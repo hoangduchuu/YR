@@ -1,6 +1,7 @@
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/widget/image_slider.dart';
 import 'package:your_reward_user/widget/member_card.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/textfield.dart';
@@ -120,6 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
               times: 10,
               startDate: '01/01/2019',
             ),
+            MemberCard(
+              memberName: 'Phan Nguyễn Song Toàn',
+              memberPoint: 2048,
+              times: 10,
+              startDate: '01/01/2019',
+              isVIP: true,
+            ),
             Padding(padding: EdgeInsets.all(10),
             child: ListView(
               shrinkWrap: true,
@@ -129,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   time: '17:00',
                   date: '15/5/2019',
                   place: 'Popeyes',
-                  price: '1000000000đ',
+                  price: '10000000đ',
                   ispayByCard: true,
                 ),
                 TranferHistoryRow(
@@ -137,11 +145,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   time: '18:00',
                   date: '15/5/2019',
                   place: 'KFC',
-                  price: '1000000000đ',
+                  price: '10000000đ',
                   ispayByCard: false,
                 )
               ],
-            ),)
+            ),),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
