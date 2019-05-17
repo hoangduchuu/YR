@@ -25,6 +25,12 @@ class HColors{
   static const Color ColorBg = const Color(0xffBDBDBD);
   static const Color textColor = const Color(0xff212121);
   static const Color hintTextColor= const Color(0xff9E9E9E);
+
+  static const Color ColorBgFacebook =const Color(0xff3b5998);
+  static const Color textOnButtonColor=const Color(0xFFFFFFFF);
+  static const Color saveButtonColor=const Color(0xFF3360ff);
+  static const Color endGradientColor=const Color(0xFF6a1b9a);
+  static const Color ColorBgGoogle=const Color(0xFFDD4B39);
 }
 
 
