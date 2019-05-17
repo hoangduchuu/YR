@@ -61,7 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             CommonButton(
-                onPressed: () {},
+                onPressed: () {
+                  //todo
+                  Navigator.pushNamed(context, '/home');
+                },
                 backgroundColor: HColors.ColorSecondPrimary,
                 textColor: HColors.white,
                 text: Text('Đăng nhập'),

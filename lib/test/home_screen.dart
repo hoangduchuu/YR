@@ -40,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: HColors.white,
       body: Column(
         children: <Widget>[
-          RestaurantCard(),
+          RestaurantCard(cb: (index){
+            print('you clicked $index');
+            Navigator.pushNamed(context, '/bottombar');
+          }),
           Padding(
             padding: EdgeInsets.only(left: 20, top: 30),
             child: Text(

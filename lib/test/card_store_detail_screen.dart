@@ -55,6 +55,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'KFC',
                     storeImage:
                         'https://tea-3.lozi.vn/v1/images/resized/ga-ran-kfc-sSsnDgUgtZZZ5NEs-69045-1464881189?w=480&type=o',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -63,6 +66,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'KFC',
                     storeImage:
                         'https://tea-3.lozi.vn/v1/images/resized/ga-ran-kfc-sSsnDgUgtZZZ5NEs-69045-1464881189?w=480&type=o',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -71,6 +77,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'KFC',
                     storeImage:
                         'https://tea-3.lozi.vn/v1/images/resized/ga-ran-kfc-sSsnDgUgtZZZ5NEs-69045-1464881189?w=480&type=o',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -79,6 +88,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'KFC',
                     storeImage:
                         'https://tea-3.lozi.vn/v1/images/resized/ga-ran-kfc-sSsnDgUgtZZZ5NEs-69045-1464881189?w=480&type=o',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -87,6 +99,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'KFC',
                     storeImage:
                         'https://tea-3.lozi.vn/v1/images/resized/ga-ran-kfc-sSsnDgUgtZZZ5NEs-69045-1464881189?w=480&type=o',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                 ],
               )),
