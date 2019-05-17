@@ -4,17 +4,16 @@ import 'package:your_reward_user/styles/styles.dart';
 
 class TranferHistoryRow extends StatefulWidget {
   final String tranferName;
-  final Color storeColor;
   final String time;
   final String date;
   final String place;
   final String price;
   final bool ispayByCard;
-
+  final IconData storeIcon;
   TranferHistoryRow(
       {Key key,
       @required this.tranferName,
-      this.storeColor,
+      @required this.storeIcon,
       @required this.time,
       @required this.date,
       @required this.place,
@@ -50,7 +49,7 @@ class _TranferHistoryRowState extends State<TranferHistoryRow> {
                 tileMode: TileMode.clamp),
           ),
           child: Icon(
-            FontAwesomeIcons.userAstronaut,
+            widget.storeIcon,
             color: Colors.white,
             size: 30,
           ),

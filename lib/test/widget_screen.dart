@@ -85,7 +85,6 @@ class TestScreen extends StatelessWidget {
               //width: 300,
             ),
             YRTextField(
-              icon: FontAwesomeIcons.envelopeOpen,
               onTextChanged: (value) {},
               titleText: 'Tên',
               hintText: 'Nhập họ tên',

@@ -19,7 +19,7 @@ class HColors{
   static const pale = const Color(0xfff2e1d6);
   static const salmon = const Color(0xffee8777);
   static const dark = const Color(0xff22242a);
-
+  static const Color ColorSecondPrimary=const Color(0xFF644650);
   static const Color ColorPrimary = const Color(0xff89c541);
   static const Color ColorPrimaryLight = const Color(0xff9CCC65);
   static const Color ColorBg = const Color(0xffBDBDBD);

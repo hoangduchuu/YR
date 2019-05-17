@@ -32,7 +32,7 @@ class _RestaurantCardState extends State<RestaurantCard>{
                   EdgeInsets.only(top: 10, left: 2, right: 2,bottom: 10),
                   child: ClipRRect(
                       borderRadius:
-                      BorderRadius.all(Radius.circular(10)),
+                      BorderRadius.all(Radius.circular(15)),
                       child: GestureDetector(
                           child: Image.network(url,
                               fit: BoxFit.cover),
@@ -43,7 +43,7 @@ class _RestaurantCardState extends State<RestaurantCard>{
           );
         },
       ).toList(),
-      height: 250,
+      height: 200,
     );
   }
 }
