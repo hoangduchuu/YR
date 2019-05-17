@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:your_reward_user/test/main_screen.dart';
+import 'package:your_reward_user/test/map_screen.dart';
 
 import 'test/widget_screen.dart';
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   final app = new MaterialApp(
     routes: <String, WidgetBuilder>{
         '/': (BuildContext context) => MainScreen(),
-        '/test': (BuildContext context) => TestScreen()
+        '/test': (BuildContext context) => TestScreen(),
+        '/map': (BuildContext context) => GoogleMapScreen(),
     },
     initialRoute: '/',
     //unknown route
