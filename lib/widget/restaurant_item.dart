@@ -7,7 +7,10 @@ import 'package:your_reward_user/styles/styles.dart';
 class RestaurantItem extends StatefulWidget {
   final String storeName;
   final String storeImage;
-  RestaurantItem({Key key,@required this.storeName,@required this.storeImage}):super(key:key);
+  final VoidCallback onClick;
+  RestaurantItem({Key key,
+    @required this.storeName,
+    @required this.storeImage, @required this.onClick}):super(key:key);
   @override
   _RestaurantItemState createState() => _RestaurantItemState();
 }
@@ -39,6 +42,7 @@ class _RestaurantItemState extends State<RestaurantItem> {
               InkWell(
                 onTap: () {
                   selectItem(widget.storeName);
+                  widget.onClick();
                 },
                 child: Container(
                   height: 150,

@@ -1,19 +1,6 @@
-import 'package:your_reward_user/widget/common_button.dart';
 import 'package:flutter/material.dart';
-import 'package:your_reward_user/widget/restaurant_info.dart';
-import 'package:your_reward_user/widget/round_icon.dart';
 
 import 'app.dart';
-import 'widget/bar_code.dart';
-import 'widget/row_info.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/widget/image_slider.dart';
-import 'package:your_reward_user/widget/member_card.dart';
-import 'package:your_reward_user/widget/restaurant_card.dart';
-import 'package:your_reward_user/widget/textfield.dart';
-import 'package:your_reward_user/widget/tranfer_history_row.dart';
-import 'styles/styles.dart';
 
 
 void main() => runApp(MyApp());

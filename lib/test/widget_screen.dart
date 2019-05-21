@@ -88,7 +88,9 @@ class TestScreen extends StatelessWidget {
               onTextChanged: (value) {},
               hintText: 'Nhập họ tên',
             ),
-            RestaurantCard(),
+            RestaurantCard(cb: (index){
+
+            }),
             MemberCard(
               memberName: 'Phan Nguyễn Song Toàn',
               memberPoint: 2048,
