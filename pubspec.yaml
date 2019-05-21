@@ -26,6 +26,11 @@ dependencies:
   font_awesome_flutter: ^8.4.0
   carousel_slider: ^1.3.0
   flutter_swiper: ^1.1.4
+  #flutter_facebook_login: ^2.0.0
+  flutter_facebook_login:
+    git: https://github.com/lequanghiep74/flutter_facebook_login
+  http: ^0.12.0+2
+  equatable: ^0.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

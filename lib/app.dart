@@ -4,6 +4,7 @@ import 'package:your_reward_user/test/account_information_screen.dart';
 import 'package:your_reward_user/test/bottom_navigation.dart';
 import 'package:your_reward_user/test/card_store_detail_screen.dart';
 import 'package:your_reward_user/test/error_screen.dart';
+import 'package:your_reward_user/test/facebook_login.dart';
 import 'package:your_reward_user/test/forgotpass_screen.dart';
 import 'package:your_reward_user/test/home_screen.dart';
 import 'package:your_reward_user/test/login_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       '/restaurantdetail': (BuildContext context) => RestaurantDetailScreen(),
       '/errorscreen': (BuildContext context) => ErrorScreen(),
       '/accountinfo': (BuildContext context) => AccountInformationScreen(),
+      '/facebooklogin': (BuildContext context) => FacebookLoginPage(),
     },
     initialRoute: '/',
     //unknown route
