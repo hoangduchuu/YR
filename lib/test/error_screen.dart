@@ -14,10 +14,8 @@ class _ErrorScreenState extends State<ErrorScreen> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-            ),
             SizedBox(
               width: 120,
               height: 120,
@@ -36,26 +34,15 @@ class _ErrorScreenState extends State<ErrorScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
             ),
-            Text(
-              'Thử lại sau',
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: HColors.hintTextColor),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            CommonButton(
-                onPressed: (){
+            ButtonTheme(
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(border: Border.all(color: HColors.ColorSecondPrimary),borderRadius: BorderRadius.circular(10)),
+                child: FlatButton(onPressed: (){
 
-                },
-                text: Text('Thử lại'),
-                width: MediaQuery.of(context).size.width*0.3,
-                backgroundColor: HColors.ColorSecondPrimary,
-                textColor: HColors.white,
-                radiusValue: 20,
-                buttonPadding: 10),
+                }, child: Text('Thử lại')),
+              )
+            ),
           ],
         ),
       ),

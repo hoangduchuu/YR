@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
 
@@ -72,7 +73,7 @@ class _MemberCardState extends State<MemberCard> {
                       child: Text(
                         widget.memberName,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
                       ),
                     )
                   ],
@@ -92,7 +93,7 @@ class _MemberCardState extends State<MemberCard> {
                             Text(
                               'Điểm tích lũy',
                               style:
-                                  TextStyle(fontSize: 11, color: Colors.white),
+                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -102,7 +103,7 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -117,7 +118,7 @@ class _MemberCardState extends State<MemberCard> {
                             Text(
                               'Ngày tham gia',
                               style:
-                                  TextStyle(fontSize: 11, color: Colors.white),
+                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -127,7 +128,7 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -142,7 +143,7 @@ class _MemberCardState extends State<MemberCard> {
                             Text(
                               'Lần tích điểm',
                               style:
-                                  TextStyle(fontSize: 11, color: Colors.white),
+                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -152,7 +153,7 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -186,11 +187,11 @@ class _MemberCardState extends State<MemberCard> {
                 widget.isVIP == true
                     ? Text(
                         'VIP',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
                       )
                     : Text(
                         'Member',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
                       ),
               ],
             ),

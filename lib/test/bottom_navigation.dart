@@ -29,10 +29,10 @@ class _BottomNavigationState extends State<BottomNavigation>{
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.home, color: _currentIndex==0?HColors.saveButtonColor:HColors.brownishGrey),
+                  icon: Icon(FontAwesomeIcons.home, color: _currentIndex==0?HColors.ColorSecondPrimary:HColors.inactiveTabColor),
                   title: SizedBox.shrink()),
               BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.solidBell, color: _currentIndex==1?HColors.saveButtonColor:HColors.brownishGrey,),
+                  icon: Icon(FontAwesomeIcons.solidBell, color: _currentIndex==1?HColors.ColorSecondPrimary:HColors.inactiveTabColor,),
                   title: SizedBox
                       .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
               ),
@@ -48,7 +48,7 @@ class _BottomNavigationState extends State<BottomNavigation>{
               Navigator.pushNamed(context, '/home');
             },
             child: new Icon(FontAwesomeIcons.wallet),
-            backgroundColor: HColors.saveButtonColor,
+            backgroundColor: HColors.ColorSecondPrimary,
           ),
         )); // is trailing comma makes auto-formatting nicer for build methods.
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
 
@@ -18,18 +19,21 @@ class _RestaurantItemState extends State<RestaurantItem> {
     // TODO: implement build
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,borderRadius: BorderRadius.circular(5)
+          borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                  child: Image.network(widget.storeImage,fit: BoxFit.cover,),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  image: DecorationImage( image: NetworkImage(widget.storeImage),
+                    fit: BoxFit.cover
+                  )
                 ),
-                height: 100,
+                
+                height: 150,
                 width:100,
               ),
               InkWell(
@@ -37,23 +41,42 @@ class _RestaurantItemState extends State<RestaurantItem> {
                   selectItem(widget.storeName);
                 },
                 child: Container(
-                  height: 100,
+                  height: 150,
                   width: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0),
                   ),
                 ),
-              )
+              ),
+              Positioned(
+                  bottom: 0,
+                  left: 0,
+                  child: Container(
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(7),bottomRight: Radius.circular(7)),
+                      color: Colors.black54
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width*0.25,
+                          child:  Center(
+                            child: Text(
+                              '${widget.storeName}',
+                              textAlign: TextAlign.center,overflow: TextOverflow.ellipsis,maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 14,color: HColors.white,fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             ],
           ),
-          SizedBox(height: 7.0),
-          Text(
-            widget.storeName,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15.0,fontWeight: FontWeight.bold
-            ),
-          )
         ],
       ),
     );

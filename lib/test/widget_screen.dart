@@ -86,7 +86,6 @@ class TestScreen extends StatelessWidget {
             ),
             YRTextField(
               onTextChanged: (value) {},
-              titleText: 'Tên',
               hintText: 'Nhập họ tên',
             ),
             RestaurantCard(),
@@ -113,7 +112,7 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'Popeyes',
                     price: '10000000đ',
-                    ispayByCard: true,
+                    point: 0, storeType: '',
                   ),
                   TranferHistoryRow(
                     tranferName: 'Giao dịch số 2',
@@ -121,7 +120,7 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'KFC',
                     price: '10000000đ',
-                    ispayByCard: false,
+                    point: 0, storeType: '',
                   )
                 ],
               ),),

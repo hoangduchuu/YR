@@ -46,7 +46,15 @@ flutter:
   assets:
     - assets/images/
     - assets/images/cancel.png
-
+    - assets/images/coupons.png
+    - assets/images/password.png
+    - assets/images/copywriter.png
+    - assets/images/burgers.png
+    - assets/images/coffee-cup.png
+    - assets/images/pizza.png
+    - assets/images/movie-theatre.png
+    - assets/images/bg.jpg
+    - assets/images/bg1.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -70,5 +78,12 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: neusa
+      fonts:
+        - asset: assets/fonts/neusa.ttf
+    - family: neusabold
+      fonts:
+        - asset: assets/fonts/neusabold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

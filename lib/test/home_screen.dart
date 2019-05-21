@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
@@ -38,60 +39,70 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
       ),
       backgroundColor: HColors.white,
-      body: Column(
-        children: <Widget>[
-          RestaurantCard(),
-          Padding(
-            padding: EdgeInsets.only(left: 20, top: 30),
-            child: Text(
-              'Lịch sử giao dịch',
-              style: TextStyle(
-                  color: HColors.ColorSecondPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            RestaurantCard(),
+            Padding(
+              padding: EdgeInsets.only(left: 20, top: 30,right: 20),
+              child: Container(
+                padding: EdgeInsets.only(bottom: 6),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(color: Colors.black12,width: 1)
+                  ),
+                ),
+                child: Text(
+                  'Lịch sử giao dịch',
+                  style: TextStyle(
+                      color: HColors.ColorSecondPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,fontFamily: Hfonts.PrimaryFontBold),
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height*0.375,
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                TranferHistoryRow(
-                    tranferName: 'Giao dịch số 1',
-                    time: '18:00',
-                    date: '16/5/2019',
-                    place: 'KFC',
-                    price: '100000đ',
-                    storeIcon: FontAwesomeIcons.ccVisa,
-                    ispayByCard: true),
-                TranferHistoryRow(
-                    tranferName: 'Giao dịch số 2',
-                    time: '15:00',
-                    date: '16/5/2019',
-                    place: 'Pizza Huts',
-                    price: '100000đ',
-                    storeIcon: FontAwesomeIcons.pizzaSlice,
-                    ispayByCard: true),
-                TranferHistoryRow(
-                    tranferName: 'Giao dịch số 3',
-                    time: '17:00',
-                    date: '16/5/2019',
-                    place: 'KFC',
-                    price: '100000đ',
-                    storeIcon: FontAwesomeIcons.calculator,
-                    ispayByCard: true),
-                TranferHistoryRow(
-                    tranferName: 'Giao dịch số 4',
-                    time: '12:00',
-                    date: '16/5/2019',
-                    place: 'Lotteria',
-                    price: '100000đ',
-                    storeIcon: FontAwesomeIcons.ccDinersClub,
-                    ispayByCard: true),
-              ],
-            ),
-          )
-        ],
+             Expanded(
+                flex: 1,
+                child: ListView(
+                children: <Widget>[
+                  TranferHistoryRow(
+                      tranferName: 'Giao dịch số 1',
+                      time: '18:00',
+                      date: '16/5/2019',
+                      place: 'KFC',
+                      price: '100000đ',
+                      storeType: 'assets/images/burgers.png',
+                      point: 50),
+                  TranferHistoryRow(
+                      tranferName: 'Giao dịch số 2',
+                      time: '15:00',
+                      date: '16/5/2019',
+                      place: 'Pizza Huts',
+                      price: '100000đ',
+                      storeType: 'assets/images/coffee-cup.png',
+                      point: 20),
+                  TranferHistoryRow(
+                      tranferName: 'Giao dịch số 3',
+                      time: '17:00',
+                      date: '16/5/2019',
+                      place: 'KFC',
+                      price: '100000đ',
+                      storeType: 'assets/images/pizza.png',
+                      point: 100),
+                  TranferHistoryRow(
+                      tranferName: 'Giao dịch số 4',
+                      time: '12:00',
+                      date: '16/5/2019',
+                      place: 'Lotteria',
+                      price: '100000đ',
+                      storeType: 'assets/images/movie-theatre.png',
+                      point: 10),
+                ],
+              ),),
+          ],
+        ),
       ),
     );
   }

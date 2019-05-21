@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
+
 class YRTextField extends StatefulWidget {
-  final String hintText;
-  final String titleText;
   final Function(String textValue) onTextChanged;
   final bool isPassword;
+  final String hintText;
+  final IconData icon;
   YRTextField(
       {Key key,
-        @required this.titleText,
-      @required this.hintText,
-      @required this.onTextChanged,this.isPassword})
+        @required this.hintText,
+        @required this.icon,
+        @required this.onTextChanged,@required this.isPassword})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _TextFieldState();
+    return _SBTextFieldState();
   }
 }
 
-class _TextFieldState extends State<YRTextField> {
+class _SBTextFieldState extends State<YRTextField> {
   TextEditingController textController;
   bool _obscureText = true;
   @override
@@ -33,58 +35,57 @@ class _TextFieldState extends State<YRTextField> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        new Row(
-          children: <Widget>[
-            new Expanded(
-              child: new Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: new Text(
-                  widget.titleText!=null?widget.titleText:'Tên',
-                  style: TextStyle(
-                    fontFamily: "oscinebold",
-                    color: Colors.black87,
-                    fontSize: 15.0,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
         new Padding(
-          padding: EdgeInsets.only(
-               bottom: 20.0, left: 25.0, right: 25.0),
-          child: TextField(
-            keyboardType: TextInputType.text,
-            controller: textController,
-            obscureText: _obscureText,
-            style: TextStyle(fontSize: 16.0, color: HColors.textColor),
-            decoration: InputDecoration(
-              border: new UnderlineInputBorder(
-                  borderSide: new BorderSide(
-                      color: HColors.ColorSecondPrimary
-                  )
-              ),
-              hintStyle: TextStyle(fontSize: 17.0, color: HColors.hintTextColor),
-              suffixIcon: widget.isPassword==true?GestureDetector(
-                onTap: _toggle,
-                child: _obscureText == true
-                    ? Icon(
-                  FontAwesomeIcons.eyeSlash,
-                  size: 18.0,
-                  color: Colors.black87,
-                )
-                    : Icon(
-                  FontAwesomeIcons.eye,
-                  size: 18.0,
-                  color: Colors.black87,
-                ),
-              ):null,
+            padding: EdgeInsets.only(
+                bottom: 10, left: 50, right: 50.0),
+            child: TextField(
+              keyboardType: TextInputType.text,
+              controller: textController,
+              obscureText: widget.isPassword==true? _obscureText:false,
+              style: TextStyle(fontSize: 17.0,fontFamily: Hfonts.PrimaryFontBold),
+              decoration: InputDecoration(
 
-            ),
-            onChanged: (value) {
-              widget.onTextChanged(value);
-            },
-          )
+                contentPadding:
+                const EdgeInsets.only(left: 14.0, bottom: 15, top: 15,right:14),
+                fillColor: HColors.textFBGColor,
+                hintText: widget.hintText,
+                hintStyle: TextStyle(fontSize: 17.0, color: HColors.brighterBlack,fontFamily: Hfonts.PrimaryFontBold),
+                border:InputBorder.none,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: HColors.ColorSecondPrimary,style: BorderStyle.solid,width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                filled: true,
+                prefixIcon: Icon(
+                  widget.icon,
+                  color: HColors.ColorSecondPrimary,
+                  size: 22.0,
+                ),
+                suffixIcon: widget.isPassword==true?GestureDetector(
+                  onTap: _toggle,
+                  child: _obscureText == true
+                      ? Icon(
+                    FontAwesomeIcons.eyeSlash,
+                    size: 15,
+                    color: Colors.black87,
+                  )
+                      : Icon(
+                    FontAwesomeIcons.eye,
+                    size: 15,
+                    color: Colors.black87,
+                  ),
+                ):null,
+
+              ),
+              onChanged: (value) {
+                print(_obscureText);
+                widget.onTextChanged(value);
+              },
+            )
         ),
       ],
     );
