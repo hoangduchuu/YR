@@ -65,6 +65,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'Cây sung quán Nam Quốc Cang',
                     storeImage:
                         'http://cdn01.diadiemanuong.com/ddau/640x/undefined-quan-cay-sung-oc-hai-san-nam-quoc-cang-0-8a2a02bd636501452796637913.jpg',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -73,6 +76,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'Cây sung quán Phạm Thái Bường',
                     storeImage:
                         'http://cdn01.diadiemanuong.com/ddau/640x/undefined-cay-sung-quan-pham-thai-buong-0-8dc2771636531019586948638.jpg',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                   SizedBox(
                     width: 10,
@@ -81,6 +87,9 @@ class _CardStoreDetailScreenState extends State<CardStoreDetailScreen> {
                     storeName: 'Cây Sung Quán Thảo Điền',
                     storeImage:
                         'http://namanhcatering.com/uploads/tiny_uploads/cay%20sung%20quan/cay%20sung6.jpg',
+                    onClick: (){
+                      Navigator.pushNamed(context, '/restaurantdetail');
+                    },
                   ),
                 ],
               )),

@@ -34,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 FontAwesomeIcons.userCircle,
                 color: HColors.ColorSecondPrimary,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.pushNamed(context, '/accountinfo');
+              }),
         ],
         elevation: 0.0,
       ),
@@ -43,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RestaurantCard(),
+            RestaurantCard(cb: (int index){
+              print('url==$index');
+              Navigator.pushNamed(context, '/bottombar');
+            }),
             Padding(
               padding: EdgeInsets.only(left: 20, top: 30,right: 20),
               child: Container(
@@ -63,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-             Expanded(
+            Expanded(
                 flex: 1,
                 child: ListView(
                 children: <Widget>[

@@ -87,7 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 CommonButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
                     backgroundColor: HColors.ColorSecondPrimary,
                     textColor: HColors.white,
                     text: Text('Đăng nhập',style: TextStyle(fontFamily: Hfonts.PrimaryFontBold,fontSize: 16),),
@@ -109,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         textAlign: TextAlign.end,
                       ),
-                      onPressed: () => {
-                            //_showForgotPassSentDialog()
-                          },
+                      onPressed: (){
+                         Navigator.pushNamed(context, '/signup');
+                      }
                     ),
                   ],
                 ),

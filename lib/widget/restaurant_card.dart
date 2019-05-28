@@ -22,7 +22,6 @@ class _RestaurantCardState extends State<RestaurantCard> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return CarouselSlider(
       viewportFraction: 0.90,
       aspectRatio: 2.0,
