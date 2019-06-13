@@ -10,7 +10,7 @@ import 'package:your_reward_user/test/login_screen.dart';
 import 'package:your_reward_user/test/main_screen.dart';
 import 'package:your_reward_user/test/restaurant_detail_screen.dart';
 import 'package:your_reward_user/test/signup_screen.dart';
-
+import 'package:your_reward_user/test/map_screen.dart';
 import 'test/widget_screen.dart';
 
 //class này sẽ cấu hình route tới các screen của màn hình
@@ -28,8 +28,9 @@ class MyApp extends StatelessWidget {
       '/restaurantdetail': (BuildContext context) => RestaurantDetailScreen(),
       '/errorscreen': (BuildContext context) => ErrorScreen(),
       '/accountinfo': (BuildContext context) => AccountInformationScreen(),
+        '/test': (BuildContext context) => TestScreen(),
+        '/map': (BuildContext context) => GoogleMapScreen(),
     },
-    initialRoute: '/',
     //unknown route
   );
 

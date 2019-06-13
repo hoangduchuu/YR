@@ -53,7 +53,11 @@ class MainScreen extends StatelessWidget {
               return getTitle('Tour Screen', (){
                 Navigator.pushNamed(context, '/login');
               });
-            }else {
+            } else if (index == 11){
+              return getTitle('Map Screen', (){
+                Navigator.pushNamed(context, '/map');
+              });
+            } else {
               return getTitle('Test Screen', (){
                 Navigator.pushNamed(context, '/test');
               });
