@@ -1,4 +1,5 @@
 PODS:
+<<<<<<< HEAD
   - Flutter (1.0.0)
   - google_maps_flutter (0.0.1):
     - Flutter
@@ -9,20 +10,44 @@ PODS:
   - GoogleMaps/Maps (3.1.0):
     - GoogleMaps/Base
   - permission_handler (3.0.2):
+=======
+  - FBSDKCoreKit (5.0.0):
+    - FBSDKCoreKit/Basics (= 5.0.0)
+    - FBSDKCoreKit/Core (= 5.0.0)
+  - FBSDKCoreKit/Basics (5.0.0)
+  - FBSDKCoreKit/Core (5.0.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.0.0):
+    - FBSDKCoreKit (= 5.0.0)
+  - Flutter (1.0.0)
+  - flutter_facebook_login (0.0.1):
+    - FBSDKCoreKit (= 5.0.0)
+    - FBSDKLoginKit (= 5.0.0)
+>>>>>>> add_facebook
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
+<<<<<<< HEAD
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - GoogleMaps
+=======
+  - flutter_facebook_login (from `.symlinks/plugins/flutter_facebook_login/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+>>>>>>> add_facebook
 
 EXTERNAL SOURCES:
   Flutter:
     :path: ".symlinks/flutter/ios"
+<<<<<<< HEAD
   google_maps_flutter:
     :path: ".symlinks/plugins/google_maps_flutter/ios"
   permission_handler:
@@ -35,5 +60,17 @@ SPEC CHECKSUMS:
   permission_handler: 73cfc10e081c379c1dcc19cd0040c77e500fa936
 
 PODFILE CHECKSUM: 3389836f37640698630b8f0670315d626d5f1469
+=======
+  flutter_facebook_login:
+    :path: ".symlinks/plugins/flutter_facebook_login/ios"
+
+SPEC CHECKSUMS:
+  FBSDKCoreKit: ba361d4a9d4dc29ff218822b849b22d4f869c7bb
+  FBSDKLoginKit: c6d0dc187bd076e370dffa10f7fc8a3562a6892c
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_facebook_login: 8963f768786618d674fcb41f5eb648a09cddca47
+
+PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
+>>>>>>> add_facebook
 
 COCOAPODS: 1.6.1

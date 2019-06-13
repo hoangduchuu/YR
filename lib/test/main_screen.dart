@@ -6,7 +6,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemCount: 12,
+          itemCount: 13,
           itemBuilder: (context, index) {
             if (index == 0) {
               return getTitle('SignIn Screen', (){
@@ -56,6 +56,10 @@ class MainScreen extends StatelessWidget {
             } else if (index == 11){
               return getTitle('Map Screen', (){
                 Navigator.pushNamed(context, '/map');
+              });
+            } else if (index == 12){
+              return getTitle('Facebook Login', (){
+                Navigator.pushNamed(context, '/facebooklogin');
               });
             } else {
               return getTitle('Test Screen', (){

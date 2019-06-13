@@ -28,6 +28,11 @@ dependencies:
   flutter_swiper: ^1.1.4
   google_maps_flutter: ^0.5.11
   permission_handler: '^3.0.0'
+  #flutter_facebook_login: ^2.0.0
+  flutter_facebook_login:
+    git: https://github.com/lequanghiep74/flutter_facebook_login
+  http: ^0.12.0+2
+  equatable: ^0.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

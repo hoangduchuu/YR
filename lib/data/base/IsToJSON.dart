@@ -1,0 +1,3 @@
+class IsToJSON{
+  String toJSON(){}
+}
