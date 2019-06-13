@@ -19,7 +19,7 @@ class HColors{
   static const pale = const Color(0xfff2e1d6);
   static const salmon = const Color(0xffee8777);
   static const dark = const Color(0xff22242a);
-
+  static const Color ColorSecondPrimary=const Color(0xFF644650);
   static const Color ColorPrimary = const Color(0xff89c541);
   static const Color ColorPrimaryLight = const Color(0xff9CCC65);
   static const Color ColorBg = const Color(0xffBDBDBD);
@@ -31,6 +31,34 @@ class HColors{
   static const Color saveButtonColor=const Color(0xFF3360ff);
   static const Color endGradientColor=const Color(0xFF6a1b9a);
   static const Color ColorBgGoogle=const Color(0xFFDD4B39);
+
+  static const Color deepRed=const Color(0xFFb71c1c);
+  static const Color shobNowColor=const Color(0xFF607d8b);
+  static const Color inactiveTabColor=const Color(0xFFBDBDBD);
+  static const Color shynnyRed=const Color(0xFFef9a9a);
+  static const Color red=const Color(0xFFd32f2f);
+  static const Color shynnyPurple=const Color(0xFFCE93D8);
+  static const Color purple=const Color(0xFF7B1FA2);
+  static const Color deepPurple=const Color(0xFF4A148C);
+  static const Color lightBlue=const Color(0xFF3360ff);
+  static const Color shineBlue=const Color(0xFF5c79ff);
+
+  static const Color brighterBlack=const Color(0xFF9E9E9E);
+  static const Color materialRed=const Color(0xFFDD4B39);
+  static const Color materialGreen=const Color(0xFF2E7D32);
+  static const Color deepGreen=const Color(0xFF1B5E20);
+  static const Color deepOrange=const Color(0xFFBF360C);
+  static const Color orange=const Color(0xFFD84315);
+  static const Color pink= const Color(0xFFAD1457);
+  static const Color deepPink=const Color(0xFF880E4F);
+  static const Color lime=const Color(0xFFF9A825);
+  static const Color dust=const Color(0xFF9E9D24);
+  static const Color brightestBlue=const Color(0xFF4DD0E1);
+  static const Color lightPink=const Color(0xFFD81B60);
+  static const Color ladyPink=const Color(0xFFD500F9);
+  static const Color bgColor=const Color(0xFFF8F8F8);
+  static const Color textFBGColor=const Color(0xFFEEEEEE);
+
 }
 
 

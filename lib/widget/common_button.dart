@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 
 class CommonButton extends StatefulWidget {
   final VoidCallback onPressed;
@@ -62,7 +63,7 @@ class _CommonButtonState extends State<CommonButton> {
                         ? Text(
                             'Đăng nhập với facebook',
                             style: TextStyle(
-                                fontSize: 15, fontFamily: 'oscinebold'),
+                                fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                           )
                         : widget.text,
                   ],

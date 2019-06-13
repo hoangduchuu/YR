@@ -1,11 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-class RestaurantCard extends StatefulWidget{
+import 'package:flutter/material.dart';
+
+class RestaurantCard extends StatefulWidget {
+  Function cb;
+
+  RestaurantCard({this.cb});
+
   @override
   _RestaurantCardState createState() => _RestaurantCardState();
 }
-class _RestaurantCardState extends State<RestaurantCard>{
 
+class _RestaurantCardState extends State<RestaurantCard> {
+  var currentPosition = 0;
   final List<String> imgList = [
     'https://mcdn.wallpapersafari.com/medium/81/9/ZzUw9E.jpeg',
     'https://wallpapercave.com/wp/O5eAHDa.jpg',
@@ -16,34 +22,34 @@ class _RestaurantCardState extends State<RestaurantCard>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return CarouselSlider(
       viewportFraction: 0.90,
       aspectRatio: 2.0,
       autoPlay: false,
       enlargeCenterPage: true,
       items: imgList.map(
-            (url) {
+        (url) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
                   width: MediaQuery.of(context).size.width,
                   margin:
-                  EdgeInsets.only(top: 10, left: 2, right: 2,bottom: 10),
+                      EdgeInsets.only(top: 10, left: 2, right: 2, bottom: 10),
                   child: ClipRRect(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                       child: GestureDetector(
-                          child: Image.network(url,
-                              fit: BoxFit.cover),
+                          child: Image.network(url, fit: BoxFit.cover),
                           onTap: () {
-                            print(imgList.indexOf(url));
+                            widget.cb(imgList.indexOf(url));
                           })));
             },
           );
         },
       ).toList(),
-      height: 250,
+      onPageChanged: (index) {
+        currentPosition = index;
+      },
+      height: 200,
     );
   }
 }

@@ -85,12 +85,12 @@ class TestScreen extends StatelessWidget {
               //width: 300,
             ),
             YRTextField(
-              icon: FontAwesomeIcons.envelopeOpen,
               onTextChanged: (value) {},
-              titleText: 'Tên',
               hintText: 'Nhập họ tên',
             ),
-            RestaurantCard(),
+            RestaurantCard(cb: (index){
+
+            }),
             MemberCard(
               memberName: 'Phan Nguyễn Song Toàn',
               memberPoint: 2048,
@@ -114,7 +114,7 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'Popeyes',
                     price: '10000000đ',
-                    ispayByCard: true,
+                    point: 0, storeType: '',
                   ),
                   TranferHistoryRow(
                     tranferName: 'Giao dịch số 2',
@@ -122,7 +122,7 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'KFC',
                     price: '10000000đ',
-                    ispayByCard: false,
+                    point: 0, storeType: '',
                   )
                 ],
               ),),
