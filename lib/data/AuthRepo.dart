@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:your_reward_user/model/LoginEntity.dart';
+import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
+import 'package:your_reward_user/model/RegisterRequest.dart';
 import 'package:your_reward_user/model/RegisterEntity.dart';
-import 'package:your_reward_user/model/RespRegisterEntity.dart';
 
 import 'package:your_reward_user/data/base/MyHttpClient.dart';
 import 'YRService.dart';
@@ -16,8 +17,17 @@ class AuthRepo {
   }
 
   //register
-  Future<dynamic> register(RegisterEntity body) async {
-    String url = '${YRService.END_POINT} + "" + ${YRService.PATH_REGSITER}';
+  Future<dynamic> register(RegisterRequest body) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_REGSITER}';
+    String raw =
+        await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
+    var result = new RegisterRespParser().parse(raw);
+    return result;
+  }
+
+  //register Facebook
+  Future<dynamic> registerWithFacebook(RegisterFacebookRequest body) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_LOGIN_FACEBOOK}';
     String raw =
         await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
     var result = new RegisterRespParser().parse(raw);
@@ -35,10 +45,10 @@ class AuthRepo {
   }
 }
 
-class RegisterRespParser extends BaseParser<RespRegisterEntity> {
+class RegisterRespParser extends BaseParser<RegisterEntity> {
   @override
-  RespRegisterEntity parseInfo(Map<String, dynamic> raw) {
-    return RespRegisterEntity.fromJSON(raw);
+  RegisterEntity parseInfo(Map<String, dynamic> raw) {
+    return RegisterEntity.fromJson(raw);
   }
 }
 

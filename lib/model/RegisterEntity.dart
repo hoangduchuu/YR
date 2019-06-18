@@ -1,49 +1,95 @@
+// To parse this JSON data, do
+//
+//     final registerEntity = registerEntityFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
+class RegisterEntity {
+  String gender;
+  String status;
+  String role;
+  int points;
+  bool isNotificationEmail;
+  bool isNotificationApplication;
+  bool isNotificationPromotion;
+  bool isNotificationEvent;
+  bool isProfile;
+  String id;
+  String email;
+  String fullname;
+  String thumbnail;
+  String phone;
+  String address;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-import 'package:your_reward_user/data/base/IsToJSON.dart';
+  RegisterEntity({
+    this.gender,
+    this.status,
+    this.role,
+    this.points,
+    this.isNotificationEmail,
+    this.isNotificationApplication,
+    this.isNotificationPromotion,
+    this.isNotificationEvent,
+    this.isProfile,
+    this.id,
+    this.email,
+    this.fullname,
+    this.thumbnail,
+    this.phone,
+    this.address,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
-//model {
-//	"email": "john.doe@example.com",
-//	"role": "client",
-//	"fullname": "John Doe",
-//	"password": "john.doe",
-//	"confirm_password": "john.doe",
-//	"thumbnail": "http://example.com/user.png",
-//	"phone": "123456789",
-//	"gender": "male",
-//	"address": "123456789",
-//	"status": "active"
-//}
+  factory RegisterEntity.fromJson(Map<String, dynamic> json) =>
+      new RegisterEntity(
+        gender: json["gender"],
+        status: json["status"],
+        role: json["role"],
+        points: json["points"],
+        isNotificationEmail: json["isNotificationEmail"],
+        isNotificationApplication: json["isNotificationApplication"],
+        isNotificationPromotion: json["isNotificationPromotion"],
+        isNotificationEvent: json["isNotificationEvent"],
+        isProfile: json["isProfile"],
+        id: json["_id"],
+        email: json["email"],
+        fullname: json["fullname"],
+        thumbnail: json["thumbnail"],
+        phone: json["phone"],
+        address: json["address"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
 
-class RegisterEntity implements IsToJSON{
-  String email, role, fullName, password, confirmPasswrod, thumbnail, phone,
-  gender, status;
-
-  RegisterEntity({this.email, this.role, this.fullName, this.password, this.confirmPasswrod,
-  this.thumbnail, this.phone, this.gender, this.status});
+  Map<String, dynamic> toJson() => {
+        "gender": gender,
+        "status": status,
+        "role": role,
+        "points": points,
+        "isNotificationEmail": isNotificationEmail,
+        "isNotificationApplication": isNotificationApplication,
+        "isNotificationPromotion": isNotificationPromotion,
+        "isNotificationEvent": isNotificationEvent,
+        "isProfile": isProfile,
+        "_id": id,
+        "email": email,
+        "fullname": fullname,
+        "thumbnail": thumbnail,
+        "phone": phone,
+        "address": address,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
 
   @override
   String toString() {
-    return 'RegisterEntity{email: $email, role: $role, fullName: $fullName,'
-        ' password: $password, confirm_passwrod: $confirmPasswrod, thumbnail:'
-        ' $thumbnail, phone: $phone, gender: $gender, status: $status}';
+    return 'RegisterEntity{gender: $gender, status: $status, role: $role, points: $points, isNotificationEmail: $isNotificationEmail, isNotificationApplication: $isNotificationApplication, isNotificationPromotion: $isNotificationPromotion, isNotificationEvent: $isNotificationEvent, isProfile: $isProfile, id: $id, email: $email, fullname: $fullname, thumbnail: $thumbnail, phone: $phone, address: $address, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
   }
-
-  @override
-  String toJSON() {
-    Map<String, dynamic> raw = new Map();
-    raw['email'] = this.email;
-    raw['role'] = this.fullName;
-    raw['password'] = this.password;
-    raw['confirmPasswrod'] = this.confirmPasswrod;
-    raw['thumbnail'] = this.thumbnail;
-    raw['phone'] = this.phone;
-    raw['gender'] = this.gender;
-    raw['status'] = this.status;
-    return jsonEncode(raw);
-  }
-
-
 }

@@ -17,4 +17,5 @@ class YRService{
   //authentication
   static String PATH_REGSITER = '/users';
   static String PATH_LOGIN = '/authentication';
+  static String PATH_LOGIN_FACEBOOK = '/facebook/auth';
 }

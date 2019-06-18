@@ -1,4 +1,4 @@
-class User {
+class UserEntity {
   String id;
   String gender;
   String status;
@@ -18,7 +18,7 @@ class User {
   DateTime updatedAt;
   int v;
 
-  User({
+  UserEntity({
     this.id,
     this.gender,
     this.status,
@@ -39,7 +39,7 @@ class User {
     this.v,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => new User(
+  factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
     id: json["_id"],
     gender: json["gender"],
     status: json["status"],

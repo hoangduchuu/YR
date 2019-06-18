@@ -30,4 +30,10 @@ class ErrorEntity {
     );
   }
 
+  @override
+  String toString() {
+    return 'ErrorEntity{name: $name, message: $message, className: $className, code: $code}';
+  }
+
+
 }

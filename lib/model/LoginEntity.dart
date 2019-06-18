@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:your_reward_user/model/user.dart';
+import 'package:your_reward_user/model/userEntity.dart';
 
 LoginEntity loginEntityFromJson(String str) =>
     LoginEntity.fromJson(json.decode(str));
@@ -13,7 +13,7 @@ String loginEntityToJson(LoginEntity data) => json.encode(data.toJson());
 
 class LoginEntity {
   String accessToken;
-  User user;
+  UserEntity user;
 
   LoginEntity({
     this.accessToken,
@@ -22,7 +22,7 @@ class LoginEntity {
 
   factory LoginEntity.fromJson(Map<String, dynamic> json) => new LoginEntity(
         accessToken: json["accessToken"],
-        user: User.fromJson(json["user"]),
+        user: UserEntity.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
