@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:your_reward_user/test/account_information_screen.dart';
+import 'package:your_reward_user/test/api_test_screen.dart';
 import 'package:your_reward_user/test/bottom_navigation.dart';
 import 'package:your_reward_user/test/card_store_detail_screen.dart';
 import 'package:your_reward_user/test/error_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       '/test': (BuildContext context) => TestScreen(),
       '/map': (BuildContext context) => GoogleMapScreen(),
       '/facebooklogin': (BuildContext context) => FacebookLoginPage(),
+      '/hoorayapi': (BuildContext context) => ApiScreenTest(),
     },
     //unknown route
   );
