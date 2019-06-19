@@ -7,7 +7,7 @@ class YRService{
 
   static Map<String, String> generateHeadersWithToken(String token){
     return {
-      HttpHeaders.authorizationHeader: 'Token $token',
+      HttpHeaders.authorizationHeader: 'Bearer $token',
       HttpHeaders.contentTypeHeader : 'application/json'
     };
   }
