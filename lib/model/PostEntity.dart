@@ -65,4 +65,11 @@ class PostEntity {
         "authorId": authorId == null ? null : authorId,
         "author": author == null ? null : author.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'PostEntity{id: $id, objectType: $objectType, status: $status, title: $title, code: $code, description: $description, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, authorId: $authorId, author: $author}';
+  }
+
+
 }

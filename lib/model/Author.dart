@@ -74,4 +74,11 @@ class AuthorEntity {
         "__v": v,
         "points": points,
       };
+
+  @override
+  String toString() {
+    return 'AuthorEntity{id: $id, gender: $gender, status: $status, role: $role, fullname: $fullname, email: $email, phone: $phone, address: $address, thumbnail: $thumbnail, storeId: $storeId, password: $password, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, points: $points}';
+  }
+
+
 }

@@ -36,6 +36,13 @@ class GetPostEntity {
     "skip": skip,
     "data": new List<dynamic>.from(data.map((x) => x.toJson())),
   };
+
+  @override
+  String toString() {
+    return 'GetPostEntity{total: $total, limit: $limit, skip: $skip, data: $data}';
+  }
+
+
 }
 
 
