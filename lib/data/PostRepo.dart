@@ -9,7 +9,7 @@ class PostRepo {
   MyHttpClient client;
 
   PostRepo() {
-    client = MyHttpClient();
+    client = MyHttpClient.instance;
   }
 
   //register

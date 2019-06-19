@@ -13,7 +13,7 @@ class AuthRepo {
   MyHttpClient client;
 
   AuthRepo() {
-    client = MyHttpClient();
+    client = MyHttpClient.instance;
   }
 
   //register
