@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/data/AuthRepo.dart';
+import 'package:your_reward_user/data/CoupRepo.dart';
 import 'package:your_reward_user/data/PostRepo.dart';
+import 'package:your_reward_user/model/CreatePostRequest.dart';
 import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/model/RegisterRequest.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
@@ -16,65 +18,98 @@ class ApiScreenTest extends StatefulWidget {
 class _ApiScreenTestState extends State<ApiScreenTest> {
   AuthRepo repo;
   PostRepo postRepo;
+  CouponRepo couponRepo;
   var _loginStatus = "Login";
 
   @override
   void initState() {
     repo = AuthRepo();
     postRepo = PostRepo();
+    couponRepo = CouponRepo();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: HColors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: HColors.ColorSecondPrimary,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                FontAwesomeIcons.userCircle,
-                color: HColors.ColorSecondPrimary,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/accountinfo');
-              }),
-        ],
-        elevation: 0.0,
-      ),
-      backgroundColor: HColors.white,
-      body: Center(
-          child: Column(
+    return Container(
+      child: Row(
         children: <Widget>[
-          RaisedButton(
-            onPressed: _onAuthenticationLogin,
-            child: Text(_loginStatus),
-          ),
-          RaisedButton(
-            onPressed: _onRegister,
-            child: Text("Register"),
-          ),
-          RaisedButton(
-            onPressed: _onforgotPassword,
-            child: Text("Lost password"),
-          ),
-          RaisedButton(
-            onPressed: _onLoginFacebook,
-            child: Text("Login FB API"),
-          ),
-          RaisedButton(
-            onPressed: _onGetPosts,
-            child: Text("getPosts"),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: HColors.white,
+                      leading: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: HColors.ColorSecondPrimary,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                      actions: <Widget>[
+                        IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.userCircle,
+                              color: HColors.ColorSecondPrimary,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/accountinfo');
+                            }),
+                      ],
+                      elevation: 0.0,
+                    ),
+                    backgroundColor: HColors.white,
+                    body: Center(
+                        child: Column(
+                      children: <Widget>[
+                        RaisedButton(
+                          onPressed: _onAuthenticationLogin,
+                          child: Text(_loginStatus),
+                        ),
+                        RaisedButton(
+                          onPressed: _onRegister,
+                          child: Center(child: Container(child: Text("Register"))),
+                        ),
+                        RaisedButton(
+                          onPressed: _onforgotPassword,
+                          child: Text("Lost password"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onLoginFacebook,
+                          child: Text("Login FB API"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onGetPosts,
+                          child: Text("getPosts"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onGetPostDetail,
+                          child: Text("getPostsDetail"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onCreateNewPost,
+                          child: Text("createNewPost"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onGetGeneralCoupons,
+                          child: Text("getGeneral Coupons"),
+                        ),
+                        RaisedButton(
+                          onPressed: _onGetCouponDetails,
+                          child: Text("getGeneral Coupons Details"),
+                        ),
+                      ],
+                    )),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      )),
+      ),
     );
   }
 
@@ -132,6 +167,52 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   void _onGetPosts() {
     print(LogPrefix.methodName("_onGetPosts"));
     postRepo.getPosts().then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetPostDetail() {
+    print(LogPrefix.methodName("_onGetPostDetail"));
+    postRepo.getPostDetail("5c9a02f7a6151b1603bcad7c").then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onCreateNewPost() {
+    print(LogPrefix.methodName("_onCreateNewPost"));
+//    CreatePostRequest body = CreatePostRequest(
+//        objectType: "page",
+//        status: "active",
+//        title: " Post Title From IOS- ANDROID",
+//        code: "4",
+//        description: " Horray News from APP",
+//        thumbnail: "https://s120.avatar.talk.zdn.vn/default");
+//
+//    postRepo.createNewPost(body).then((onValue) {
+//      print(LogPrefix.okResponse(onValue));
+//    }).catchError((e) {
+//      print(LogPrefix.errorResponse(e));
+//    });
+    print(LogPrefix.okResponse(
+        "Tạo mới có phải là phần bên WEB-ADMIN?"));
+  }
+
+  void _onGetGeneralCoupons() {
+    print(LogPrefix.methodName("_onGetGeneralCoupons"));
+    couponRepo.getCoupons().then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetCouponDetails() {
+    print(LogPrefix.methodName("_onGetGeneralCoupons"));
+    couponRepo.getCouponDetails("5d0764974ea8b268344fc7b9").then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));

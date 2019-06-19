@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:your_reward_user/model/Author.dart';
+import 'package:your_reward_user/model/AuthorEntity.dart';
 
 class PostEntity {
   String id;
