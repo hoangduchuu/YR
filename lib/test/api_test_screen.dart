@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/data/AuthRepo.dart';
+import 'package:your_reward_user/data/PostRepo.dart';
 import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/model/RegisterRequest.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
@@ -14,11 +15,13 @@ class ApiScreenTest extends StatefulWidget {
 
 class _ApiScreenTestState extends State<ApiScreenTest> {
   AuthRepo repo;
+  PostRepo postRepo;
   var _loginStatus = "Login";
 
   @override
   void initState() {
     repo = AuthRepo();
+    postRepo = PostRepo();
   }
 
   @override
@@ -65,6 +68,10 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
           RaisedButton(
             onPressed: _onLoginFacebook,
             child: Text("Login FB API"),
+          ),
+          RaisedButton(
+            onPressed: _onGetPosts,
+            child: Text("getPosts"),
           ),
         ],
       )),
@@ -116,6 +123,15 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
         tokenKey: "abcdaskljdlkasjdslkjdalsj093784jklshfs",
         strategy: "facebook");
     repo.registerWithFacebook(body).then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetPosts() {
+    print(LogPrefix.methodName("_onGetPosts"));
+    postRepo.getPosts().then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
