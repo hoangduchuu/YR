@@ -3,10 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/data/AuthRepo.dart';
 import 'package:your_reward_user/data/CoupRepo.dart';
 import 'package:your_reward_user/data/PostRepo.dart';
+import 'package:your_reward_user/model/LoginEntity.dart';
 import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/model/RegisterRequest.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/utils/UserProvider.dart';
 import 'package:your_reward_user/utils/log_prefix.dart';
 
 class ApiScreenTest extends StatefulWidget {
@@ -19,6 +21,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   PostRepo postRepo;
   CouponRepo couponRepo;
   var _loginStatus = "Login";
+  var _userProfile = "Press login";
 
   @override
   void initState() {
@@ -56,13 +59,22 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
       body: Center(
           child: Column(
         children: <Widget>[
+          Container(
+              child: SizedBox(
+                  child: Text(
+            _userProfile,
+            style: TextStyle(
+                backgroundColor: Colors.blue,
+                color: Colors.white,
+                fontSize: 18),
+          ))),
           RaisedButton(
             onPressed: _onAuthenticationLogin,
             child: Text(_loginStatus),
           ),
           RaisedButton(
             onPressed: _onRegister,
-            child: Center(child: Container(child: Text("Register"))),
+            child: Text("Register"),
           ),
           RaisedButton(
             onPressed: _onforgotPassword,
@@ -100,7 +112,15 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   void _onAuthenticationLogin() {
     print(LogPrefix.methodName("Authentication (login)"));
     repo.login("huu@example.com", "john.doe").then((onValue) {
-      print(LogPrefix.okResponse(onValue));
+      // provide token
+      LoginEntity entity = onValue;
+      UserProvider.loginEntity = entity;
+      UserProvider.userEntity = entity.user;
+      print(LogPrefix.okResponse(entity.accessToken));
+      setState(() {
+        _userProfile =
+            'Welcome: ${UserProvider.userEntity.email} - ${UserProvider.userEntity.fullname}';
+      });
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
     });
