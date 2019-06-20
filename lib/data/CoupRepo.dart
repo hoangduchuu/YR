@@ -20,7 +20,7 @@ class CouponRepo {
   Future<dynamic> getCoupons() async {
     String url = '${YRService.END_POINT}${YRService.PATH_COUPONS}';
     String raw =
-        await client.get(url, YRService.generateHeadersWithToken(""), Map());
+        await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponParser().parse(raw);
     return result;
   }
@@ -28,7 +28,7 @@ class CouponRepo {
   Future<dynamic> getCouponDetails(String couponId) async {
     String url = '${YRService.END_POINT}${YRService.PATH_COUPONS}/$couponId';
     String raw =
-    await client.get(url, YRService.generateHeadersWithToken(""), Map());
+    await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponDetaiParser().parse(raw);
     return result;
   }

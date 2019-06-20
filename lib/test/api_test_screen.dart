@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/data/AuthRepo.dart';
 import 'package:your_reward_user/data/CoupRepo.dart';
 import 'package:your_reward_user/data/PostRepo.dart';
-import 'package:your_reward_user/model/CreatePostRequest.dart';
 import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/model/RegisterRequest.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
@@ -30,86 +29,71 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Scaffold(
-                    appBar: AppBar(
-                      backgroundColor: HColors.white,
-                      leading: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: HColors.ColorSecondPrimary,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
-                      actions: <Widget>[
-                        IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.userCircle,
-                              color: HColors.ColorSecondPrimary,
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/accountinfo');
-                            }),
-                      ],
-                      elevation: 0.0,
-                    ),
-                    backgroundColor: HColors.white,
-                    body: Center(
-                        child: Column(
-                      children: <Widget>[
-                        RaisedButton(
-                          onPressed: _onAuthenticationLogin,
-                          child: Text(_loginStatus),
-                        ),
-                        RaisedButton(
-                          onPressed: _onRegister,
-                          child: Center(child: Container(child: Text("Register"))),
-                        ),
-                        RaisedButton(
-                          onPressed: _onforgotPassword,
-                          child: Text("Lost password"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onLoginFacebook,
-                          child: Text("Login FB API"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onGetPosts,
-                          child: Text("getPosts"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onGetPostDetail,
-                          child: Text("getPostsDetail"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onCreateNewPost,
-                          child: Text("createNewPost"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onGetGeneralCoupons,
-                          child: Text("getGeneral Coupons"),
-                        ),
-                        RaisedButton(
-                          onPressed: _onGetCouponDetails,
-                          child: Text("getGeneral Coupons Details"),
-                        ),
-                      ],
-                    )),
-                  ),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: HColors.white,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: HColors.ColorSecondPrimary,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                FontAwesomeIcons.userCircle,
+                color: HColors.ColorSecondPrimary,
               ),
-            ],
+              onPressed: () {
+                Navigator.pushNamed(context, '/accountinfo');
+              }),
+        ],
+        elevation: 0.0,
+      ),
+      backgroundColor: HColors.white,
+      body: Center(
+          child: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: _onAuthenticationLogin,
+            child: Text(_loginStatus),
+          ),
+          RaisedButton(
+            onPressed: _onRegister,
+            child: Center(child: Container(child: Text("Register"))),
+          ),
+          RaisedButton(
+            onPressed: _onforgotPassword,
+            child: Text("Lost password"),
+          ),
+          RaisedButton(
+            onPressed: _onLoginFacebook,
+            child: Text("Login FB API"),
+          ),
+          RaisedButton(
+            onPressed: _onGetPosts,
+            child: Text("getPosts"),
+          ),
+          RaisedButton(
+            onPressed: _onGetPostDetail,
+            child: Text("getPostsDetail"),
+          ),
+          RaisedButton(
+            onPressed: _onCreateNewPost,
+            child: Text("createNewPost"),
+          ),
+          RaisedButton(
+            onPressed: _onGetGeneralCoupons,
+            child: Text("getGeneral Coupons"),
+          ),
+          RaisedButton(
+            onPressed: _onGetCouponDetails,
+            child: Text("getGeneral Coupons Details"),
           ),
         ],
-      ),
+      )),
     );
   }
 
@@ -197,8 +181,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 //    }).catchError((e) {
 //      print(LogPrefix.errorResponse(e));
 //    });
-    print(LogPrefix.okResponse(
-        "Tạo mới có phải là phần bên WEB-ADMIN?"));
+    print(LogPrefix.okResponse("Tạo mới có phải là phần bên WEB-ADMIN?"));
   }
 
   void _onGetGeneralCoupons() {
