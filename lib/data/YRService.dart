@@ -30,5 +30,12 @@ static String myToken = UserProvider.loginEntity.accessToken;
 
   // Coupons
 static String PATH_COUPONS = "/coupons";
+static String PATH_MY_COUPONS = "/my-coupons";
+
+
+static String PATH_STORE_USER = "/store-users";
+static String PATH_STORES = "/stores";
+
+static String PATH_TRANSACTIONS = "/transactions";
 
 }

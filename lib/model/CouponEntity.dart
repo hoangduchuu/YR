@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'AuthorEntity.dart';
+import 'OwnerEntity.dart';
 import 'StoreEntity.dart';
 import 'enums.dart';
 
 class CouponEntity {
   String id;
   String objectType;
-  String giftType;
+  String giftType; // TODO huu; use enum instead?
   int totalUsed;
   String pointValue;
   bool isAlwaysApply;
@@ -29,7 +30,7 @@ class CouponEntity {
   DateTime updatedAt;
   int v;
   AuthorEntity author;
-  AuthorEntity owner;
+  OwnerEntity owner;
   StoreEntity store;
 
   CouponEntity({
@@ -90,7 +91,7 @@ class CouponEntity {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
     author: AuthorEntity.fromJson(json["author"]),
-    owner: AuthorEntity.fromJson(json["owner"]),
+    owner: OwnerEntity.fromJson(json["owner"]),
     store: json["store"] == null ? null : StoreEntity.fromJson(json["store"]),
   );
 

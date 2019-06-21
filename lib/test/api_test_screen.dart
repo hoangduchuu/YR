@@ -28,6 +28,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
     repo = AuthRepo();
     postRepo = PostRepo();
     couponRepo = CouponRepo();
+    _onAuthenticationLogin();
   }
 
   @override
@@ -103,6 +104,30 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
           RaisedButton(
             onPressed: _onGetCouponDetails,
             child: Text("getGeneral Coupons Details"),
+          ),
+          RaisedButton(
+            onPressed: _onGetMemberShips,
+            child: Text("get card"),
+          ),
+          RaisedButton(
+            onPressed: _onGetStores,
+            child: Text("get Stores"),
+          ),
+          RaisedButton(
+            onPressed: _onGetTransactionByStoreId,
+            child: Text("getTransactionByStoreID"),
+          ),
+          RaisedButton(
+            onPressed: _onGetTransactionOverTheWorld,
+            child: Text("_onGetTransactionOverTheWorld"),
+          ),
+          RaisedButton(
+            onPressed: _onGetCouponsOfUser,
+            child: Text("_onGetCouponsOfUser"),
+          ),
+          RaisedButton(
+            onPressed: _onGetCouponDetailById,
+            child: Text("_onGetCouponDetailById"),
           ),
         ],
       )),
@@ -216,6 +241,66 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   void _onGetCouponDetails() {
     print(LogPrefix.methodName("_onGetGeneralCoupons"));
     couponRepo.getCouponDetails("5d0764974ea8b268344fc7b9").then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetMemberShips() {
+    print(LogPrefix.methodName("_onGetMemberShips"));
+    couponRepo
+        .getMemberShipCards("5ce0061bc151ae4a211e7508", limit: 2, skip: 0)
+        .then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetStores() {
+    print(LogPrefix.methodName("_onGetStores"));
+    couponRepo
+        .getStores("5ce3704714fcb561a3d7a277", limit: 2, skip: 0)
+        .then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetTransactionByStoreId() {
+    print(LogPrefix.methodName("_onGetTransactionByStoreId"));
+    couponRepo
+        .getTransactionByStoreId("5cdfeb2b04456d438bb0ae4b", limit: 2, skip: 0)
+        .then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetTransactionOverTheWorld() {
+    print(LogPrefix.methodName("_onGetTransactionOverTheWorld"));
+    couponRepo.getAllTransactions(limit: 2, skip: 0).then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetCouponsOfUser() {
+    print(LogPrefix.methodName("_onGetCouponsOfUser"));
+    couponRepo.getCouponsOfUser(limit: 2, skip: 0).then((onValue) {
+      print(LogPrefix.okResponse(onValue));
+    }).catchError((e) {
+      print(LogPrefix.errorResponse(e));
+    });
+  }
+
+  void _onGetCouponDetailById() {
+    print(LogPrefix.methodName("_onGetCouponDetailById"));
+    couponRepo.getCouponDetailById("5ce02b3db37edf5d3983e258").then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));

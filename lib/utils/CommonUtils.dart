@@ -11,4 +11,7 @@ class CommonUtils {
     int number = random.nextInt(1000);
     return 'testEmailaccount${number}@gmail.com';
   }
+  static String getFilterParam( {int limit = 200, int skip = 0}){
+    return "\$skip=$skip&\$limit=$limit";
+  }
 }

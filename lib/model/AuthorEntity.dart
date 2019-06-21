@@ -35,7 +35,8 @@ class AuthorEntity {
     this.points,
   });
 
-  factory AuthorEntity.fromRawJson(String str) => AuthorEntity.fromJson(json.decode(str));
+  factory AuthorEntity.fromRawJson(String str) =>
+      AuthorEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -79,6 +80,4 @@ class AuthorEntity {
   String toString() {
     return 'AuthorEntity{id: $id, gender: $gender, status: $status, role: $role, fullname: $fullname, email: $email, phone: $phone, address: $address, thumbnail: $thumbnail, storeId: $storeId, password: $password, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, points: $points}';
   }
-
-
 }

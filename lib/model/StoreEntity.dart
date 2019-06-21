@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:your_reward_user/model/enums.dart';
 
 import 'AuthorEntity.dart';
+import 'OwnerEntity.dart';
 
 class StoreEntity {
   String id;
@@ -22,7 +23,7 @@ class StoreEntity {
   DateTime createdAt;
   DateTime updatedAt;
   int v;
-  AuthorEntity owner;
+  OwnerEntity owner;
   AuthorEntity author;
 
   StoreEntity({
@@ -69,7 +70,7 @@ class StoreEntity {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    owner: AuthorEntity.fromJson(json["owner"]),
+    owner: OwnerEntity.fromJson(json["owner"]),
     author: AuthorEntity.fromJson(json["author"]),
   );
 
@@ -94,4 +95,10 @@ class StoreEntity {
     "owner": owner.toJson(),
     "author": author.toJson(),
   };
+
+  @override
+  String toString() {
+    return 'StoreEntity{id: $id, openHours: $openHours, rating: $rating, status: $status, title: $title, address: $address, email: $email, phone: $phone, addressLat: $addressLat, addressLng: $addressLng, ownerId: $ownerId, description: $description, thumbnail: $thumbnail, authorId: $authorId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, owner: $owner, author: $author}';
+  }
+
 }
