@@ -57,80 +57,82 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
         elevation: 0.0,
       ),
       backgroundColor: HColors.white,
-      body: Center(
-          child: Column(
-        children: <Widget>[
-          Container(
-              child: SizedBox(
-                  child: Text(
-            _userProfile,
-            style: TextStyle(
-                backgroundColor: Colors.blue,
-                color: Colors.white,
-                fontSize: 18),
-          ))),
-          RaisedButton(
-            onPressed: _onAuthenticationLogin,
-            child: Text(_loginStatus),
-          ),
-          RaisedButton(
-            onPressed: _onRegister,
-            child: Text("Register"),
-          ),
-          RaisedButton(
-            onPressed: _onforgotPassword,
-            child: Text("Lost password"),
-          ),
-          RaisedButton(
-            onPressed: _onLoginFacebook,
-            child: Text("Login FB API"),
-          ),
-          RaisedButton(
-            onPressed: _onGetPosts,
-            child: Text("getPosts"),
-          ),
-          RaisedButton(
-            onPressed: _onGetPostDetail,
-            child: Text("getPostsDetail"),
-          ),
-          RaisedButton(
-            onPressed: _onCreateNewPost,
-            child: Text("createNewPost"),
-          ),
-          RaisedButton(
-            onPressed: _onGetGeneralCoupons,
-            child: Text("getGeneral Coupons"),
-          ),
-          RaisedButton(
-            onPressed: _onGetCouponDetails,
-            child: Text("getGeneral Coupons Details"),
-          ),
-          RaisedButton(
-            onPressed: _onGetMemberShips,
-            child: Text("get card"),
-          ),
-          RaisedButton(
-            onPressed: _onGetStores,
-            child: Text("get Stores"),
-          ),
-          RaisedButton(
-            onPressed: _onGetTransactionByStoreId,
-            child: Text("getTransactionByStoreID"),
-          ),
-          RaisedButton(
-            onPressed: _onGetTransactionOverTheWorld,
-            child: Text("_onGetTransactionOverTheWorld"),
-          ),
-          RaisedButton(
-            onPressed: _onGetCouponsOfUser,
-            child: Text("_onGetCouponsOfUser"),
-          ),
-          RaisedButton(
-            onPressed: _onGetCouponDetailById,
-            child: Text("_onGetCouponDetailById"),
-          ),
-        ],
-      )),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+                child: SizedBox(
+                    child: Text(
+              _userProfile,
+              style: TextStyle(
+                  backgroundColor: Colors.blue,
+                  color: Colors.white,
+                  fontSize: 18),
+            ))),
+            RaisedButton(
+              onPressed: _onAuthenticationLogin,
+              child: Text(_loginStatus),
+            ),
+            RaisedButton(
+              onPressed: _onRegister,
+              child: Text("Register"),
+            ),
+            RaisedButton(
+              onPressed: _onforgotPassword,
+              child: Text("Lost password"),
+            ),
+            RaisedButton(
+              onPressed: _onLoginFacebook,
+              child: Text("Login FB API"),
+            ),
+            RaisedButton(
+              onPressed: _onGetPosts,
+              child: Text("getPosts"),
+            ),
+            RaisedButton(
+              onPressed: _onGetPostDetail,
+              child: Text("getPostsDetail"),
+            ),
+            RaisedButton(
+              onPressed: _onCreateNewPost,
+              child: Text("createNewPost"),
+            ),
+            RaisedButton(
+              onPressed: _onGetGeneralCoupons,
+              child: Text("getGeneral Coupons"),
+            ),
+            RaisedButton(
+              onPressed: _onGetCouponDetails,
+              child: Text("getGeneral Coupons Details"),
+            ),
+            RaisedButton(
+              onPressed: _onGetMemberShips,
+              child: Text("get card"),
+            ),
+            RaisedButton(
+              onPressed: _onGetStores,
+              child: Text("get Stores"),
+            ),
+            RaisedButton(
+              onPressed: _onGetTransactionByStoreId,
+              child: Text("getTransactionByStoreID"),
+            ),
+            RaisedButton(
+              onPressed: _onGetTransactionOverTheWorld,
+              child: Text("_onGetTransactionOverTheWorld"),
+            ),
+            RaisedButton(
+              onPressed: _onGetCouponsOfUser,
+              child: Text("_onGetCouponsOfUser"),
+            ),
+            RaisedButton(
+              onPressed: _onGetCouponDetailById,
+              child: Text("_onGetCouponDetailById"),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
