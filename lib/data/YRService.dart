@@ -23,7 +23,7 @@ static String myToken = UserProvider.loginEntity.accessToken;
 
 
   // post /posts?$skip=0&$limit=500&$sort[title]=1&$search=Magna et&objectType=page
-  static String PATH_POSTS = "/posts?\$skip=0&\$limit=500&\$sort[title]=1&\$search=Magna et&objectType=page";
+  static String PATH_POSTS = "/posts";
   static String PATH_POST_DETAIL = "/posts";
   static String PATH_POST_CREATE = "/posts";
 

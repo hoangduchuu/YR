@@ -197,7 +197,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetPosts() {
     print(LogPrefix.methodName("_onGetPosts"));
-    postRepo.getPosts().then((onValue) {
+    postRepo.getPosts("Chung","page").then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
