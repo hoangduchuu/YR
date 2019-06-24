@@ -1,18 +1,17 @@
 import 'dart:convert';
 
-import 'package:your_reward_user/model/LoginEntity.dart';
-import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
-import 'package:your_reward_user/model/RegisterRequest.dart';
-import 'package:your_reward_user/model/RegisterEntity.dart';
-
+import 'package:your_reward_user/data/YRService.dart';
+import 'package:your_reward_user/data/base/BaseParser.dart';
 import 'package:your_reward_user/data/base/MyHttpClient.dart';
-import 'YRService.dart';
-import 'base/BaseParser.dart';
+import 'package:your_reward_user/entity/LoginEntity.dart';
+import 'package:your_reward_user/entity/RegisterEntity.dart';
+import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
+import 'package:your_reward_user/entity/RegisterRequest.dart';
 
-class AuthRepo {
+class AuthProvider {
   MyHttpClient client;
 
-  AuthRepo() {
+  AuthProvider() {
     client = MyHttpClient.instance;
   }
 

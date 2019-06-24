@@ -2,7 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:your_reward_user/model/RespErrorEntity.dart';
+import 'package:your_reward_user/entity/RespErrorEntity.dart';
+
 
 abstract class BaseParser<T>{
   dynamic parse(String raw){

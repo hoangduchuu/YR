@@ -83,7 +83,7 @@ class UserEntity {
 
   @override
   String toString() {
-    return 'User{id: $id, gender: $gender, status: $status, role: $role, points: $points, isNotificationEmail: $isNotificationEmail, isNotificationApplication: $isNotificationApplication, isNotificationPromotion: $isNotificationPromotion, isNotificationEvent: $isNotificationEvent, isProfile: $isProfile, email: $email, fullname: $fullname, thumbnail: $thumbnail, phone: $phone, address: $address, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
+    return 'UserEntity{id: $id, gender: $gender, status: $status, role: $role, points: $points, isNotificationEmail: $isNotificationEmail, isNotificationApplication: $isNotificationApplication, isNotificationPromotion: $isNotificationPromotion, isNotificationEvent: $isNotificationEvent, isProfile: $isProfile, email: $email, fullname: $fullname, thumbnail: $thumbnail, phone: $phone, address: $address, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
   }
 
 

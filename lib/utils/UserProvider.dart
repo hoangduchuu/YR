@@ -1,5 +1,6 @@
-import 'package:your_reward_user/model/LoginEntity.dart';
-import 'package:your_reward_user/model/userEntity.dart';
+
+import 'package:your_reward_user/entity/LoginEntity.dart';
+import 'package:your_reward_user/entity/userEntity.dart';
 
 /**
  * the Fake token provider after login

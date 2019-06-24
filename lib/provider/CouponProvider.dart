@@ -1,19 +1,14 @@
-import 'dart:convert';
 
-import 'package:your_reward_user/model/CouponEntity.dart';
-import 'package:your_reward_user/model/CreatePostRequest.dart';
-import 'package:your_reward_user/model/GetGeneralCouponEntity.dart';
-import 'package:your_reward_user/model/GetMemberShipEntity.dart';
-import 'package:your_reward_user/model/GetPostEntity.dart';
+
+import 'package:your_reward_user/data/YRService.dart';
+import 'package:your_reward_user/data/base/BaseParser.dart';
 import 'package:your_reward_user/data/base/MyHttpClient.dart';
-import 'package:your_reward_user/model/GetStoreEntity.dart';
-import 'package:your_reward_user/model/GetTransactionEntity.dart';
-import 'package:your_reward_user/model/MembershipEntity.dart';
-import 'package:your_reward_user/model/PostEntity.dart';
+import 'package:your_reward_user/entity/CouponEntity.dart';
+import 'package:your_reward_user/entity/GetGeneralCouponEntity.dart';
+import 'package:your_reward_user/entity/GetMemberShipEntity.dart';
+import 'package:your_reward_user/entity/GetStoreEntity.dart';
+import 'package:your_reward_user/entity/GetTransactionEntity.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
-import 'PostRepo.dart';
-import 'YRService.dart';
-import 'base/BaseParser.dart';
 
 class CouponRepo {
   MyHttpClient client;

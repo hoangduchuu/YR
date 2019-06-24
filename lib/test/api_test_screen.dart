@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/data/AuthRepo.dart';
-import 'package:your_reward_user/data/CoupRepo.dart';
-import 'package:your_reward_user/data/PostRepo.dart';
-import 'package:your_reward_user/model/LoginEntity.dart';
-import 'package:your_reward_user/model/RegisterFacbookRequest.dart';
-import 'package:your_reward_user/model/RegisterRequest.dart';
+import 'package:your_reward_user/provider/AuthProvider.dart';
+import 'package:your_reward_user/provider/CouponProvider.dart';
+import 'package:your_reward_user/provider/PostProvider.dart';
+import 'package:your_reward_user/entity/LoginEntity.dart';
+import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
+import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/UserProvider.dart';
@@ -17,7 +17,7 @@ class ApiScreenTest extends StatefulWidget {
 }
 
 class _ApiScreenTestState extends State<ApiScreenTest> {
-  AuthRepo repo;
+  AuthProvider repo;
   PostRepo postRepo;
   CouponRepo couponRepo;
   var _loginStatus = "Login";
@@ -25,7 +25,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   @override
   void initState() {
-    repo = AuthRepo();
+    repo = AuthProvider();
     postRepo = PostRepo();
     couponRepo = CouponRepo();
     _onAuthenticationLogin();

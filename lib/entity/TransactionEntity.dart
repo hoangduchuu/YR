@@ -1,7 +1,8 @@
 
 import 'dart:convert';
 
-import 'package:your_reward_user/model/userEntity.dart';
+
+import 'package:your_reward_user/entity/userEntity.dart';
 
 import 'AuthorEntity.dart';
 import 'StoreEntity.dart';

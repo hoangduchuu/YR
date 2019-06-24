@@ -33,6 +33,8 @@ dependencies:
     git: https://github.com/lequanghiep74/flutter_facebook_login
   http: ^0.12.0+2
   equatable: ^0.2.3
+  bloc: ^0.14.0
+  flutter_bloc: ^0.18.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

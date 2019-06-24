@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:your_reward_user/model/enums.dart';
 
 import 'AuthorEntity.dart';
 import 'OwnerEntity.dart';
+import 'enums.dart';
 
 class StoreEntity {
   String id;
