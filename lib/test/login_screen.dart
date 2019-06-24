@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/bloc/login/login_bloc.dart';
 import 'package:your_reward_user/bloc/login/login_event.dart';
 import 'package:your_reward_user/bloc/login/login_state.dart';
+import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
@@ -18,12 +19,16 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginBloc _loginBloc;
-  String _email, _password;
+  String _email, _password, _token;
 
   @override
   void initState() {
     super.initState();
     _loginBloc = LoginBloc();
+    SharedPrefRepo.getToken().then((token) {
+      _token = token;
+      print('AppToken ${_token}');
+    });
   }
 
   @override
@@ -147,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
                   text: Text(
-                    'Đăng nhập',
+                    'Đăng nhập abc def',
                     style: TextStyle(
                         fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
