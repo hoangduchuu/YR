@@ -1,11 +1,12 @@
 import 'dart:io';
 
+import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/utils/UserProvider.dart';
 class YRService{
   static const DEFAULT_HEADER = {
     HttpHeaders.contentTypeHeader : 'application/json'
   };
-static String myToken = UserProvider.loginEntity.accessToken;
+static String myToken = DataProvider.userToken;
   static Map<String, String> generateHeadersWithToken(){
     return {
       HttpHeaders.authorizationHeader: 'Bearer $myToken',

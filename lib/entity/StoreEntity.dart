@@ -1,15 +1,16 @@
+// To parse this JSON data, do
+//
+//     final storeEntity = storeEntityFromJson(jsonString);
+
 import 'dart:convert';
 
-
-import 'AuthorEntity.dart';
 import 'OwnerEntity.dart';
-import 'enums.dart';
 
 class StoreEntity {
   String id;
   String openHours;
   int rating;
-  Status status;
+  String status;
   String title;
   String address;
   String email;
@@ -24,7 +25,6 @@ class StoreEntity {
   DateTime updatedAt;
   int v;
   OwnerEntity owner;
-  AuthorEntity author;
 
   StoreEntity({
     this.id,
@@ -45,7 +45,6 @@ class StoreEntity {
     this.updatedAt,
     this.v,
     this.owner,
-    this.author,
   });
 
   factory StoreEntity.fromRawJson(String str) => StoreEntity.fromJson(json.decode(str));
@@ -56,7 +55,7 @@ class StoreEntity {
     id: json["_id"],
     openHours: json["openHours"],
     rating: json["rating"],
-    status: statusValues.map[json["status"]],
+    status: json["status"],
     title: json["title"],
     address: json["address"],
     email: json["email"],
@@ -71,14 +70,13 @@ class StoreEntity {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
     owner: OwnerEntity.fromJson(json["owner"]),
-    author: AuthorEntity.fromJson(json["author"]),
   );
 
   Map<String, dynamic> toJson() => {
     "_id": id,
     "openHours": openHours,
     "rating": rating,
-    "status": statusValues.reverse[status],
+    "status": status,
     "title": title,
     "address": address,
     "email": email,
@@ -93,12 +91,6 @@ class StoreEntity {
     "updatedAt": updatedAt.toIso8601String(),
     "__v": v,
     "owner": owner.toJson(),
-    "author": author.toJson(),
   };
-
-  @override
-  String toString() {
-    return 'StoreEntity{id: $id, openHours: $openHours, rating: $rating, status: $status, title: $title, address: $address, email: $email, phone: $phone, addressLat: $addressLat, addressLng: $addressLng, ownerId: $ownerId, description: $description, thumbnail: $thumbnail, authorId: $authorId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, owner: $owner, author: $author}';
-  }
-
 }
+

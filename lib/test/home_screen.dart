@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/bloc/home/home_bloc.dart';
+import 'package:your_reward_user/bloc/home/home_event.dart';
+import 'package:your_reward_user/bloc/home/home_state.dart';
+import 'package:your_reward_user/model/Store.dart';
+import 'package:your_reward_user/repository/StoreRepo.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -14,6 +20,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
+  HomeBLoc _homeBloc;
+  List<Store> _stores;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeBloc = HomeBLoc();
+    _homeBloc.dispatch(GetStoreRequest());
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -41,36 +57,68 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
       ),
       backgroundColor: HColors.white,
-      body: Container(
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return BlocListener(
+      bloc: _homeBloc,
+      listener: (context, state) {
+        if (state is GetStoresState) {
+          if (state.isError) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                  content: Text('${state.errMsg}'),
+                  backgroundColor: Colors.red));
+          } else if (state.isLoading) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+          } else {
+            Scaffold.of(context)..hideCurrentSnackBar();
+          }
+        } else if (state is OnGetStoresSuccess) {
+          Scaffold.of(context)..hideCurrentSnackBar();
+          setState(() {
+            _stores = state.stores;
+          });
+        }
+      },
+      child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RestaurantCard(cb: (int index){
-              print('url==$index');
-              Navigator.pushNamed(context, '/bottombar');
-            }),
+            RestaurantCard(
+              cb: (int index) {
+                print('url==$index');
+                Navigator.pushNamed(context, '/bottombar');
+              },
+              store: _stores,
+            ),
             Padding(
-              padding: EdgeInsets.only(left: 20, top: 30,right: 20),
+              padding: EdgeInsets.only(left: 20, top: 30, right: 20),
               child: Container(
                 padding: EdgeInsets.only(bottom: 6),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   border: Border(
-                      bottom: BorderSide(color: Colors.black12,width: 1)
-                  ),
+                      bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
                 child: Text(
                   'Lịch sử giao dịch',
                   style: TextStyle(
                       color: HColors.ColorSecondPrimary,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,fontFamily: Hfonts.PrimaryFontBold),
+                      fontSize: 20,
+                      fontFamily: Hfonts.PrimaryFontBold),
                 ),
               ),
             ),
             Expanded(
-                flex: 1,
-                child: ListView(
+              flex: 1,
+              child: ListView(
                 children: <Widget>[
                   TranferHistoryRow(
                       tranferName: 'Giao dịch số 1',
@@ -105,7 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       storeType: 'assets/images/movie-theatre.png',
                       point: 10),
                 ],
-              ),),
+              ),
+            ),
           ],
         ),
       ),

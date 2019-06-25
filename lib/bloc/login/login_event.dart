@@ -6,7 +6,7 @@ abstract class LoginEvent extends Equatable {
   LoginEvent([List props = const []]) : super(props);
 }
 
-class LoginRequest extends LoginEvent{
+class LoginRequest extends LoginEvent {
   final String email, password;
 
   LoginRequest({@required this.email, @required this.password})
@@ -18,8 +18,7 @@ class LoginRequest extends LoginEvent{
   }
 }
 
-class LoggedInRequest extends LoginEvent{
-
+class LoggedInRequest extends LoginEvent {
   @override
   String toString() {
     return 'LoggedInRequest{}';

@@ -33,3 +33,5 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     entity.fullname = model.fullName;
   }
 }
+
+
