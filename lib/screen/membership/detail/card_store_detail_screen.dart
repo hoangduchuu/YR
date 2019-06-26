@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/Store.dart';
+import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
-import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/member_card.dart';
-import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/restaurant_item.dart';
-import 'package:your_reward_user/widget/textfield.dart';
-import 'package:your_reward_user/widget/tranfer_history_row.dart';
 import 'package:your_reward_user/widget/voucher.dart';
 
 import 'bloc/membership_detail_bloc.dart';
@@ -95,7 +91,7 @@ class _MemberShipStoreDetailScreenState
           SizedBox(
             height: 10,
           ),
-          BarCode(),
+          BarCode(phone: DataProvider.user.phone,),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
