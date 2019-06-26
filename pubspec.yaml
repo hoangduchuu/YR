@@ -36,6 +36,7 @@ dependencies:
   bloc: ^0.14.0
   flutter_bloc: ^0.18.1
   shared_preferences: ^0.5.3+1
+  intl: ^0.15.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

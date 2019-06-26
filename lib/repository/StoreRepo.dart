@@ -14,7 +14,7 @@ class StoreRepo {
 
   StoreRepo() {
     _provider = StoreProvider();
-    _mapper = StoreMapper();
+    this._mapper = StoreMapper();
   }
 
   // request and mapping from entity to model

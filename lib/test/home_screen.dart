@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/bloc/home/home_state_stores.dart';
 import 'package:your_reward_user/bloc/home/home_bloc.dart';
 import 'package:your_reward_user/bloc/home/home_event.dart';
-import 'package:your_reward_user/bloc/home/home_state.dart';
+import 'package:your_reward_user/bloc/home/home_state_transactions.dart';
 import 'package:your_reward_user/model/Store.dart';
-import 'package:your_reward_user/repository/StoreRepo.dart';
+import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/widget/common_button.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
-import 'package:your_reward_user/widget/textfield.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,12 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
   List<Store> _stores;
+  List<Transaction> _transactions;
 
   @override
   void initState() {
     super.initState();
     _homeBloc = HomeBLoc();
     _homeBloc.dispatch(GetStoreRequest());
+    _homeBloc.dispatch(GetTransactionRequest());
   }
 
   @override
@@ -85,6 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
             _stores = state.stores;
           });
         }
+        if (state is OnGetTransactionSuccess) {
+          Scaffold.of(context)..hideCurrentSnackBar();
+          setState(() {
+            _transactions = state.transactions;
+          });
+        }
       },
       child: Container(
         child: Column(
@@ -118,46 +126,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Expanded(
               flex: 1,
-              child: ListView(
-                children: <Widget>[
-                  TranferHistoryRow(
-                      tranferName: 'Giao dịch số 1',
-                      time: '18:00',
-                      date: '16/5/2019',
-                      place: 'KFC',
-                      price: '100000đ',
-                      storeType: 'assets/images/burgers.png',
-                      point: 50),
-                  TranferHistoryRow(
-                      tranferName: 'Giao dịch số 2',
-                      time: '15:00',
-                      date: '16/5/2019',
-                      place: 'Pizza Huts',
-                      price: '100000đ',
-                      storeType: 'assets/images/coffee-cup.png',
-                      point: 20),
-                  TranferHistoryRow(
-                      tranferName: 'Giao dịch số 3',
-                      time: '17:00',
-                      date: '16/5/2019',
-                      place: 'KFC',
-                      price: '100000đ',
-                      storeType: 'assets/images/pizza.png',
-                      point: 100),
-                  TranferHistoryRow(
-                      tranferName: 'Giao dịch số 4',
-                      time: '12:00',
-                      date: '16/5/2019',
-                      place: 'Lotteria',
-                      price: '100000đ',
-                      storeType: 'assets/images/movie-theatre.png',
-                      point: 10),
-                ],
-              ),
+              child: _buildTransactionList(_transactions),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildTransactionList(List<Transaction> mTransactions) {
+    if (mTransactions == null || mTransactions.isEmpty) {
+      return Container();
+    } // Prevent while waiting data error
+    return ListView.builder(
+        itemCount: _transactions.length,
+        itemBuilder: (context, index) {
+          return TranferHistoryRow(
+              tranferName: 'Giao dịch số ${index + 1}',
+              time: CommonUtils.getTimeFormated(_transactions[index].time),
+              date: CommonUtils.getDateFormat(_transactions[index].time),
+              place: _transactions[index].storeLocation,
+              price: _transactions[index].price.toString(),
+              storeType: _transactions[index].logo,
+              point: _transactions[index].point);
+        });
   }
 }

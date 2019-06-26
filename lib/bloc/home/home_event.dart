@@ -7,3 +7,4 @@ abstract class HomeEvent extends Equatable {
 }
 
 class GetStoreRequest extends HomeEvent {}
+class GetTransactionRequest extends HomeEvent {}

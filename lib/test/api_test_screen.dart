@@ -6,6 +6,7 @@ import 'package:your_reward_user/provider/PostProvider.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
+import 'package:your_reward_user/provider/TransactionProvider.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/UserProvider.dart';
@@ -20,6 +21,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   AuthProvider repo;
   PostRepo postRepo;
   CouponRepo couponRepo;
+  TransactionProvider _transactionRepo;
   var _loginStatus = "Login";
   var _userProfile = "Press login";
 
@@ -28,6 +30,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
     repo = AuthProvider();
     postRepo = PostRepo();
     couponRepo = CouponRepo();
+    _transactionRepo = TransactionProvider();
     _onAuthenticationLogin();
   }
 
@@ -284,7 +287,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetTransactionOverTheWorld() {
     print(LogPrefix.methodName("_onGetTransactionOverTheWorld"));
-    couponRepo.getAllTransactions(limit: 2, skip: 0).then((onValue) {
+    _transactionRepo.getAllTransactions(limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));

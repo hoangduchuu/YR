@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 class CommonUtils {
   static int getRandomInt() {
@@ -14,5 +15,19 @@ class CommonUtils {
 
   static String getFilterParam({int limit = 200, int skip = 0}) {
     return "\$skip=$skip&\$limit=$limit";
+  }
+
+  static String getTimeFormated(String value) {
+    var input = DateTime.parse(value);
+    var formatter = new DateFormat('h:mm a');
+    String result = formatter.format(input);
+    return result;
+  }
+
+  static String getDateFormat(String value) {
+    var input = DateTime.parse(value);
+    var formatter = new DateFormat('MM-dd-yyyy');
+    String result = formatter.format(input);
+    return result;
   }
 }
