@@ -1,23 +1,24 @@
+// To parse this JSON data, do
+//
+//     final couponEntity = couponEntityFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'AuthorEntity.dart';
 import 'OwnerEntity.dart';
-import 'StoreEntity.dart';
-import 'enums.dart';
 
 class CouponEntity {
   String id;
   String objectType;
-  String giftType; // TODO huu; use enum instead?
+  String giftType;
   int totalUsed;
   String pointValue;
   bool isAlwaysApply;
-  Status status;
+  String status;
   String title;
   String code;
   String description;
-  DateTime startDate;
-  DateTime endDate;
+  dynamic startDate;
+  dynamic endDate;
   String orderAmt;
   String thumbnail;
   String discountPercentage;
@@ -29,9 +30,7 @@ class CouponEntity {
   DateTime createdAt;
   DateTime updatedAt;
   int v;
-  AuthorEntity author;
   OwnerEntity owner;
-  StoreEntity store;
 
   CouponEntity({
     this.id,
@@ -57,9 +56,7 @@ class CouponEntity {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.author,
     this.owner,
-    this.store,
   });
 
   factory CouponEntity.fromRawJson(String str) => CouponEntity.fromJson(json.decode(str));
@@ -73,12 +70,12 @@ class CouponEntity {
     totalUsed: json["totalUsed"],
     pointValue: json["pointValue"],
     isAlwaysApply: json["isAlwaysApply"],
-    status: statusValues.map[json["status"]],
+    status: json["status"],
     title: json["title"],
     code: json["code"],
     description: json["description"],
-    startDate: json["startDate"] == null ? null : DateTime.parse(json["startDate"]),
-    endDate: json["endDate"] == null ? null : DateTime.parse(json["endDate"]),
+    startDate: json["startDate"],
+    endDate: json["endDate"],
     orderAmt: json["orderAmt"],
     thumbnail: json["thumbnail"],
     discountPercentage: json["discountPercentage"],
@@ -90,9 +87,7 @@ class CouponEntity {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    author: AuthorEntity.fromJson(json["author"]),
     owner: OwnerEntity.fromJson(json["owner"]),
-    store: json["store"] == null ? null : StoreEntity.fromJson(json["store"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -102,12 +97,12 @@ class CouponEntity {
     "totalUsed": totalUsed,
     "pointValue": pointValue,
     "isAlwaysApply": isAlwaysApply,
-    "status": statusValues.reverse[status],
+    "status": status,
     "title": title,
     "code": code,
     "description": description,
-    "startDate": startDate == null ? null : startDate.toIso8601String(),
-    "endDate": endDate == null ? null : endDate.toIso8601String(),
+    "startDate": startDate,
+    "endDate": endDate,
     "orderAmt": orderAmt,
     "thumbnail": thumbnail,
     "discountPercentage": discountPercentage,
@@ -119,14 +114,7 @@ class CouponEntity {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "__v": v,
-    "author": author.toJson(),
     "owner": owner.toJson(),
-    "store": store == null ? null : store.toJson(),
   };
-
-  @override
-  String toString() {
-    return 'CouponEntity{id: $id, objectType: $objectType, giftType: $giftType, totalUsed: $totalUsed, pointValue: $pointValue, isAlwaysApply: $isAlwaysApply, status: $status, title: $title, code: $code, description: $description, startDate: $startDate, endDate: $endDate, orderAmt: $orderAmt, thumbnail: $thumbnail, discountPercentage: $discountPercentage, discountMaxAmt: $discountMaxAmt, productId: $productId, storeId: $storeId, ownerId: $ownerId, authorId: $authorId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, author: $author, owner: $owner, store: $store}';
-  }
-
 }
+

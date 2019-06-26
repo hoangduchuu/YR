@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:your_reward_user/screen/membership/detail/card_store_detail_screen.dart';
 import 'package:your_reward_user/test/account_information_screen.dart';
 import 'package:your_reward_user/test/api_test_screen.dart';
-import 'package:your_reward_user/test/bottom_navigation.dart';
-import 'package:your_reward_user/test/card_store_detail_screen.dart';
+import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/test/error_screen.dart';
 import 'package:your_reward_user/test/facebook_login.dart';
 import 'package:your_reward_user/test/forgotpass_screen.dart';
@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
   final app = new MaterialApp(
     routes: <String, WidgetBuilder>{
       '/': (BuildContext context) => MainScreen(),
-      '/bottombar': (BuildContext context) => BottomNavigation(),
+      '/bottombar': (BuildContext context) => MemberShipScreen(),
       '/test': (BuildContext context) => TestScreen(),
       '/login': (BuildContext context) => LoginScreen(),
       '/signup': (BuildContext context) => SignUpScreen(),
       '/forgotpass': (BuildContext context) => ForgotPassScreen(),
       '/home': (BuildContext context) => HomeScreen(),
-      '/carddetail': (BuildContext context) => CardStoreDetailScreen(),
+      '/carddetail': (BuildContext context) => MemberShipStoreDetailScreen(),
       '/restaurantdetail': (BuildContext context) => RestaurantDetailScreen(),
       '/errorscreen': (BuildContext context) => ErrorScreen(),
       '/accountinfo': (BuildContext context) => AccountInformationScreen(),

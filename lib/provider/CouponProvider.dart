@@ -10,10 +10,10 @@ import 'package:your_reward_user/entity/GetStoreEntity.dart';
 import 'package:your_reward_user/entity/GetTransactionEntity.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 
-class CouponRepo {
+class CouponProvider {
   MyHttpClient client;
 
-  CouponRepo() {
+  CouponProvider() {
     client = MyHttpClient.instance;
   }
 

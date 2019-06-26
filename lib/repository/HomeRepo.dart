@@ -10,10 +10,10 @@ import 'package:your_reward_user/utils/pair.dart';
 import 'DataProvider.dart';
 
 class HomeRepo {
-  CouponRepo _couponRepo;
+  CouponProvider _couponRepo;
 
   HomeRepo() {
-    this._couponRepo = CouponRepo();
+    this._couponRepo = CouponProvider();
   }
 
   // request and mapping from entity to model

@@ -35,4 +35,24 @@ class StoreRepo {
       return Pair(STATE.ERROR, null, erroMsg: e.toString());
     }
   }
+
+
+  // request and mapping from entity to model
+  Future<Pair<STATE, List<Store>>> getStoresByStoreId(String ownerId) async {
+    try {
+      var result = await _provider.getStoresByStoreId(ownerId);
+      if (result is ErrorEntity && result.code != null) {
+        return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
+      }
+      if (result is GetStoreEntity) {
+        List<Store> stores = List<Store>();
+        result.data.forEach((it) {
+          stores.add(_mapper.mapFrom(it));
+        });
+        return Pair(STATE.SUCCESS, stores);
+      }
+    } catch (e) {
+      return Pair(STATE.ERROR, null, erroMsg: e.toString());
+    }
+  }
 }

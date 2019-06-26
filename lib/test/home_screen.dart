@@ -13,7 +13,7 @@ import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
-import 'bottom_navigation.dart';
+import 'package:your_reward_user/screen/membership/membership_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             RestaurantCard(
               cb: (int index) {
                 print('url==$index');
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNavigation(storeOwnerId: _stores[index].ownerId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(storeOwnerId: _stores[index].ownerId,)));
               },
               store: _stores,
             ),

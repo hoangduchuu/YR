@@ -11,10 +11,10 @@ final roleValues = new EnumValues({
   "owner": Role.OWNER
 });
 
-enum Status { ACTIVE }
+enum CouponStatus { ACTIVE }
 
 final statusValues = new EnumValues({
-  "active": Status.ACTIVE
+  "active": CouponStatus.ACTIVE
 });
 
 

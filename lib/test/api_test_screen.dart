@@ -20,7 +20,7 @@ class ApiScreenTest extends StatefulWidget {
 class _ApiScreenTestState extends State<ApiScreenTest> {
   AuthProvider repo;
   PostRepo postRepo;
-  CouponRepo couponRepo;
+  CouponProvider couponRepo;
   TransactionProvider _transactionRepo;
   var _loginStatus = "Login";
   var _userProfile = "Press login";
@@ -29,7 +29,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   void initState() {
     repo = AuthProvider();
     postRepo = PostRepo();
-    couponRepo = CouponRepo();
+    couponRepo = CouponProvider();
     _transactionRepo = TransactionProvider();
     _onAuthenticationLogin();
   }
