@@ -8,4 +8,12 @@ abstract class HomeState extends Equatable {
   HomeState([List props = const []]) : super(props);
 }
 
+class InitialState extends HomeState{
+
+  @override
+  String toString() {
+    return 'InitialState{}';
+  }
+}
+
 

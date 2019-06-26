@@ -31,7 +31,7 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
   }
 
   @override
-  HomeState get initialState => GetStoresState.isLoading();
+  HomeState get initialState => InitialState();
 
   Stream<HomeState> _handleHomeRequest() async* {
     yield GetStoresState.isLoading();
