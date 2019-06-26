@@ -2,6 +2,7 @@ import 'package:your_reward_user/entity/StoreEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
 
 class Store {
+  String ownerId;
   String name;
   String owner;
   String address;
@@ -15,6 +16,7 @@ class StoreMapper extends BaseMapper<Store, StoreEntity> {
     Store model = Store();
     model.storeLogo = entity.owner.ownerBackground;
     model.address = entity.address;
+    model.ownerId = entity.ownerId;
     model.owner = entity.owner.fullname;
     model.name = entity.owner.fullname;
     model.phone = entity.phone;

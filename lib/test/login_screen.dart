@@ -19,7 +19,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginBloc _loginBloc;
-  String _email, _password, _token;
+  String _email ="huu@example.com";
+  String _password ="john.doe";
+  String _token;
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _token = token;
       print('AppToken ${_token}');
     });
+
   }
 
   @override

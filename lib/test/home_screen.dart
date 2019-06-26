@@ -13,6 +13,8 @@ import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
+import 'bottom_navigation.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -101,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             RestaurantCard(
               cb: (int index) {
                 print('url==$index');
-                Navigator.pushNamed(context, '/bottombar');
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNavigation(storeOwnerId: _stores[index].ownerId,)));
               },
               store: _stores,
             ),

@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/Store.dart';
 
+import 'no_membership_cart.dart';
+
 class RestaurantCard extends StatefulWidget {
   Function cb;
   List<Store> store;
@@ -24,6 +26,9 @@ class _RestaurantCardState extends State<RestaurantCard> {
 
   @override
   Widget build(BuildContext context) {
+    if (super.widget.store == null || super.widget.store.isEmpty) {
+      return new NoMemberShipCard();
+    }
     return CarouselSlider(
       initialPage: 2,
       viewportFraction: 0.90,
@@ -39,9 +44,9 @@ class _RestaurantCardState extends State<RestaurantCard> {
   }
 
   List<Builder> buildList() {
-    var urls = getStringFromStore(super.widget.store);
-    return urls.map(
-      (url) {
+    var store = super.widget.store;
+    return store.map(
+      (item) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
@@ -50,27 +55,13 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     child: GestureDetector(
-                        child: Image.network(url, fit: BoxFit.cover),
+                        child: Image.network(item.storeLogo, fit: BoxFit.cover),
                         onTap: () {
-                          widget.cb(imgList.indexOf(url));
+                          widget.cb(widget.store.indexOf(item));
                         })));
           },
         );
       },
     ).toList();
-  }
-
-  List<String> getStringFromStore(List<Store> stores) {
-    List<String> urls = List<String>();
-
-    if (stores == null) {
-      urls.add(
-          "http://128.199.78.111:3030/load/image/5cc9ab71760e2d065cdd84ce");
-      return urls;
-    }
-    stores.forEach((it) {
-      urls.add(it.storeLogo);
-    });
-    return urls;
   }
 }

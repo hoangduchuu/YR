@@ -11,33 +11,47 @@ import 'package:your_reward_user/widget/textfield.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
 class BottomNavigation extends StatefulWidget {
-  _BottomNavigationState createState()=> _BottomNavigationState();
+  final String storeOwnerId;
+
+  const BottomNavigation({Key key, @required this.storeOwnerId}) : super(key: key);
+
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
-class _BottomNavigationState extends State<BottomNavigation>{
+
+class _BottomNavigationState extends State<BottomNavigation> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     CardStoreDetailScreen(),
     CardStoreDetailScreen()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: true,
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.home, color: _currentIndex==0?HColors.ColorSecondPrimary:HColors.inactiveTabColor),
-                  title: SizedBox.shrink()),
-              BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.solidBell, color: _currentIndex==1?HColors.ColorSecondPrimary:HColors.inactiveTabColor,),
-                  title: SizedBox
-                      .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
-              ),
-            ],
-            onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.home,
+                    color: _currentIndex == 0
+                        ? HColors.ColorSecondPrimary
+                        : HColors.inactiveTabColor),
+                title: SizedBox.shrink()),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  FontAwesomeIcons.solidBell,
+                  color: _currentIndex == 1
+                      ? HColors.ColorSecondPrimary
+                      : HColors.inactiveTabColor,
+                ),
+                title: SizedBox
+                    .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
+                ),
+          ],
+          onTap: onTabTapped,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: new Container(
@@ -52,6 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation>{
           ),
         )); // is trailing comma makes auto-formatting nicer for build methods.
   }
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
