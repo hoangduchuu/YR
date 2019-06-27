@@ -18,7 +18,7 @@ class StoreMapper extends BaseMapper<Store, StoreEntity> {
     model.address = entity.address;
     model.ownerId = entity.ownerId;
     model.owner = entity.owner.fullname;
-    model.name = entity.owner.fullname;
+    model.name = entity.title;
     model.phone = entity.phone;
     return model;
   }
