@@ -22,6 +22,8 @@ class MembershipCard {
   String iconName;
   String levelDescription;
   String img;
+  String logo;
+  String ownerName;
 
   @override
   String toString() {
@@ -37,7 +39,8 @@ class MembershipCardMapper
   MembershipCard mapFrom(MembershipEntity entity) {
     MembershipCard model = MembershipCard();
     model.id = entity.id;
-    model.points = entity.level.points;
+//    model.points = entity.level.points;
+    model.points = 11; // FIXME UGENT: bị mất field Level
     model.accumulationPoints = entity.accumulationPoints;
     model.userId = entity.userId;
     model.ownerId = entity.ownerId;
@@ -46,7 +49,10 @@ class MembershipCardMapper
     model.fullName = entity.user.fullname;
     model.levelDescription = entity.levelDescription;
     model.iconName = entity.iconName;
-    model.levelName = entity.level.title;
+    model.logo = entity.owner.ownerLogo;
+    model.ownerName = entity.owner.fullname;
+//    model.levelName = entity.level.title;
+    model.levelName = "Bạc";  // FIXME UGENT: bị mất field Level
     model.img = entity.owner.ownerBackground;
     // FIXME: lấy đúng field hoặc API trả về kết quả không đúng
     return model;

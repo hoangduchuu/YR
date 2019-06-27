@@ -31,6 +31,8 @@ class _RestaurantCardState extends State<RestaurantCard> {
       return new NoMemberShipCard();
     }
     return CarouselSlider(
+      enableInfiniteScroll: false,
+      // disable loop
       initialPage: 2,
       viewportFraction: 0.90,
       aspectRatio: 2.0,
@@ -56,7 +58,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     child: GestureDetector(
-                        child: Image.network(item.img, fit: BoxFit.cover),
+                        child: _buildStack(item),
                         onTap: () {
                           widget.cb(widget.memberships.indexOf(item));
                         })));
@@ -65,4 +67,39 @@ class _RestaurantCardState extends State<RestaurantCard> {
       },
     ).toList();
   }
+
+  Widget _buildStack(MembershipCard item) => Stack(
+        fit: StackFit.expand,
+        alignment: const Alignment(0, 0),
+        children: [
+          Image.network(item.img, fit: BoxFit.fill),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black45,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: CircleAvatar(
+                radius: 18,
+                child: ClipOval(
+                  child: Image.network(
+                    item.logo,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              "The Coffee House", // FIXME  use from api =>  item.ownerName;
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
+      );
 }
