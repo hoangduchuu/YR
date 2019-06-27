@@ -33,7 +33,6 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("ownerId ${widget.ownerId}");
     return Scaffold(
       appBar:AppBar(
         backgroundColor: HColors.white,

@@ -8,7 +8,6 @@ class YRService{
   };
 static String myToken = DataProvider.userToken;
   static Map<String, String> generateHeadersWithToken(){
-    print("$myToken tk");
     return {
       HttpHeaders.authorizationHeader: 'Bearer $myToken',
       HttpHeaders.contentTypeHeader : 'application/json'

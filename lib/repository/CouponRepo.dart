@@ -49,7 +49,6 @@ class CouponRepo {
         result.data.forEach((it) {
           MembershipCard item = _membershipCardMapper.mapFrom(it);
           stores.add(item);
-          print(item);
         });
         return Pair(STATE.SUCCESS, stores);
       }

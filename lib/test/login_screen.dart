@@ -4,7 +4,6 @@ import 'package:your_reward_user/bloc/login/login_bloc.dart';
 import 'package:your_reward_user/bloc/login/login_event.dart';
 import 'package:your_reward_user/bloc/login/login_state.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
-import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -29,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _loginBloc = LoginBloc();
     SharedPrefRepo.getToken().then((token) {
       _token = token;
-      print('AppToken ${_token}');
     });
 
   }
