@@ -23,6 +23,21 @@ class TransactionProvider {
     var result = GetTransactionParser().parse(raw);
     return result;
   }
+
+  Future<dynamic> getTransactionAtStore(String userId,String ownerId,{int limit = 200, int skip = 0}) async {
+    String url =
+        '${YRService.END_POINT}${YRService.PATH_TRANSACTIONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
+
+    // FIXME : UGENT : hỏi lại api này
+    Map<String,String> params = Map();
+    params['ownerId'] = "5cdfeb2b04456d438bb0ae4b";
+    params['userId'] = "5ce0061bc151ae4a211e7508";
+
+    String raw =
+    await client.get(url, YRService.generateHeadersWithToken(), params);
+    var result = GetTransactionParser().parse(raw);
+    return result;
+  }
 }
 
 class GetTransactionParser extends BaseParser<GetTransactionEntity> {

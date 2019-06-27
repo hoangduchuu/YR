@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
+import 'package:your_reward_user/screen/membership/store_transaction/TransactionStoreScreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
 import 'detail/card_store_detail_screen.dart';
@@ -19,15 +20,14 @@ class _MemberShipScreenState extends State<MemberShipScreen> {
   int _currentIndex = 0;
    List<Widget> _children ;
 
+   // FIXME tìm cách không cho load lại data khi chuyển "fragment";
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _children = [
       MemberShipStoreDetailScreen(memberCard:widget.memberCard),
-      Center(
-        child: Text("SCREEN B",style: TextStyle(fontSize: 20),),
-      )
+      TransactionStoreScreen(ownerId: widget.memberCard.ownerId,)
     ];
   }
 
