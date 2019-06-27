@@ -47,7 +47,7 @@ class MembershipCardMapper
     model.levelDescription = entity.levelDescription;
     model.iconName = entity.iconName;
     model.levelName = entity.levelName;
-    model.img = "https://i-vnexpress.vnecdn.net/2019/06/27/thi-sinh-ha-noi-2153-1561571038_r_500x300.jpg";
+    model.img = entity.owner.ownerBackground;
     // FIXME: lấy đúng field hoặc API trả về kết quả không đúng
     return model;
   }

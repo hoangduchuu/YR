@@ -36,10 +36,16 @@ class CouponProvider {
   Future<dynamic> getMemberShipCards(String userId,
       {int limit = 200, int skip = 0}) async {
     String url =
-        '${YRService.END_POINT}${YRService.PATH_STORE_USER}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}&userId=$userId';
+        '${YRService.END_POINT}${YRService.PATH_STORE_USER}';
+
+    Map<String,String> param = Map();
+    param['userId'] = userId  ;
+    print(" MEMBERSHIP URL $url");
     String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+        await client.get(url, YRService.generateHeadersWithToken(),param);
     var result = GetMemberShipCardParser().parse(raw);
+    print(" MEMBERSHIP RESULE $result");
+
     return result;
   }
 

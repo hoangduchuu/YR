@@ -16,10 +16,19 @@ class MemberShipScreen extends StatefulWidget {
 
 class _MemberShipScreenState extends State<MemberShipScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    MemberShipStoreDetailScreen(storeOwnerId:"5ce3704714fcb561a3d7a277"),
-    MemberShipStoreDetailScreen(storeOwnerId:"5ce3704714fcb561a3d7a277")
-  ];
+   List<Widget> _children ;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _children = [
+      MemberShipStoreDetailScreen(storeOwnerId:widget.storeOwnerId),
+      Center(
+        child: Text("SCREEN B",style: TextStyle(fontSize: 20),),
+      )
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
