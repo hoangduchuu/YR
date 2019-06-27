@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/Transaction.dart';
+import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_bloc.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_event.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_state.dart';
@@ -19,7 +20,7 @@ class TransactionStoreScreen extends StatefulWidget {
   _TransactionStoreScreenState createState() => _TransactionStoreScreenState();
 }
 
-class _TransactionStoreScreenState extends State<TransactionStoreScreen> {
+class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
   TransactionStoreBloc _bloc;
   List<Transaction> _transactions;
 
@@ -68,21 +69,15 @@ class _TransactionStoreScreenState extends State<TransactionStoreScreen> {
       listener: (context, state) {
         if (state is GetTransactionState) {
           if (state.isError) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('${state.errMsg}'),
-                  backgroundColor: Colors.red));
+            super.showError(state.errMsg);
           } else if (state.isLoading) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+            super.showLoading();
           } else {
-            Scaffold.of(context)..hideCurrentSnackBar();
+            super.hideLoading();
           }
         }
         if (state is OnGetTransactionSuccess) {
-          Scaffold.of(context)..hideCurrentSnackBar();
+          super.hideLoading();
           setState(() {
             _transactions = state.transactions;
           });
