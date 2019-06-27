@@ -4,9 +4,9 @@ import 'package:your_reward_user/styles/styles.dart';
 import 'package:barcode_flutter/barcode_flutter.dart';
 
 class BarCode extends StatelessWidget {
-  String phone;
+  String value;
 
-  BarCode({Key key, this.phone}) : super(key: key);
+  BarCode({Key key, this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,8 @@ class BarCode extends StatelessWidget {
                 width: 21,
                 height: 2,
                 child: new BarCodeImage(
-                  data: phone,              // Code string. (required)
-                  codeType: BarCodeType.Code39,  // Code type (required)
+                  data: value,              // Code string. (required)
+                  codeType: BarCodeType.Code128,  // Code type (required)
                   hasText: true,                 // Render with text label or not (default: false)
                   onError: (error) {             // Error handler
                     print('error = $error');

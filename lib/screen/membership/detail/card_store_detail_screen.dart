@@ -92,7 +92,7 @@ class _MemberShipStoreDetailScreenState
           SizedBox(
             height: 10,
           ),
-          BarCode(phone: DataProvider.user.phone,),
+          BarCode(value: DataProvider.user.phone,),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
@@ -172,6 +172,7 @@ class _MemberShipStoreDetailScreenState
           return Row(
             children: <Widget>[
               Voucher(
+                coupon: coupons[index],
                 name: coupons[index].title,
                 imageUrl: _getVoucherThumb(coupons[index].image),
                 date: coupons[index].endDate,

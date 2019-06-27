@@ -7,7 +7,21 @@ class Coupon{
   String image;
   String code;
   String status;
-  String description;
+  String _description;
+
+
+  @override
+  String toString() {
+    return 'Coupon{title: $title, endDate: $endDate, image: $image, code: $code, status: $status, _description: $_description}';
+  }
+
+  String getDescription(){
+    if(_description == null || _description.length <= 1){
+     return "Bạn được nhận khuyến mãi";
+    }
+    return _description;
+  }
+
 }
 
 class CouponMapper extends BaseMapper<Coupon, CouponEntity>{
@@ -18,8 +32,8 @@ class CouponMapper extends BaseMapper<Coupon, CouponEntity>{
     model.title = entity.title;
     model.code = entity.code;
     model.status = entity.status.toString();
-    model.description = entity.description;
-    model.endDate ="Chua co API";
+    model._description = entity.description;
+    model.endDate ="Chưa có API";
     return model;
   }
 
