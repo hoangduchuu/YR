@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final storeEntity = storeEntityFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'OwnerEntity.dart';
@@ -25,6 +21,9 @@ class StoreEntity {
   DateTime updatedAt;
   int v;
   OwnerEntity owner;
+  List<String> images;
+  String openHourEnd;
+  String openHourStart;
 
   StoreEntity({
     this.id,
@@ -45,6 +44,9 @@ class StoreEntity {
     this.updatedAt,
     this.v,
     this.owner,
+    this.images,
+    this.openHourEnd,
+    this.openHourStart,
   });
 
   factory StoreEntity.fromRawJson(String str) => StoreEntity.fromJson(json.decode(str));
@@ -70,6 +72,9 @@ class StoreEntity {
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
     owner: OwnerEntity.fromJson(json["owner"]),
+    images: json["images"] == null ? null : new List<String>.from(json["images"].map((x) => x)),
+    openHourEnd: json["openHourEnd"] == null ? null : json["openHourEnd"],
+    openHourStart: json["openHourStart"] == null ? null : json["openHourStart"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -91,6 +96,8 @@ class StoreEntity {
     "updatedAt": updatedAt.toIso8601String(),
     "__v": v,
     "owner": owner.toJson(),
+    "images": images == null ? null : new List<dynamic>.from(images.map((x) => x)),
+    "openHourEnd": openHourEnd == null ? null : openHourEnd,
+    "openHourStart": openHourStart == null ? null : openHourStart,
   };
 }
-

@@ -8,6 +8,8 @@ class Store {
   String address;
   String phone;
   String storeLogo;
+  String description;
+  List<String> images;
 }
 
 class StoreMapper extends BaseMapper<Store, StoreEntity> {
@@ -20,6 +22,8 @@ class StoreMapper extends BaseMapper<Store, StoreEntity> {
     model.owner = entity.owner.fullname;
     model.name = entity.title;
     model.phone = entity.phone;
+    model.description = entity.description;
+    model.images = entity.images;
     return model;
   }
 

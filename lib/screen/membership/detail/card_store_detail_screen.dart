@@ -6,6 +6,7 @@ import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
 import 'package:your_reward_user/widget/member_card.dart';
@@ -152,7 +153,7 @@ class _MemberShipStoreDetailScreenState
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
-                  Navigator.pushNamed(context, '/restaurantdetail');
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> RestaurantDetailScreen(store:stores[index])));
                 },
               ),
             ],
