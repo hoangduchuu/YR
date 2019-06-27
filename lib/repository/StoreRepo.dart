@@ -40,7 +40,7 @@ class StoreRepo {
   // request and mapping from entity to model
   Future<Pair<STATE, List<Store>>> getStoresByStoreId(String ownerId) async {
     try {
-      var result = await _provider.getStoresByStoreId(ownerId);
+      var result = await _provider.getStoresByOwnerId(ownerId);
       if (result is ErrorEntity && result.code != null) {
         return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
       }

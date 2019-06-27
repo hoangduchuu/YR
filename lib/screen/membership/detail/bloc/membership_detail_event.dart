@@ -8,9 +8,9 @@ abstract class MemberShipDetailEvent extends Equatable {
 }
 
 class GetMemberShipDetailEvent extends MemberShipDetailEvent {
-  String storeId;
+  String ownerId;
 
-  GetMemberShipDetailEvent(this.storeId);
+  GetMemberShipDetailEvent(this.ownerId);
 
 }
 

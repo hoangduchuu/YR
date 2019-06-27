@@ -24,7 +24,7 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailB
   Stream<MemberShipDetailBaseState> mapEventToState(
       MemberShipDetailEvent event) async* {
     if (event is GetMemberShipDetailEvent) {
-      yield* _handleGetStoreRequest();
+      yield* _handleGetStoreRequest(event.ownerId);
     }
     if (event is GetVoucherEvent){
       yield* _handleGetCouponRequest();
@@ -34,10 +34,10 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailB
   @override
   MemberShipDetailBaseState get initialState => InitialState();
 
-  Stream<MemberShipDetailBaseState> _handleGetStoreRequest() async* {
+  Stream<MemberShipDetailBaseState> _handleGetStoreRequest(String ownerId) async* {
     yield GetMemmberShipDetailState.isLoading();
     try {
-      Pair<STATE, List<Store>> result = await _storeRepo.getStores();
+      Pair<STATE, List<Store>> result = await _storeRepo.getStoresByStoreId(ownerId);
       if (result.left == STATE.ERROR) {
         yield GetMemmberShipDetailState.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {
