@@ -86,7 +86,6 @@ class _RestaurantItemState extends State<RestaurantItem> {
   }
   selectItem(name) {
     setState(() {
-      print(name);
       selectedItem = name;
     });
   }

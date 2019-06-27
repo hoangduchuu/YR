@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:your_reward_user/model/Coupon.dart';
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
 import 'package:your_reward_user/widget/member_card.dart';
 import 'package:your_reward_user/widget/restaurant_item.dart';
@@ -15,13 +17,13 @@ import 'bloc/membership_detail_event.dart';
 import 'bloc/membership_detail_state.dart';
 
 class MemberShipStoreDetailScreen extends StatefulWidget {
-  String storeOwnerId;
+  final MembershipCard memberCard;
 
   @override
   _MemberShipStoreDetailScreenState createState() =>
       _MemberShipStoreDetailScreenState();
 
-  MemberShipStoreDetailScreen({Key key, @required this.storeOwnerId})
+  MemberShipStoreDetailScreen({Key key, @required this.memberCard})
       : super(key: key);
 }
 
@@ -36,8 +38,8 @@ class _MemberShipStoreDetailScreenState
   void initState() {
     super.initState();
     this._bloc = MemberShipDetailBloc();
-    _bloc.dispatch(GetMemberShipDetailEvent(widget.storeOwnerId));
-    _bloc.dispatch(GetVoucherEvent(widget.storeOwnerId));
+    _bloc.dispatch(GetMemberShipDetailEvent(widget.memberCard.ownerId));
+    _bloc.dispatch(GetVoucherEvent(widget.memberCard.ownerId));
   }
 
   @override
@@ -76,17 +78,16 @@ class _MemberShipStoreDetailScreenState
   }
 
   Widget _buildBody() {
-    print(DataProvider.user.toString());
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       body: ListView(
         controller: _scrollController,
         children: <Widget>[
           MemberCard(
-              memberName: 'Phan Nguyễn Song Toàn',
-              memberPoint: 2048,
-              startDate: '25/01/2018',
-              times: 10),
+              memberName: widget.memberCard.fullName,
+              memberPoint: widget.memberCard.points,
+              startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
+              times: widget.memberCard.accumulationPoints),
           SizedBox(
             height: 10,
           ),

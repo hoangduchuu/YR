@@ -40,12 +40,10 @@ class CouponProvider {
 
     Map<String,String> param = Map();
     param['userId'] = userId  ;
-    print(" MEMBERSHIP URL $url");
+
     String raw =
         await client.get(url, YRService.generateHeadersWithToken(),param);
     var result = GetMemberShipCardParser().parse(raw);
-    print(" MEMBERSHIP RESULE $result");
-
     return result;
   }
 

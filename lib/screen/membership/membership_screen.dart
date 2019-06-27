@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
 import 'detail/card_store_detail_screen.dart';
 
 
 class MemberShipScreen extends StatefulWidget {
-  final String storeOwnerId;
+  final MembershipCard memberCard;
 
-  const MemberShipScreen({Key key, @required this.storeOwnerId}) : super(key: key);
+  const MemberShipScreen({Key key, @required this.memberCard}) : super(key: key);
 
   _MemberShipScreenState createState() => _MemberShipScreenState();
 }
@@ -23,7 +24,7 @@ class _MemberShipScreenState extends State<MemberShipScreen> {
     // TODO: implement initState
     super.initState();
     _children = [
-      MemberShipStoreDetailScreen(storeOwnerId:widget.storeOwnerId),
+      MemberShipStoreDetailScreen(memberCard:widget.memberCard),
       Center(
         child: Text("SCREEN B",style: TextStyle(fontSize: 20),),
       )

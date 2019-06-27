@@ -103,8 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             RestaurantCard(
               cb: (int index) {
-                print('url==$index');
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(storeOwnerId: "12",)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(memberCard:_memberships[index],)));
               },
               memberships: _memberships,
             ),

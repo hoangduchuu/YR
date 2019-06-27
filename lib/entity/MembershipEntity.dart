@@ -19,7 +19,6 @@ class MembershipEntity {
   String levelId;
   UserEntity user;
   OwnerEntity owner;
-  String ownerStoreName;
   Level level;
   String levelName;
   String iconName;
@@ -38,7 +37,6 @@ class MembershipEntity {
       this.user,
       this.owner,
       this.level,
-      this.ownerStoreName,
       this.levelName,
       this.iconName,
       this.levelDescription});
@@ -62,7 +60,6 @@ class MembershipEntity {
         user: UserEntity.fromJson(json["user"]),
         owner: OwnerEntity.fromJson(json["owner"]),
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
-        ownerStoreName: OwnerEntity.fromJson(json["owner"]).fullname,
         levelName:
             json["level"] == null ? null : Level.fromJson(json["level"]).title,
         iconName: json["level"] == null
@@ -90,6 +87,6 @@ class MembershipEntity {
 
   @override
   String toString() {
-    return 'H  MembershipEntity{id: $id, points: $points, accumulationPoints: $accumulationPoints, userId: $userId, ownerId: $ownerId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, levelId: $levelId, user: $user, owner: $owner, ownerStoreName: $ownerStoreName, level: $level, levelName: $levelName, iconName: $iconName, levelDescription: $levelDescription}';
+    return 'H  MembershipEntity{id: $id, points: $points, accumulationPoints: $accumulationPoints, userId: $userId, ownerId: $ownerId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, levelId: $levelId, user: $user, owner: $owner, level: $level, levelName: $levelName, iconName: $iconName, levelDescription: $levelDescription}';
   }
 }
