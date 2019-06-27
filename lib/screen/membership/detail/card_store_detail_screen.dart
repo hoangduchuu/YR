@@ -42,7 +42,6 @@ class _MemberShipStoreDetailScreenState
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
@@ -77,6 +76,7 @@ class _MemberShipStoreDetailScreenState
   }
 
   Widget _buildBody() {
+    print(DataProvider.user.toString());
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       body: ListView(

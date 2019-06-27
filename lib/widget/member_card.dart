@@ -27,7 +27,6 @@ class MemberCard extends StatefulWidget {
 class _MemberCardState extends State<MemberCard> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       height: 200,
       width: MediaQuery.of(context).size.width * 0.9,

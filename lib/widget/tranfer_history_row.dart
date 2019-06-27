@@ -29,7 +29,6 @@ class TranferHistoryRow extends StatefulWidget {
 class _TranferHistoryRowState extends State<TranferHistoryRow> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       padding: EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(

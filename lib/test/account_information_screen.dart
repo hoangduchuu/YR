@@ -15,7 +15,6 @@ class AccountInformationScreen extends StatefulWidget {
 class _AccountInformationScreenState extends State<AccountInformationScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 ////    return Scaffold(
 ////      backgroundColor: HColors.white,
 //      appBar: AppBar(

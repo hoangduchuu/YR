@@ -14,7 +14,6 @@ class ForgotPassScreen extends StatefulWidget {
 class _ForgotPassScreenState extends State<ForgotPassScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 ////    return Scaffold(
 //      appBar: AppBar(
 //        backgroundColor: HColors.white,

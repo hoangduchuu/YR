@@ -30,7 +30,6 @@ class CommonButton extends StatefulWidget {
 class _CommonButtonState extends State<CommonButton> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Center(
       child: Container(
           width: widget.width != null ? widget.width : 270,

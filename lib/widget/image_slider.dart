@@ -20,7 +20,6 @@ class _ImageSliderState extends State<ImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Swiper(
         autoplay: true,
         itemBuilder: (BuildContext context, int index) {

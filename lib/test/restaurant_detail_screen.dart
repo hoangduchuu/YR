@@ -31,7 +31,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 4, vsync: this);
     scrollController = ScrollController(initialScrollOffset: 0.0);
@@ -46,7 +45,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body:Stack(
         fit: StackFit.expand,
