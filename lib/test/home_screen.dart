@@ -5,8 +5,10 @@ import 'package:your_reward_user/bloc/home/home_state_stores.dart';
 import 'package:your_reward_user/bloc/home/home_bloc.dart';
 import 'package:your_reward_user/bloc/home/home_event.dart';
 import 'package:your_reward_user/bloc/home/home_state_transactions.dart';
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
+import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
@@ -23,14 +25,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
-  List<Store> _stores;
+  List<MembershipCard> _memberships;
   List<Transaction> _transactions;
 
   @override
   void initState() {
     super.initState();
     _homeBloc = HomeBLoc();
-    _homeBloc.dispatch(GetStoreRequest());
+    _homeBloc.dispatch(GetMemberShipCardsRequest(DataProvider.user.id));
     _homeBloc.dispatch(GetTransactionRequest());
   }
 
@@ -69,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
-        if (state is GetStoresState) {
+        if (state is GetMemberShipCards) {
           if (state.isError) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
@@ -83,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             Scaffold.of(context)..hideCurrentSnackBar();
           }
-        } else if (state is OnGetStoresSuccess) {
+        } else if (state is GetMembershipCardSuccessState) {
           Scaffold.of(context)..hideCurrentSnackBar();
           setState(() {
-            _stores = state.stores;
+            _memberships = state.memberships;
           });
         }
         if (state is OnGetTransactionSuccess) {
@@ -103,9 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
             RestaurantCard(
               cb: (int index) {
                 print('url==$index');
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(storeOwnerId: _stores[index].ownerId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(storeOwnerId: "12",)));
               },
-              store: _stores,
+              memberships: _memberships,
             ),
             Padding(
               padding: EdgeInsets.only(left: 20, top: 30, right: 20),

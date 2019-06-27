@@ -1,14 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 
 import 'no_membership_cart.dart';
 
 class RestaurantCard extends StatefulWidget {
   Function cb;
-  List<Store> store;
+  List<MembershipCard> memberships;
 
-  RestaurantCard({this.store, this.cb});
+  RestaurantCard({this.memberships, this.cb});
 
   @override
   _RestaurantCardState createState() => _RestaurantCardState();
@@ -26,7 +27,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (super.widget.store == null || super.widget.store.isEmpty) {
+    if (super.widget.memberships == null || super.widget.memberships.isEmpty) {
       return new NoMemberShipCard();
     }
     return CarouselSlider(
@@ -44,7 +45,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
   }
 
   List<Builder> buildList() {
-    var store = super.widget.store;
+    var store = super.widget.memberships;
     return store.map(
       (item) {
         return Builder(
@@ -55,9 +56,9 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     child: GestureDetector(
-                        child: Image.network(item.storeLogo, fit: BoxFit.cover),
+                        child: Image.network(item.img, fit: BoxFit.cover),
                         onTap: () {
-                          widget.cb(widget.store.indexOf(item));
+                          widget.cb(widget.memberships.indexOf(item));
                         })));
           },
         );

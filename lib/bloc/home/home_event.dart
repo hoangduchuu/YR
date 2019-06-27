@@ -6,5 +6,10 @@ abstract class HomeEvent extends Equatable {
   HomeEvent([List props = const []]) : super(props);
 }
 
-class GetStoreRequest extends HomeEvent {}
+class GetMemberShipCardsRequest extends HomeEvent {
+  String userId;
+
+  GetMemberShipCardsRequest(this.userId);
+
+}
 class GetTransactionRequest extends HomeEvent {}

@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
+import 'package:your_reward_user/repository/CouponRepo.dart';
 import 'package:your_reward_user/repository/StoreRepo.dart';
 import 'package:your_reward_user/repository/TransactionRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -14,16 +16,18 @@ import 'home_state_transactions.dart';
 class HomeBLoc extends Bloc<HomeEvent, HomeState> {
   StoreRepo _storeRepo;
   TransactionRepo _transactionRepo;
+  CouponRepo _couponRepo;
 
   HomeBLoc() {
     this._storeRepo = StoreRepo();
     this._transactionRepo = new TransactionRepo();
+    this._couponRepo = new CouponRepo();
   }
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is GetStoreRequest) {
-      yield* _handleHomeRequest();
+    if (event is GetMemberShipCardsRequest) {
+      yield* _handleHomeRequest(event.userId);
     }
     if(event is GetTransactionRequest){
       yield* _HandleGetTransactionRequest();
@@ -33,20 +37,20 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
   @override
   HomeState get initialState => InitialState();
 
-  Stream<HomeState> _handleHomeRequest() async* {
-    yield GetStoresState.isLoading();
+  Stream<HomeState> _handleHomeRequest(String userID) async* {
+    yield GetMemberShipCards.isLoading();
     try {
-      Pair<STATE, List<Store>> result = await _storeRepo.getStores();
+      Pair<STATE, List<MembershipCard>> result = await _couponRepo.getMembership(userID);
       if (result.left == STATE.ERROR) {
-        yield GetStoresState.isError(errMsg: result.erroMsg);
+        yield GetMemberShipCards.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {
-        yield GetStoresState.empty();
+        yield GetMemberShipCards.empty();
       }
       if (result.left == STATE.SUCCESS) {
-        yield OnGetStoresSuccess(stores: result.right);
+        yield GetMembershipCardSuccessState(memberships: result.right);
       }
     } catch (e) {
-      yield GetStoresState.isError(errMsg: e.toString());
+      yield GetMemberShipCards.isError(errMsg: e.toString());
     }
   }
 
@@ -60,7 +64,6 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
         yield GetTransactionState.empty();
       }
       if (result.left == STATE.SUCCESS) {
-        print(" HOME BLOC: _HandleGetTransactionRequest SUCCESS");
         yield OnGetTransactionSuccess(transactions: result.right);
       }
     } catch (e) {

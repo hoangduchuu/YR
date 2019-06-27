@@ -90,6 +90,6 @@ class MembershipEntity {
 
   @override
   String toString() {
-    return 'MembershipEntity{id: $id, points: $points, accumulationPoints: $accumulationPoints, userId: $userId, ownerId: $ownerId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, levelId: $levelId, user: $user, owner: $owner, ownerStoreName: $ownerStoreName, level: $level, levelName: $levelName, iconName: $iconName, levelDescription: $levelDescription}';
+    return 'H  MembershipEntity{id: $id, points: $points, accumulationPoints: $accumulationPoints, userId: $userId, ownerId: $ownerId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, levelId: $levelId, user: $user, owner: $owner, ownerStoreName: $ownerStoreName, level: $level, levelName: $levelName, iconName: $iconName, levelDescription: $levelDescription}';
   }
 }

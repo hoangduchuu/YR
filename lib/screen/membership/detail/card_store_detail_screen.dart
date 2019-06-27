@@ -69,7 +69,6 @@ class _MemberShipStoreDetailScreenState
         if (state is OngetGetCouponSuccessState) {
           setState(() {
             _coupons = state.coupons;
-            print("SUCCESS COUPON: ${state.coupons}");
           });
         }
       },

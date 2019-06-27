@@ -1,11 +1,12 @@
+import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 
 import 'home_state.dart';
 
-class OnGetStoresSuccess extends HomeState {
-  List<Store> stores;
+class GetMembershipCardSuccessState extends HomeState {
+  List<MembershipCard> memberships;
 
-  OnGetStoresSuccess({this.stores}) : super([stores]);
+  GetMembershipCardSuccessState({this.memberships}) : super([memberships]);
 
   @override
   String toString() {
@@ -13,29 +14,29 @@ class OnGetStoresSuccess extends HomeState {
   }
 }
 
-class GetStoresState extends HomeState {
+class GetMemberShipCards extends HomeState {
   final bool isLoading;
   final bool isError;
   String errMsg;
 
-  GetStoresState({this.isLoading, this.isError, this.errMsg})
+  GetMemberShipCards({this.isLoading, this.isError, this.errMsg})
       : super([isLoading, isError, errMsg]);
 
-  factory GetStoresState.empty() {
-    return GetStoresState(
+  factory GetMemberShipCards.empty() {
+    return GetMemberShipCards(
       isLoading: false,
       isError: false,
     );
   }
 
-  factory GetStoresState.isLoading() {
-    return GetStoresState(
+  factory GetMemberShipCards.isLoading() {
+    return GetMemberShipCards(
       isLoading: true,
       isError: false,
     );
   }
 
-  factory GetStoresState.isError({String errMsg}) {
-    return GetStoresState(isLoading: false, isError: true, errMsg: errMsg);
+  factory GetMemberShipCards.isError({String errMsg}) {
+    return GetMemberShipCards(isLoading: false, isError: true, errMsg: errMsg);
   }
 }
