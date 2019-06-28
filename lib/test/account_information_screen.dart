@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -15,17 +17,6 @@ class AccountInformationScreen extends StatefulWidget {
 class _AccountInformationScreenState extends State<AccountInformationScreen> {
   @override
   Widget build(BuildContext context) {
-////    return Scaffold(
-////      backgroundColor: HColors.white,
-//      appBar: AppBar(
-//        backgroundColor: Colors.transparent,
-//        elevation: 0.0,
-//        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: HColors.ColorSecondPrimary,), onPressed: (){
-//          Navigator.pop(context);
-//        }),
-//        title: Text('Thông tin',style: TextStyle(color: HColors.ColorSecondPrimary),),
-//      ),
-////      body: Stack(
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -144,11 +135,35 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                   },
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
-                  text: Text('Lưu lại thông tin',style: TextStyle(fontFamily: Hfonts.PrimaryFontBold,fontSize: 16),),
+                  text: Text(
+                    'Lưu lại thông tin',
+                    style: TextStyle(
+                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                  ),
                   width: MediaQuery.of(context).size.width * 0.72,
                   buttonPadding: 10,
                   radiusValue: 10,
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                CommonButton(
+                  onPressed: () {
+                    SharedPrefRepo.clearAll();
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => SplashScreen()));
+                  },
+                  backgroundColor: HColors.red,
+                  textColor: HColors.white,
+                  text: Text(
+                    'Đăng xuất',
+                    style: TextStyle(
+                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                  ),
+                  width: MediaQuery.of(context).size.width * 0.72,
+                  buttonPadding: 10,
+                  radiusValue: 10,
+                )
               ],
             ),
           ),

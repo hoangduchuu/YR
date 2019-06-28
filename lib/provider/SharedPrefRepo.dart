@@ -32,4 +32,9 @@ class SharedPrefRepo {
     String accessToken = prefs.getString('USER_ID');
     return accessToken;
   }
+
+  static clearAll() async {
+    await saveUserId(null);
+    await saveToken(null);
+  }
 }
