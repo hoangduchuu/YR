@@ -56,6 +56,9 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is GetUserInfoSuccessState) {
           gotoHomeScreen();
         }
+        if(state is GetUserInfoErrorState){
+          gotoLoginScreen();
+        }
       },
       child: Stack(
         children: <Widget>[
