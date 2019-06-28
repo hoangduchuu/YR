@@ -13,7 +13,7 @@ import 'package:your_reward_user/test/login_screen.dart';
 import 'package:your_reward_user/test/main_screen.dart';
 import 'package:your_reward_user/test/map_screen.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
-import 'package:your_reward_user/test/signup_screen.dart';
+import 'package:your_reward_user/screen/sign_up/signup_screen.dart';
 
 import 'test/widget_screen.dart';
 
