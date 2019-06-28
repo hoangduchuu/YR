@@ -11,6 +11,8 @@ import 'package:your_reward_user/widget/textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui;
 
+import 'home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -18,8 +20,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginBloc _loginBloc;
-  String _email ="huu@example.com";
-  String _password ="john.doe";
+  String _email = "huu@example.com";
+  String _password = "john.doe";
   String _token;
 
   @override
@@ -29,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPrefRepo.getToken().then((token) {
       _token = token;
     });
-
   }
 
   @override
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ..showSnackBar(SnackBar(content: Text('Đang đăng nhập...')));
           } else if (state.isSuccess) {
             print("Login thanh cong");
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (state.isFailure) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()

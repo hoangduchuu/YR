@@ -7,27 +7,28 @@ import 'package:your_reward_user/styles/styles.dart';
 
 import 'detail/card_store_detail_screen.dart';
 
-
 class MemberShipScreen extends StatefulWidget {
   final MembershipCard memberCard;
 
-  const MemberShipScreen({Key key, @required this.memberCard}) : super(key: key);
+  const MemberShipScreen({Key key, @required this.memberCard})
+      : super(key: key);
 
   _MemberShipScreenState createState() => _MemberShipScreenState();
 }
 
 class _MemberShipScreenState extends State<MemberShipScreen> {
   int _currentIndex = 0;
-   List<Widget> _children ;
+  List<Widget> _children;
 
-   // FIXME tìm cách không cho load lại data khi chuyển "fragment";
+  // FIXME tìm cách không cho load lại data khi chuyển "fragment";
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _children = [
-      MemberShipStoreDetailScreen(memberCard:widget.memberCard),
-      TransactionStoreScreen(ownerId: widget.memberCard.ownerId,)
+      MemberShipStoreDetailScreen(memberCard: widget.memberCard),
+      TransactionStoreScreen(
+        ownerId: widget.memberCard.ownerId,
+      )
     ];
   }
 
@@ -65,7 +66,7 @@ class _MemberShipScreenState extends State<MemberShipScreen> {
           decoration: new BoxDecoration(),
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pop(context);
             },
             child: new Icon(FontAwesomeIcons.wallet),
             backgroundColor: HColors.ColorSecondPrimary,

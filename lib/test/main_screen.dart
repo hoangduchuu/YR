@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'api_test_screen.dart';
+
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,10 @@ class MainScreen extends StatelessWidget {
               });
             }  else if (index == 13){
               return getTitle('hoooray api Login', (){
-                Navigator.pushNamed(context, '/hoorayapi');
+//                Navigator.pushNamed(context, '/hoorayapi');
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ApiScreenTest()));
               });
             }
             else {

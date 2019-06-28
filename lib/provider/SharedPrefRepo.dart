@@ -11,10 +11,25 @@ class SharedPrefRepo {
     });
   }
 
-
-  static Future<String> getToken() async{
+  static Future<String> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String accessToken = prefs.getString('ACCESS_TOKEN');
+    return accessToken;
+  }
+
+  static saveUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("Saving UserID $userId");
+    await prefs.setString("USER_ID", userId).then((onValue) {
+      print("saved UserID $userId");
+    }).catchError((error) {
+      print("Save token error ${error.toString()}");
+    });
+  }
+
+  static Future<String> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString('USER_ID');
     return accessToken;
   }
 }

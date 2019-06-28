@@ -14,6 +14,13 @@ static String myToken = DataProvider.userToken;
     };
   }
 
+  static Map<String, String> inputToken(String token){
+    return {
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+      HttpHeaders.contentTypeHeader : 'application/json'
+    };
+  }
+
 
   static String END_POINT = 'http://128.199.78.111:3030';
   //authentication

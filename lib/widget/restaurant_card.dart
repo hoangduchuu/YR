@@ -17,18 +17,11 @@ class RestaurantCard extends StatefulWidget {
 
 class _RestaurantCardState extends State<RestaurantCard> {
   var currentPosition = 0;
-  final List<String> imgList = [
-    'http://128.199.78.111:3030/load/image/5cc9ab71760e2d065cdd84ce',
-    'https://wallpapercave.com/wp/O5eAHDa.jpg',
-    'https://wallpapercave.com/wp/wp2253880.gif',
-    'https://images2.alphacoders.com/466/466692.jpg',
-    'http://wallpapersdsc.net/wp-content/uploads/2016/09/KFC-Wallpaper.jpg',
-  ];
 
   @override
   Widget build(BuildContext context) {
     if (super.widget.memberships == null || super.widget.memberships.isEmpty) {
-      return new NoMemberShipCard();
+      return new NoMemberShipCard("Chưa có hình ảnh");
     }
     return CarouselSlider(
       enableInfiniteScroll: false,

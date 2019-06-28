@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;
   List<Transaction> _transactions;
+  bool isSliderLoaded = false;
 
   @override
   void initState() {
@@ -41,25 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: HColors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: HColors.ColorSecondPrimary,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        elevation: 0.0,
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                FontAwesomeIcons.userCircle,
-                color: HColors.ColorSecondPrimary,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/accountinfo');
-              }),
+            icon: Icon(FontAwesomeIcons.userCircle),
+            color: HColors.ColorSecondPrimary,
+            onPressed: () {
+              Navigator.pushNamed(context, '/accountinfo');
+            },
+          ),
         ],
-        elevation: 0.0,
       ),
       backgroundColor: HColors.white,
       body: _buildBody(),
@@ -87,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         } else if (state is GetMembershipCardSuccessState) {
           Scaffold.of(context)..hideCurrentSnackBar();
           setState(() {
+            isSliderLoaded = true;
             _memberships = state.memberships;
           });
         }
@@ -101,11 +94,23 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RestaurantCard(
-              cb: (int index) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>MemberShipScreen(memberCard:_memberships[index],)));
-              },
-              memberships: _memberships,
+            Visibility(
+              visible: isSliderLoaded,
+              child: RestaurantCard(
+                cb: (int index) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MemberShipScreen(
+                                memberCard: _memberships[index],
+                              )));
+                },
+                memberships: _memberships,
+              ),
+            ),
+            Visibility(
+              visible: !isSliderLoaded,
+              child: Center(child: Text("Đang tải....")),
             ),
             Padding(
               padding: EdgeInsets.only(left: 20, top: 30, right: 20),

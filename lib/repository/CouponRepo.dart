@@ -19,9 +19,9 @@ class CouponRepo {
   }
 
   // request and mapping from entity to model
-  Future<Pair<STATE, List<Coupon>>> getCoupons() async {
+  Future<Pair<STATE, List<Coupon>>> getCoupons(String ownerId) async {
     try {
-      var result = await _provider.getCoupons();
+      var result = await _provider.getCoupons(ownerId);
       if (result is ErrorEntity && result.code != null) {
         return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
       }

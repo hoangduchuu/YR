@@ -9,6 +9,8 @@ class Store {
   String phone;
   String storeLogo;
   String description;
+  String addressLat;
+  String addressLng;
   List<String> images;
 }
 
@@ -24,6 +26,8 @@ class StoreMapper extends BaseMapper<Store, StoreEntity> {
     model.phone = entity.phone;
     model.description = entity.description;
     model.images = entity.images;
+    model.addressLat = entity.addressLat;
+    model.addressLng = entity.addressLng;
     return model;
   }
 

@@ -15,7 +15,7 @@ class GetMemberShipDetailEvent extends MemberShipDetailEvent {
 }
 
 class GetVoucherEvent extends MemberShipDetailEvent{
-  String storeId;
+  String ownerId;
 
-  GetVoucherEvent(this.storeId);
+  GetVoucherEvent(this.ownerId);
 }

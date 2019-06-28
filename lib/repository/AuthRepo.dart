@@ -1,5 +1,6 @@
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
+import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/provider/AuthProvider.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
@@ -27,7 +28,30 @@ class AuthRepo {
           return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
         } else {
           SharedPrefRepo.saveToken(result.accessToken);
-          DataProvider.provideData(result);
+          SharedPrefRepo.saveUserId(result.user.id);
+          DataProvider.provideData(UserMapper().mapFrom(result.user),result.accessToken);
+          return Pair(STATE.SUCCESS, DataProvider.user);
+        }
+      }
+    } catch (e) {
+      return Pair(STATE.ERROR, null, erroMsg: e.toString());
+    }
+  }
+
+
+  Future<Pair<STATE, User>> getUserInfo(String userId, String token) async {
+    try {
+      var result = await _authProvider.getUserInfo(userId, token);
+      if (result is ErrorEntity && result.code != null) {
+        return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
+      }
+      if (result is UserEntity) {
+        if (result == null) {
+          return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
+        } else {
+         await SharedPrefRepo.saveToken(token);
+        await  SharedPrefRepo.saveUserId(result.id);
+        DataProvider.provideData(UserMapper().mapFrom(result), token);
           return Pair(STATE.SUCCESS, DataProvider.user);
         }
       }

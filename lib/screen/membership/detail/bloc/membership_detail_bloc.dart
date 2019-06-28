@@ -27,7 +27,7 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailB
       yield* _handleGetStoreRequest(event.ownerId);
     }
     if (event is GetVoucherEvent){
-      yield* _handleGetCouponRequest();
+      yield* _handleGetCouponRequest(event.ownerId);
     }
   }
 
@@ -51,10 +51,10 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailB
     }
   }
 
-  Stream<MemberShipDetailBaseState> _handleGetCouponRequest() async* {
+  Stream<MemberShipDetailBaseState> _handleGetCouponRequest(String ownerId) async* {
     yield GetCouponState.isLoading();
     try {
-      Pair<STATE, List<Coupon>> result = await _couponRepo.getCoupons();
+      Pair<STATE, List<Coupon>> result = await _couponRepo.getCoupons(ownerId);
       if (result.left == STATE.ERROR) {
         yield GetCouponState.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {

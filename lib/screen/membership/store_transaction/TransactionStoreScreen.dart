@@ -34,33 +34,16 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        backgroundColor: HColors.white,
-        title: Text("Lịch sử check in tại cửa hàng",style: TextStyle(color: Colors.red),),
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: HColors.ColorSecondPrimary,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                FontAwesomeIcons.userCircle,
-                color: HColors.ColorSecondPrimary,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/accountinfo');
-              }),
-        ],
-        elevation: 0.0,
-      ),
-      body: _buildBody()
-    );
+        appBar: AppBar(
+          backgroundColor: HColors.white,
+          title: Text(
+            "Lịch sử giao dịch",
+            style: TextStyle(color: Colors.red),
+          ),
+          elevation: 0.0,
+        ),
+        body: _buildBody());
   }
-
 
   Widget _buildBody() {
     return BlocListener(
@@ -85,6 +68,7 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
       child: TransactionWidget(_transactions),
     );
   }
+
   Widget _buildTransactionList(List<Transaction> mTransactions) {
     if (mTransactions == null || mTransactions.isEmpty) {
       return Container();
@@ -102,5 +86,4 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
               point: _transactions[index].point);
         });
   }
-
 }

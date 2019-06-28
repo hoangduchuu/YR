@@ -10,8 +10,8 @@ class DataProvider {
 
   static String get userToken => _userToken;
 
-  static provideData(LoginEntity entity) {
-    _user = UserMapper().mapFrom(entity.user);
-    _userToken = entity.accessToken;
+  static provideData(User user, String token) {
+    _user = user;
+    _userToken = token;
   }
 }

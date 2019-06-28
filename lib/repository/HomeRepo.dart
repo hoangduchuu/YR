@@ -28,7 +28,7 @@ class HomeRepo {
           return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
         } else {
           SharedPrefRepo.saveToken(result.accessToken);
-          DataProvider.provideData(result);
+          SharedPrefRepo.saveUserId(result.user.id);
           return Pair(STATE.SUCCESS, DataProvider.user);
         }
       }

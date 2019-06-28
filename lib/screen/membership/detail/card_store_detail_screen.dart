@@ -87,12 +87,15 @@ class _MemberShipStoreDetailScreenState
           MemberCard(
               memberName: widget.memberCard.fullName,
               memberPoint: widget.memberCard.points,
-              startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
+              startDate: CommonUtils.getDateFormat(
+                  widget.memberCard.createdAt.toString()),
               times: widget.memberCard.accumulationPoints),
           SizedBox(
             height: 10,
           ),
-          BarCode(value: DataProvider.user.phone,),
+          BarCode(
+            value: DataProvider.user.phone,
+          ),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
@@ -153,14 +156,18 @@ class _MemberShipStoreDetailScreenState
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> RestaurantDetailScreen(store:stores[index])));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              RestaurantDetailScreen(store: stores[index])));
                 },
               ),
             ],
           );
         });
   }
-  
+
   Widget _buildListVouchers(List<Coupon> coupons) {
     if (coupons == null || coupons.isEmpty) {
       return Container();

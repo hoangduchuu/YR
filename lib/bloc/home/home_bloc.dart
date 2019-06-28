@@ -29,7 +29,7 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
     if (event is GetMemberShipCardsRequest) {
       yield* _handleHomeRequest(event.userId);
     }
-    if(event is GetTransactionRequest){
+    if (event is GetTransactionRequest) {
       yield* _HandleGetTransactionRequest();
     }
   }
@@ -40,7 +40,8 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _handleHomeRequest(String userID) async* {
     yield GetMemberShipCards.isLoading();
     try {
-      Pair<STATE, List<MembershipCard>> result = await _couponRepo.getMembership(userID);
+      Pair<STATE, List<MembershipCard>> result =
+          await _couponRepo.getMembership(userID);
       if (result.left == STATE.ERROR) {
         yield GetMemberShipCards.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {
@@ -57,7 +58,8 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _HandleGetTransactionRequest() async* {
     yield GetTransactionState.isLoading();
     try {
-      Pair<STATE, List<Transaction>> result = await _transactionRepo.getTransactions();
+      Pair<STATE, List<Transaction>> result =
+          await _transactionRepo.getTransactions();
       if (result.left == STATE.ERROR) {
         yield GetTransactionState.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {
@@ -69,4 +71,5 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
     } catch (e) {
       yield GetTransactionState.isError(errMsg: e.toString());
     }
-  }}
+  }
+}

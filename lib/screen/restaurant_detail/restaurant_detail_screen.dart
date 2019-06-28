@@ -6,6 +6,7 @@ import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:your_reward_user/test/map_screen.dart';
 class RestaurantDetailScreen extends StatefulWidget {
   Store _store;
 
@@ -120,20 +121,23 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                   border: Border(
                       left: BorderSide(color: HColors.paleGrey, width: 2)),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.location_on,
-                      color: HColors.ColorSecondPrimary,
-                    ),
-                    Text(
-                      'Địa điểm',
-                      style: TextStyle(
-                          color: HColors.ColorSecondPrimary,
-                          fontFamily: Hfonts.PrimaryFontBold),
-                    ),
-                  ],
+                child: InkWell(
+                  onTap: ()=> _onLocationClick(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                        color: HColors.ColorSecondPrimary,
+                      ),
+                      Text(
+                        'Địa điểm',
+                        style: TextStyle(
+                            color: HColors.ColorSecondPrimary,
+                            fontFamily: Hfonts.PrimaryFontBold),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -229,4 +233,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
     print("call to $phone");
     UrlLauncher.launch("tel://$phone");
   }
+  _onLocationClick() {
+    print('${widget._store.addressLng} -- ${widget._store.addressLat}');
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>GoogleMapScreen()));
+  }
+
 }

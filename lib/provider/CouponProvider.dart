@@ -17,8 +17,10 @@ class CouponProvider {
     client = MyHttpClient.instance;
   }
 
-  Future<dynamic> getCoupons() async {
+  Future<dynamic> getCoupons(String ownerId) async {
     String url = '${YRService.END_POINT}${YRService.PATH_COUPONS}';
+    Map<String,String> params = new Map();
+    params['ownerId'] = ownerId;
     String raw =
         await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponParser().parse(raw);

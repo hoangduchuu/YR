@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:your_reward_user/screen/membership/detail/card_store_detail_screen.dart';
+import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/test/account_information_screen.dart';
 import 'package:your_reward_user/test/api_test_screen.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
@@ -20,7 +21,7 @@ import 'test/widget_screen.dart';
 class MyApp extends StatelessWidget {
   final app = new MaterialApp(
     routes: <String, WidgetBuilder>{
-      '/': (BuildContext context) => MainScreen(),
+      '/': (BuildContext context) => SplashScreen(),
       '/bottombar': (BuildContext context) => MemberShipScreen(),
       '/test': (BuildContext context) => TestScreen(),
       '/login': (BuildContext context) => LoginScreen(),

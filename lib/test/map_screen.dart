@@ -5,6 +5,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class GoogleMapScreen extends StatefulWidget {
+  LatLng _location;
+  GoogleMapScreen({LatLng location}){
+    this._location = location;
+  }
+
   @override
   State<StatefulWidget> createState() {
     return new _MyAppState();
