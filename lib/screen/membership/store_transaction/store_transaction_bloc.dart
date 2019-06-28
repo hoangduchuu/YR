@@ -32,22 +32,14 @@ class TransactionStoreBloc
       Pair<STATE, List<Transaction>> result =
           await _transactionRepo.getTransactionOfStore(ownerId);
       if (result.left == STATE.ERROR) {
-        print("_handleGetTransactionRequest ERROR");
-
         yield GetTransactionState.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {
-        print("_handleGetTransactionRequest isEmpty");
-
         yield GetTransactionState.empty();
       }
       if (result.left == STATE.SUCCESS) {
-        print("_handleGetTransactionRequest SUCCESS");
-
         yield OnGetTransactionSuccess(transactions: result.right);
       }
     } catch (e) {
-      print("_handleGetTransactionRequest catch  ${e.toString()}");
-
       yield GetTransactionState.isError(errMsg: e.toString());
     }
   }
