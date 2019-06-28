@@ -7,6 +7,7 @@ import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
+import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 
 class AuthProvider {
@@ -53,10 +54,10 @@ class AuthProvider {
   }
 }
 
-class RegisterRespParser extends BaseParser<RegisterEntity> {
+class RegisterRespParser extends BaseParser<SignupEntity> {
   @override
-  RegisterEntity parseInfo(Map<String, dynamic> raw) {
-    return RegisterEntity.fromJson(raw);
+  SignupEntity parseInfo(Map<String, dynamic> raw) {
+    return SignupEntity.fromMap(raw);
   }
 }
 

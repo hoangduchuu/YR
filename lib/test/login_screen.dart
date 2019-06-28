@@ -64,7 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ..showSnackBar(SnackBar(content: Text('Đang đăng nhập...')));
           } else if (state.isSuccess) {
             print("Login thanh cong");
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (state.isFailure) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()

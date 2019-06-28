@@ -1,3 +1,5 @@
+import 'package:your_reward_user/entity/RegisterEntity.dart';
+import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
 
@@ -6,10 +8,11 @@ class User {
   String id;
   String phone;
   String adress;
+  String email;
 
   @override
   String toString() {
-    return 'USER_model{fullName: $fullName, id: $id, phone: $phone, adress: $adress}';
+    return 'USER_model{fullName: $fullName, id: $id, phone: $phone, adress: $adress , Email $email}';
   }
 }
 
@@ -31,6 +34,25 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     entity.phone = model.phone;
     entity.address = model.adress;
     entity.fullname = model.fullName;
+  }
+}
+
+class UserRegisterMapper extends BaseMapper<User, SignupEntity>{
+
+  @override
+  User mapFrom(SignupEntity entity) {
+    User user = new User();
+    user.fullName = entity.fullname;
+    user.email = entity.email;
+    user.phone = entity.phone;
+    user.id = entity.id;
+    user.adress = "no";
+    return user;
+  }
+
+  @override
+  SignupEntity mapTo(User model) {
+
   }
 }
 

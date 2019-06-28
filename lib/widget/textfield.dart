@@ -9,11 +9,12 @@ class YRTextField extends StatefulWidget {
   final bool isPassword;
   final String hintText;
   final IconData icon;
+  TextInputType type = TextInputType.text;
   YRTextField(
       {Key key,
         @required this.hintText,
         @required this.icon,
-        @required this.onTextChanged,@required this.isPassword})
+        @required this.onTextChanged,@required this.isPassword,this.type})
       : super(key: key);
 
   @override
