@@ -1,3 +1,4 @@
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/model/User.dart';
@@ -10,11 +11,8 @@ import 'package:your_reward_user/utils/pair.dart';
 import 'DataProvider.dart';
 
 class HomeRepo {
-  CouponProvider _couponRepo;
+  CouponProvider _couponRepo =injector<CouponProvider>();
 
-  HomeRepo() {
-    this._couponRepo = CouponProvider();
-  }
 
   // request and mapping from entity to model
   Future<Pair<STATE, User>> getStore(String email, String password) async {

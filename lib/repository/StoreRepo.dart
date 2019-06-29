@@ -1,3 +1,4 @@
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/GetStoreEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/model/Store.dart';
@@ -9,11 +10,10 @@ import 'package:your_reward_user/utils/pair.dart';
 import 'DataProvider.dart';
 
 class StoreRepo {
-  StoreProvider _provider;
+  StoreProvider _provider =injector<StoreProvider>();
   StoreMapper _mapper;
 
   StoreRepo() {
-    _provider = StoreProvider();
     this._mapper = StoreMapper();
   }
 

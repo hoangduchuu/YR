@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
@@ -14,14 +15,11 @@ import 'home_state.dart';
 import 'home_state_transactions.dart';
 
 class HomeBLoc extends Bloc<HomeEvent, HomeState> {
-  StoreRepo _storeRepo;
   TransactionRepo _transactionRepo;
-  CouponRepo _couponRepo;
+  CouponRepo _couponRepo = injector<CouponRepo>();
 
   HomeBLoc() {
-    this._storeRepo = StoreRepo();
     this._transactionRepo = new TransactionRepo();
-    this._couponRepo = new CouponRepo();
   }
 
   @override

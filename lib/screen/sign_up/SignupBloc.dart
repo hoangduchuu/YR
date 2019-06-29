@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -9,14 +10,10 @@ import 'package:your_reward_user/utils/pair.dart';
 
 //region bloc
 class SignUpBloc extends Bloc<BaseSignUpEvent, SignUpState> {
-  AuthRepo authRepo;
+  AuthRepo authRepo = injector<AuthRepo>();
 
   @override
   SignUpState get initialState => InitialState();
-
-  SignUpBloc() {
-    this.authRepo = AuthRepo();
-  }
 
   @override
   Stream<SignUpState> mapEventToState(BaseSignUpEvent event) async* {

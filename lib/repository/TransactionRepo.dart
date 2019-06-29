@@ -1,3 +1,4 @@
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/GetTransactionEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/model/Store.dart';
@@ -10,11 +11,10 @@ import 'DataProvider.dart';
 
 
 class TransactionRepo {
-  TransactionProvider _provider;
+  TransactionProvider _provider = injector<TransactionProvider>();
   TransactionMapper _mapper;
 
   TransactionRepo() {
-    this._provider = new TransactionProvider();
     this._mapper = new TransactionMapper();
   }
 

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -8,14 +9,10 @@ import 'package:your_reward_user/utils/pair.dart';
 
 //region Bloc
 class SplashBloc extends Bloc<BaseSplashEvent, SplashState> {
-  AuthRepo authRepo;
+  AuthRepo authRepo = injector<AuthRepo>();
 
   @override
   SplashState get initialState => InitialState();
-
-  SplashBloc() {
-    this.authRepo = AuthRepo();
-  }
 
   @override
   Stream<SplashState> mapEventToState(BaseSplashEvent event) async* {

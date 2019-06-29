@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/TransactionRepo.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_event.dart';
@@ -8,11 +9,8 @@ import 'package:your_reward_user/utils/pair.dart';
 
 class TransactionStoreBloc
     extends Bloc<StoreTransactionEvent, StoreTransactionBaseState> {
-  TransactionRepo _transactionRepo;
+  TransactionRepo _transactionRepo = injector<TransactionRepo>();
 
-  TransactionStoreBloc() {
-    this._transactionRepo = TransactionRepo();
-  }
 
   @override
   StoreTransactionBaseState get initialState => InitialState();

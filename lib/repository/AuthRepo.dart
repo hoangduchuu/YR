@@ -1,3 +1,4 @@
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
@@ -14,11 +15,8 @@ import 'package:your_reward_user/utils/pair.dart';
 import 'DataProvider.dart';
 
 class AuthRepo {
-  AuthProvider _authProvider;
+  AuthProvider _authProvider = injector<AuthProvider>();
 
-  AuthRepo() {
-    this._authProvider = AuthProvider();
-  }
 
   // request and mapping from entity to model
   Future<Pair<STATE, User>> login(String email, String password) async {

@@ -8,13 +8,11 @@ import 'package:your_reward_user/utils/pair.dart';
 
 import 'login_event.dart';
 import 'login_state.dart';
+import '../../core/injector.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  AuthRepo authRepo;
+  AuthRepo authRepo = injector<AuthRepo>();
 
-  LoginBloc() {
-    this.authRepo = AuthRepo();
-  }
 
   @override
   LoginState get initialState => LoggedInState.empty();

@@ -1,3 +1,4 @@
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/GetGeneralCouponEntity.dart';
 import 'package:your_reward_user/entity/GetMemberShipEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
@@ -8,12 +9,11 @@ import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 class CouponRepo {
-  CouponProvider _provider;
+  CouponProvider _provider = injector<CouponProvider>();
   CouponMapper _couponMapper;
   MembershipCardMapper _membershipCardMapper;
 
   CouponRepo() {
-    this._provider = CouponProvider();
     this._couponMapper = CouponMapper();
     this._membershipCardMapper = MembershipCardMapper();
   }

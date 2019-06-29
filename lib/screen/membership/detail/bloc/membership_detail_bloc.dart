@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/provider/CouponProvider.dart';
@@ -11,14 +12,9 @@ import 'membership_detail_event.dart';
 import 'membership_detail_state.dart';
 
 class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailBaseState> {
-  StoreRepo _storeRepo;
-  CouponRepo _couponRepo;
+  StoreRepo _storeRepo = injector<StoreRepo>();
+  CouponRepo _couponRepo = injector<CouponRepo>();
 
-
-  MemberShipDetailBloc() {
-    this._storeRepo = StoreRepo();
-    this._couponRepo = CouponRepo();
-  }
 
   @override
   Stream<MemberShipDetailBaseState> mapEventToState(
