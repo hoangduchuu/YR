@@ -114,7 +114,7 @@ class _MemberShipStoreDetailScreenState
                       fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
-          Container(height: 160, child: _buildListStore(_stores)),
+          Container(height: 250, child: _buildListStore(_stores)),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
@@ -133,7 +133,7 @@ class _MemberShipStoreDetailScreenState
                       fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
-          Container(height: 215, child: _buildListVouchers(_coupons)),
+          Container(height: 250, child: _buildListVouchers(_coupons)),
         ],
       ),
     );
@@ -175,19 +175,23 @@ class _MemberShipStoreDetailScreenState
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: coupons.length,
+
         itemBuilder: (context, index) {
-          return Row(
-            children: <Widget>[
-              Voucher(
-                coupon: coupons[index],
-                name: coupons[index].title,
-                imageUrl: _getVoucherThumb(coupons[index].image),
-                date: coupons[index].endDate,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
+          return Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: Row(
+              children: <Widget>[
+                Voucher(
+                  coupon: coupons[index],
+                  name: coupons[index].title,
+                  imageUrl: _getVoucherThumb(coupons[index].image),
+                  date: coupons[index].endDate,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+            ),
           );
         });
   }
