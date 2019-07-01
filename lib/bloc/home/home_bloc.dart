@@ -28,7 +28,7 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
       yield* _handleHomeRequest(event.userId);
     }
     if (event is GetTransactionRequest) {
-      yield* _HandleGetTransactionRequest();
+      yield* _HandleGetTransactionRequest(event.userId);
     }
   }
 
@@ -53,11 +53,11 @@ class HomeBLoc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Stream<HomeState> _HandleGetTransactionRequest() async* {
+  Stream<HomeState> _HandleGetTransactionRequest(String userId) async* {
     yield GetTransactionState.isLoading();
     try {
       Pair<STATE, List<Transaction>> result =
-          await _transactionRepo.getTransactions();
+          await _transactionRepo.getTransactions(userId);
       if (result.left == STATE.ERROR) {
         yield GetTransactionState.isError(errMsg: result.erroMsg);
       } else if (result.right.isEmpty) {

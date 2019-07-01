@@ -18,7 +18,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends BaseState<SignUpScreen> {
   SignUpBloc _signUpBloc;
-  String _email, _password, _repassword, _name,_phone;
+  String _email, _password, _repassword, _name, _phone;
 
   @override
   void initState() {
@@ -28,22 +28,20 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: HColors.white, body: _buildBloc());
+    return Scaffold(backgroundColor: HColors.white, body: _buildBloc(context));
   }
 
-  Widget _buildBloc() {
+  Widget _buildBloc(BuildContext context) {
     return BlocListener(
       bloc: _signUpBloc,
       listener: (context, state) {
         if (state is SignUpSuccessState) {
-          print("_buildBloc SignUpSuccessState ${state.user.toString()}");
+          super.showSuccessMessage("Đăng ký thành công", context);
         }
         if (state is SignUpErrorState) {
-          print("Hide SignUpErrorState ${state.errorMessage}");
+          super.showError2("${state.errorMessage}", context);
         }
-        if (state is ResetState) {
-          print("reset");
-        }
+        if (state is ResetState) {}
       },
       child: Stack(
         fit: StackFit.expand,
@@ -116,7 +114,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
                     },
                     isPassword: true),
                 YRTextField(
-                  type: TextInputType.phone,
+                    type: TextInputType.phone,
                     hintText: 'Số điện thoại',
                     icon: FontAwesomeIcons.key,
                     onTextChanged: (value) {

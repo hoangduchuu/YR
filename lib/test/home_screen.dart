@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _homeBloc = HomeBLoc();
     _homeBloc.dispatch(GetMemberShipCardsRequest(DataProvider.user.id));
-    _homeBloc.dispatch(GetTransactionRequest());
+    _homeBloc.dispatch(GetTransactionRequest(DataProvider.user.id));
   }
 
   @override

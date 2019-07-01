@@ -287,7 +287,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetTransactionOverTheWorld() {
     print(LogPrefix.methodName("_onGetTransactionOverTheWorld"));
-    _transactionRepo.getAllTransactions(limit: 2, skip: 0).then((onValue) {
+    _transactionRepo.getAllTransactions("5d1995787a44a4595488de9a",limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));

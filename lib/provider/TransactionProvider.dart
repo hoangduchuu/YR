@@ -15,11 +15,13 @@ class TransactionProvider {
     client = MyHttpClient.instance;
   }
 
-  Future<dynamic> getAllTransactions({int limit = 200, int skip = 0}) async {
+  Future<dynamic> getAllTransactions(String userId,{int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_TRANSACTIONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
+    Map<String,String> params = Map();
+    params['userId'] = userId;
     String raw =
-    await client.get(url, YRService.generateHeadersWithToken(), Map());
+    await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = GetTransactionParser().parse(raw);
     return result;
   }

@@ -28,15 +28,12 @@ class SignUpBloc extends Bloc<BaseSignUpEvent, SignUpState> {
       if (result.left == STATE.SUCCESS) {
         yield SignUpSuccessState(result.right);
       } else {
-        print("ERER tren ${result.erroMsg}");
-        yield SignUpErrorState(errorMessage: result.erroMsg);
+        yield SignUpErrorState(errorMessage: result.erroMsg.toString());
         yield ResetState();
-        return;
       }
     } catch (e) {
       yield SignUpErrorState(errorMessage: e.toString());
       yield ResetState();
-      return;
     }
   }
 }
@@ -78,7 +75,7 @@ class SignUpErrorState extends SignUpState {
   SignUpErrorState({this.errorMessage});
 }
 
-class ResetState extends SignUpErrorState {}
+class ResetState extends SignUpState {}
 
 class InitialState extends SignUpState {
   @override

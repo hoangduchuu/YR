@@ -4,6 +4,7 @@ import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/screen/voucher_detail/VoucherDetailScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'NetWorkImage.dart';
 class Voucher extends StatelessWidget {
   final String name;
   final int discountpercent;
@@ -47,7 +48,7 @@ class Voucher extends StatelessWidget {
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                    child: Image.network(imageUrl,fit: BoxFit.cover,),
+                    child: ImageLoader(imageUrl),
                   ),
                   height: 160,
                   width:160,

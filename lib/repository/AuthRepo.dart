@@ -74,7 +74,6 @@ class AuthRepo {
       gender: model.gender,
       status: model.status,
     );
-    print("body ${body.phone}");
     try {
       var result = await _authProvider.register(body);
       if (result is ErrorEntity && result.code != null) {

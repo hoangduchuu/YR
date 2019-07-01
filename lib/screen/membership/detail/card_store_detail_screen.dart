@@ -8,6 +8,7 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/utils/const.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
 import 'package:your_reward_user/widget/member_card.dart';
 import 'package:your_reward_user/widget/restaurant_item.dart';
@@ -199,7 +200,7 @@ class _MemberShipStoreDetailScreenState
   // FIXME: get exactly data
   _getVoucherThumb(String s) {
     if (s == null) {
-      return "https://images.foody.vn/res/g17/165353/prof/s576x330/foody-mobile-dsvdvs-jpg.jpg";
+      return NO_IMAGE;
     }
     return s;
   }

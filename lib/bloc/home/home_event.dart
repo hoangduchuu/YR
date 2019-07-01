@@ -12,4 +12,7 @@ class GetMemberShipCardsRequest extends HomeEvent {
   GetMemberShipCardsRequest(this.userId);
 
 }
-class GetTransactionRequest extends HomeEvent {}
+class GetTransactionRequest extends HomeEvent {
+  String userId;
+  GetTransactionRequest(this.userId);
+}

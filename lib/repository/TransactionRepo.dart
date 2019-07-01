@@ -19,9 +19,9 @@ class TransactionRepo {
   }
 
   // request and mapping from entity to model
-  Future<Pair<STATE, List<Transaction>>> getTransactions() async {
+  Future<Pair<STATE, List<Transaction>>> getTransactions(String userId) async {
       try {
-        var result = await _provider.getAllTransactions();
+        var result = await _provider.getAllTransactions(userId);
         if (result is ErrorEntity && result.code != null) {
           return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
         }
