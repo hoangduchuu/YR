@@ -30,8 +30,8 @@ class TransactionProvider {
 
     // FIXME : UGENT : hỏi lại api này
     Map<String,String> params = Map();
-    params['ownerId'] = "5cdfeb2b04456d438bb0ae4b";
-    params['userId'] = "5ce0061bc151ae4a211e7508";
+    params['ownerId'] = ownerId;
+    params['userId'] = userId;
 
     String raw =
     await client.get(url, YRService.generateHeadersWithToken(), params);

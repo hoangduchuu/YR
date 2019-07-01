@@ -83,9 +83,10 @@ class _RestaurantCardState extends State<RestaurantCard> {
             ),
           ),
           Container(
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
             alignment: Alignment.bottomLeft,
             child: Text(
-              "The Coffee House", // FIXME  use from api =>  item.ownerName;
+              item.ownerName, // FIXME  use from api =>  item.ownerName;
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

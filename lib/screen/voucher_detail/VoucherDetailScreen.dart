@@ -40,28 +40,28 @@ class VoucherDetailScreen extends StatelessWidget {
         children: <Widget>[
           BarCode(value: coupon.code),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: Center(
-                child: Text(
+            alignment: Alignment.bottomLeft,
+            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            child: Text(
               coupon.title,
               style: TextStyle(fontSize: 20, color: Colors.red),
-            )),
+            ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: Center(
-                child: Text(
+            alignment: Alignment.bottomLeft,
+            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            child: Text(
               'Ngày hết hạn:  ${coupon.endDate}',
               style: TextStyle(fontSize: 14, color: Colors.black54),
-            )),
+            ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: Center(
-                child: Text(
+            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            alignment: Alignment.bottomLeft,
+            child: Text(
               'Nội dung:  ${coupon.getDescription()}',
               style: TextStyle(fontSize: 14, color: Colors.black54),
-            )),
+            ),
           )
         ],
       ),

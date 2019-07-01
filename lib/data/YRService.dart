@@ -22,7 +22,7 @@ static String myToken = DataProvider.userToken;
   }
 
 
-  static String END_POINT = 'http://128.199.78.111:3030';
+  static String END_POINT = 'http://206.189.149.115:3030';
   //authentication
   static String PATH_REGSITER = '/users';
   static String PATH_LOGIN = '/authentication';

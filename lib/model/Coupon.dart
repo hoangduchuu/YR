@@ -1,5 +1,6 @@
 import 'package:your_reward_user/entity/CouponEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 
 class Coupon{
   String title;
@@ -21,24 +22,22 @@ class Coupon{
     }
     return _description;
   }
-
 }
 
 class CouponMapper extends BaseMapper<Coupon, CouponEntity>{
-
   @override
   Coupon mapFrom(CouponEntity entity) {
     Coupon model = Coupon();
     model.title = entity.title;
     model.code = entity.code;
+    model.image = entity.thumbnail;
     model.status = entity.status.toString();
     model._description = entity.description;
-    model.endDate ="Chưa có API";
+    model.endDate = CommonUtils.getDateFormat(entity.endDate);
+    ;
     return model;
   }
 
   @override
-  CouponEntity mapTo(Coupon model) {
-
-  }
+  CouponEntity mapTo(Coupon model) {}
 }
