@@ -11,8 +11,8 @@ class BarCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.25,
-      width: MediaQuery.of(context).size.width * 0.8,
+      height:230,
+      width: MediaQuery.of(context).size.width ,
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.black,
@@ -24,22 +24,21 @@ class BarCode extends StatelessWidget {
               border: new Border.all(color: Colors.white),
               borderRadius: BorderRadius.all(Radius.circular(spacing_16))),
           child: Container(
+            alignment: Alignment.center,
               margin: EdgeInsets.all(8),
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(spacing_16))),
-              child: SizedBox(
-                width: 21,
-                height: 2,
-                child: new BarCodeImage(
-                  data: value,              // Code string. (required)
-                  codeType: BarCodeType.Code128,  // Code type (required)
-                  hasText: true,                 // Render with text label or not (default: false)
-                  onError: (error) {             // Error handler
-                    print('error = $error');
-                  },
-                ),
+              child: new BarCodeImage(
+                barHeight: 80,
+                lineWidth: 1.8,
+                data: value,              // Code string. (required)
+                codeType: BarCodeType.Code128,  // Code type (required)
+                hasText: true,                 // Render with text label or not (default: false)
+                onError: (error) {             // Error handler
+                  print('error = $error');
+                },
               ))),
     );
   }

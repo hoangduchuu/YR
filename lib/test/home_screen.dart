@@ -9,9 +9,11 @@ import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/widget/empty_membership_widget.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
@@ -22,7 +24,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends BaseState<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;
@@ -54,37 +56,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       backgroundColor: HColors.white,
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
         if (state is GetMemberShipCards) {
           if (state.isError) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('${state.errMsg}'),
-                  backgroundColor: Colors.red));
+            super.showError2("${state.errMsg}", context);
           } else if (state.isLoading) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+            super.showLoading2(context);
           } else {
-            Scaffold.of(context)..hideCurrentSnackBar();
+            super.hideLoading2(context);
+          }
+          if (state.isEmpty) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
           }
         } else if (state is GetMembershipCardSuccessState) {
-          Scaffold.of(context)..hideCurrentSnackBar();
+          super.hideLoading2(context);
           setState(() {
             isSliderLoaded = true;
             _memberships = state.memberships;
           });
         }
         if (state is OnGetTransactionSuccess) {
-          Scaffold.of(context)..hideCurrentSnackBar();
+          super.hideLoading2(context);
           setState(() {
             _transactions = state.transactions;
           });

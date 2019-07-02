@@ -9,6 +9,7 @@ class User {
   String phone;
   String adress;
   String email;
+  String createAt;
 
   @override
   String toString() {
@@ -24,6 +25,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.phone = entity.phone;
     model.adress = entity.address;
     model.fullName = entity.fullname;
+    model.createAt = entity.createdAt.toString();
     return model;
   }
 
@@ -37,8 +39,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
   }
 }
 
-class UserRegisterMapper extends BaseMapper<User, SignupEntity>{
-
+class UserRegisterMapper extends BaseMapper<User, SignupEntity> {
   @override
   User mapFrom(SignupEntity entity) {
     User user = new User();
@@ -51,9 +52,5 @@ class UserRegisterMapper extends BaseMapper<User, SignupEntity>{
   }
 
   @override
-  SignupEntity mapTo(User model) {
-
-  }
+  SignupEntity mapTo(User model) {}
 }
-
-
