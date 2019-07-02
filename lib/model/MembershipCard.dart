@@ -40,7 +40,7 @@ class MembershipCardMapper
     MembershipCard model = MembershipCard();
     model.id = entity.id;
 //    model.points = entity.level.points;
-    model.points = 11; // FIXME UGENT: bị mất field Level
+    model.points = entity.points; // FIXME UGENT: bị mất field Level
     model.accumulationPoints = entity.accumulationPoints;
     model.userId = entity.userId;
     model.ownerId = entity.ownerId;

@@ -1,5 +1,3 @@
-
-
 import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/data/base/BaseParser.dart';
 import 'package:your_reward_user/data/base/MyHttpClient.dart';
@@ -17,12 +15,14 @@ class CouponProvider {
     client = MyHttpClient.instance;
   }
 
-  Future<dynamic> getCoupons(String ownerId) async {
-    String url = '${YRService.END_POINT}${YRService.PATH_COUPONS}';
-    Map<String,String> params = new Map();
+  Future<dynamic> getCoupons(String userId, String ownerId) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}';
+    Map<String, String> params = new Map();
     params['ownerId'] = ownerId;
+    params['userId'] = userId;
+    params['status'] = "active";
     String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+        await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = new GetCouponParser().parse(raw);
     return result;
   }
@@ -37,14 +37,13 @@ class CouponProvider {
 
   Future<dynamic> getMemberShipCards(String userId,
       {int limit = 200, int skip = 0}) async {
-    String url =
-        '${YRService.END_POINT}${YRService.PATH_STORE_USER}';
+    String url = '${YRService.END_POINT}${YRService.PATH_STORE_USER}';
 
-    Map<String,String> param = Map();
-    param['userId'] = userId  ;
+    Map<String, String> param = Map();
+    param['userId'] = userId;
 
     String raw =
-        await client.get(url, YRService.generateHeadersWithToken(),param);
+        await client.get(url, YRService.generateHeadersWithToken(), param);
     var result = GetMemberShipCardParser().parse(raw);
     return result;
   }
@@ -79,16 +78,18 @@ class CouponProvider {
   }
 
   Future<dynamic> getCouponsOfUser({int limit = 200, int skip = 0}) async {
-    String url = '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}?${CommonUtils.getFilterParam(limit: limit,skip: skip)}';
+    String url =
+        '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
     String raw =
         await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponParser().parse(raw);
     return result;
   }
+
   Future<dynamic> getCouponDetailById(String couponId) async {
     String url = '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}/$couponId';
     String raw =
-    await client.get(url, YRService.generateHeadersWithToken(), Map());
+        await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = CouponEntity.fromRawJson(raw);
     return result;
   }

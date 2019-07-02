@@ -41,7 +41,7 @@ class _MemberShipStoreDetailScreenState
     super.initState();
     this._bloc = MemberShipDetailBloc();
     _bloc.dispatch(GetMemberShipDetailEvent(widget.memberCard.ownerId));
-    _bloc.dispatch(GetVoucherEvent(widget.memberCard.ownerId));
+    _bloc.dispatch(GetVoucherEvent(DataProvider.user.id,widget.memberCard.ownerId));
   }
 
   @override
