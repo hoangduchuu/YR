@@ -10,7 +10,6 @@ class ErrorScreen extends StatefulWidget {
 class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Center(
         child: Column(

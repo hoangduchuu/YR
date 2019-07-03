@@ -5,6 +5,13 @@ import 'package:http/http.dart' as http;
 
 
 class MyHttpClient{
+
+  MyHttpClient._privateConstructor();
+
+  static final MyHttpClient _instance = MyHttpClient._privateConstructor();
+
+  static MyHttpClient get instance => _instance;
+
   //get unauthorized
   Future<String> get(String url,
                                 Map<String, String> header,
@@ -20,6 +27,8 @@ class MyHttpClient{
     var response = await http.post(url, headers: header, body: jsonBody);
     return response.body;
   }
+
+
 
 
 }

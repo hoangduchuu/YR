@@ -29,7 +29,6 @@ class TranferHistoryRow extends StatefulWidget {
 class _TranferHistoryRowState extends State<TranferHistoryRow> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       padding: EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
@@ -47,7 +46,7 @@ class _TranferHistoryRowState extends State<TranferHistoryRow> {
             decoration: new BoxDecoration(
               shape: BoxShape.circle,
             ),
-            child: Image.asset(widget.storeType,fit: BoxFit.cover,width: 20,),
+            child: Image.network(widget.storeType,fit: BoxFit.cover,width: 20,),
           ),
           SizedBox(
             width:  MediaQuery.of(context).size.width*0.02,
@@ -64,7 +63,7 @@ class _TranferHistoryRowState extends State<TranferHistoryRow> {
               Container(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  '${widget.time} ngày ${widget.date} tại ${widget.place}',
+                  'Vào lúc: ${widget.time}:${widget.date} tại ${widget.place}',
                   style: TextStyle(fontSize: 13, color: HColors.hintTextColor,fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )

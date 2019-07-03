@@ -1,0 +1,4 @@
+enum STATE {
+  SUCCESS,
+  ERROR,
+}

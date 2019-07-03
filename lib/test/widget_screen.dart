@@ -88,9 +88,7 @@ class TestScreen extends StatelessWidget {
               onTextChanged: (value) {},
               hintText: 'Nhập họ tên',
             ),
-            RestaurantCard(cb: (index){
-
-            }),
+            RestaurantCard(cb: (index) {}),
             MemberCard(
               memberName: 'Phan Nguyễn Song Toàn',
               memberPoint: 2048,
@@ -104,7 +102,8 @@ class TestScreen extends StatelessWidget {
               startDate: '01/01/2019',
               isVIP: true,
             ),
-            Padding(padding: EdgeInsets.all(10),
+            Padding(
+              padding: EdgeInsets.all(10),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
@@ -114,7 +113,8 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'Popeyes',
                     price: '10000000đ',
-                    point: 0, storeType: '',
+                    point: 0,
+                    storeType: '',
                   ),
                   TranferHistoryRow(
                     tranferName: 'Giao dịch số 2',
@@ -122,10 +122,12 @@ class TestScreen extends StatelessWidget {
                     date: '15/5/2019',
                     place: 'KFC',
                     price: '10000000đ',
-                    point: 0, storeType: '',
+                    point: 0,
+                    storeType: '',
                   )
                 ],
-              ),),
+              ),
+            ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -133,13 +135,15 @@ class TestScreen extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.home, color: HColors.saveButtonColor),
+                icon:
+                    Icon(FontAwesomeIcons.home, color: HColors.saveButtonColor),
                 title: SizedBox.shrink()),
             BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.bell, color: HColors.saveButtonColor),
+                icon:
+                    Icon(FontAwesomeIcons.bell, color: HColors.saveButtonColor),
                 title: SizedBox
                     .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
-            ),
+                ),
           ],
           onTap: (index) {},
         ),

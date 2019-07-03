@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/model/Coupon.dart';
+import 'package:your_reward_user/screen/voucher_detail/VoucherDetailScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'NetWorkImage.dart';
 class Voucher extends StatelessWidget {
   final String name;
   final int discountpercent;
   final String imageUrl;
   final String date;
+  final Coupon coupon;
   const Voucher({Key key,
+    @required this.coupon,
     @required this.name,
     this.discountpercent,
     @required this.imageUrl,
@@ -26,7 +31,7 @@ class Voucher extends StatelessWidget {
   _buildItemCard(BuildContext context){
     return InkWell(
       onTap: () {
-        print(name);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>VoucherDetailScreen(coupon)));
       },
       child: Container(
         height: 200,
@@ -43,7 +48,7 @@ class Voucher extends StatelessWidget {
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                    child: Image.network(imageUrl,fit: BoxFit.cover,),
+                    child: ImageLoader(imageUrl),
                   ),
                   height: 160,
                   width:160,
