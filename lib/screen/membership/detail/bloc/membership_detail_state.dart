@@ -6,6 +6,12 @@ import 'package:your_reward_user/model/Store.dart';
 @immutable
 abstract class MemberShipDetailBaseState extends Equatable {
   MemberShipDetailBaseState([List props = const []]) : super(props);
+
+  @override
+  String toString() {
+    return 'MemberShipDetailBaseState{}';
+  }
+
 }
 
 class InitialState extends MemberShipDetailBaseState {
@@ -19,15 +25,21 @@ class OngetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
   List<Store> stores;
 
   OngetMemberShipDetailSuccessState(this.stores);
+
+  @override
+  String toString() {
+    return 'OngetMemberShipDetailSuccessState{stores: $stores}';
+  }
+
 }
 
 class GetMemmberShipDetailState extends MemberShipDetailBaseState {
-  final bool isLoading = false;
-  final bool isError = false;
+   bool isLoading;
+  final bool isError;
   String errMsg;
   List<Store> stores;
 
-  GetMemmberShipDetailState({this.stores, isLoading, isError, this.errMsg})
+  GetMemmberShipDetailState({this.stores, this.isLoading, this.isError, this.errMsg})
       : super([isLoading, isError, errMsg]);
 
   factory GetMemmberShipDetailState.empty() {

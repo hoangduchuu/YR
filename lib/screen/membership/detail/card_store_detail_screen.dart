@@ -4,6 +4,7 @@ import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
@@ -30,7 +31,7 @@ class MemberShipStoreDetailScreen extends StatefulWidget {
 }
 
 class _MemberShipStoreDetailScreenState
-    extends State<MemberShipStoreDetailScreen> {
+    extends BaseState<MemberShipStoreDetailScreen> {
   ScrollController _scrollController = new ScrollController();
   MemberShipDetailBloc _bloc;
   List<Store> _stores;
@@ -41,7 +42,8 @@ class _MemberShipStoreDetailScreenState
     super.initState();
     this._bloc = MemberShipDetailBloc();
     _bloc.dispatch(GetMemberShipDetailEvent(widget.memberCard.ownerId));
-    _bloc.dispatch(GetVoucherEvent(DataProvider.user.id,widget.memberCard.ownerId));
+    _bloc.dispatch(
+        GetVoucherEvent(DataProvider.user.id, widget.memberCard.ownerId));
   }
 
   @override
@@ -51,25 +53,21 @@ class _MemberShipStoreDetailScreenState
       listener: (context, state) {
         if (state is GetMemmberShipDetailState) {
           if (state.isError) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('${state.errMsg}'),
-                  backgroundColor: Colors.red));
-          } else if (state.isLoading) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+            super.showError(state.errMsg);
+          }
+          if (state.isLoading) {
+            super.showLoading2(context);
           } else {
-            Scaffold.of(context)..hideCurrentSnackBar();
+            super.hideLoading2(context);
           }
         } else if (state is OngetMemberShipDetailSuccessState) {
-          Scaffold.of(context)..hideCurrentSnackBar();
+          super.hideLoading2(context);
           setState(() {
             _stores = state.stores;
           });
         }
         if (state is OngetGetCouponSuccessState) {
+          super.hideLoading2(context);
           setState(() {
             _coupons = state.coupons;
           });
@@ -176,7 +174,6 @@ class _MemberShipStoreDetailScreenState
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: coupons.length,
-
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.fromLTRB(10, 0, 0, 0),

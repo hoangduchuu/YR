@@ -4,6 +4,7 @@ import 'package:your_reward_user/bloc/login/login_bloc.dart';
 import 'package:your_reward_user/bloc/login/login_event.dart';
 import 'package:your_reward_user/bloc/login/login_state.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends BaseState<LoginScreen> {
   LoginBloc _loginBloc;
   String _email = "huu@example.com";
   String _password = "john.doe";
@@ -150,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 CommonButton(
-                  onPressed: () => {_onSubmitLogin()},
+                  onPressed: () => {_onSubmitLogin(context)},
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
                   text: Text(
@@ -228,7 +229,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  _onSubmitLogin() {
+  _onSubmitLogin(BuildContext context) {
     _loginBloc.dispatch(LoginRequest(email: _email, password: _password));
+    super.showLoading2(context);
   }
 }

@@ -51,15 +51,15 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
       listener: (context, state) {
         if (state is GetTransactionState) {
           if (state.isError) {
-            super.showError(state.errMsg);
+            super.showError2(state.errMsg,context);
           } else if (state.isLoading) {
-            super.showLoading();
+            super.showLoading2(context);
           } else {
-            super.hideLoading();
+            super.hideLoading2(context);
           }
         }
         if (state is OnGetTransactionSuccess) {
-          super.hideLoading();
+          super.hideLoading2(context);
           setState(() {
             _transactions = state.transactions;
           });
