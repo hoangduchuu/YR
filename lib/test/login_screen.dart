@@ -38,11 +38,11 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
-  _buildBody() {
+  _buildBody(BuildContext context) {
     return BlocListener(
       bloc: _loginBloc,
       listener: (context, state) {
@@ -50,9 +50,8 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           if (state.isInvalidEmail && state.isSubmitting == false) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('Email không hợp lệ !!!'),
-                  backgroundColor: HColors.red));
+              ..showSnackBar(
+                  SnackBar(content: Text(''), backgroundColor: HColors.red));
           } else if (state.isInValidPass && state.isSubmitting == false) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
@@ -60,14 +59,14 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                   content: Text('Password không hợp lệ'),
                   backgroundColor: HColors.red));
           } else if (state.isSubmitting) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Đang đăng nhập...')));
+            super.showLoading2(context);
           } else if (state.isSuccess) {
             print("Login thanh cong");
+            super.hideLoading2(context);
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (state.isFailure) {
+            super.hideLoading2(context);
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
@@ -231,6 +230,5 @@ class _LoginScreenState extends BaseState<LoginScreen> {
 
   _onSubmitLogin(BuildContext context) {
     _loginBloc.dispatch(LoginRequest(email: _email, password: _password));
-    super.showLoading2(context);
   }
 }
