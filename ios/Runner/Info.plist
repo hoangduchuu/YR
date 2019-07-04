@@ -72,6 +72,11 @@
       <string>fbshareextension</string>
     </array>
 
-
+    <key>NSCameraUsageDescription</key>
+	<string>take screenshots to make avat   ar</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>select picture to make avatar</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

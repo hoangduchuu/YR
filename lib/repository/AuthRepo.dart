@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RegisterEntity.dart';
@@ -6,6 +8,7 @@ import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/provider/AuthProvider.dart';
@@ -91,20 +94,33 @@ class AuthRepo {
   Future<bool> requestChangeEmail(String email) async {
     try {
       ForgotEntity result =
-      await _authProvider.requestChangePasswordCode(email);
+          await _authProvider.requestChangePasswordCode(email);
       return result.status;
     } catch (error) {
       return false;
     }
   }
 
-  Future<bool> changePassword(String code,String email, String password) async {
+  Future<bool> changePassword(
+      String code, String email, String password) async {
     try {
       ChangePasswordEntity result =
-      await _authProvider.changePassword(email,code,password);
+          await _authProvider.changePassword(email, code, password);
       return result.status;
     } catch (error) {
       return false;
+    }
+  }
+
+  Future<Pair<bool, String>> upload(File file) async {
+    try {
+      UploadEntity result = await _authProvider.upload(file);
+      if (result.image != null) {
+        return Pair(true, '${result.image.path} ${result.image.filename}',
+            erroMsg: null);
+      }
+    } catch (error) {
+      return Pair(false, null, erroMsg: error.toString());
     }
   }
 }

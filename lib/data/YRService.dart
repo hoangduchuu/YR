@@ -4,7 +4,7 @@ import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/utils/UserProvider.dart';
 class YRService{
   static const DEFAULT_HEADER = {
-    HttpHeaders.contentTypeHeader : 'application/json'
+    HttpHeaders.contentTypeHeader: 'application/json'
   };
 static String myToken = DataProvider.userToken;
   static Map<String, String> generateHeadersWithToken(){
@@ -21,6 +21,10 @@ static String myToken = DataProvider.userToken;
     };
   }
 
+  static const DEFAULT_FILE_HEADER = {
+    HttpHeaders.contentTypeHeader : 'application/x-www-form-urlencoded'
+  };
+
 
   static String END_POINT = 'http://206.189.149.115:3030';
   //authentication
@@ -29,6 +33,7 @@ static String myToken = DataProvider.userToken;
   static String PATH_LOGIN_FACEBOOK = '/facebook/auth';
   static String PATH_FORGET_REQUEST = '/forgot-request';
   static String PATH_FORGET_CHANGE = '/forgot-verify';
+  static String PATH_UPLOAD_IMAGE = '/upload/image';
 
 
 

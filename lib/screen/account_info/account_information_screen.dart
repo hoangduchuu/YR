@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/screen/account_info/profile_bloc.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'dart:ui' as ui;
+
+import 'profile_event.dart';
 
 class AccountInformationScreen extends StatefulWidget {
   @override
@@ -14,7 +20,31 @@ class AccountInformationScreen extends StatefulWidget {
       _AccountInformationScreenState();
 }
 
-class _AccountInformationScreenState extends State<AccountInformationScreen> {
+class _AccountInformationScreenState extends State<AccountInformationScreen>
+    with ImagePickerListener,TickerProviderStateMixin {
+  AnimationController _controller;
+  ImagePickerHandler imagePicker;
+  ProfileBloc _profileBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = new AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    imagePicker = new ImagePickerHandler(this, _controller);
+    imagePicker.init();
+
+    _profileBloc = ProfileBloc();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -95,7 +125,9 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                 ),
 
                 CommonButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    imagePicker.showDialog(context);
+                  },
                   backgroundColor: Colors.transparent,
                   textColor: HColors.white,
                   buttonPadding: 10,
@@ -150,8 +182,10 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                 CommonButton(
                   onPressed: () {
                     SharedPrefRepo.clearAll();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => SplashScreen()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SplashScreen()));
                   },
                   backgroundColor: HColors.red,
                   textColor: HColors.white,
@@ -170,5 +204,16 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
         )
       ],
     );
+  }
+
+  @override
+  onImageCropped(File _image) {
+    _profileBloc.dispatch(UploadEvent(_image));
+  }
+
+  @override
+  onUploaded(File _image, String imgUrl) {
+    print("UPLOADING $imgUrl $_image");
+    return;
   }
 }

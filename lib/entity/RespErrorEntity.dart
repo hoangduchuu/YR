@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 //{
@@ -7,16 +9,20 @@ import 'package:equatable/equatable.dart';
 //"className": "bad-request",
 //"errors": {}
 //}
+String uploadEntityToJson(ErrorEntity data) => json.encode(data.toJson());
+
 class ErrorEntity {
   String name, message, className;
   int code;
-  ErrorEntity({this.name, this.message, this.className, this.code});
+  dynamic errors;
+  ErrorEntity({this.name, this.message, this.className, this.code,this.errors});
 
   factory ErrorEntity.fromJson(Map<String, dynamic> raw){
     return ErrorEntity(
         name: raw['name'],
         message: raw['message'],
         code: raw['code'],
+        errors: raw['errors'],
         className: raw['className']
     );
   }
@@ -26,13 +32,24 @@ class ErrorEntity {
         name: raw['name'],
         message: raw['message'],
         code: raw['code'],
+        errors: raw['errors'],
         className: raw['className']
     );
   }
 
+
+
+  Map<String, dynamic> toJson() => {
+    "name": name == null ? null : name,
+    "message": message == null ? null : message,
+    "code": code == null ? null : code,
+    "className": className == null ? null : className,
+    "errors": errors== null ? null:errors
+  };
+
   @override
   String toString() {
-    return 'Error{name: $name, message: $message, className: $className, code: $code}';
+    return 'ErrorEntity{name: $name, message: $message, className: $className, code: $code, errors: $errors}';
   }
 
 

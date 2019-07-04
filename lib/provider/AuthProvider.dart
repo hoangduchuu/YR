@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/data/base/BaseParser.dart';
@@ -10,6 +11,7 @@ import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 
 class AuthProvider {
@@ -67,10 +69,18 @@ class AuthProvider {
   Future<dynamic> changePassword(
       String email, String code, String password) async {
     String url = '${YRService.END_POINT}${YRService.PATH_FORGET_CHANGE}';
-    var body={'email':email,'forgotCode':code,'password':password};
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body).toString());
+    var body = {'email': email, 'forgotCode': code, 'password': password};
+    String raw = await client.post(
+        url, YRService.DEFAULT_HEADER, jsonEncode(body).toString());
     var result = new ChangePasswordParser().parse(raw);
+    return result;
+  }
+
+  Future<dynamic> upload(File file) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_UPLOAD_IMAGE}';
+    String raw = await client.uploadFile(url,file);
+    var result = new UpLoadImageParser().parse(raw);
+    print("MY RESULST $result");
     return result;
   }
 }
@@ -108,5 +118,13 @@ class ChangePasswordParser {
     Map<String, dynamic> map = jsonDecode(raw);
     return ChangePasswordEntity(
         status: map['status'], email: map['email'], role: map['role']);
+  }
+}
+
+class UpLoadImageParser extends BaseParser<UploadEntity> {
+
+  @override
+  UploadEntity parseInfo(Map<String, dynamic> raw) {
+    return UploadEntity.fromMap(raw);
   }
 }
