@@ -83,7 +83,6 @@ class _SBTextFieldState extends State<YRTextField> {
 
               ),
               onChanged: (value) {
-                print(_obscureText);
                 widget.onTextChanged(value);
               },
             )

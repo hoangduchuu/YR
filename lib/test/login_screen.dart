@@ -143,9 +143,8 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.end,
                       ),
-                      onPressed: () => {
-                            //_showForgotPassSentDialog()
-                          },
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, "/forgotpass")},
                     ),
                   ],
                 ),

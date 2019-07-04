@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:your_reward_user/screen/forgotpass/change_passs_screen.dart';
 import 'package:your_reward_user/screen/membership/detail/card_store_detail_screen.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/screen/account_info/account_information_screen.dart';
@@ -7,7 +8,7 @@ import 'package:your_reward_user/test/api_test_screen.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/test/error_screen.dart';
 import 'package:your_reward_user/test/facebook_login.dart';
-import 'package:your_reward_user/test/forgotpass_screen.dart';
+import 'package:your_reward_user/screen/forgotpass/forgotpass_screen.dart';
 import 'package:your_reward_user/test/home_screen.dart';
 import 'package:your_reward_user/test/login_screen.dart';
 import 'package:your_reward_user/test/main_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       '/test': (BuildContext context) => TestScreen(),
       '/login': (BuildContext context) => LoginScreen(),
       '/signup': (BuildContext context) => SignUpScreen(),
-      '/forgotpass': (BuildContext context) => ForgotPassScreen(),
+      '/forgotpass': (BuildContext context) => ForgotPassRequestScreen(),
       '/home': (BuildContext context) => HomeScreen(),
       '/carddetail': (BuildContext context) => MemberShipStoreDetailScreen(),
       '/restaurantdetail': (BuildContext context) => RestaurantDetailScreen(),

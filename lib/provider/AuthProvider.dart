@@ -8,6 +8,8 @@ import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
+import 'package:your_reward_user/entity/change_pass_entity.dart';
+import 'package:your_reward_user/entity/forgot_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 
 class AuthProvider {
@@ -44,12 +46,31 @@ class AuthProvider {
     var result = new LoginResponseParser().parse(raw);
     return result;
   }
+
   Future<dynamic> getUserInfo(String userId, String token) async {
     String url = '${YRService.END_POINT}${YRService.PATH_REGSITER}/$userId';
     Map<String, String> params = new Map();
-    String raw =
-        await client.get(url,YRService.inputToken(token),params );
+    String raw = await client.get(url, YRService.inputToken(token), params);
     var result = new GetUserInfoParser().parse(raw);
+    return result;
+  }
+
+  Future<dynamic> requestChangePasswordCode(String email) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_FORGET_REQUEST}';
+    var body = {"email": email};
+    String raw =
+        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    var result = new RequestPasswordParser().parse(raw);
+    return result;
+  }
+
+  Future<dynamic> changePassword(
+      String email, String code, String password) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_FORGET_CHANGE}';
+    var body={'email':email,'forgotCode':code,'password':password};
+    String raw =
+        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body).toString());
+    var result = new ChangePasswordParser().parse(raw);
     return result;
   }
 }
@@ -68,10 +89,24 @@ class LoginResponseParser extends BaseParser<LoginEntity> {
   }
 }
 
-class GetUserInfoParser extends BaseParser<UserEntity>{
+class GetUserInfoParser extends BaseParser<UserEntity> {
   @override
-  UserEntity parseInfo(Map<String, dynamic > raw) {
+  UserEntity parseInfo(Map<String, dynamic> raw) {
     return UserEntity.fromJson(raw);
   }
+}
 
+class RequestPasswordParser {
+  ForgotEntity parse(String raw) {
+    Map<String, dynamic> map = jsonDecode(raw);
+    return ForgotEntity(forgotCode: map['forgotCode'], status: map['status']);
+  }
+}
+
+class ChangePasswordParser {
+  ChangePasswordEntity parse(String raw) {
+    Map<String, dynamic> map = jsonDecode(raw);
+    return ChangePasswordEntity(
+        status: map['status'], email: map['email'], role: map['role']);
+  }
 }
