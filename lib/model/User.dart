@@ -26,9 +26,10 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.id = entity.id;
     model.phone = entity.phone;
     model.adress = entity.address;
+    model.email = entity.email;
     model.fullName = entity.fullname;
     model.createAt = entity.createdAt.toString();
-    model.avatar = "${YRService.END_POINT}/load/${entity.thumbnail}";
+    model.avatar = entity.thumbnail.contains("http")? entity.thumbnail:"${YRService.END_POINT}/load/${entity.thumbnail}";
     return model;
   }
 

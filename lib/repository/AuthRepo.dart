@@ -8,8 +8,10 @@ import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
+import 'package:your_reward_user/entity/user_update_request_entity.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/provider/AuthProvider.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
@@ -35,8 +37,7 @@ class AuthRepo {
         } else {
           SharedPrefRepo.saveToken(result.accessToken);
           SharedPrefRepo.saveUserId(result.user.id);
-          DataProvider.provideData(
-              UserMapper().mapFrom(result.user), result.accessToken);
+          DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
           return Pair(STATE.SUCCESS, DataProvider.user);
         }
       }
@@ -93,32 +94,55 @@ class AuthRepo {
 
   Future<bool> requestChangeEmail(String email) async {
     try {
-      ForgotEntity result =
-          await _authProvider.requestChangePasswordCode(email);
+      ForgotEntity result = await _authProvider.requestChangePasswordCode(email);
       return result.status;
     } catch (error) {
       return false;
     }
   }
 
-  Future<bool> changePassword(
-      String code, String email, String password) async {
+  Future<bool> changePassword(String code, String email, String password) async {
     try {
-      ChangePasswordEntity result =
-          await _authProvider.changePassword(email, code, password);
+      ChangePasswordEntity result = await _authProvider.changePassword(email, code, password);
       return result.status;
     } catch (error) {
       return false;
     }
   }
 
-  Future<Pair<bool, String>> upload(File file) async {
+  Future<Pair<bool, String>> upload(String userId, File file) async {
     try {
-      UploadEntity result = await _authProvider.upload(file);
-      if (result.image != null) {
-        return Pair(true, '${result.image.path} ${result.image.filename}',
-            erroMsg: null);
+      UploadEntity uploadTask = await _authProvider.upload(file);
+      var updateResult = await _authProvider.updateAvatar(userId, uploadTask.image.path);
+      if (updateResult is ErrorEntity) {
+        return Pair(false, null, erroMsg: updateResult.message);
       }
+
+      if (updateResult != null && updateResult is UpdateProfileEntity) {
+        return Pair(true, '${uploadTask.image.path} ${uploadTask.image.filename}', erroMsg: null);
+      }
+    } catch (error) {
+      return Pair(false, null, erroMsg: error.toString());
+    }
+  }
+
+  Future<Pair<bool, String>> updateProfile(String userId, User user) async {
+
+    UserRequest userRequest = UserRequest();
+    userRequest.phone = user.phone;
+    userRequest.fullname = user.fullName;
+    userRequest.email = user.email;
+
+    try {
+      var result = await _authProvider.updateProfile(userId, userRequest);
+      if (result is ErrorEntity) {
+        return Pair(false, null, erroMsg: result.message);
+      }
+
+      if (result != null && result is UpdateProfileEntity) {
+        return Pair(true, "", erroMsg: "NO");
+      }
+      ;
     } catch (error) {
       return Pair(false, null, erroMsg: error.toString());
     }

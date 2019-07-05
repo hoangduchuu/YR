@@ -11,8 +11,10 @@ import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
+import 'package:your_reward_user/entity/user_update_request_entity.dart';
 
 class AuthProvider {
   MyHttpClient client;
@@ -78,9 +80,29 @@ class AuthProvider {
 
   Future<dynamic> upload(File file) async {
     String url = '${YRService.END_POINT}${YRService.PATH_UPLOAD_IMAGE}';
-    String raw = await client.uploadFile(url,file);
+    String raw = await client.uploadFile(url, file);
     var result = new UpLoadImageParser().parse(raw);
-    print("MY RESULST $result");
+    return result;
+  }
+
+  //login
+  Future<dynamic> updateAvatar(String userId, String imageUrl) async {
+    var body = {'thumbnail': imageUrl};
+    String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
+    String raw = await client.patch(
+        url, YRService.generateHeadersWithToken(), jsonEncode(body));
+    var result = new UpdateProfileParser().parse(raw);
+    return result;
+  }
+
+
+  //update profile
+  Future<dynamic> updateProfile(String userId,UserRequest requestBody) async {
+    var body = {"email": requestBody.email,"phone": requestBody.phone,"fullname":requestBody.fullname};
+    String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
+    String raw = await client.patch(
+        url, YRService.generateHeadersWithToken(), jsonEncode(body));
+    var result = new UpdateProfileParser().parse(raw);
     return result;
   }
 }
@@ -122,9 +144,15 @@ class ChangePasswordParser {
 }
 
 class UpLoadImageParser extends BaseParser<UploadEntity> {
-
   @override
   UploadEntity parseInfo(Map<String, dynamic> raw) {
     return UploadEntity.fromMap(raw);
+  }
+}
+
+class UpdateProfileParser extends BaseParser<UpdateProfileEntity> {
+  @override
+  UpdateProfileEntity parseInfo(Map<String, dynamic> raw) {
+    return UpdateProfileEntity.fromMap(raw);
   }
 }

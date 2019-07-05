@@ -33,6 +33,12 @@ class MyHttpClient {
     return response.body;
   }
 
+  Future<String> patch(
+      String url, Map<String, String> header, String jsonBody) async {
+    var response = await http.patch(url, headers: header, body:jsonBody);
+    return response.body;
+  }
+
   //post unauthorized with json data
   // https://stackoverflow.com/questions/52276158/file-is-not-a-subtype-of-type-string-in-type-cast
   Future<String> uploadFile(String url, File file) async {
