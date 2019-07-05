@@ -23,7 +23,7 @@ class AuthProvider {
 
   //register
   Future<dynamic> register(RegisterRequest body) async {
-    String url = '${YRService.END_POINT}${YRService.PATH_REGSITER}';
+    String url = '${YRService.END_POINT}${YRService.PATH_USERS}';
     String raw =
         await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
     var result = new RegisterRespParser().parse(raw);
@@ -50,7 +50,7 @@ class AuthProvider {
   }
 
   Future<dynamic> getUserInfo(String userId, String token) async {
-    String url = '${YRService.END_POINT}${YRService.PATH_REGSITER}/$userId';
+    String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
     Map<String, String> params = new Map();
     String raw = await client.get(url, YRService.inputToken(token), params);
     var result = new GetUserInfoParser().parse(raw);

@@ -28,7 +28,7 @@ static String myToken = DataProvider.userToken;
 
   static String END_POINT = 'http://206.189.149.115:3030';
   //authentication
-  static String PATH_REGSITER = '/users';
+  static String PATH_USERS = '/users';
   static String PATH_LOGIN = '/authentication';
   static String PATH_LOGIN_FACEBOOK = '/facebook/auth';
   static String PATH_FORGET_REQUEST = '/forgot-request';
