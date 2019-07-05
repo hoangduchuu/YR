@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-
 
 class MemberCard extends StatefulWidget {
   final String memberName;
@@ -60,10 +60,15 @@ class _MemberCardState extends State<MemberCard> {
                         color: Colors.white30,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        FontAwesomeIcons.userAstronaut,
-                        color: Colors.white,
-                        size: 30,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            borderRadius: new BorderRadius.circular(50),
+                            image: DecorationImage(
+                                image: NetworkImage(DataProvider.user.avatar),
+                                fit: BoxFit.cover)),
                       ),
                     ),
                     Container(
@@ -72,7 +77,10 @@ class _MemberCardState extends State<MemberCard> {
                       child: Text(
                         widget.memberName,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: Hfonts.PrimaryFontBold),
                       ),
                     )
                   ],
@@ -91,8 +99,10 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Điểm tích lũy',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -102,7 +112,8 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -116,8 +127,10 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Ngày tham gia',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -127,7 +140,8 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -141,8 +155,10 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Lần tích điểm',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white,fontFamily: Hfonts.PrimaryFontRegular),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -152,7 +168,8 @@ class _MemberCardState extends State<MemberCard> {
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold,fontFamily: Hfonts.PrimaryFontBold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: Hfonts.PrimaryFontBold),
                             ),
                           ],
                         ),
@@ -186,11 +203,17 @@ class _MemberCardState extends State<MemberCard> {
                 widget.isVIP == true
                     ? Text(
                         'VIP',
-                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: Hfonts.PrimaryFontBold),
                       )
                     : Text(
                         'Member',
-                        style: TextStyle(color: Colors.white, fontSize: 16,fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: Hfonts.PrimaryFontBold),
                       ),
               ],
             ),

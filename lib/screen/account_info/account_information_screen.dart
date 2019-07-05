@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/account_info/profile_bloc.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
@@ -117,8 +119,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen>
                       decoration: BoxDecoration(
                           borderRadius: new BorderRadius.circular(50),
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://images.unsplash.com/photo-1558208846-f197910b7707?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80'),
+                              image: NetworkImage(DataProvider.user.avatar),
                               fit: BoxFit.cover)),
                     ),
                   ],

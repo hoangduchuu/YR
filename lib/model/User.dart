@@ -1,3 +1,4 @@
+import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
@@ -10,6 +11,7 @@ class User {
   String adress;
   String email;
   String createAt;
+  String avatar;
 
   @override
   String toString() {
@@ -26,6 +28,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.adress = entity.address;
     model.fullName = entity.fullname;
     model.createAt = entity.createdAt.toString();
+    model.avatar = "${YRService.END_POINT}/load/${entity.thumbnail}";
     return model;
   }
 
