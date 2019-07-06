@@ -23,9 +23,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   void showLoading2(BuildContext context) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+//    Scaffold.of(context)
+//      ..hideCurrentSnackBar()
+//      ..showSnackBar(SnackBar(content: Text('Đang tải...')));
     if (_progressBar == null) {
       _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);
     }
