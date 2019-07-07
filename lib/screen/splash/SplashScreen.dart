@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
       },
       child: Container(
         color: Colors.white,
-        child: Image.asset('assets/images/ic_launcher.png')
+        child: Image.asset('assets/images/ic_launcher.png', width: 64.0, height: 64.0)
       )
     );
   }
