@@ -4,6 +4,7 @@ import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'bar_code.dart';
+import 'hooray_barcode.dart';
 import 'member_card.dart';
 
 class EmptyCardScreen extends StatelessWidget {
@@ -35,8 +36,8 @@ class EmptyCardScreen extends StatelessWidget {
               memberPoint: 0,
               startDate: CommonUtils.getDateFormat(user.createAt),
               times: 0),
-          BarCode(
-            value: user.phone,
+          HoorayBarCode(
+            content: user.phone.toString(),
           )
         ],
       ),

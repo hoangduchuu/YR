@@ -11,6 +11,7 @@ import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_scre
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
+import 'package:your_reward_user/widget/hooray_barcode.dart';
 import 'package:your_reward_user/widget/member_card.dart';
 import 'package:your_reward_user/widget/restaurant_item.dart';
 import 'package:your_reward_user/widget/voucher.dart';
@@ -23,15 +24,12 @@ class MemberShipStoreDetailScreen extends StatefulWidget {
   final MembershipCard memberCard;
 
   @override
-  _MemberShipStoreDetailScreenState createState() =>
-      _MemberShipStoreDetailScreenState();
+  _MemberShipStoreDetailScreenState createState() => _MemberShipStoreDetailScreenState();
 
-  MemberShipStoreDetailScreen({Key key, @required this.memberCard})
-      : super(key: key);
+  MemberShipStoreDetailScreen({Key key, @required this.memberCard}) : super(key: key);
 }
 
-class _MemberShipStoreDetailScreenState
-    extends BaseState<MemberShipStoreDetailScreen> {
+class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailScreen> {
   ScrollController _scrollController = new ScrollController();
   MemberShipDetailBloc _bloc;
   List<Store> _stores;
@@ -42,8 +40,7 @@ class _MemberShipStoreDetailScreenState
     super.initState();
     this._bloc = MemberShipDetailBloc();
     _bloc.dispatch(GetMemberShipDetailEvent(widget.memberCard.ownerId));
-    _bloc.dispatch(
-        GetVoucherEvent(DataProvider.user.id, widget.memberCard.ownerId));
+    _bloc.dispatch(GetVoucherEvent(DataProvider.user.id, widget.memberCard.ownerId));
   }
 
   @override
@@ -86,14 +83,13 @@ class _MemberShipStoreDetailScreenState
           MemberCard(
               memberName: widget.memberCard.fullName,
               memberPoint: widget.memberCard.points,
-              startDate: CommonUtils.getDateFormat(
-                  widget.memberCard.createdAt.toString()),
+              startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
               times: widget.memberCard.accumulationPoints),
           SizedBox(
             height: 10,
           ),
-          BarCode(
-            value: DataProvider.user.phone,
+          HoorayBarCode(
+            content: DataProvider.user.phone.toString(),
           ),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
@@ -101,16 +97,11 @@ class _MemberShipStoreDetailScreenState
                 padding: EdgeInsets.only(bottom: 6),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.black12, width: 1)),
+                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
                 child: Text(
                   'Cửa hàng',
-                  style: TextStyle(
-                      color: HColors.ColorSecondPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
+                  style: TextStyle(color: HColors.ColorSecondPrimary, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
           Container(height: 250, child: _buildListStore(_stores)),
@@ -120,16 +111,11 @@ class _MemberShipStoreDetailScreenState
                 padding: EdgeInsets.only(bottom: 6),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.black12, width: 1)),
+                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
                 child: Text(
                   'Voucher',
-                  style: TextStyle(
-                      color: HColors.ColorSecondPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
+                  style: TextStyle(color: HColors.ColorSecondPrimary, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
           Container(height: 250, child: _buildListVouchers(_coupons)),
@@ -155,11 +141,7 @@ class _MemberShipStoreDetailScreenState
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              RestaurantDetailScreen(store: stores[index])));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
                 },
               ),
             ],

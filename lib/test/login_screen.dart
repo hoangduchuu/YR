@@ -153,7 +153,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
                   text: Text(
-                    'Đăng nhập abc def',
+                    'Đăng nhập',
                     style: TextStyle(
                         fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
