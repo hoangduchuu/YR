@@ -71,17 +71,17 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FBSDKCoreKit: ba361d4a9d4dc29ff218822b849b22d4f869c7bb
   FBSDKLoginKit: c6d0dc187bd076e370dffa10f7fc8a3562a6892c
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  flutter_facebook_login: 78427c3bb173844e3204fb717a0e2d94a28905ef
-  google_maps_flutter: 6449d5918d3f1a69a37dc9c557bbad7bb9bcf0e9
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_facebook_login: 8963f768786618d674fcb41f5eb648a09cddca47
+  google_maps_flutter: 924970f41ec509a201b593548db005efb2a09ee9
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  image_cropper: e0a40e80b2107490926d0f15e3b42f44867c15b4
-  image_picker: 86b84c4fe89267356a1f17297a45b5d317ebd2e7
-  permission_handler: a1b8c0f8c83b4e7201f9c04b9aef09979cc97f60
-  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+  image_cropper: f25bdfbf1ef970c9a0a0f78306fb6a0aaac7229e
+  image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
+  permission_handler: fa6b0d784b1a43cb96b468a5b8365cb130b1956a
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   TOCropViewController: d86078d3a57a70c116bf3db7c89c80046a0e5fdf
-  url_launcher: 92b89c1029a0373879933c21642958c874539095
+  url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
