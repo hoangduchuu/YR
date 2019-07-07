@@ -41,12 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Your Reward"),
-      ),
-      body: _buildBody(),
-    );
+    return _buildBody();
   }
 
   _buildBody() {
@@ -60,36 +55,10 @@ class _SplashScreenState extends State<SplashScreen> {
           gotoLoginScreen();
         }
       },
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              image: DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.9), BlendMode.dstATop),
-                image: AssetImage('assets/images/bg1.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: Text(
-                "Your Reward", // FIXME  use from api =>  item.ownerName;
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
+      child: Container(
+        color: Colors.white,
+        child: Image.asset('assets/images/ic_launcher.png')
+      )
     );
   }
 

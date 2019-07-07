@@ -12,6 +12,7 @@ import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/test/login_screen.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
@@ -246,7 +247,11 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                     CommonButton(
                       onPressed: () {
                         SharedPrefRepo.clearAll();
-                        Navigator.pushReplacement(parentContext, MaterialPageRoute(builder: (context) => SplashScreen()));
+                        //Navigator.pushReplacement(parentContext, MaterialPageRoute(builder: (context) => SplashScreen()));
+                        Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+                                (Route<dynamic> route) => false
+                        );
                       },
                       backgroundColor: HColors.red,
                       textColor: HColors.white,
