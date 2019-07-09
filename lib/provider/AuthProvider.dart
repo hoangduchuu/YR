@@ -10,6 +10,7 @@ import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
+import 'package:your_reward_user/entity/find_email_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
 import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
@@ -95,14 +96,26 @@ class AuthProvider {
     return result;
   }
 
-
   //update profile
-  Future<dynamic> updateProfile(String userId,UserRequest requestBody) async {
-    var body = {"email": requestBody.email,"phone": requestBody.phone,"fullname":requestBody.fullname};
+  Future<dynamic> updateProfile(String userId, UserRequest requestBody) async {
+    var body = {
+      "email": requestBody.email,
+      "phone": requestBody.phone,
+      "fullname": requestBody.fullname
+    };
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
     String raw = await client.patch(
         url, YRService.generateHeadersWithToken(), jsonEncode(body));
     var result = new UpdateProfileParser().parse(raw);
+    return result;
+  }
+
+  Future<dynamic> findEmailByPhone(String phone) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_CHECK_EMAIL}';
+    var body = {"phone": phone};
+    String raw =
+        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    var result = FindEmailParser().parse(raw);
     return result;
   }
 }
@@ -154,5 +167,15 @@ class UpdateProfileParser extends BaseParser<UpdateProfileEntity> {
   @override
   UpdateProfileEntity parseInfo(Map<String, dynamic> raw) {
     return UpdateProfileEntity.fromMap(raw);
+  }
+}
+
+class FindEmailParser {
+  dynamic parse(String raw) {
+    if (raw == "{}" || raw.length <4 || raw.contains('"status":false')) {
+      return FindEmailNotFoundEntity();
+    } else {
+    }
+    return FindEmailEntity.fromJson(raw);
   }
 }

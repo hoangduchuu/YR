@@ -11,7 +11,14 @@ class User {
   String adress;
   String email;
   String createAt;
-  String avatar;
+  String _avatar;
+
+
+  String get avatar => this._avatar;
+
+  set avatar(String value) {
+    this._avatar = '${YRService.END_POINT}/$value';
+  }
 
   @override
   String toString() {
@@ -29,7 +36,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.email = entity.email;
     model.fullName = entity.fullname;
     model.createAt = entity.createdAt.toString();
-    model.avatar = entity.thumbnail.contains("http")? entity.thumbnail:"${YRService.END_POINT}/load/${entity.thumbnail}";
+    model.avatar = entity.thumbnail;
     return model;
   }
 

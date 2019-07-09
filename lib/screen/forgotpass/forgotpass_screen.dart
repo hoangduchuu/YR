@@ -58,17 +58,17 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> {
       listener: (context, state) {
         if (state is RequestPassState) {
           if (!state.emailValid) {
-            super.showError2(state.errMsg, context);
+            super.showErrorWithContext(state.errMsg, context);
           }
           if (state.isLoading) {
-            super.showLoading2(context);
+            super.showLoadingWithContext(context);
           }
           if (state.isError) {
-            super.showError2(state.errMsg, context);
-            super.hideLoading2(context);
+            super.showErrorWithContext(state.errMsg, context);
+            super.hideLoadingWithContext(context);
           }
           if (state.success) {
-            super.hideLoading2(context);
+            super.hideLoadingWithContext(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(

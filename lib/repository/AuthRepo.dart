@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
@@ -7,6 +8,7 @@ import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
+import 'package:your_reward_user/entity/find_email_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
 import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
@@ -25,7 +27,7 @@ class AuthRepo {
   AuthProvider _authProvider = injector<AuthProvider>();
 
   // request and mapping from entity to model
-  Future<Pair<STATE, User>> login(String email, String password) async {
+  Future<Pair<STATE, User>> loginByEmail(String email, String password) async {
     try {
       var result = await _authProvider.login(email, password);
       if (result is ErrorEntity && result.code != null) {
@@ -37,8 +39,39 @@ class AuthRepo {
         } else {
           SharedPrefRepo.saveToken(result.accessToken);
           SharedPrefRepo.saveUserId(result.user.id);
-          DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
+          DataProvider.provideData(
+              UserMapper().mapFrom(result.user), result.accessToken);
           return Pair(STATE.SUCCESS, DataProvider.user);
+        }
+      }
+    } catch (e) {
+      return Pair(STATE.ERROR, null, erroMsg: e.toString());
+    }
+  }
+
+  Future<Pair<STATE, User>> loginByPhone(String phone, String password) async {
+    try {
+      var emailResponse = await _authProvider.findEmailByPhone(phone);
+
+      if (emailResponse is FindEmailNotFoundEntity) {
+        return Pair(STATE.ERROR, null,
+            erroMsg: "Không tìm thấy số điện thoại trên hệ thống");
+      } else if (emailResponse is FindEmailEntity) {
+        var result = await _authProvider.login(emailResponse.email, password);
+
+        if (result is ErrorEntity && result.code != null) {
+          return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
+        }
+        if (result is LoginEntity) {
+          if (result.accessToken == null || result.accessToken.isEmpty) {
+            return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
+          } else {
+            SharedPrefRepo.saveToken(result.accessToken);
+            SharedPrefRepo.saveUserId(result.user.id);
+            DataProvider.provideData(
+                UserMapper().mapFrom(result.user), result.accessToken);
+            return Pair(STATE.SUCCESS, DataProvider.user);
+          }
         }
       }
     } catch (e) {
@@ -94,16 +127,19 @@ class AuthRepo {
 
   Future<bool> requestChangeEmail(String email) async {
     try {
-      ForgotEntity result = await _authProvider.requestChangePasswordCode(email);
+      ForgotEntity result =
+          await _authProvider.requestChangePasswordCode(email);
       return result.status;
     } catch (error) {
       return false;
     }
   }
 
-  Future<bool> changePassword(String code, String email, String password) async {
+  Future<bool> changePassword(
+      String code, String email, String password) async {
     try {
-      ChangePasswordEntity result = await _authProvider.changePassword(email, code, password);
+      ChangePasswordEntity result =
+          await _authProvider.changePassword(email, code, password);
       return result.status;
     } catch (error) {
       return false;
@@ -113,13 +149,16 @@ class AuthRepo {
   Future<Pair<bool, String>> upload(String userId, File file) async {
     try {
       UploadEntity uploadTask = await _authProvider.upload(file);
-      var updateResult = await _authProvider.updateAvatar(userId, uploadTask.image.path);
+      var updateResult =
+          await _authProvider.updateAvatar(userId, 'load/file/${uploadTask.image.filename}');
       if (updateResult is ErrorEntity) {
         return Pair(false, null, erroMsg: updateResult.message);
       }
 
       if (updateResult != null && updateResult is UpdateProfileEntity) {
-        return Pair(true, '${uploadTask.image.path} ${uploadTask.image.filename}', erroMsg: null);
+        return Pair(
+            true, 'load/file/${uploadTask.image.filename}',
+            erroMsg: null);
       }
     } catch (error) {
       return Pair(false, null, erroMsg: error.toString());
@@ -127,7 +166,6 @@ class AuthRepo {
   }
 
   Future<Pair<bool, String>> updateProfile(String userId, User user) async {
-
     UserRequest userRequest = UserRequest();
     userRequest.phone = user.phone;
     userRequest.fullname = user.fullName;

@@ -53,18 +53,18 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
             super.showError(state.errMsg);
           }
           if (state.isLoading) {
-            super.showLoading2(context);
+            super.showLoadingWithContext(context);
           } else {
-            super.hideLoading2(context);
+            super.hideLoadingWithContext(context);
           }
         } else if (state is OngetMemberShipDetailSuccessState) {
-          super.hideLoading2(context);
+          super.hideLoadingWithContext(context);
           setState(() {
             _stores = state.stores;
           });
         }
         if (state is OngetGetCouponSuccessState) {
-          super.hideLoading2(context);
+          super.hideLoadingWithContext(context);
           setState(() {
             _coupons = state.coupons;
           });

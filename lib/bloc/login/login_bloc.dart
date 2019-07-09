@@ -13,7 +13,6 @@ import '../../core/injector.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   AuthRepo authRepo = injector<AuthRepo>();
 
-
   @override
   LoginState get initialState => LoggedInState.empty();
 
@@ -28,25 +27,58 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Stream<LoginState> _handleLoginState(String email, String password) async* {
-    if (!AuthUtils.validateEmailValid(email)) {
-      yield LoggedInState.invalidEmail();
-      return;
+  Stream<LoginState> _handleLoginState(String input, String password) async* {
+    // login with email
+    if (AuthUtils.mayEmail(input)) {
+      yield* _handleLoginWithEmail(input, password);
+    } else {
+      //login with mobile
+      yield* _handleLoginWithMobile(input, password);
     }
-    if (!AuthUtils.validatePasswordValid(password)) {
-      yield LoggedInState.invalidPassword();
-      return;
-    }
-    yield LoggedInState.submitting();
-    try {
-      Pair<STATE, User> result = await authRepo.login(email, password);
-      if (result.left == STATE.SUCCESS) {
-        yield LoggedInState.success(result.right);
-      } else {
-        yield LoggedInState.failed(result.erroMsg);
+
+  }
+
+  Stream<LoginState> _handleLoginWithEmail(String input, String password) async*{
+    if (!AuthUtils.validateEmailValid(input)) {
+      yield LoggedInState.invalidInput(
+          "Vui lòng nhập đúng định dạng Email hoặc Số điện thoại");
+    } else if (!AuthUtils.validatePasswordValid(password)) {
+      yield LoggedInState.invalidInput("Vui lòng nhập password hợp lệ");
+    } else {
+      yield LoggedInState.submitting();
+      try {
+        Pair<STATE, User> result =
+            await authRepo.loginByEmail(input, password);
+        if (result.left == STATE.SUCCESS) {
+          yield LoggedInState.success(result.right);
+        } else {
+          yield LoggedInState.failed(result.erroMsg);
+        }
+      } catch (e) {
+        yield LoggedInState.failed(e.erroMsg);
       }
-    } catch (e) {
-      yield LoggedInState.failed(e.erroMsg);
+    }
+  }
+
+  Stream<LoginState> _handleLoginWithMobile(String input, String password) async*{
+    if (!AuthUtils.validateMobile(input)) {
+      yield LoggedInState.invalidInput(
+          "Vui lòng nhập đúng định dạng Email hoặc Số điện thoại");
+    } else if (!AuthUtils.validatePasswordValid(password)) {
+      yield LoggedInState.invalidInput("Vui lòng nhập password hợp lệ");
+    } else {
+      yield LoggedInState.submitting();
+      try {
+        Pair<STATE, User> result =
+        await authRepo.loginByPhone(input, password);
+        if (result.left == STATE.SUCCESS) {
+          yield LoggedInState.success(result.right);
+        } else {
+          yield LoggedInState.failed(result.erroMsg);
+        }
+      } catch (e) {
+        yield LoggedInState.failed(e.erroMsg);
+      }
     }
   }
 }

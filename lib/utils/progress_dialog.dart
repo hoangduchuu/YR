@@ -7,11 +7,10 @@ enum ProgressDialogType { Normal, Download }
 ProgressDialogType _progressDialogType = ProgressDialogType.Normal;
 double _progress = 0.0;
 
-bool _isShowing = false;
 
 class ProgressDialog {
   _MyDialog _dialog;
-
+  bool _isShowing = false;
   BuildContext _buildContext, _context;
 
   ProgressDialog(
@@ -85,7 +84,7 @@ class _MyDialogState extends State<_MyDialog> {
   @override
   void dispose() {
     super.dispose();
-    _isShowing = false;
+    //_isShowing = false;
   }
 
   @override
