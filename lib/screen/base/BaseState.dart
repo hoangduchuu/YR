@@ -12,41 +12,34 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
   }
 
-  void showError2(String msg, BuildContext context) {
+  void showErrorWithContext(String msg, BuildContext context) {
     Scaffold.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
           SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
-    if (_progressBar != null && _progressBar.isShowing()) {
-      _progressBar.hide(context);
-    }
   }
 
-  void showLoading2(BuildContext context) {
-//    Scaffold.of(context)
-//      ..hideCurrentSnackBar()
-//      ..showSnackBar(SnackBar(content: Text('Đang tải...')));
+  void showLoading() {
+    if (_progressBar == null) {
+      _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);
+    }
+    _progressBar.show(context);
+  }
+  
+  void showLoadingWithContext(BuildContext context) {
     if (_progressBar == null) {
       _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);
     }
     _progressBar.show(context);
   }
 
-  void showLoading() {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('Đang tải...')));
-  }
-
   void hideLoading() {
-    Scaffold.of(context)..hideCurrentSnackBar();
     if (_progressBar != null && _progressBar.isShowing()) {
       _progressBar.hide(context);
     }
   }
 
-  void hideLoading2(BuildContext context) {
-    Scaffold.of(context)..hideCurrentSnackBar();
+  void hideLoadingWithContext(BuildContext context) {
     if (_progressBar != null && _progressBar.isShowing()) {
       _progressBar.hide(context);
     }

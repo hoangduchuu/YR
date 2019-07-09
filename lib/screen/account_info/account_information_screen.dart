@@ -31,6 +31,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   ImagePickerHandler imagePicker;
   ProfileBloc _profileBloc;
   String _name, _email, _phone;
+  String _avatarUrl = DataProvider.user.avatar;
   TextEditingController _userTextController, _emailTextController, _phoneTextController;
 
   @override
@@ -84,28 +85,31 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
         listener: (context, state) {
           if (state is UploadState) {
             if (state.loading) {
-              super.showLoading2(context);
+              super.showLoadingWithContext(context);
             }
             if (state.success) {
               print("Uplaod success ${state.uploadedUrl}");
-              super.hideLoading2(context);
+              setState(() {
+                DataProvider.user.avatar = state.uploadedUrl;
+              });
+              super.hideLoadingWithContext(context);
             }
             if (state.error) {
-              super.showError2(state.errorMessage, context);
-              super.hideLoading2(context);
+              super.showErrorWithContext(state.errorMessage, context);
+              super.hideLoadingWithContext(context);
             }
           }
           if (state is UpdateState) {
             if (state.loading) {
-              super.showLoading2(context);
+              super.showLoadingWithContext(context);
             }
             if (state.success) {
-              super.hideLoading2(context);
+              super.hideLoadingWithContext(context);
               showSuccessMessage("Thay đổi thông tin thành công", context);
             }
             if (state.error) {
-              super.showError2(state.errorMessage, context);
-              super.hideLoading2(context);
+              super.showErrorWithContext(state.errorMessage, context);
+              super.hideLoadingWithContext(context);
             }
           }
         },
@@ -177,7 +181,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                           decoration: BoxDecoration(
                               borderRadius: new BorderRadius.circular(50),
                               image: DecorationImage(
-                                  image: NetworkImage("https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"),
+                                  image: NetworkImage(DataProvider.user.avatar),
                                   fit: BoxFit.cover)),
                         ),
                       ],

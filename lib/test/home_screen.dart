@@ -30,6 +30,7 @@ class _HomeScreenState extends BaseState<HomeScreen> {
   List<MembershipCard> _memberships;
   List<Transaction> _transactions;
   bool isSliderLoaded = false;
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _HomeScreenState extends BaseState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: HColors.white,
         elevation: 0.0,
@@ -56,35 +58,36 @@ class _HomeScreenState extends BaseState<HomeScreen> {
         ],
       ),
       backgroundColor: HColors.white,
-      body: _buildBody(context),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody() {
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
         if (state is GetMemberShipCards) {
           if (state.isError) {
-            super.showError2("${state.errMsg}", context);
+            super.showErrorWithContext("${state.errMsg}", super.context);
           } else if (state.isLoading) {
-            super.showLoading2(context);
+            super.showLoadingWithContext(_scaffoldKey.currentState.context);
           } else {
-            super.hideLoading2(context);
+            super.hideLoadingWithContext(super.context);
           }
           if (state.isEmpty) {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
           }
         } else if (state is GetMembershipCardSuccessState) {
-          super.hideLoading2(context);
+          super.hideLoadingWithContext(_scaffoldKey.currentState.context);
           setState(() {
             isSliderLoaded = true;
             _memberships = state.memberships;
+
           });
         }
         if (state is OnGetTransactionSuccess) {
-          super.hideLoading2(context);
+          super.hideLoadingWithContext(super.context);
           setState(() {
             _transactions = state.transactions;
           });

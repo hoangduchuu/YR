@@ -63,14 +63,14 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> {
       listener: (context, state) {
         if (state is ChangePassState) {
           if (state.isloading) {
-            super.showLoading2(context);
+            super.showLoadingWithContext(context);
           }
           if (!state.isPasswordMatching) {
-            super.showError2(state.errMsg, context);
+            super.showErrorWithContext(state.errMsg, context);
           }
 
           if (state.isError) {
-            super.showError2(state.errMsg, context);
+            super.showErrorWithContext(state.errMsg, context);
           }
           if (state.success) {
             setState(() {
@@ -79,7 +79,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> {
             });
             super.showSuccessMessage(
                 "Thành công, Bạn có thể đăng nhập với mật khẩu mới", context);
-            super.hideLoading2(context);
+            super.hideLoadingWithContext(context);
           }
         }
       },
@@ -183,7 +183,6 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> {
   }
 
   void _handleCLick(BuildContext context) {
-    print("pwd $_newPassword - $_newPassword - $_code");
     if (_backToLogin) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginScreen()));

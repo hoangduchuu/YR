@@ -14,6 +14,10 @@ class AuthUtils {
       return false;
   }
 
+//Check  the input may be email or not
+  static bool mayEmail(String value) {
+    return value.contains("@");
+  }
   //check password!! password length must be 8 digit
   static bool validatePasswordValid(String password) {
     if (password == null || password.isEmpty) {

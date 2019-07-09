@@ -47,32 +47,25 @@ class _LoginScreenState extends BaseState<LoginScreen> {
       bloc: _loginBloc,
       listener: (context, state) {
         if (state is LoggedInState) {
-          if (state.isInvalidEmail && state.isSubmitting == false) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                  SnackBar(content: Text(''), backgroundColor: HColors.red));
-          } else if (state.isInValidPass && state.isSubmitting == false) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('Password không hợp lệ'),
-                  backgroundColor: HColors.red));
-          } else if (state.isSubmitting) {
-            super.showLoading2(context);
-          } else if (state.isSuccess) {
-            print("Login thanh cong");
-            super.hideLoading2(context);
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          } else if (state.isFailure) {
-            super.hideLoading2(context);
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text('${state.errorMsg}'),
-                  backgroundColor: HColors.red));
+          if (state.isInvalidInput) {
+            super.showErrorWithContext(state.errorMsg, super.context);
+            super.hideLoadingWithContext(super.context);
           }
+        }
+        if (state.isSubmitting) {
+          super.showLoadingWithContext(super.context);
+        }
+        if (state.isSuccess) {
+          super.hideLoadingWithContext(super.context);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        } else if (state.isFailure) {
+          super.hideLoadingWithContext(super.context);
+          Scaffold.of(super.context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+                content: Text('${state.errorMsg}'),
+                backgroundColor: HColors.red));
         }
       },
       child: Stack(

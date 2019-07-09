@@ -39,7 +39,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
           super.showSuccessMessage("Đăng ký thành công", context);
         }
         if (state is SignUpErrorState) {
-          super.showError2("${state.errorMessage}", context);
+          super.showErrorWithContext("${state.errorMessage}", context);
         }
         if (state is ResetState) {}
       },

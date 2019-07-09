@@ -10,22 +10,22 @@ abstract class LoginState extends Equatable {
 class InitialLoginState extends LoginState {}
 
 class LoggedInState extends LoginState {
-  final bool isInvalidEmail;
+  final bool isInvalidInput;
   final bool isInValidPass;
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
-  String errorMsg = '';
+  String errorMsg ;
 
   LoggedInState(
-      {this.isInvalidEmail,
+      {this.isInvalidInput,
       this.isInValidPass,
       this.isSubmitting,
       this.isSuccess,
       this.isFailure,
       this.errorMsg})
       : super([
-          isInvalidEmail,
+          isInvalidInput,
           isInValidPass,
           isSubmitting,
           isSuccess,
@@ -33,18 +33,19 @@ class LoggedInState extends LoginState {
           errorMsg
         ]);
 
-  factory LoggedInState.invalidEmail() {
+  factory LoggedInState.invalidInput(String message) {
     return LoggedInState(
-        isInvalidEmail: true,
+        isInvalidInput: true,
         isInValidPass: false,
         isSubmitting: false,
         isSuccess: false,
-        isFailure: false);
+        errorMsg: message,
+        isFailure: true);
   }
 
   factory LoggedInState.invalidPassword() {
     return LoggedInState(
-        isInvalidEmail: false,
+        isInvalidInput: false,
         isInValidPass: true,
         isSubmitting: false,
         isSuccess: false,
@@ -53,8 +54,8 @@ class LoggedInState extends LoginState {
 
   factory LoggedInState.submitting() {
     return LoggedInState(
-        isInvalidEmail: true,
-        isInValidPass: true,
+        isInvalidInput: false,
+        isInValidPass: false,
         isSubmitting: true,
         isSuccess: false,
         isFailure: false);
@@ -62,7 +63,7 @@ class LoggedInState extends LoginState {
 
   factory LoggedInState.success(User user) {
     return LoggedInState(
-        isInvalidEmail: false,
+        isInvalidInput: false,
         isInValidPass: false,
         isSubmitting: false,
         isSuccess: true,
@@ -71,7 +72,7 @@ class LoggedInState extends LoginState {
 
   factory LoggedInState.failed(String msg) {
     return LoggedInState(
-        isInvalidEmail: false,
+        isInvalidInput: false,
         isInValidPass: false,
         isSubmitting: false,
         isSuccess: false,
@@ -81,7 +82,7 @@ class LoggedInState extends LoginState {
 
   factory LoggedInState.empty() {
     return LoggedInState(
-      isInvalidEmail: false,
+      isInvalidInput: false,
       isInValidPass: false,
       isSubmitting: false,
       isSuccess: false,
@@ -91,7 +92,7 @@ class LoggedInState extends LoginState {
 
   @override
   String toString() {
-    return 'LoggedInState{isValidEmail: $isInvalidEmail,'
+    return 'LoggedInState{isValidEmail: $isInvalidInput,'
         ' isValidPass: $isInValidPass,'
         ' isSubmitting: $isSubmitting,'
         ' isSuccess: $isSuccess,'
