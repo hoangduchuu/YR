@@ -23,16 +23,20 @@ import 'profile_event.dart';
 
 class AccountInformationScreen extends StatefulWidget {
   @override
-  _AccountInformationScreenState createState() => _AccountInformationScreenState();
+  _AccountInformationScreenState createState() =>
+      _AccountInformationScreenState();
 }
 
-class _AccountInformationScreenState extends BaseState<AccountInformationScreen> with ImagePickerListener, TickerProviderStateMixin {
+class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
+    with ImagePickerListener, TickerProviderStateMixin {
   AnimationController _controller;
   ImagePickerHandler imagePicker;
   ProfileBloc _profileBloc;
   String _name, _email, _phone;
   String _avatarUrl = DataProvider.user.avatar;
-  TextEditingController _userTextController, _emailTextController, _phoneTextController;
+  TextEditingController _userTextController,
+      _emailTextController,
+      _phoneTextController;
 
   @override
   void initState() {
@@ -121,7 +125,8 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               decoration: BoxDecoration(
                 color: Colors.white,
                 image: DecorationImage(
-                  colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.9), BlendMode.dstATop),
                   image: AssetImage('assets/images/bg1.jpg'),
                   fit: BoxFit.cover,
                 ),
@@ -130,7 +135,8 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                 filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                 child: new Container(
                   //you can change opacity with color here(I used black) for background.
-                  decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+                  decoration:
+                      new BoxDecoration(color: Colors.black.withOpacity(0.2)),
                 ),
               ),
             ),
@@ -239,7 +245,8 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       textColor: HColors.white,
                       text: Text(
                         'Lưu lại thông tin',
-                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                        style: TextStyle(
+                            fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                       ),
                       width: MediaQuery.of(parentContext).size.width * 0.72,
                       buttonPadding: 10,
@@ -250,18 +257,14 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                     ),
                     CommonButton(
                       onPressed: () {
-                        SharedPrefRepo.clearAll();
-                        //Navigator.pushReplacement(parentContext, MaterialPageRoute(builder: (context) => SplashScreen()));
-                        Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-                                (Route<dynamic> route) => false
-                        );
+                        showAlertDialog(context);
                       },
                       backgroundColor: HColors.red,
                       textColor: HColors.white,
                       text: Text(
                         'Đăng xuất',
-                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                        style: TextStyle(
+                            fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                       ),
                       width: MediaQuery.of(parentContext).size.width * 0.72,
                       buttonPadding: 10,
@@ -284,5 +287,45 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
 
     print("SCREEN  $newUserInfo");
     _profileBloc.dispatch(UpdateUserInfo(newUserInfo));
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("Hủy"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("Xác nhận"),
+      onPressed: () {
+        SharedPrefRepo.clearAll();
+        //Navigator.pushReplacement(parentContext, MaterialPageRoute(builder: (context) => SplashScreen()));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+            (Route<dynamic> route) => false);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Xác nhận"),
+      content: Text(
+          "Bạn có muốn đăng xuất?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
