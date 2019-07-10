@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/utils/progress_dialog.dart';
+import 'package:your_reward_user/widget/custom_dialog.dart';
 
 class NotificationManager {
   FirebaseMessaging _firebaseMessaging;
@@ -37,11 +38,7 @@ class NotificationManager {
         print('*("2 register ********* on message $message');
         var title = message['notification']['title'];
         var body = message['notification']['body'];
-        _showDialog(
-          _context,
-          title,
-          body
-        );
+        _showDialog(_context, title, body);
       },
       onResume: (Map<String, dynamic> message) async {
         print(' 2register ********** on resume $message');
@@ -52,10 +49,9 @@ class NotificationManager {
     );
   }
 
-    void unRegister() {
-      print("UN-REGISTER THI LAM GI?");
-    }
-
+  void unRegister() {
+    print("UN-REGISTER THI LAM GI?");
+  }
 
   void iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(
@@ -66,24 +62,15 @@ class NotificationManager {
     });
   }
 
-  void _showDialog(BuildContext context,String title,String body) {
+  void _showDialog(BuildContext context, String title, String body) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text(title),
-          content: new Text(body),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+      builder: (BuildContext context) => CustomDialog(
+        title: title,
+        description:
+            body,
+        buttonText: " Xác nhận",
+      ),
     );
   }
-
 }
