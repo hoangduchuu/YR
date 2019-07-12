@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/Store.dart';
+import 'package:your_reward_user/model/User.dart';
 
 @immutable
 abstract class ProfileState extends Equatable {
@@ -49,8 +50,9 @@ class UpdateState extends ProfileState {
   bool loading = false;
   bool error = false;
   String errorMessage = "";
+  User user;
 
-  UpdateState({this.success, this.loading, this.error, this.errorMessage});
+  UpdateState({this.success, this.loading, this.error, this.errorMessage,this.user});
 
   factory UpdateState.Loading(bool loading) {
     return UpdateState(loading: loading, errorMessage: "", success: false, error: false);
@@ -60,8 +62,8 @@ class UpdateState extends ProfileState {
     return UpdateState(error: true, errorMessage: errorMessage,loading: false,success: false);
   }
 
-  factory UpdateState.Success() {
-    return UpdateState(success: true, loading: false, error: false, errorMessage: "");
+  factory UpdateState.Success(User user) {
+    return UpdateState(success: true, loading: false, error: false, errorMessage: "",user: user);
   }
 
   @override

@@ -110,6 +110,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
             if (state.success) {
               super.hideLoadingWithContext(context);
               showSuccessMessage("Thay đổi thông tin thành công", context);
+              updateChangedData(state.user);
             }
             if (state.error) {
               super.showErrorWithContext(state.errorMessage, context);
@@ -339,5 +340,19 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
         return alert;
       },
     );
+  }
+
+  updateChangedData(User user) {
+    setState(() {
+
+      User mUser = DataProvider.user;
+      mUser.email = user.email;
+      mUser.phone = user.phone;
+      mUser.fullName = user.fullName;
+
+      print("OBJECT USER ${user.toString()}");
+
+      DataProvider.provideData(mUser, DataProvider.userToken);
+    });
   }
 }

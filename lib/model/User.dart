@@ -23,8 +23,10 @@ class User {
 
   @override
   String toString() {
-    return 'USER_model{fullName: $fullName, id: $id, phone: $phone, adress: $adress , Email $email}';
+    return 'User{fullName: $fullName, id: $id, phone: $phone, adress: $adress, email: $email, createAt: $createAt, _avatar: $_avatar, deviceId: $deviceId}';
   }
+
+
 }
 
 class UserMapper extends BaseMapper<User, UserEntity> {

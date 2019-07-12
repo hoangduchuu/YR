@@ -81,7 +81,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
         controller: _scrollController,
         children: <Widget>[
           MemberCard(
-              memberName: widget.memberCard.fullName,
+              memberName: DataProvider.user.fullName,
               memberPoint: widget.memberCard.points,
               startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
               times: widget.memberCard.accumulationPoints),

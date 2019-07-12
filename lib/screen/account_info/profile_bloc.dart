@@ -53,7 +53,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield ResetState();
       var result = await _authRepo.updateProfile(user.id, AuthUtils.buildUser(user));
       if (result.left) {
-        yield UpdateState.Success();
+        yield UpdateState.Success(user);
         yield ResetState();
       } else {
         yield UpdateState.Error(result.erroMsg);
