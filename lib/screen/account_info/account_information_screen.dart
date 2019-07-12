@@ -240,6 +240,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       textController: _phoneTextController,
                       hintText: 'Nhập vào số điện thoại liên lạc',
                       icon: FontAwesomeIcons.phoneSquare,
+                      type: TextInputType.number,
                       onTextChanged: (value) {
                         _phone = value;
                       },

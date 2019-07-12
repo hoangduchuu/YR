@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/widget/bar_code.dart';
+import 'package:your_reward_user/widget/hooray_barcode.dart';
 
 class VoucherDetailScreen extends StatelessWidget {
   Coupon coupon;
@@ -22,23 +23,13 @@ class VoucherDetailScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                FontAwesomeIcons.userCircle,
-                color: HColors.ColorSecondPrimary,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/accountinfo');
-              }),
-        ],
         elevation: 0.0,
       ),
 
       // FIXME : makeup lại
       body: ListView(
         children: <Widget>[
-          BarCode(value: coupon.code),
+          HoorayBarCode(content: coupon.code),
           Container(
             alignment: Alignment.bottomLeft,
             margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
