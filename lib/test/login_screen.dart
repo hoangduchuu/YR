@@ -11,7 +11,7 @@ import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui;
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,10 +24,12 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   String _email = "huu@example.com";
   String _password = "john.doe";
   String _token;
+  FirebaseMessaging _firebaseMessaging;
 
   @override
   void initState() {
     super.initState();
+    _firebaseMessaging = new FirebaseMessaging();
     _loginBloc = LoginBloc();
     SharedPrefRepo.getToken().then((token) {
       _token = token;
@@ -38,35 +40,32 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: _buildBody(context),
+      body: _buildBody(),
     );
   }
 
-  _buildBody(BuildContext context) {
+  _buildBody() {
     return BlocListener(
       bloc: _loginBloc,
       listener: (context, state) {
         if (state is LoggedInState) {
           if (state.isInvalidInput) {
-            super.showErrorWithContext(state.errorMsg, super.context);
-            super.hideLoadingWithContext(super.context);
+            super.showErrorWithContext(state.errorMsg, context);
+            super.hideLoadingWithContext(context);
+          }
+          if (state.isSubmitting) {
+            super.showLoadingWithContext(context);
+          }
+          if (state.isSuccess) {
+            super.hideLoadingWithContext(context);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          } if (state.isFailure) {
+            super.hideLoadingWithContext(context);
+            super.showErrorWithContext("${state.errorMsg}",context);
           }
         }
-        if (state.isSubmitting) {
-          super.showLoadingWithContext(super.context);
-        }
-        if (state.isSuccess) {
-          super.hideLoadingWithContext(super.context);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
-        } else if (state.isFailure) {
-          super.hideLoadingWithContext(super.context);
-          Scaffold.of(super.context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text('${state.errorMsg}'),
-                backgroundColor: HColors.red));
-        }
+
       },
       child: Stack(
         fit: StackFit.expand,
@@ -220,7 +219,16 @@ class _LoginScreenState extends BaseState<LoginScreen> {
     );
   }
 
-  _onSubmitLogin(BuildContext context) {
-    _loginBloc.dispatch(LoginRequest(email: _email, password: _password));
+  _onSubmitLogin(BuildContext context) async {
+    String deviceId = await getDeviceId();
+    _loginBloc.dispatch(LoginRequest(email: _email, password: _password,deviceId: deviceId));
+  }
+
+  Future<String> getDeviceId() async {
+    return _firebaseMessaging.getToken().then((deviceId) {
+      return deviceId;
+    }).catchError((err) {
+      return "ERROR_GET_DEVICE_ID";
+    });
   }
 }

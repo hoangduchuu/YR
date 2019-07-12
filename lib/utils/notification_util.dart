@@ -26,11 +26,11 @@ class NotificationManager {
       print("PLATFORM ------ >I IS ANDROID");
     }
 
-    _firebaseMessaging.getToken().then((value) {
-      print("------- GET TOKEN SUCCESS->: $value");
-    }).catchError((err) {
-      print("------- GET TOKEN err $err");
-    });
+//    _firebaseMessaging.getToken().then((value) {
+//      print("------- GET TOKEN SUCCESS->: $value");
+//    }).catchError((err) {
+//      print("------- GET TOKEN err $err");
+//    });
     print("REGISTER ");
 
     _firebaseMessaging.configure(

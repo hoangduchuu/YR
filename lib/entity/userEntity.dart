@@ -17,6 +17,7 @@ class UserEntity {
   DateTime createdAt;
   DateTime updatedAt;
   int v;
+  String deviceId;
 
   UserEntity({
     this.id,
@@ -37,6 +38,7 @@ class UserEntity {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.deviceId
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
@@ -58,6 +60,7 @@ class UserEntity {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
+    deviceId: json["deviceId"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -79,11 +82,15 @@ class UserEntity {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "__v": v,
+    "deviceId": deviceId
   };
 
   @override
   String toString() {
-    return 'UserEntity{id: $id, gender: $gender, status: $status, role: $role, points: $points, isNotificationEmail: $isNotificationEmail, isNotificationApplication: $isNotificationApplication, isNotificationPromotion: $isNotificationPromotion, isNotificationEvent: $isNotificationEvent, isProfile: $isProfile, email: $email, fullname: $fullname, thumbnail: $thumbnail, phone: $phone, address: $address, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
+    return 'UserEntity{id: $id, gender: $gender, status: $status, role: $role, points: $points, isNotificationEmail: $isNotificationEmail, '
+        'isNotificationApplication: $isNotificationApplication, isNotificationPromotion: $isNotificationPromotion, isNotificationEvent: '
+        '$isNotificationEvent, isProfile: $isProfile, email: $email, fullname: $fullname, thumbnail: $thumbnail, phone: $phone, address: $address, '
+        'createdAt: $createdAt, updatedAt: $updatedAt, v: $v, deviceId $deviceId}';
   }
 
 

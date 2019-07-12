@@ -113,9 +113,19 @@ class AuthProvider {
   Future<dynamic> findEmailByPhone(String phone) async {
     String url = '${YRService.END_POINT}${YRService.PATH_CHECK_EMAIL}';
     var body = {"phone": phone};
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
     var result = FindEmailParser().parse(raw);
+    return result;
+  }
+
+  //update profile
+  Future<dynamic> updateDeviceId(String userId, String deviceId) async {
+    var body = {
+      "deviceId": deviceId,
+    };
+    String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
+    String raw = await client.patch(url, YRService.generateHeadersWithToken(), jsonEncode(body));
+    var result = new UpdateProfileParser().parse(raw);
     return result;
   }
 }

@@ -27,7 +27,7 @@ class AuthRepo {
   AuthProvider _authProvider = injector<AuthProvider>();
 
   // request and mapping from entity to model
-  Future<Pair<STATE, User>> loginByEmail(String email, String password) async {
+  Future<Pair<STATE, User>> loginByEmail(String email, String password, String deviceId) async {
     try {
       var result = await _authProvider.login(email, password);
       if (result is ErrorEntity && result.code != null) {
@@ -37,11 +37,20 @@ class AuthRepo {
         if (result.accessToken == null || result.accessToken.isEmpty) {
           return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
         } else {
-          SharedPrefRepo.saveToken(result.accessToken);
-          SharedPrefRepo.saveUserId(result.user.id);
-          DataProvider.provideData(
-              UserMapper().mapFrom(result.user), result.accessToken);
-          return Pair(STATE.SUCCESS, DataProvider.user);
+          // login success --> Update UserIdToken
+
+          saveLoginResult(result);
+
+          var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
+          if (updateResult is ErrorEntity) {
+            clearLoginResult();
+            return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId");
+          }
+          if (updateResult is UpdateProfileEntity) {
+            SharedPrefRepo.saveDeviceId(deviceId);
+            DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
+            return Pair(STATE.SUCCESS, DataProvider.user);
+          }
         }
       }
     } catch (e) {
@@ -49,13 +58,22 @@ class AuthRepo {
     }
   }
 
-  Future<Pair<STATE, User>> loginByPhone(String phone, String password) async {
+  void saveLoginResult(LoginEntity result) {
+    SharedPrefRepo.saveToken(result.accessToken);
+    SharedPrefRepo.saveUserId(result.user.id);
+  }
+
+  void clearLoginResult() {
+    SharedPrefRepo.saveToken(null);
+    SharedPrefRepo.saveUserId(null);
+  }
+
+  Future<Pair<STATE, User>> loginByPhone(String phone, String password, String deviceId) async {
     try {
       var emailResponse = await _authProvider.findEmailByPhone(phone);
 
       if (emailResponse is FindEmailNotFoundEntity) {
-        return Pair(STATE.ERROR, null,
-            erroMsg: "Không tìm thấy số điện thoại trên hệ thống");
+        return Pair(STATE.ERROR, null, erroMsg: "Không tìm thấy số điện thoại trên hệ thống");
       } else if (emailResponse is FindEmailEntity) {
         var result = await _authProvider.login(emailResponse.email, password);
 
@@ -66,11 +84,19 @@ class AuthRepo {
           if (result.accessToken == null || result.accessToken.isEmpty) {
             return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
           } else {
-            SharedPrefRepo.saveToken(result.accessToken);
-            SharedPrefRepo.saveUserId(result.user.id);
-            DataProvider.provideData(
-                UserMapper().mapFrom(result.user), result.accessToken);
-            return Pair(STATE.SUCCESS, DataProvider.user);
+            // login success --> Update UserIdToken
+            saveLoginResult(result);
+
+            var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
+            DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
+            if (updateResult is ErrorEntity) {
+              clearLoginResult();
+              return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId");
+            }
+            if (updateResult is UpdateProfileEntity) {
+              DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
+              return Pair(STATE.SUCCESS, DataProvider.user);
+            }
           }
         }
       }
@@ -178,6 +204,23 @@ class AuthRepo {
       }
 
       if (result != null && result is UpdateProfileEntity) {
+        return Pair(true, "", erroMsg: "NO");
+      }
+      ;
+    } catch (error) {
+      return Pair(false, null, erroMsg: error.toString());
+    }
+  }
+
+  Future<Pair<bool, String>> updateDeviceId(String userId, String deviceId) async {
+    try {
+      var result = await _authProvider.updateDeviceId(userId, deviceId);
+      if (result is ErrorEntity) {
+        return Pair(false, null, erroMsg: result.message);
+      }
+
+      if (result != null && result is UpdateProfileEntity) {
+        await SharedPrefRepo.saveDeviceId(deviceId);
         return Pair(true, "", erroMsg: "NO");
       }
       ;

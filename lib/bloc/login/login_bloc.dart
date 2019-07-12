@@ -21,24 +21,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginEvent event,
   ) async* {
     if (event is LoginRequest) {
-      yield* _handleLoginState(event.email, event.password);
+      yield* _handleLoginState(event.email, event.password,event.deviceId);
     } else if (event is LoggedInRequest) {
       yield LoggedInState.success(User());
     }
   }
 
-  Stream<LoginState> _handleLoginState(String input, String password) async* {
+  Stream<LoginState> _handleLoginState(String input, String password,String deviceId) async* {
     // login with email
     if (AuthUtils.mayEmail(input)) {
-      yield* _handleLoginWithEmail(input, password);
+      yield* _handleLoginWithEmail(input, password,deviceId);
     } else {
       //login with mobile
-      yield* _handleLoginWithMobile(input, password);
+      yield* _handleLoginWithMobile(input, password,deviceId);
     }
 
   }
 
-  Stream<LoginState> _handleLoginWithEmail(String input, String password) async*{
+  Stream<LoginState> _handleLoginWithEmail(String input, String password,String deviceId) async*{
     if (!AuthUtils.validateEmailValid(input)) {
       yield LoggedInState.invalidInput(
           "Vui lòng nhập đúng định dạng Email hoặc Số điện thoại");
@@ -48,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoggedInState.submitting();
       try {
         Pair<STATE, User> result =
-            await authRepo.loginByEmail(input, password);
+            await authRepo.loginByEmail(input, password,deviceId);
         if (result.left == STATE.SUCCESS) {
           yield LoggedInState.success(result.right);
         } else {
@@ -60,7 +60,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Stream<LoginState> _handleLoginWithMobile(String input, String password) async*{
+  Stream<LoginState> _handleLoginWithMobile(String input, String password,String deviceId) async*{
     if (!AuthUtils.validateMobile(input)) {
       yield LoggedInState.invalidInput(
           "Vui lòng nhập đúng định dạng Email hoặc Số điện thoại");
@@ -70,7 +70,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoggedInState.submitting();
       try {
         Pair<STATE, User> result =
-        await authRepo.loginByPhone(input, password);
+        await authRepo.loginByPhone(input, password,deviceId);
         if (result.left == STATE.SUCCESS) {
           yield LoggedInState.success(result.right);
         } else {

@@ -34,7 +34,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     _progressBar.show(context);
   }
-  
+
   void showLoadingWithContext(BuildContext context) {
     if (_progressBar == null) {
       _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);

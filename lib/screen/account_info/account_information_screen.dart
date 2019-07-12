@@ -82,7 +82,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   _buildBloc(BuildContext parentContext) {
     return BlocListener(
         bloc: _profileBloc,
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is UploadState) {
             if (state.loading) {
               super.showLoadingWithContext(context);
@@ -110,6 +110,21 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
             if (state.error) {
               super.showErrorWithContext(state.errorMessage, context);
               super.hideLoadingWithContext(context);
+            }
+          }
+
+          if (state is Signout) {
+            if (state.state == SignOutState.LOADING) {
+              super.showLoadingWithContext(context);
+            }
+            if (state.state == SignOutState.ERROR) {
+              super.showErrorWithContext(state.message, context);
+              super.hideLoadingWithContext(context);
+            }
+            if (state.state == SignOutState.SUCCESS) {
+             await SharedPrefRepo.clearAll();
+              Navigator.pushAndRemoveUntil(
+                  context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (Route<dynamic> route) => false);
             }
           }
         },
@@ -250,12 +265,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                     ),
                     CommonButton(
                       onPressed: () {
-                        SharedPrefRepo.clearAll();
-                        //Navigator.pushReplacement(parentContext, MaterialPageRoute(builder: (context) => SplashScreen()));
-                        Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-                                (Route<dynamic> route) => false
-                        );
+                        _profileBloc.dispatch(SignoutEvent(DataProvider.user.id));
                       },
                       backgroundColor: HColors.red,
                       textColor: HColors.white,

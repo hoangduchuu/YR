@@ -12,6 +12,7 @@ class User {
   String email;
   String createAt;
   String _avatar;
+  String deviceId;
 
 
   String get avatar => this._avatar;
@@ -37,6 +38,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.fullName = entity.fullname;
     model.createAt = entity.createdAt.toString();
     model.avatar = entity.thumbnail;
+    model.deviceId = entity.deviceId;
     return model;
   }
 

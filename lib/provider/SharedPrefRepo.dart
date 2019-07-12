@@ -33,8 +33,25 @@ class SharedPrefRepo {
     return accessToken;
   }
 
+  static saveDeviceId(String deviceId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("Saving deviceId");
+    await prefs.setString("DEVICE_ID", deviceId).then((onValue) {
+      print("saved deviceId");
+    }).catchError((error) {
+      print("Save deviceId error ${error.toString()}");
+    });
+  }
+
+  static Future<String> getDeviceId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String deviceId = prefs.getString('DEVICE_ID');
+    return deviceId;
+  }
+
   static clearAll() async {
     await saveUserId(null);
     await saveToken(null);
+    await saveDeviceId("");
   }
 }
