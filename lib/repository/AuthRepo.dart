@@ -39,12 +39,12 @@ class AuthRepo {
         } else {
           // login success --> Update UserIdToken
 
-          saveLoginResult(result);
+          await saveLoginResult(result);
 
           var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
           if (updateResult is ErrorEntity) {
-            clearLoginResult();
-            return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId");
+            await clearLoginResult();
+            return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
           }
           if (updateResult is UpdateProfileEntity) {
             SharedPrefRepo.saveDeviceId(deviceId);
@@ -58,14 +58,16 @@ class AuthRepo {
     }
   }
 
-  void saveLoginResult(LoginEntity result) {
-    SharedPrefRepo.saveToken(result.accessToken);
-    SharedPrefRepo.saveUserId(result.user.id);
+  void saveLoginResult(LoginEntity result) async {
+    DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
+    await SharedPrefRepo.saveToken(result.accessToken);
+    await SharedPrefRepo.saveUserId(result.user.id);
   }
 
-  void clearLoginResult() {
-    SharedPrefRepo.saveToken(null);
-    SharedPrefRepo.saveUserId(null);
+  void clearLoginResult() async {
+    DataProvider.provideData(null, null);
+    await SharedPrefRepo.saveToken(null);
+    await SharedPrefRepo.saveUserId(null);
   }
 
   Future<Pair<STATE, User>> loginByPhone(String phone, String password, String deviceId) async {
@@ -85,13 +87,13 @@ class AuthRepo {
             return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
           } else {
             // login success --> Update UserIdToken
-            saveLoginResult(result);
+            await saveLoginResult(result);
 
             var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
             DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
             if (updateResult is ErrorEntity) {
-              clearLoginResult();
-              return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId");
+              await clearLoginResult();
+              return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
             }
             if (updateResult is UpdateProfileEntity) {
               DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
@@ -153,19 +155,16 @@ class AuthRepo {
 
   Future<bool> requestChangeEmail(String email) async {
     try {
-      ForgotEntity result =
-          await _authProvider.requestChangePasswordCode(email);
+      ForgotEntity result = await _authProvider.requestChangePasswordCode(email);
       return result.status;
     } catch (error) {
       return false;
     }
   }
 
-  Future<bool> changePassword(
-      String code, String email, String password) async {
+  Future<bool> changePassword(String code, String email, String password) async {
     try {
-      ChangePasswordEntity result =
-          await _authProvider.changePassword(email, code, password);
+      ChangePasswordEntity result = await _authProvider.changePassword(email, code, password);
       return result.status;
     } catch (error) {
       return false;
@@ -175,16 +174,13 @@ class AuthRepo {
   Future<Pair<bool, String>> upload(String userId, File file) async {
     try {
       UploadEntity uploadTask = await _authProvider.upload(file);
-      var updateResult =
-          await _authProvider.updateAvatar(userId, 'load/file/${uploadTask.image.filename}');
+      var updateResult = await _authProvider.updateAvatar(userId, 'load/file/${uploadTask.image.filename}');
       if (updateResult is ErrorEntity) {
         return Pair(false, null, erroMsg: updateResult.message);
       }
 
       if (updateResult != null && updateResult is UpdateProfileEntity) {
-        return Pair(
-            true, 'load/file/${uploadTask.image.filename}',
-            erroMsg: null);
+        return Pair(true, 'load/file/${uploadTask.image.filename}', erroMsg: null);
       }
     } catch (error) {
       return Pair(false, null, erroMsg: error.toString());
