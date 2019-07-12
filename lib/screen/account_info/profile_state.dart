@@ -69,3 +69,22 @@ class UpdateState extends ProfileState {
     return 'UploadState{success: $success, loading: $loading, error: $error, errorMessage: $errorMessage}';
   }
 }
+
+enum SignOutState { SUCCESS, ERROR, LOADING }
+
+class Signout extends ProfileState {
+  SignOutState state;
+  String message;
+  Signout(this.state,{this.message});
+
+  factory Signout.Loading() {
+    return Signout(SignOutState.LOADING);
+  }
+  factory Signout.Error(String msg) {
+    return Signout(SignOutState.ERROR,message: msg);
+  }
+  factory Signout.Success() {
+    return Signout(SignOutState.SUCCESS);
+  }
+  
+}

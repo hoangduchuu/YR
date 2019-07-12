@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:your_reward_user/utils/notification_util.dart';
 import 'package:your_reward_user/utils/progress_dialog.dart';
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
   ProgressDialog _progressBar;
+  NotificationManager notificationManager;
+
+  @override
+  void initState() {
+    super.initState();
+    notificationManager = NotificationManager(context);
+    notificationManager.register();
+  }
 
   void showError(String msg) {
     Scaffold.of(context)
@@ -25,7 +34,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     _progressBar.show(context);
   }
-  
+
   void showLoadingWithContext(BuildContext context) {
     if (_progressBar == null) {
       _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);

@@ -43,7 +43,7 @@ class _SBTextFieldState extends State<YRTextField> {
         new Padding(
             padding: EdgeInsets.only(bottom: 10, left: 50, right: 50.0),
             child: TextField(
-              keyboardType: TextInputType.text,
+              keyboardType: this.widget.type,
               controller: widget.textController,
               obscureText: widget.isPassword == true ? _obscureText : false,
               style: TextStyle(fontSize: 17.0, fontFamily: Hfonts.PrimaryFontBold),

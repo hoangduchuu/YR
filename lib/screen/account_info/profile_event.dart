@@ -23,3 +23,9 @@ class UpdateUserInfo extends ProfileEvent {
 
   UpdateUserInfo(this.user);
 }
+
+class SignoutEvent extends ProfileEvent{
+  String userId;
+
+  SignoutEvent(this.userId);
+}

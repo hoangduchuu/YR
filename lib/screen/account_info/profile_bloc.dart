@@ -21,6 +21,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (event is UpdateUserInfo) {
       yield* _handleUserInfo(event.user);
     }
+    if(event is SignoutEvent){
+      yield* _handleSignOut(event.userId);
+    }
   }
 
   @override
@@ -58,6 +61,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
     } catch (e) {
       yield UpdateState.Error(e..toString());
+      yield ResetState();
+    }
+  }
+  Stream<ProfileState> _handleSignOut(String userid) async* {
+    try {
+      yield Signout.Loading();
+      yield ResetState();
+      var result = await _authRepo.updateDeviceId(userid, "");
+      if (result.left) {
+        yield Signout.Success();
+        yield ResetState();
+      } else {
+        yield Signout.Error(result.erroMsg);
+        yield ResetState();
+      }
+    } catch (e) {
+      yield Signout.Error(e..toString());
       yield ResetState();
     }
   }

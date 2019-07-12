@@ -7,10 +7,10 @@ abstract class LoginEvent extends Equatable {
 }
 
 class LoginRequest extends LoginEvent {
-  final String email, password;
+  final String email, password,deviceId;
 
-  LoginRequest({@required this.email, @required this.password})
-      : super([email, password]);
+  LoginRequest({@required this.email, @required this.password,@required this.deviceId})
+      : super([email, password,deviceId]);
 
   @override
   String toString() {
