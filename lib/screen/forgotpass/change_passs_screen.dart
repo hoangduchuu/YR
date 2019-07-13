@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/test/login_screen.dart';
+import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'dart:ui' as ui;

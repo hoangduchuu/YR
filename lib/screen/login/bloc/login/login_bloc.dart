@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -8,7 +9,6 @@ import 'package:your_reward_user/utils/pair.dart';
 
 import 'login_event.dart';
 import 'login_state.dart';
-import '../../core/injector.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   AuthRepo authRepo = injector<AuthRepo>();

@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:toast/toast.dart';
-import 'package:your_reward_user/bloc/login/login_bloc.dart';
-import 'package:your_reward_user/bloc/login/login_event.dart';
-import 'package:your_reward_user/bloc/login/login_state.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/screen/home/home_screen.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui;
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'home_screen.dart';
+import 'bloc/login/login_bloc.dart';
+import 'bloc/login/login_event.dart';
 import 'package:http/http.dart' as http;
+
+import 'bloc/login/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
