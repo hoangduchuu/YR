@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:toast/toast.dart';
 import 'package:your_reward_user/bloc/login/login_bloc.dart';
 import 'package:your_reward_user/bloc/login/login_event.dart';
 import 'package:your_reward_user/bloc/login/login_state.dart';
@@ -13,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'home_screen.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -25,6 +30,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   String _password = "john.doe";
   String _token;
   FirebaseMessaging _firebaseMessaging;
+  BuildContext _context;
 
   @override
   void initState() {
@@ -48,6 +54,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
     return BlocListener(
       bloc: _loginBloc,
       listener: (context, state) {
+        this._context = context;
         if (state is LoggedInState) {
           if (state.isInvalidInput) {
             super.showErrorWithContext(state.errorMsg, context);
@@ -58,14 +65,13 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           }
           if (state.isSuccess) {
             super.hideLoadingWithContext(context);
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          } if (state.isFailure) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          }
+          if (state.isFailure) {
             super.hideLoadingWithContext(context);
-            super.showErrorWithContext("${state.errorMsg}",context);
+            super.showErrorWithContext("${state.errorMsg}", context);
           }
         }
-
       },
       child: Stack(
         fit: StackFit.expand,
@@ -75,8 +81,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               image: DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
                 image: AssetImage('assets/images/bg1.jpg'),
                 fit: BoxFit.cover,
               ),
@@ -85,8 +90,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
               filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
               child: new Container(
                 //you can change opacity with color here(I used black) for background.
-                decoration:
-                    new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+                decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
               ),
             ),
           ),
@@ -129,14 +133,10 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                       child: new Text(
                         "Quên mật khẩu?",
                         style: TextStyle(
-                            fontFamily: Hfonts.PrimaryFontRegular,
-                            color: HColors.ColorSecondPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: Hfonts.PrimaryFontRegular, color: HColors.ColorSecondPrimary, fontSize: 18, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.end,
                       ),
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, "/forgotpass")},
+                      onPressed: () => {Navigator.pushNamed(context, "/forgotpass")},
                     ),
                   ],
                 ),
@@ -146,8 +146,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                   textColor: HColors.white,
                   text: Text(
                     'Đăng nhập',
-                    style: TextStyle(
-                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                    style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
                   width: MediaQuery.of(context).size.width * 0.72,
                   buttonPadding: 10,
@@ -158,20 +157,13 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                   children: <Widget>[
                     Text(
                       'Chưa có tài khoản?',
-                      style: TextStyle(
-                          color: HColors.white,
-                          fontFamily: Hfonts.PrimaryFontRegular,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: HColors.white, fontFamily: Hfonts.PrimaryFontRegular, fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                     FlatButton(
                         child: new Text(
                           "Đăng ký ngay",
                           style: TextStyle(
-                              color: HColors.ColorSecondPrimary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: Hfonts.PrimaryFontRegular),
+                              color: HColors.ColorSecondPrimary, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: Hfonts.PrimaryFontRegular),
                           textAlign: TextAlign.end,
                         ),
                         onPressed: () {
@@ -191,11 +183,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                     children: <Widget>[
                       Text(
                         "Hoặc đăng nhập với",
-                        style: TextStyle(
-                            color: HColors.white,
-                            fontFamily: Hfonts.PrimaryFontRegular,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(color: HColors.white, fontFamily: Hfonts.PrimaryFontRegular, fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -204,7 +192,9 @@ class _LoginScreenState extends BaseState<LoginScreen> {
                   height: MediaQuery.of(context).size.height * 0.005,
                 ),
                 CommonButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _onSubmitFbLogin(context);
+                    },
                     icon: Icon(FontAwesomeIcons.facebookF),
                     backgroundColor: HColors.ColorBgFacebook,
                     textColor: HColors.white,
@@ -221,7 +211,21 @@ class _LoginScreenState extends BaseState<LoginScreen> {
 
   _onSubmitLogin(BuildContext context) async {
     String deviceId = await getDeviceId();
-    _loginBloc.dispatch(LoginRequest(email: _email, password: _password,deviceId: deviceId));
+    _loginBloc.dispatch(LoginRequest(email: _email, password: _password, deviceId: deviceId));
+  }
+
+  _onSubmitFbLogin(BuildContext context) async {
+    try {
+      var facebookSignIn = FacebookLogin();
+      final result = await facebookSignIn.logInWithReadPermissions(['email', 'public_profile']);
+      final token = result.accessToken.token;
+      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=email&access_token=${"$token"}');
+      final profile = json.decode(graphResponse.body);
+      super.showSuccessToast(_context, "${profile.toString()}");
+      // dispatch facebook submited
+    } catch (e) {
+      super.showErrorToast(_context, "${e.toString()}");
+    }
   }
 
   Future<String> getDeviceId() async {
