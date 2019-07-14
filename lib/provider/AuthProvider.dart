@@ -16,6 +16,8 @@ import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/entity/user_update_request_entity.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/utils/pair.dart';
 
 class AuthProvider {
   MyHttpClient client;
@@ -120,8 +122,12 @@ class AuthProvider {
 
   //update profile
   Future<dynamic> updateDeviceId(String userId, String deviceId) async {
+
+    Pair<String,String> fullToken =CommonUtils.splitFirebaseToken(deviceId);
+
     var body = {
-      "deviceId": deviceId,
+      "deviceId": fullToken.left,
+      "registrationToken": deviceId
     };
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
     String raw = await client.patch(url, YRService.generateHeadersWithToken(), jsonEncode(body));

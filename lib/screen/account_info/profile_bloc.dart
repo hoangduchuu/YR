@@ -68,7 +68,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       yield Signout.Loading();
       yield ResetState();
-      var result = await _authRepo.updateDeviceId(userid, "");
+      var result = await _authRepo.updateDeviceId(userid, ":");
       if (result.left) {
         yield Signout.Success();
         yield ResetState();

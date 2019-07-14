@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:intl/intl.dart';
+import 'package:your_reward_user/utils/pair.dart';
 
 class CommonUtils {
   static int getRandomInt() {
@@ -29,5 +30,12 @@ class CommonUtils {
     var formatter = new DateFormat('MM-dd-yyyy');
     String result = formatter.format(input);
     return result;
+  }
+
+  static Pair<String, String> splitFirebaseToken(String token) {
+    int colonPosition = token.indexOf(":");
+    String deviceId = token.substring(0, colonPosition);
+    String registrationToken = token.substring(colonPosition + 1, token.length);
+    return Pair(deviceId, registrationToken);
   }
 }
