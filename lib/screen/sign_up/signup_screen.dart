@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'dart:ui' as ui;
 
 import 'SignupBloc.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends BasePage {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends BaseState<SignUpScreen> {
+class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandler, ScaffoldPage{
   SignUpBloc _signUpBloc;
   String _email, _password, _repassword, _name, _phone;
 
@@ -27,21 +29,28 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: HColors.white, body: _buildBloc(context));
+  Widget appBar() {
+    return null;
   }
 
-  Widget _buildBloc(BuildContext context) {
+  @override
+  Widget body() {
+    return _buildBody();
+  }
+
+  @override
+  Color getBgColor() {
+    return HColors.white;
+  }
+  
+  Widget _buildBody() {
     return BlocListener(
       bloc: _signUpBloc,
       listener: (context, state) {
+        handleUIControlState(state);
         if (state is SignUpSuccessState) {
           super.showSuccessMessage("Đăng ký thành công", context);
         }
-        if (state is SignUpErrorState) {
-          super.showErrorWithContext("${state.errorMessage}", context);
-        }
-        if (state is ResetState) {}
       },
       child: Stack(
         fit: StackFit.expand,
@@ -180,4 +189,6 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
       ),
     );
   }
+
+
 }

@@ -4,7 +4,10 @@ import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
@@ -20,7 +23,7 @@ import 'bloc/membership_detail_bloc.dart';
 import 'bloc/membership_detail_event.dart';
 import 'bloc/membership_detail_state.dart';
 
-class MemberShipStoreDetailScreen extends StatefulWidget {
+class MemberShipStoreDetailScreen extends BasePage {
   final MembershipCard memberCard;
 
   @override
@@ -29,7 +32,8 @@ class MemberShipStoreDetailScreen extends StatefulWidget {
   MemberShipStoreDetailScreen({Key key, @required this.memberCard}) : super(key: key);
 }
 
-class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailScreen> {
+class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailScreen>
+    with ErrorMessageHandler, ScaffoldPage {
   ScrollController _scrollController = new ScrollController();
   MemberShipDetailBloc _bloc;
   List<Store> _stores;
@@ -44,40 +48,39 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget appBar() {
+    return null;
+  }
+
+  @override
+  Widget body() {
+    return _body();
+  }
+
+  @override
+  Color getBgColor() {
+    return Color(0xFFF5F5F5);
+  }
+
+  Widget _body(){
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
-        if (state is GetMemmberShipDetailState) {
-          if (state.isError) {
-            super.showError(state.errMsg);
-          }
-          if (state.isLoading) {
-            super.showLoadingWithContext(context);
-          } else {
-            super.hideLoadingWithContext(context);
-          }
-        } else if (state is OngetMemberShipDetailSuccessState) {
+        handleUIControlState(state);
+        if (state is OnGetMemberShipDetailSuccessState) {
           super.hideLoadingWithContext(context);
           setState(() {
             _stores = state.stores;
           });
         }
-        if (state is OngetGetCouponSuccessState) {
+        if (state is OnGetCouponSuccessState) {
           super.hideLoadingWithContext(context);
           setState(() {
             _coupons = state.coupons;
           });
         }
       },
-      child: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
-      body: ListView(
+      child: ListView(
         controller: _scrollController,
         children: <Widget>[
           MemberCard(
@@ -176,7 +179,6 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
         });
   }
 
-  // FIXME: get exactly data
   _getVoucherThumb(String s) {
     if (s == null) {
       return NO_IMAGE;

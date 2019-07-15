@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -10,14 +11,14 @@ import 'login_event.dart';
 import 'login_state.dart';
 import '../../core/injector.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends Bloc<LoginEvent, BaseBlocState> {
   AuthRepo authRepo = injector<AuthRepo>();
 
   @override
   LoginState get initialState => LoggedInState.empty();
 
   @override
-  Stream<LoginState> mapEventToState(
+  Stream<BaseBlocState> mapEventToState(
     LoginEvent event,
   ) async* {
     if (event is LoginRequest) {
@@ -27,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Stream<LoginState> _handleLoginState(String input, String password,String deviceId) async* {
+  Stream<BaseBlocState> _handleLoginState(String input, String password,String deviceId) async* {
     // login with email
     if (AuthUtils.mayEmail(input)) {
       yield* _handleLoginWithEmail(input, password,deviceId);
@@ -38,24 +39,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   }
 
-  Stream<LoginState> _handleLoginWithEmail(String input, String password,String deviceId) async*{
+  Stream<BaseBlocState> _handleLoginWithEmail(String input, String password,String deviceId) async*{
     if (!AuthUtils.validateEmailValid(input)) {
-      yield LoggedInState.invalidInput(
-          "Vui lòng nhập đúng định dạng Email hoặc Số điện thoại");
+      yield UIControlState.showError('Vui lòng nhập đúng định dạng Email hoặc Số điện thoại');
     } else if (!AuthUtils.validatePasswordValid(password)) {
-      yield LoggedInState.invalidInput("Vui lòng nhập password hợp lệ");
+      yield UIControlState.showError('Vui lòng nhập password hợp lệ');
     } else {
-      yield LoggedInState.submitting();
+      yield UIControlState.showLoading();
       try {
         Pair<STATE, User> result =
             await authRepo.loginByEmail(input, password,deviceId);
         if (result.left == STATE.SUCCESS) {
           yield LoggedInState.success(result.right);
         } else {
-          yield LoggedInState.failed(result.erroMsg);
+          yield UIControlState.showError(result.erroMsg);
         }
       } catch (e) {
-        yield LoggedInState.failed(e.erroMsg);
+        yield UIControlState.showError(e.erroMsg);
       }
     }
   }

@@ -1,23 +1,22 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/Store.dart';
-import 'package:your_reward_user/provider/CouponProvider.dart';
 import 'package:your_reward_user/repository/CouponRepo.dart';
 import 'package:your_reward_user/repository/StoreRepo.dart';
-import 'package:your_reward_user/repository/TransactionRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 import 'membership_detail_event.dart';
 import 'membership_detail_state.dart';
 
-class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailBaseState> {
+class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, BaseBlocState> {
   StoreRepo _storeRepo = injector<StoreRepo>();
   CouponRepo _couponRepo = injector<CouponRepo>();
 
 
   @override
-  Stream<MemberShipDetailBaseState> mapEventToState(
+  Stream<BaseBlocState> mapEventToState(
       MemberShipDetailEvent event) async* {
     if (event is GetMemberShipDetailEvent) {
       yield* _handleGetStoreRequest(event.ownerId);
@@ -30,37 +29,37 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, MemberShipDetailB
   @override
   MemberShipDetailBaseState get initialState => InitialState();
 
-  Stream<MemberShipDetailBaseState> _handleGetStoreRequest(String ownerId) async* {
-    yield GetMemmberShipDetailState.isLoading();
+  Stream<BaseBlocState> _handleGetStoreRequest(String ownerId) async* {
+    yield UIControlState.showLoading();
     try {
       Pair<STATE, List<Store>> result = await _storeRepo.getStoresByStoreId(ownerId);
       if (result.left == STATE.ERROR) {
-        yield GetMemmberShipDetailState.isError(errMsg: result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
       } else if (result.right.isEmpty) {
-        yield GetMemmberShipDetailState.empty();
+        yield OnGetMemberShipDetailSuccessState(List());
       }
       if (result.left == STATE.SUCCESS) {
-        yield OngetMemberShipDetailSuccessState(result.right);
+        yield OnGetMemberShipDetailSuccessState(result.right);
       }
     } catch (e) {
-      yield GetMemmberShipDetailState.isError(errMsg: e.toString());
+      yield UIControlState.showError(e.toString());
     }
   }
 
-  Stream<MemberShipDetailBaseState> _handleGetCouponRequest(String userId,String ownerId) async* {
-    yield GetCouponState.isLoading();
+  Stream<BaseBlocState> _handleGetCouponRequest(String userId,String ownerId) async* {
+    yield UIControlState.showLoading();
     try {
       Pair<STATE, List<Coupon>> result = await _couponRepo.getCoupons(userId,ownerId);
       if (result.left == STATE.ERROR) {
-        yield GetCouponState.isError(errMsg: result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
       } else if (result.right.isEmpty) {
-        yield GetCouponState.empty();
+        yield OnGetCouponSuccessState(List());
       }
       if (result.left == STATE.SUCCESS) {
-        yield OngetGetCouponSuccessState(result.right);
+        yield OnGetCouponSuccessState(result.right);
       }
     } catch (e) {
-      yield GetCouponState.isError(errMsg: e.toString());
+      yield UIControlState.showError(e.toString());
     }
   }
 }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/Transaction.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_bloc.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_event.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_state.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/TransactionWidget.dart';
-import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
-class TransactionStoreScreen extends StatefulWidget {
-  String ownerId;
+class TransactionStoreScreen extends BasePage {
+  final String ownerId;
 
   TransactionStoreScreen({this.ownerId});
 
@@ -20,7 +20,8 @@ class TransactionStoreScreen extends StatefulWidget {
   _TransactionStoreScreenState createState() => _TransactionStoreScreenState();
 }
 
-class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
+class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen>
+    with ScaffoldPage, ErrorMessageHandler {
   TransactionStoreBloc _bloc;
   List<Transaction> _transactions;
 
@@ -32,32 +33,32 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: HColors.white,
-          title: Text(
-            "Lịch sử giao dịch",
-            style: TextStyle(color: Colors.red),
-          ),
-          elevation: 0.0,
-        ),
-        body: _buildBody());
+  Widget appBar() {
+    return AppBar(
+      backgroundColor: HColors.white,
+      title: Text(
+        "Lịch sử giao dịch",
+        style: TextStyle(color: Colors.red),
+      ),
+      elevation: 0.0,
+    );
+  }
+
+  @override
+  Widget body() {
+    return _buildBody();
+  }
+
+  @override
+  Color getBgColor() {
+    return  HColors.white;
   }
 
   Widget _buildBody() {
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
-        if (state is GetTransactionState) {
-          if (state.isError) {
-            super.showErrorWithContext(state.errMsg,context);
-          } else if (state.isLoading) {
-            super.showLoadingWithContext(context);
-          } else {
-            super.hideLoadingWithContext(context);
-          }
-        }
+        handleUIControlState(state);
         if (state is OnGetTransactionSuccess) {
           super.hideLoadingWithContext(context);
           setState(() {
@@ -67,23 +68,5 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> {
       },
       child: TransactionWidget(_transactions),
     );
-  }
-
-  Widget _buildTransactionList(List<Transaction> mTransactions) {
-    if (mTransactions == null || mTransactions.isEmpty) {
-      return Container();
-    } // Prevent while waiting data error
-    return ListView.builder(
-        itemCount: _transactions.length,
-        itemBuilder: (context, index) {
-          return TranferHistoryRow(
-              tranferName: 'Giao dịch số ${index + 1}',
-              time: CommonUtils.getTimeFormated(_transactions[index].time),
-              date: CommonUtils.getDateFormat(_transactions[index].time),
-              place: _transactions[index].storeLocation,
-              price: _transactions[index].price.toString(),
-              storeType: _transactions[index].logo,
-              point: _transactions[index].point);
-        });
   }
 }

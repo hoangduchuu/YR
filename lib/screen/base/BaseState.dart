@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/utils/notification_util.dart';
 import 'package:your_reward_user/utils/progress_dialog.dart';
 
-abstract class BaseState<T extends StatefulWidget> extends State<T> {
+abstract class BaseState<page extends BasePage> extends State<page> {
   ProgressDialog _progressBar;
   NotificationManager notificationManager;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   void initState() {
@@ -15,17 +17,20 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   void showError(String msg) {
-    Scaffold.of(context)
+    scaffoldKey.currentState
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-          SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
+      ..showSnackBar(SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
   }
 
-  void showErrorWithContext(String msg, BuildContext context) {
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-          SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
+  void hideMsg(){
+    scaffoldKey.currentState
+      ..hideCurrentSnackBar();
+  }
+
+  void hideLoading() {
+    if (_progressBar != null && _progressBar.isShowing()) {
+      _progressBar.hide(context);
+    }
   }
 
   void showLoading() {
@@ -35,6 +40,14 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     _progressBar.show(context);
   }
 
+
+  void showErrorWithContext(String msg, BuildContext context) {
+    Scaffold.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+          SnackBar(content: Text('$msg'), backgroundColor: Colors.red));
+  }
+
   void showLoadingWithContext(BuildContext context) {
     if (_progressBar == null) {
       _progressBar = new ProgressDialog(context, ProgressDialogType.Normal);
@@ -42,11 +55,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     _progressBar.show(context);
   }
 
-  void hideLoading() {
-    if (_progressBar != null && _progressBar.isShowing()) {
-      _progressBar.hide(context);
-    }
-  }
 
   void hideLoadingWithContext(BuildContext context) {
     if (_progressBar != null && _progressBar.isShowing()) {

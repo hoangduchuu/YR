@@ -11,7 +11,7 @@ abstract class StoreTransactionEvent extends Equatable {
 }
 
 class GetTransactionRequest extends StoreTransactionEvent {
-  String ownerId;
+  final String ownerId;
 
-  GetTransactionRequest(this.ownerId);
+  GetTransactionRequest(this.ownerId) : super([ownerId]);
 }

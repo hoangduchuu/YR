@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
@@ -9,30 +10,30 @@ import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 //region bloc
-class SignUpBloc extends Bloc<BaseSignUpEvent, SignUpState> {
+class SignUpBloc extends Bloc<BaseSignUpEvent, BaseBlocState> {
   AuthRepo authRepo = injector<AuthRepo>();
 
   @override
   SignUpState get initialState => InitialState();
 
   @override
-  Stream<SignUpState> mapEventToState(BaseSignUpEvent event) async* {
+  Stream<BaseBlocState> mapEventToState(BaseSignUpEvent event) async* {
     if (event is SignUpEvent) {
       yield* _handleLoginState(event.body);
     }
   }
 
-  Stream<SignUpState> _handleLoginState(SignupModel model) async* {
+  Stream<BaseBlocState> _handleLoginState(SignupModel model) async* {
     try {
       Pair<STATE, User> result = await authRepo.register(model);
       if (result.left == STATE.SUCCESS) {
         yield SignUpSuccessState(result.right);
       } else {
-        yield SignUpErrorState(errorMessage: result.erroMsg.toString());
+        yield UIControlState.showError(result.erroMsg.toString());
         yield ResetState();
       }
     } catch (e) {
-      yield SignUpErrorState(errorMessage: e.toString());
+      yield UIControlState.showError(e.toString());
       yield ResetState();
     }
   }
@@ -57,7 +58,7 @@ class SignUpEvent extends BaseSignUpEvent {
 
 //region State
 @immutable
-abstract class SignUpState extends Equatable {
+abstract class SignUpState extends BaseBlocState {
   SignUpState([List props = const []]) : super(props);
 }
 
@@ -67,12 +68,6 @@ class SignUpSuccessState extends SignUpState {
   User user;
 
   SignUpSuccessState(this.user);
-}
-
-class SignUpErrorState extends SignUpState {
-  String errorMessage;
-
-  SignUpErrorState({this.errorMessage});
 }
 
 class ResetState extends SignUpState {}

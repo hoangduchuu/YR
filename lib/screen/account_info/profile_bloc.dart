@@ -1,20 +1,20 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/auth_utils.dart';
-import 'package:your_reward_user/utils/pair.dart';
 
 import 'profile_event.dart';
 import 'profile_state.dart';
 
-class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+class ProfileBloc extends Bloc<ProfileEvent, BaseBlocState> {
   AuthRepo _authRepo = injector<AuthRepo>();
 
   @override
-  Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
+  Stream<BaseBlocState> mapEventToState(ProfileEvent event) async* {
     if (event is UploadEvent) {
       yield* _handleUpload(event.userId, event.file);
     }
@@ -29,55 +29,54 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   @override
   ProfileState get initialState => InitState();
 
-  Stream<ProfileState> _handleUpload(String userid, File file) async* {
+  Stream<BaseBlocState> _handleUpload(String userid, File file) async* {
     try {
-      yield UploadState.Loading(true);
+      yield UIControlState.showLoading();
       yield ResetState();
       var result = await _authRepo.upload(userid, file);
       if (result.left) {
-        yield UploadState.Success(result.right);
+        yield UploadSuccessState(result.right);
         yield ResetState();
       } else {
-        yield UploadState.Error(result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
         yield ResetState();
       }
     } catch (e) {
-      yield UploadState.Error(e..toString());
+      yield UIControlState.showError(e..toString());
       yield ResetState();
     }
   }
 
-  Stream<ProfileState> _handleUserInfo(User user) async* {
+  Stream<BaseBlocState> _handleUserInfo(User user) async* {
     try {
-      yield UpdateState.Loading(true);
+      yield UIControlState.showLoading();
       yield ResetState();
       var result = await _authRepo.updateProfile(user.id, AuthUtils.buildUser(user));
       if (result.left) {
-        yield UpdateState.Success(user);
+        yield UpdateStateSuccess(user);
         yield ResetState();
       } else {
-        yield UpdateState.Error(result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
         yield ResetState();
       }
     } catch (e) {
-      yield UpdateState.Error(e..toString());
+      yield UIControlState.showError(e..toString());
       yield ResetState();
     }
   }
-  Stream<ProfileState> _handleSignOut(String userid) async* {
+  Stream<BaseBlocState> _handleSignOut(String userId) async* {
     try {
-      yield Signout.Loading();
-      yield ResetState();
-      var result = await _authRepo.updateDeviceId(userid, "");
+      yield UIControlState.showLoading();
+      var result = await _authRepo.updateDeviceId(userId, "");
       if (result.left) {
-        yield Signout.Success();
+        yield SignOutSuccess();
         yield ResetState();
       } else {
-        yield Signout.Error(result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
         yield ResetState();
       }
     } catch (e) {
-      yield Signout.Error(e..toString());
+      yield UIControlState.showError(e..toString());
       yield ResetState();
     }
   }

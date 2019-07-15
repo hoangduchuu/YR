@@ -6,6 +6,7 @@ import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/test/home_screen.dart';
 import 'package:your_reward_user/test/login_screen.dart';
@@ -15,14 +16,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 //region scree
 /// Reponsitbility to check the user info was saved in local storage and navigate to login or home screen.
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends BasePage {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 //endregion
 
 //region state
-class _SplashScreenState extends BaseState<SplashScreen> {
+class _SplashScreenState extends BaseState<SplashScreen>{
   SplashBloc _splashBloc;
   bool isValid;
   Timer _timer;

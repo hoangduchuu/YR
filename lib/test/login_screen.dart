@@ -4,7 +4,10 @@ import 'package:your_reward_user/bloc/login/login_bloc.dart';
 import 'package:your_reward_user/bloc/login/login_event.dart';
 import 'package:your_reward_user/bloc/login/login_state.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -14,12 +17,12 @@ import 'dart:ui' as ui;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'home_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends BasePage {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends BaseState<LoginScreen> {
+class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler, ScaffoldPage{
   LoginBloc _loginBloc;
   String _email = "huu@example.com";
   String _password = "john.doe";
@@ -37,35 +40,31 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: _buildBody(),
-    );
+  Widget appBar() {
+    return null;
   }
+
+  @override
+  Widget body() {
+    return _buildBody();
+  }
+
+  @override
+  Color getBgColor() {
+    return null;
+  }
+
 
   _buildBody() {
     return BlocListener(
       bloc: _loginBloc,
       listener: (context, state) {
-        if (state is LoggedInState) {
-          if (state.isInvalidInput) {
-            super.showErrorWithContext(state.errorMsg, context);
-            super.hideLoadingWithContext(context);
-          }
-          if (state.isSubmitting) {
-            super.showLoadingWithContext(context);
-          }
-          if (state.isSuccess) {
-            super.hideLoadingWithContext(context);
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          } if (state.isFailure) {
-            super.hideLoadingWithContext(context);
-            super.showErrorWithContext("${state.errorMsg}",context);
-          }
+        handleUIControlState(state);
+        if (state is LoggedInState && state.isSuccess) {
+          super.hideLoading();
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
-
       },
       child: Stack(
         fit: StackFit.expand,
@@ -231,4 +230,6 @@ class _LoginScreenState extends BaseState<LoginScreen> {
       return "ERROR_GET_DEVICE_ID";
     });
   }
+
+
 }

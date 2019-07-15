@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/model/User.dart';
 
-@immutable
-abstract class LoginState extends Equatable {
+abstract class LoginState extends BaseBlocState {
   LoginState([List props = const []]) : super(props);
 }
 

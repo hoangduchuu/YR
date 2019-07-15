@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/TransactionRepo.dart';
@@ -8,7 +9,7 @@ import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 class TransactionStoreBloc
-    extends Bloc<StoreTransactionEvent, StoreTransactionBaseState> {
+    extends Bloc<StoreTransactionEvent, BaseBlocState> {
   TransactionRepo _transactionRepo = injector<TransactionRepo>();
 
 
@@ -16,29 +17,29 @@ class TransactionStoreBloc
   StoreTransactionBaseState get initialState => InitialState();
 
   @override
-  Stream<StoreTransactionBaseState> mapEventToState(
+  Stream<BaseBlocState> mapEventToState(
       StoreTransactionEvent event) async* {
     if (event is GetTransactionRequest) {
       yield* _handleGetTransactionRequest(event.ownerId);
     }
   }
 
-  Stream<StoreTransactionBaseState> _handleGetTransactionRequest(
+  Stream<BaseBlocState> _handleGetTransactionRequest(
       String ownerId) async* {
-    yield GetTransactionState.isLoading();
+    yield UIControlState.showLoading();
     try {
       Pair<STATE, List<Transaction>> result =
           await _transactionRepo.getTransactionOfStore(ownerId);
       if (result.left == STATE.ERROR) {
-        yield GetTransactionState.isError(errMsg: result.erroMsg);
+        yield UIControlState.showError(result.erroMsg);
       } else if (result.right.isEmpty) {
-        yield GetTransactionState.empty();
+        yield OnGetTransactionSuccess(transactions: List());
       }
       if (result.left == STATE.SUCCESS) {
         yield OnGetTransactionSuccess(transactions: result.right);
       }
     } catch (e) {
-      yield GetTransactionState.isError(errMsg: e.toString());
+      yield UIControlState.showError(e.erroMsg);
     }
   }
 }

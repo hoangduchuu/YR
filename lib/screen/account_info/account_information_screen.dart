@@ -8,7 +8,10 @@ import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/account_info/profile_bloc.dart';
 import 'package:your_reward_user/screen/account_info/profile_state.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
@@ -21,14 +24,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'profile_event.dart';
 
-class AccountInformationScreen extends StatefulWidget {
+class AccountInformationScreen extends BasePage {
   @override
   _AccountInformationScreenState createState() =>
       _AccountInformationScreenState();
 }
 
 class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
-    with ImagePickerListener, TickerProviderStateMixin {
+    with ImagePickerListener, TickerProviderStateMixin, ErrorMessageHandler, ScaffoldPage {
   AnimationController _controller;
   ImagePickerHandler imagePicker;
   ProfileBloc _profileBloc;
@@ -66,11 +69,15 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBloc(context),
-    );
+  Widget appBar() {
+    return null;
   }
+
+  @override
+  Widget body() {
+    return _buildBloc(context);
+  }
+
 
   @override
   onImageCropped(File _image) {
@@ -87,50 +94,21 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     return BlocListener(
         bloc: _profileBloc,
         listener: (context, state) async {
-          if (state is UploadState) {
-            if (state.loading) {
-              super.showLoadingWithContext(context);
-            }
-            if (state.success) {
-              print("Uplaod success ${state.uploadedUrl}");
-              setState(() {
-                DataProvider.user.avatar = state.uploadedUrl;
-              });
-              super.hideLoadingWithContext(context);
-            }
-            if (state.error) {
-              super.showErrorWithContext(state.errorMessage, context);
-              super.hideLoadingWithContext(context);
-            }
-          }
-          if (state is UpdateState) {
-            if (state.loading) {
-              super.showLoadingWithContext(context);
-            }
-            if (state.success) {
-              super.hideLoadingWithContext(context);
-              showSuccessMessage("Thay đổi thông tin thành công", context);
-              updateChangedData(state.user);
-            }
-            if (state.error) {
-              super.showErrorWithContext(state.errorMessage, context);
-              super.hideLoadingWithContext(context);
-            }
-          }
-
-          if (state is Signout) {
-            if (state.state == SignOutState.LOADING) {
-              super.showLoadingWithContext(context);
-            }
-            if (state.state == SignOutState.ERROR) {
-              super.showErrorWithContext(state.message, context);
-              super.hideLoadingWithContext(context);
-            }
-            if (state.state == SignOutState.SUCCESS) {
-             await SharedPrefRepo.clearAll();
-              Navigator.pushAndRemoveUntil(
-                  context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (Route<dynamic> route) => false);
-            }
+          handleUIControlState(state);
+          if (state is UploadSuccessState){
+            print("Upload success ${state.uploadedUrl}");
+            setState(() {
+              DataProvider.user.avatar = state.uploadedUrl;
+            });
+            super.hideLoadingWithContext(context);
+          } else if (state is UpdateStateSuccess){
+            super.hideLoadingWithContext(context);
+            showSuccessMessage("Thay đổi thông tin thành công", context);
+            updateChangedData(state.user);
+          } else if (state is SignOutSuccess){
+            await SharedPrefRepo.clearAll();
+            Navigator.pushAndRemoveUntil(
+                context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (Route<dynamic> route) => false);
           }
         },
         child: Stack(
@@ -355,4 +333,11 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
       DataProvider.provideData(mUser, DataProvider.userToken);
     });
   }
+
+  @override
+  Color getBgColor() {
+    return null;
+  }
+
+
 }
