@@ -28,7 +28,8 @@ class HomeScreen extends BasePage {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, ScaffoldPage{
+class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
+    ScaffoldPage{
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;

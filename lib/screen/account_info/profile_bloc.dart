@@ -67,7 +67,7 @@ class ProfileBloc extends Bloc<ProfileEvent, BaseBlocState> {
   Stream<BaseBlocState> _handleSignOut(String userId) async* {
     try {
       yield UIControlState.showLoading();
-      var result = await _authRepo.updateDeviceId(userId, "");
+      var result = await _authRepo.updateDeviceId(userId, ':');
       if (result.left) {
         yield SignOutSuccess();
         yield ResetState();
