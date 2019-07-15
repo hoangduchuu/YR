@@ -59,7 +59,7 @@ class AuthRepo {
     }
   }
 
-  void saveLoginResult(LoginEntity result) async {
+  Future<void> saveLoginResult(LoginEntity result) async {
     DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
     await SharedPrefRepo.saveToken(result.accessToken);
     await SharedPrefRepo.saveUserId(result.user.id);
@@ -82,9 +82,6 @@ class AuthRepo {
       } else if (emailResponse is FindEmailEntity) {
         var result = await _authProvider.login(emailResponse.email, password);
 
-        if (result is ErrorEntity && result.code != null) {
-          return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
-        }
         if (result is LoginEntity) {
           if (result.accessToken == null || result.accessToken.isEmpty) {
             return Pair(STATE.ERROR, null, erroMsg: "Token Invalid");
@@ -94,15 +91,10 @@ class AuthRepo {
 
             var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
             DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
-            if (updateResult is ErrorEntity) {
-              await clearLoginResult();
-              return Pair(STATE.ERROR, null, erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
-            }
-            if (updateResult is UpdateProfileEntity) {
-              DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken);
-              return Pair(STATE.SUCCESS, DataProvider.user);
-            }
+            return Pair(STATE.SUCCESS, DataProvider.user);
           }
+        } else {
+          return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${(result is ErrorEntity) ? result.message : 'Vui lòng thử lại'}');
         }
       }
     } catch (e) {
