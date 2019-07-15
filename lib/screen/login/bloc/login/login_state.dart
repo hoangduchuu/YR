@@ -8,6 +8,7 @@ abstract class LoginState extends Equatable {
 }
 
 class InitialLoginState extends LoginState {}
+class ResetState extends LoginState {}
 
 class LoggedInState extends LoginState {
   final bool isInvalidInput;
@@ -15,23 +16,12 @@ class LoggedInState extends LoginState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
-  String errorMsg ;
+  String errorMsg;
 
-  LoggedInState(
-      {this.isInvalidInput,
-      this.isInValidPass,
-      this.isSubmitting,
-      this.isSuccess,
-      this.isFailure,
-      this.errorMsg})
-      : super([
-          isInvalidInput,
-          isInValidPass,
-          isSubmitting,
-          isSuccess,
-          isFailure,
-          errorMsg
-        ]);
+  bool newFacebookUser;
+
+  LoggedInState({this.isInvalidInput, this.isInValidPass, this.isSubmitting, this.isSuccess, this.isFailure, this.errorMsg, this.newFacebookUser})
+      : super([isInvalidInput, isInValidPass, isSubmitting, isSuccess, isFailure, errorMsg, newFacebookUser]);
 
   factory LoggedInState.invalidInput(String message) {
     return LoggedInState(
@@ -40,44 +30,25 @@ class LoggedInState extends LoginState {
         isSubmitting: false,
         isSuccess: false,
         errorMsg: message,
+        newFacebookUser: false,
         isFailure: true);
   }
 
   factory LoggedInState.invalidPassword() {
-    return LoggedInState(
-        isInvalidInput: false,
-        isInValidPass: true,
-        isSubmitting: false,
-        isSuccess: false,
-        isFailure: false);
+    return LoggedInState(isInvalidInput: false, isInValidPass: true, isSubmitting: false, isSuccess: false, newFacebookUser: false, isFailure: false);
   }
 
   factory LoggedInState.submitting() {
-    return LoggedInState(
-        isInvalidInput: false,
-        isInValidPass: false,
-        isSubmitting: true,
-        isSuccess: false,
-        isFailure: false);
+    return LoggedInState(isInvalidInput: false, isInValidPass: false, isSubmitting: true, isSuccess: false, newFacebookUser: false, isFailure: false);
   }
 
   factory LoggedInState.success(User user) {
-    return LoggedInState(
-        isInvalidInput: false,
-        isInValidPass: false,
-        isSubmitting: false,
-        isSuccess: true,
-        isFailure: false);
+    return LoggedInState(isInvalidInput: false, isInValidPass: false, isSubmitting: false, newFacebookUser: false, isSuccess: true, isFailure: false);
   }
 
   factory LoggedInState.failed(String msg) {
     return LoggedInState(
-        isInvalidInput: false,
-        isInValidPass: false,
-        isSubmitting: false,
-        isSuccess: false,
-        isFailure: true,
-        errorMsg: msg);
+        isInvalidInput: false, isInValidPass: false, isSubmitting: false, newFacebookUser: false, isSuccess: false, isFailure: true, errorMsg: msg);
   }
 
   factory LoggedInState.empty() {
@@ -86,16 +57,18 @@ class LoggedInState extends LoginState {
       isInValidPass: false,
       isSubmitting: false,
       isSuccess: false,
+      newFacebookUser: false,
       isFailure: false,
     );
   }
 
+  factory LoggedInState.NewFacebookUser() {
+    return LoggedInState(
+        isInvalidInput: false, isInValidPass: false, isSubmitting: false, newFacebookUser: true, isSuccess: false, isFailure: false, errorMsg: "");
+  }
+
   @override
   String toString() {
-    return 'LoggedInState{isValidEmail: $isInvalidInput,'
-        ' isValidPass: $isInValidPass,'
-        ' isSubmitting: $isSubmitting,'
-        ' isSuccess: $isSuccess,'
-        ' isFailure: $isFailure}';
+    return 'LoggedInState{isInvalidInput: $isInvalidInput, isInValidPass: $isInValidPass, isSubmitting: $isSubmitting, isSuccess: $isSuccess, isFailure: $isFailure, errorMsg: $errorMsg, newFacebookUser: $newFacebookUser}';
   }
 }

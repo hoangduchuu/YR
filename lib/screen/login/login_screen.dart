@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
+import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
@@ -29,6 +31,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   String _email = "huu@example.com";
   String _password = "john.doe";
   String _token;
+  String _phone, _facebookId,_deviceId,_facebookEmail,_fullname;
   FirebaseMessaging _firebaseMessaging;
   BuildContext _context;
 
@@ -70,6 +73,9 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           if (state.isFailure) {
             super.hideLoadingWithContext(context);
             super.showErrorWithContext("${state.errorMsg}", context);
+          }
+          if(state.newFacebookUser){
+            _showPhoneInputDialog(_context);
           }
         }
       },
@@ -219,12 +225,16 @@ class _LoginScreenState extends BaseState<LoginScreen> {
       var facebookSignIn = FacebookLogin();
       final result = await facebookSignIn.logInWithReadPermissions(['email', 'public_profile']);
       final token = result.accessToken.token;
-      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=email&access_token=${"$token"}');
+      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${"$token"}');
       final profile = json.decode(graphResponse.body);
       super.showSuccessToast(_context, "${profile.toString()}");
-      // dispatch facebook submited
+       _fullname = profile['name'];
+       _facebookEmail = profile['email'];
+       _facebookId = profile['id'];
+       _deviceId = await getDeviceId();
+      _loginBloc.dispatch(LoginFacebookRequest(_facebookEmail, _fullname, _facebookId, _deviceId,null));
     } catch (e) {
-      super.showErrorToast(_context, "${e.toString()}");
+      super.showErrorToast(_context, "Có lỗi: ${e.toString()}");
     }
   }
 
@@ -234,5 +244,40 @@ class _LoginScreenState extends BaseState<LoginScreen> {
     }).catchError((err) {
       return "ERROR_GET_DEVICE_ID";
     });
+  }
+
+  Future<String> _showPhoneInputDialog(BuildContext context) async {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Một bước nữa thôi, vui lòng nhập số điện thoại để hoàn tất'),
+          content: new Row(
+            children: <Widget>[
+              new Expanded(
+                  child: new TextField(
+                    autofocus: true,
+                    decoration: new InputDecoration(
+                        labelText: 'Số điện thoại', hintText: '0919991991'),
+                    onChanged: (value) {
+                      _phone = value;
+                    },
+                  ))
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Xác nhận'),
+              onPressed: () => _handleLoginWithFacebookAndSubmmitedPhone(_context),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  _handleLoginWithFacebookAndSubmmitedPhone(BuildContext context){
+    _loginBloc.dispatch(LoginFacebookRequest(_facebookEmail,_fullname,_facebookId,_deviceId,_phone));
+    Navigator.of(context).pop(_phone);
   }
 }

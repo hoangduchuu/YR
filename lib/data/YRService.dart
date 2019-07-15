@@ -30,7 +30,7 @@ class YRService {
   //authentication
   static String PATH_USERS = '/users';
   static String PATH_LOGIN = '/authentication';
-  static String PATH_LOGIN_FACEBOOK = '/facebook/auth';
+  static String PATH_LOGIN_FACEBOOK = '/auth/facebook';
   static String PATH_FORGET_REQUEST = '/forgot-request';
   static String PATH_FORGET_CHANGE = '/forgot-verify';
   static String PATH_UPLOAD_IMAGE = '/upload/image';
