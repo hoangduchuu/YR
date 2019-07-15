@@ -36,9 +36,13 @@ class NotificationManager {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('*("2 register ********* on message $message');
-        var title = message['notification']['title'];
-        var body = message['notification']['body'];
+//        var title = message['notification']['title'];
+//        var body = message['notification']['body'];
+
+        var title = "Title";
+        var body = message.toString();
         _showDialog(_context, title, body);
+
       },
       onResume: (Map<String, dynamic> message) async {
         print(' 2register ********** on resume $message');
