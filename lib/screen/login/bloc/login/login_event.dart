@@ -24,3 +24,14 @@ class LoggedInRequest extends LoginEvent {
     return 'LoggedInRequest{}';
   }
 }
+
+class LoginFacebookRequest extends LoginEvent {
+  final String email, fullName, facebookId, deviceId, phone;
+
+  LoginFacebookRequest(this.email, this.fullName, this.facebookId, this.deviceId,this.phone);
+
+  @override
+  String toString() {
+    return 'LoginFacebookRequest{email: $email, fullName: $fullName, facebookId: $facebookId, deviceId: $deviceId , Phone : $phone}';
+  }
+}

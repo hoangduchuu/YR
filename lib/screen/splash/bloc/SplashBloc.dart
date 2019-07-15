@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
@@ -8,20 +9,20 @@ import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 //region Bloc
-class SplashBloc extends Bloc<BaseSplashEvent, SplashState> {
+class SplashBloc extends Bloc<BaseSplashEvent, BaseBlocState> {
   AuthRepo authRepo = injector<AuthRepo>();
 
   @override
   SplashState get initialState => InitialState();
 
   @override
-  Stream<SplashState> mapEventToState(BaseSplashEvent event) async* {
+  Stream<BaseBlocState> mapEventToState(BaseSplashEvent event) async* {
     if (event is GetUserInfoEvent) {
       yield* _handleLoginState(event.userId, event.token);
     }
   }
 
-  Stream<SplashState> _handleLoginState(String userId, String token) async* {
+  Stream<BaseBlocState> _handleLoginState(String userId, String token) async* {
     try {
       Pair<STATE, User> result = await authRepo.getUserInfo(userId, token);
       if (result.left == STATE.SUCCESS) {
@@ -55,7 +56,7 @@ class GetUserInfoEvent extends BaseSplashEvent {
 
 //region State
 @immutable
-abstract class SplashState extends Equatable {
+abstract class SplashState extends BaseBlocState {
   SplashState([List props = const []]) : super(props);
 }
 

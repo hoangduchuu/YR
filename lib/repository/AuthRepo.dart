@@ -8,8 +8,10 @@ import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
+import 'package:your_reward_user/entity/facebook_error_entity.dart';
 import 'package:your_reward_user/entity/find_email_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/login_facebook_entity.dart';
 import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
@@ -20,7 +22,6 @@ import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/screen/sign_up/SignupBloc.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
-
 import 'DataProvider.dart';
 
 class AuthRepo {
@@ -63,6 +64,8 @@ class AuthRepo {
     await SharedPrefRepo.saveToken(result.accessToken);
     await SharedPrefRepo.saveUserId(result.user.id);
   }
+
+//  void saveFacebookLoggedInResult()
 
   void clearLoginResult() async {
     DataProvider.provideData(null, null);
@@ -223,5 +226,42 @@ class AuthRepo {
     } catch (error) {
       return Pair(false, null, erroMsg: error.toString());
     }
+  }
+
+  Future<Pair<FACEBOOK_STATE, dynamic>> registerFacebook(String email, String facebookId, String fullName, String deviceId,String phone) async {
+    var result = await _authProvider.registerWithFacebook(email, facebookId, fullName,phone);
+    if (result is NewFacebookRegisterEntity) {
+      // return the new facebook register entity
+      return Pair(FACEBOOK_STATE.NEW_USER, null);
+    }
+    if (result is LoginFacebookEntity) {
+      // logged in status
+      if (result.accessToken.accessToken == null || result.accessToken.accessToken.isEmpty) {
+        return Pair(FACEBOOK_STATE.COMMON_ERROR, null, erroMsg: "Token Invalid");
+      } else {
+        // login success --> Update UserIdToken
+        await saveLoginFacebookResult(result);
+
+        var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
+        if (updateResult is ErrorEntity) {
+          await clearLoginResult();
+          return Pair(FACEBOOK_STATE.COMMON_ERROR, null, erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
+        }
+        if (updateResult is UpdateProfileEntity) {
+          DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken.accessToken);
+          return Pair(FACEBOOK_STATE.SUCCESS, DataProvider.user);
+        }
+      }
+    }
+    if (result is FaceBookRequestErrorEntity) {
+      return Pair(FACEBOOK_STATE.COMMON_ERROR, result.message,erroMsg: result.message);
+    }
+
+  }
+
+  saveLoginFacebookResult(LoginFacebookEntity result) async {
+    DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken.accessToken);
+    await SharedPrefRepo.saveToken(result.accessToken.accessToken);
+    await SharedPrefRepo.saveUserId(result.user.id);
   }
 }

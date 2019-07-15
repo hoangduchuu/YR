@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/Store.dart';
 
 @immutable
-abstract class MemberShipDetailBaseState extends Equatable {
+abstract class MemberShipDetailBaseState extends BaseBlocState {
   MemberShipDetailBaseState([List props = const []]) : super(props);
 
   @override
@@ -21,10 +22,10 @@ class InitialState extends MemberShipDetailBaseState {
   }
 }
 
-class OngetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
+class OnGetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
   List<Store> stores;
 
-  OngetMemberShipDetailSuccessState(this.stores);
+  OnGetMemberShipDetailSuccessState(this.stores);
 
   @override
   String toString() {
@@ -33,75 +34,27 @@ class OngetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
 
 }
 
-class GetMemmberShipDetailState extends MemberShipDetailBaseState {
-   bool isLoading;
-  final bool isError;
-  String errMsg;
-  List<Store> stores;
+class GetMemberShipDetailSuccessState extends MemberShipDetailBaseState{
+  final List<Store> stores;
 
-  GetMemmberShipDetailState({this.stores, this.isLoading, this.isError, this.errMsg})
-      : super([isLoading, isError, errMsg]);
+  GetMemberShipDetailSuccessState(this.stores) : super([stores]);
 
-  factory GetMemmberShipDetailState.empty() {
-    return GetMemmberShipDetailState(
-      isLoading: false,
-      isError: false,
-    );
-  }
-
-  factory GetMemmberShipDetailState.isLoading() {
-    return GetMemmberShipDetailState(
-      isLoading: true,
-      isError: false,
-    );
-  }
-
-  factory GetMemmberShipDetailState.isError({String errMsg}) {
-    return GetMemmberShipDetailState(
-        isLoading: false, isError: true, errMsg: errMsg);
-  }
-
-  factory GetMemmberShipDetailState.success(List<Store> data) {
-    return GetMemmberShipDetailState(stores: data);
+  @override
+  String toString() {
+    return 'GetMemberShipDetailSuccessState{stores: $stores}';
   }
 }
 
 /// Start get Couopon
-class OngetGetCouponSuccessState extends MemberShipDetailBaseState {
-  List<Coupon> coupons;
+class OnGetCouponSuccessState extends MemberShipDetailBaseState {
+  final List<Coupon> coupons;
 
-  OngetGetCouponSuccessState(this.coupons);
+  OnGetCouponSuccessState(this.coupons) : super([coupons]);
 }
 
-class GetCouponState extends MemberShipDetailBaseState {
-  final bool isLoading = false;
-  final bool isError = false;
-  String errMsg;
-  List<Store> stores;
+class GetCouponSuccessState extends MemberShipDetailBaseState{
+  final List<Store> stores;
 
-  GetCouponState({this.stores, isLoading, isError, this.errMsg})
-      : super([isLoading, isError, errMsg]);
-
-  factory GetCouponState.empty() {
-    return GetCouponState(
-      isLoading: false,
-      isError: false,
-    );
-  }
-
-  factory GetCouponState.isLoading() {
-    return GetCouponState(
-      isLoading: true,
-      isError: false,
-    );
-  }
-
-  factory GetCouponState.isError({String errMsg}) {
-    return GetCouponState(isLoading: false, isError: true, errMsg: errMsg);
-  }
-
-  factory GetCouponState.success(List<Store> data) {
-    return GetCouponState(stores: data);
-  }
+  GetCouponSuccessState(this.stores) : super([stores]);
 }
 /// END GET COUPON

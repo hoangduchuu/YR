@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
@@ -12,68 +15,61 @@ import 'bloc/request_pass_event.dart';
 import 'bloc/request_pass_state.dart';
 import 'change_passs_screen.dart';
 
-class ForgotPassRequestScreen extends StatefulWidget {
+class ForgotPassRequestScreen extends BasePage {
   @override
   _ForgotPassRequestScreenState createState() =>
       _ForgotPassRequestScreenState();
 }
 
-class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> {
+class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> with
+  ErrorMessageHandler, ScaffoldPage{
   RequestChangePassBloc _bloc;
   String _email;
 
   @override
   void initState() {
+    super.initState();
     _bloc = RequestChangePassBloc();
   }
 
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget appBar() {
+    return AppBar(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: HColors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        elevation: 0.0,
-        title: Text(
-          'Quên mật khẩu?',
-          style: TextStyle(
-              color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
-        ),
+      leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: HColors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+      elevation: 0.0,
+      title: Text(
+        'Quên mật khẩu?',
+        style: TextStyle(
+            color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
       ),
-      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  @override
+  Widget body() {
+    return _buildBody();
+  }
+
+  Widget _buildBody() {
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
-        if (state is RequestPassState) {
-          if (!state.emailValid) {
-            super.showErrorWithContext(state.errMsg, context);
-          }
-          if (state.isLoading) {
-            super.showLoadingWithContext(context);
-          }
-          if (state.isError) {
-            super.showErrorWithContext(state.errMsg, context);
-            super.hideLoadingWithContext(context);
-          }
-          if (state.success) {
-            super.hideLoadingWithContext(context);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChangePassScreen(_email)));
-          }
+        handleUIControlState(state);
+        if (state is RequestPassSuccessState){
+          super.hideLoadingWithContext(context);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChangePassScreen(_email)));
         }
       },
       child: Stack(children: <Widget>[
@@ -164,4 +160,10 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> {
   void _handleCLick() {
     _bloc.dispatch(RequestPassEvent(_email));
   }
+
+  @override
+  Color getBgColor() {
+    return null;
+  }
+
 }

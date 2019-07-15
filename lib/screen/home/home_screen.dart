@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/bloc/home/home_state_stores.dart';
-import 'package:your_reward_user/bloc/home/home_bloc.dart';
-import 'package:your_reward_user/bloc/home/home_event.dart';
-import 'package:your_reward_user/bloc/home/home_state_transactions.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
@@ -19,18 +18,23 @@ import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'bloc/home_bloc.dart';
+import 'bloc/home_event.dart';
+import 'bloc/home_state_stores.dart';
+import 'bloc/home_state_transactions.dart';
+
+class HomeScreen extends BasePage {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseState<HomeScreen> {
+class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
+    ScaffoldPage{
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;
   List<Transaction> _transactions;
   bool isSliderLoaded = false;
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -40,54 +44,51 @@ class _HomeScreenState extends BaseState<HomeScreen> {
     _homeBloc.dispatch(GetTransactionRequest(DataProvider.user.id));
   }
 
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: HColors.white,
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.userCircle),
-            color: HColors.ColorSecondPrimary,
-            onPressed: () {
-              Navigator.pushNamed(context, '/accountinfo');
-            },
-          ),
-        ],
-      ),
+  Widget body() {
+    return _buildBody();
+  }
+
+  @override
+  Widget appBar() {
+    return AppBar(
       backgroundColor: HColors.white,
-      body: _buildBody(),
+      elevation: 0.0,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(FontAwesomeIcons.userCircle),
+          color: HColors.ColorSecondPrimary,
+          onPressed: () {
+            Navigator.pushNamed(context, '/accountinfo');
+          },
+        ),
+      ],
     );
+  }
+
+  @override
+  Color getBgColor() {
+    return HColors.white;
   }
 
   Widget _buildBody() {
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
-        if (state is GetMemberShipCards) {
-          if (state.isError) {
-            super.showErrorWithContext("${state.errMsg}", super.context);
-          } else if (state.isLoading) {
-            super.showLoadingWithContext(_scaffoldKey.currentState.context);
-          } else {
-            super.hideLoadingWithContext(super.context);
-          }
-          if (state.isEmpty) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
-          }
+        handleUIControlState(state);
+        if (state is GetMemberShipCardsEmptyState){
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
         } else if (state is GetMembershipCardSuccessState) {
-          super.hideLoadingWithContext(_scaffoldKey.currentState.context);
+          super.hideLoading();
           setState(() {
             isSliderLoaded = true;
             _memberships = state.memberships;
 
           });
-        }
-        if (state is OnGetTransactionSuccess) {
-          super.hideLoadingWithContext(super.context);
+        } else if (state is OnGetTransactionSuccess) {
+          super.hideLoading();
           setState(() {
             _transactions = state.transactions;
           });
@@ -161,4 +162,6 @@ class _HomeScreenState extends BaseState<HomeScreen> {
               point: _transactions[index].point);
         });
   }
+
+
 }
