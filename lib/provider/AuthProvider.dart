@@ -10,12 +10,16 @@ import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
+import 'package:your_reward_user/entity/facebook_error_entity.dart';
 import 'package:your_reward_user/entity/find_email_entity.dart';
 import 'package:your_reward_user/entity/forgot_entity.dart';
+import 'package:your_reward_user/entity/login_facebook_entity.dart';
 import 'package:your_reward_user/entity/update_profile_entity.dart';
 import 'package:your_reward_user/entity/upload_entity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/entity/user_update_request_entity.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/utils/pair.dart';
 
 class AuthProvider {
   MyHttpClient client;
@@ -27,18 +31,28 @@ class AuthProvider {
   //register
   Future<dynamic> register(RegisterRequest body) async {
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}';
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
     var result = new RegisterRespParser().parse(raw);
     return result;
   }
 
   //register Facebook
-  Future<dynamic> registerWithFacebook(RegisterFacebookRequest body) async {
+  Future<dynamic> registerWithFacebook(String email, facebookId, String fullName, String phone) async {
+    var body = {"facebookId": facebookId, "email": email, "fullname": fullName, "avatar": "http://example.com/img.png", "strategy": "facebook"};
+    if (phone != null) {
+      body = {
+        "facebookId": facebookId,
+        "email": email,
+        "fullname": fullName,
+        "avatar": "http://example.com/img.png",
+        "strategy": "facebook",
+        "phone": phone
+      };
+    }
     String url = '${YRService.END_POINT}${YRService.PATH_LOGIN_FACEBOOK}';
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, body.toJSON());
-    var result = new RegisterRespParser().parse(raw);
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    var result = new FaecbookLoginParser().parse(raw);
+
     return result;
   }
 
@@ -46,8 +60,7 @@ class AuthProvider {
   Future<dynamic> login(String email, String password) async {
     var body = {'email': email, 'password': password, 'strategy': 'local'};
     String url = '${YRService.END_POINT}${YRService.PATH_LOGIN}';
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
     var result = new LoginResponseParser().parse(raw);
     return result;
   }
@@ -63,18 +76,15 @@ class AuthProvider {
   Future<dynamic> requestChangePasswordCode(String email) async {
     String url = '${YRService.END_POINT}${YRService.PATH_FORGET_REQUEST}';
     var body = {"email": email};
-    String raw =
-        await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body));
     var result = new RequestPasswordParser().parse(raw);
     return result;
   }
 
-  Future<dynamic> changePassword(
-      String email, String code, String password) async {
+  Future<dynamic> changePassword(String email, String code, String password) async {
     String url = '${YRService.END_POINT}${YRService.PATH_FORGET_CHANGE}';
     var body = {'email': email, 'forgotCode': code, 'password': password};
-    String raw = await client.post(
-        url, YRService.DEFAULT_HEADER, jsonEncode(body).toString());
+    String raw = await client.post(url, YRService.DEFAULT_HEADER, jsonEncode(body).toString());
     var result = new ChangePasswordParser().parse(raw);
     return result;
   }
@@ -90,22 +100,16 @@ class AuthProvider {
   Future<dynamic> updateAvatar(String userId, String imageUrl) async {
     var body = {'thumbnail': imageUrl};
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
-    String raw = await client.patch(
-        url, YRService.generateHeadersWithToken(), jsonEncode(body));
+    String raw = await client.patch(url, YRService.generateHeadersWithToken(), jsonEncode(body));
     var result = new UpdateProfileParser().parse(raw);
     return result;
   }
 
   //update profile
   Future<dynamic> updateProfile(String userId, UserRequest requestBody) async {
-    var body = {
-      "email": requestBody.email,
-      "phone": requestBody.phone,
-      "fullname": requestBody.fullname
-    };
+    var body = {"email": requestBody.email, "phone": requestBody.phone, "fullname": requestBody.fullname};
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
-    String raw = await client.patch(
-        url, YRService.generateHeadersWithToken(), jsonEncode(body));
+    String raw = await client.patch(url, YRService.generateHeadersWithToken(), jsonEncode(body));
     var result = new UpdateProfileParser().parse(raw);
     return result;
   }
@@ -120,9 +124,9 @@ class AuthProvider {
 
   //update profile
   Future<dynamic> updateDeviceId(String userId, String deviceId) async {
-    var body = {
-      "deviceId": deviceId,
-    };
+    Pair<String, String> fullToken = CommonUtils.splitFirebaseToken(deviceId);
+
+    var body = {"deviceId": fullToken.left, "registrationToken": deviceId};
     String url = '${YRService.END_POINT}${YRService.PATH_USERS}/$userId';
     String raw = await client.patch(url, YRService.generateHeadersWithToken(), jsonEncode(body));
     var result = new UpdateProfileParser().parse(raw);
@@ -161,8 +165,7 @@ class RequestPasswordParser {
 class ChangePasswordParser {
   ChangePasswordEntity parse(String raw) {
     Map<String, dynamic> map = jsonDecode(raw);
-    return ChangePasswordEntity(
-        status: map['status'], email: map['email'], role: map['role']);
+    return ChangePasswordEntity(status: map['status'], email: map['email'], role: map['role']);
   }
 }
 
@@ -182,10 +185,34 @@ class UpdateProfileParser extends BaseParser<UpdateProfileEntity> {
 
 class FindEmailParser {
   dynamic parse(String raw) {
-    if (raw == "{}" || raw.length <4 || raw.contains('"status":false')) {
+    if (raw == "{}" || raw.length < 4 || raw.contains('"status":false')) {
       return FindEmailNotFoundEntity();
-    } else {
-    }
+    } else {}
     return FindEmailEntity.fromJson(raw);
+  }
+}
+
+class FaecbookLoginParser {
+  dynamic parse(String raw) {
+    print("START PARSING ");
+    try {
+      Map<String, dynamic> map = jsonDecode(raw);
+
+      if (map.containsKey('errors')) {
+        if (map['errors']['phone'] is Map) {
+          if (map['errors']['phone']['kind'] == "required") return NewFacebookRegisterEntity();
+        } else {
+          if (map['errors']['phone'] is String) {
+            return FaceBookRequestErrorEntity(message: map['message']);
+          }
+        }
+      }
+      if (map['accessToken'] != null) {
+        return LoginFacebookEntity.fromMap(map);
+      }
+    } catch (error) {
+      print("catch errror ---- --- --  --${error.toString()}");
+      FaceBookRequestErrorEntity(message: "ERROR catch error $error");
+    }
   }
 }

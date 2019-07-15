@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/bloc/home/home_state_stores.dart';
-import 'package:your_reward_user/bloc/home/home_bloc.dart';
-import 'package:your_reward_user/bloc/home/home_event.dart';
-import 'package:your_reward_user/bloc/home/home_state_transactions.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
@@ -21,6 +17,11 @@ import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
 
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
+
+import 'bloc/home_bloc.dart';
+import 'bloc/home_event.dart';
+import 'bloc/home_state_stores.dart';
+import 'bloc/home_state_transactions.dart';
 
 class HomeScreen extends BasePage {
   @override
@@ -74,7 +75,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
-
+        handleUIControlState(state);
         if (state is GetMemberShipCardsEmptyState){
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));

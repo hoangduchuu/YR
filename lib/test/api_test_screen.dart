@@ -183,19 +183,19 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   }
 
   void _onLoginFacebook() {
-    print(LogPrefix.methodName("_onLoginFacebook"));
-    RegisterFacebookRequest body = RegisterFacebookRequest(
-        facebookId: "9929992",
-        email: CommonUtils.getRandomEmail(),
-        avatar:
-            "https://s.vnecdn.net/vnexpress/restruct/i/v75/graphics/img_logo_vne_web.gif",
-        tokenKey: "abcdaskljdlkasjdslkjdalsj093784jklshfs",
-        strategy: "facebook");
-    repo.registerWithFacebook(body).then((onValue) {
-      print(LogPrefix.okResponse(onValue));
-    }).catchError((e) {
-      print(LogPrefix.errorResponse(e));
-    });
+//    print(LogPrefix.methodName("_onLoginFacebook"));
+//    RegisterFacebookRequest body = RegisterFacebookRequest(
+//        facebookId: "9929992",
+//        email: CommonUtils.getRandomEmail(),
+//        avatar:
+//            "https://s.vnecdn.net/vnexpress/restruct/i/v75/graphics/img_logo_vne_web.gif",
+//        tokenKey: "abcdaskljdlkasjdslkjdalsj093784jklshfs",
+//        strategy: "facebook");
+//    repo.registerWithFacebook(body).then((onValue) {
+//      print(LogPrefix.okResponse(onValue));
+//    }).catchError((e) {
+//      print(LogPrefix.errorResponse(e));
+//    });
   }
 
   void _onGetPosts() {

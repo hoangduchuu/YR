@@ -8,8 +8,8 @@ import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
-import 'package:your_reward_user/test/home_screen.dart';
-import 'package:your_reward_user/test/login_screen.dart';
+import 'package:your_reward_user/screen/home/home_screen.dart';
+import 'package:your_reward_user/screen/login/login_screen.dart';
 
 import 'bloc/SplashBloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
