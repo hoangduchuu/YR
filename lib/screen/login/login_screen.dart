@@ -74,7 +74,7 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler,
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeScreen()));
         } else if(state is LoggedInFacebookState){
-          _showPhoneInputDialog(_context);
+          _showPhoneInputDialog(super.scaffoldKey.currentContext);
         }
       },
       child: Stack(
