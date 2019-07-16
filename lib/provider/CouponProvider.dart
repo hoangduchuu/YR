@@ -21,49 +21,41 @@ class CouponProvider {
     params['ownerId'] = ownerId;
     params['userId'] = userId;
     params['status'] = "active";
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), params);
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = new GetCouponParser().parse(raw);
     return result;
   }
 
   Future<dynamic> getCouponDetails(String couponId) async {
     String url = '${YRService.END_POINT}${YRService.PATH_COUPONS}/$couponId';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponDetaiParser().parse(raw);
     return result;
   }
 
-  Future<dynamic> getMemberShipCards(String userId,
-      {int limit = 200, int skip = 0}) async {
+  Future<dynamic> getMemberShipCards(String userId, {int limit = 200, int skip = 0}) async {
     String url = '${YRService.END_POINT}${YRService.PATH_STORE_USER}';
 
     Map<String, String> param = Map();
     param['userId'] = userId;
 
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), param);
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), param);
     var result = GetMemberShipCardParser().parse(raw);
     return result;
   }
 
-  Future<dynamic> getStores(String ownerId,
-      {int limit = 200, int skip = 0}) async {
+  Future<dynamic> getStores(String ownerId, {int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_STORES}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}&userId=$ownerId';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = GetStoresParser().parse(raw);
     return result;
   }
 
-  Future<dynamic> getTransactionByStoreId(String storeID,
-      {int limit = 200, int skip = 0}) async {
+  Future<dynamic> getTransactionByStoreId(String storeID, {int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_TRANSACTIONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}&ownerId=$storeID';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = GetTransactionParser().parse(raw);
     return result;
   }
@@ -71,8 +63,7 @@ class CouponProvider {
   Future<dynamic> getAllTransactions({int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_TRANSACTIONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = GetTransactionParser().parse(raw);
     return result;
   }
@@ -80,16 +71,14 @@ class CouponProvider {
   Future<dynamic> getCouponsOfUser({int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = new GetCouponParser().parse(raw);
     return result;
   }
 
   Future<dynamic> getCouponDetailById(String couponId) async {
     String url = '${YRService.END_POINT}${YRService.PATH_MY_COUPONS}/$couponId';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = CouponEntity.fromRawJson(raw);
     return result;
   }

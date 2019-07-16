@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'BasePage.dart';
 import 'BaseState.dart';
 
-mixin ScaffoldPage<page extends BasePage> on BaseState<page>{
+mixin ScaffoldPage<page extends BasePage> on BaseState<page> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       body: body(),
@@ -13,6 +13,7 @@ mixin ScaffoldPage<page extends BasePage> on BaseState<page>{
       backgroundColor: getBgColor() ?? Colors.transparent,
     );
   }
+
   //abstract build body
   Widget body();
 

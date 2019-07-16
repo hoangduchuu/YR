@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +11,6 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
-import 'dart:ui' as ui;
 
 import 'SignupBloc.dart';
 
@@ -18,7 +19,7 @@ class SignUpScreen extends BasePage {
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandler, ScaffoldPage{
+class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandler, ScaffoldPage {
   SignUpBloc _signUpBloc;
   String _email, _password, _repassword, _name, _phone;
 
@@ -42,7 +43,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
   Color getBgColor() {
     return HColors.white;
   }
-  
+
   Widget _buildBody() {
     return BlocListener(
       bloc: _signUpBloc,
@@ -60,8 +61,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
             decoration: BoxDecoration(
               color: Colors.white,
               image: DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
                 image: AssetImage('assets/images/bg1.jpg'),
                 fit: BoxFit.cover,
               ),
@@ -70,8 +70,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
               filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
               child: new Container(
                 //you can change opacity with color here(I used black) for background.
-                decoration:
-                    new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+                decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
               ),
             ),
           ),
@@ -139,8 +138,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
                       model.gender = "male";
                       model.password = _password;
                       model.confirmPasswrod = _repassword;
-                      model.thumbnail =
-                          'http://your-reward-panel.culidev.com/assets/img/brand/blue.png';
+                      model.thumbnail = 'http://your-reward-panel.culidev.com/assets/img/brand/blue.png';
                       model.status = "active";
                       print("DISPATH SIGN UP");
                       _signUpBloc.dispatch(SignUpEvent(model));
@@ -149,8 +147,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
                     textColor: HColors.white,
                     text: Text(
                       'Đăng ký',
-                      style: TextStyle(
-                          fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                      style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                     ),
                     width: MediaQuery.of(context).size.width * 0.72,
                     radiusValue: 10,
@@ -177,8 +174,8 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
                         textAlign: TextAlign.end,
                       ),
                       onPressed: () => {
-                            Navigator.pop(context),
-                          },
+                        Navigator.pop(context),
+                      },
                     ),
                   ],
                 ),
@@ -189,6 +186,4 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
       ),
     );
   }
-
-
 }

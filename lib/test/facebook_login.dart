@@ -6,7 +6,6 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 
 class FacebookLoginPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return new FacebookLoginPageState();
@@ -19,15 +18,13 @@ class FacebookLoginPageState extends State<FacebookLoginPage> {
 
   var facebookLogin = FacebookLogin();
 
-
   @override
   void initState() {
     super.initState();
-     facebookLogin.isLoggedIn.then((onValue){
-        isLoggedIn = onValue;
-        print('facebook login: $isLoggedIn');
+    facebookLogin.isLoggedIn.then((onValue) {
+      isLoggedIn = onValue;
+      print('facebook login: $isLoggedIn');
     });
-
   }
 
   void onLoginStatusChanged(bool isLoggedIn, {profileData}) {
@@ -48,24 +45,20 @@ class FacebookLoginPageState extends State<FacebookLoginPage> {
               Icons.exit_to_app,
               color: Colors.white,
             ),
-            onPressed: () => facebookLogin.isLoggedIn
-                .then((isLoggedIn) => isLoggedIn ? _logout() : {}),
+            onPressed: () => facebookLogin.isLoggedIn.then((isLoggedIn) => isLoggedIn ? _logout() : {}),
           ),
         ],
       ),
       body: Container(
         child: Center(
-          child: isLoggedIn
-              ? _displayUserData(profileData)
-              : _displayLoginButton(),
+          child: isLoggedIn ? _displayUserData(profileData) : _displayLoginButton(),
         ),
       ),
     );
   }
 
   void initiateFacebookLogin() async {
-    var facebookLoginResult =
-    await facebookLogin.logInWithReadPermissions(['email']);
+    var facebookLoginResult = await facebookLogin.logInWithReadPermissions(['email']);
 
     switch (facebookLoginResult.status) {
       case FacebookLoginStatus.error:
@@ -76,8 +69,7 @@ class FacebookLoginPageState extends State<FacebookLoginPage> {
         break;
       case FacebookLoginStatus.loggedIn:
         var graphResponse = await http.get(
-            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(200)&access_token=${facebookLoginResult
-                .accessToken.token}');
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(200)&access_token=${facebookLoginResult.accessToken.token}');
 
         var profile = jsonDecode(graphResponse.body);
         print(profile.toString());
@@ -128,5 +120,3 @@ class FacebookLoginPageState extends State<FacebookLoginPage> {
     print("Logged out");
   }
 }
-
-

@@ -1,4 +1,3 @@
-import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 
 import 'home_state.dart';
@@ -14,8 +13,7 @@ class OnGetTransactionSuccess extends HomeState {
   }
 }
 
-class GetTransactionEmptyState extends HomeState{
-
+class GetTransactionEmptyState extends HomeState {
   @override
   String toString() {
     return 'GetTransactionEmptyState{}';

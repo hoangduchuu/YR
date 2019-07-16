@@ -21,7 +21,7 @@ class ProfileBloc extends Bloc<ProfileEvent, BaseBlocState> {
     if (event is UpdateUserInfo) {
       yield* _handleUserInfo(event.user);
     }
-    if(event is SignoutEvent){
+    if (event is SignoutEvent) {
       yield* _handleSignOut(event.userId);
     }
   }
@@ -64,6 +64,7 @@ class ProfileBloc extends Bloc<ProfileEvent, BaseBlocState> {
       yield ResetState();
     }
   }
+
   Stream<BaseBlocState> _handleSignOut(String userId) async* {
     try {
       yield UIControlState.showLoading();

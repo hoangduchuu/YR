@@ -35,8 +35,7 @@ class AuthorEntity {
     this.points,
   });
 
-  factory AuthorEntity.fromRawJson(String str) =>
-      AuthorEntity.fromJson(json.decode(str));
+  factory AuthorEntity.fromRawJson(String str) => AuthorEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 

@@ -63,7 +63,10 @@ class _MemberCardState extends State<MemberCard> {
                         shape: BoxShape.circle,
                       ),
                       child: Center(
-                        child: ImageLoader(url: DataProvider.user.avatar,radius: 30,),
+                        child: ImageLoader(
+                          url: DataProvider.user.avatar,
+                          radius: 30,
+                        ),
                       ),
                     ),
                     Container(
@@ -72,10 +75,7 @@ class _MemberCardState extends State<MemberCard> {
                       child: Text(
                         widget.memberName,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                       ),
                     )
                   ],
@@ -94,10 +94,8 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Điểm tích lũy',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: Hfonts.PrimaryFontRegular),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white, fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -122,10 +120,8 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Ngày tham gia',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: Hfonts.PrimaryFontRegular),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white, fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -150,10 +146,8 @@ class _MemberCardState extends State<MemberCard> {
                           children: <Widget>[
                             Text(
                               'Lần tích điểm',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: Hfonts.PrimaryFontRegular),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white, fontFamily: Hfonts.PrimaryFontRegular),
                             ),
                             SizedBox(
                               height: 10,
@@ -198,17 +192,11 @@ class _MemberCardState extends State<MemberCard> {
                 widget.isVIP == true
                     ? Text(
                         'VIP',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                       )
                     : Text(
                         'Member',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                       ),
               ],
             ),

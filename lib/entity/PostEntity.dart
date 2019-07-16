@@ -31,8 +31,7 @@ class PostEntity {
     this.author,
   });
 
-  factory PostEntity.fromRawJson(String str) =>
-      PostEntity.fromJson(json.decode(str));
+  factory PostEntity.fromRawJson(String str) => PostEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -70,6 +69,4 @@ class PostEntity {
   String toString() {
     return 'PostEntity{id: $id, objectType: $objectType, status: $status, title: $title, code: $code, description: $description, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, authorId: $authorId, author: $author}';
   }
-
-
 }

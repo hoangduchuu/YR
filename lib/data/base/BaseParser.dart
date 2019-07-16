@@ -1,14 +1,11 @@
-
-
 import 'dart:convert';
 
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 
-
-abstract class BaseParser<T>{
-  dynamic parse(String raw){
+abstract class BaseParser<T> {
+  dynamic parse(String raw) {
     Map<String, dynamic> map = jsonDecode(raw);
-    if (map.containsKey('code') && map.containsKey('errors')){
+    if (map.containsKey('code') && map.containsKey('errors')) {
       return ErrorEntity.fromJSON(map);
     } else {
       return parseInfo(map);

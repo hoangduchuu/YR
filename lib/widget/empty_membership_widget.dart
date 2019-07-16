@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
-import 'bar_code.dart';
+
 import 'hooray_barcode.dart';
 import 'member_card.dart';
 
@@ -32,10 +32,7 @@ class EmptyCardScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           MemberCard(
-              memberName: user.fullName,
-              memberPoint: 0,
-              startDate: CommonUtils.getDateFormat(user.createAt),
-              times: 0),
+              memberName: user.fullName, memberPoint: 0, startDate: CommonUtils.getDateFormat(user.createAt), times: 0),
           HoorayBarCode(
             content: user.phone.toString(),
           )

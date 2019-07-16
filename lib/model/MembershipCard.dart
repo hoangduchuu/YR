@@ -1,8 +1,4 @@
-import 'package:your_reward_user/entity/GetMemberShipEntity.dart';
-import 'package:your_reward_user/entity/LevelEntity.dart';
 import 'package:your_reward_user/entity/MembershipEntity.dart';
-import 'package:your_reward_user/entity/OwnerEntity.dart';
-import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
 
 import 'User.dart';
@@ -29,12 +25,9 @@ class MembershipCard {
   String toString() {
     return 'MembershipCard{id: $id, fullName: $fullName, points: $points, accumulationPoints: $accumulationPoints, userId: $userId, ownerId: $ownerId, createdAt: $createdAt, updatedAt: $updatedAt, levelId: $levelId, user: $user, levelName: $levelName, iconName: $iconName, levelDescription: $levelDescription, img: $img}';
   }
-
-
 }
 
-class MembershipCardMapper
-    extends BaseMapper<MembershipCard, MembershipEntity> {
+class MembershipCardMapper extends BaseMapper<MembershipCard, MembershipEntity> {
   @override
   MembershipCard mapFrom(MembershipEntity entity) {
     MembershipCard model = MembershipCard();
@@ -52,7 +45,7 @@ class MembershipCardMapper
     model.logo = entity.owner.ownerLogo;
     model.ownerName = entity.owner.fullname;
 //    model.levelName = entity.level.title;
-    model.levelName = "Bạc";  // FIXME UGENT: bị mất field Level
+    model.levelName = "Bạc"; // FIXME UGENT: bị mất field Level
     model.img = entity.owner.ownerBackground;
     // FIXME: lấy đúng field hoặc API trả về kết quả không đúng
     return model;

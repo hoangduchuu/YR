@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
-import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
+import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/empty_membership_widget.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
-
-import 'package:your_reward_user/screen/membership/membership_screen.dart';
 
 import 'bloc/home_bloc.dart';
 import 'bloc/home_event.dart';
@@ -28,8 +26,7 @@ class HomeScreen extends BasePage {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
-    ScaffoldPage{
+class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, ScaffoldPage {
   ScrollController _scrollController = new ScrollController();
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;
@@ -43,7 +40,6 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
     _homeBloc.dispatch(GetMemberShipCardsRequest(DataProvider.user.id));
     _homeBloc.dispatch(GetTransactionRequest(DataProvider.user.id));
   }
-
 
   @override
   Widget body() {
@@ -77,7 +73,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
       bloc: _homeBloc,
       listener: (context, state) {
         handleUIControlState(state);
-        if (state is GetMemberShipCardsEmptyState){
+        if (state is GetMemberShipCardsEmptyState) {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
         } else if (state is GetMembershipCardSuccessState) {
@@ -85,7 +81,6 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
           setState(() {
             isSliderLoaded = true;
             _memberships = state.memberships;
-
           });
         } else if (state is OnGetTransactionSuccess) {
           super.hideLoading();
@@ -122,8 +117,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
                 padding: EdgeInsets.only(bottom: 6),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.black12, width: 1)),
+                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
                 child: Text(
                   'Lịch sử giao dịch',
@@ -162,6 +156,4 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler,
               point: _transactions[index].point);
         });
   }
-
-
 }

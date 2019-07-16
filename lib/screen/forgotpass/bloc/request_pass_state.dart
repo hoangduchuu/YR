@@ -1,8 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
-import 'package:your_reward_user/model/Coupon.dart';
-import 'package:your_reward_user/model/Store.dart';
 
 @immutable
 abstract class RequestPassBaseState extends BaseBlocState {
@@ -28,18 +25,16 @@ class ResetState extends RequestPassBaseState {
   }
 }
 
-class RequestPassSuccessState extends RequestPassBaseState{
+class RequestPassSuccessState extends RequestPassBaseState {
   @override
   String toString() {
     return 'RequestPassSuccess{}';
   }
 }
 
-class ChangePassSuccessState extends RequestPassBaseState{
-
+class ChangePassSuccessState extends RequestPassBaseState {
   @override
   String toString() {
     return 'ChangePassSuccessState{}';
   }
 }
-

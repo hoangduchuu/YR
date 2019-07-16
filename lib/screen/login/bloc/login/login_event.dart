@@ -7,10 +7,10 @@ abstract class LoginEvent extends Equatable {
 }
 
 class LoginRequest extends LoginEvent {
-  final String email, password,deviceId;
+  final String email, password, deviceId;
 
-  LoginRequest({@required this.email, @required this.password,@required this.deviceId})
-      : super([email, password,deviceId]);
+  LoginRequest({@required this.email, @required this.password, @required this.deviceId})
+      : super([email, password, deviceId]);
 
   @override
   String toString() {
@@ -28,7 +28,7 @@ class LoggedInRequest extends LoginEvent {
 class LoginFacebookRequest extends LoginEvent {
   final String email, fullName, facebookId, deviceId, phone;
 
-  LoginFacebookRequest(this.email, this.fullName, this.facebookId, this.deviceId,this.phone);
+  LoginFacebookRequest(this.email, this.fullName, this.facebookId, this.deviceId, this.phone);
 
   @override
   String toString() {

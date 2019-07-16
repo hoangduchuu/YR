@@ -6,19 +6,16 @@ import 'package:your_reward_user/screen/forgotpass/bloc/request_pass_event.dart'
 import 'package:your_reward_user/screen/forgotpass/bloc/request_pass_state.dart';
 import 'package:your_reward_user/utils/auth_utils.dart';
 
-class RequestChangePassBloc
-    extends Bloc<RequestPassBaseEvent, BaseBlocState> {
+class RequestChangePassBloc extends Bloc<RequestPassBaseEvent, BaseBlocState> {
   AuthRepo _authRepo = injector<AuthRepo>();
 
   @override
-  Stream<RequestPassBaseState> mapEventToState(
-      RequestPassBaseEvent event) async* {
+  Stream<RequestPassBaseState> mapEventToState(RequestPassBaseEvent event) async* {
     if (event is RequestPassEvent) {
       yield* _handleRequestEmail(event.email);
     }
     if (event is ChangePassEvent) {
-      yield* _handleChangePassword(
-          event.code, event.email, event.password, event.rePassword);
+      yield* _handleChangePassword(event.code, event.email, event.password, event.rePassword);
     }
   }
 
@@ -40,12 +37,11 @@ class RequestChangePassBloc
         yield UIControlState.showError('Sai thông tin email');
       }
     } catch (e) {
-      yield  UIControlState.showError(e.toString());
+      yield UIControlState.showError(e.toString());
     }
   }
 
-  Stream<BaseBlocState> _handleChangePassword(
-      String email, String code, String password, String repassword) async* {
+  Stream<BaseBlocState> _handleChangePassword(String email, String code, String password, String repassword) async* {
     if (email == null || repassword == null || password == null) {
       yield UIControlState.showError('Không được để trống');
       yield ResetState();

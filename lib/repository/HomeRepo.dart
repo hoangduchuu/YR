@@ -2,7 +2,6 @@ import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/model/User.dart';
-import 'package:your_reward_user/provider/AuthProvider.dart';
 import 'package:your_reward_user/provider/CouponProvider.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
@@ -11,8 +10,7 @@ import 'package:your_reward_user/utils/pair.dart';
 import 'DataProvider.dart';
 
 class HomeRepo {
-  CouponProvider _couponRepo =injector<CouponProvider>();
-
+  CouponProvider _couponRepo = injector<CouponProvider>();
 
   // request and mapping from entity to model
   Future<Pair<STATE, User>> getStore(String email, String password) async {

@@ -20,8 +20,7 @@ class TransactionStoreScreen extends BasePage {
   _TransactionStoreScreenState createState() => _TransactionStoreScreenState();
 }
 
-class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen>
-    with ScaffoldPage, ErrorMessageHandler {
+class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> with ScaffoldPage, ErrorMessageHandler {
   TransactionStoreBloc _bloc;
   List<Transaction> _transactions;
 
@@ -51,7 +50,7 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen>
 
   @override
   Color getBgColor() {
-    return  HColors.white;
+    return HColors.white;
   }
 
   Widget _buildBody() {

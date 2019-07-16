@@ -1,7 +1,8 @@
+import 'dart:math' as math;
+
+import 'package:barcode_flutter/barcode_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
-import 'package:barcode_flutter/barcode_flutter.dart';
 
 class HoorayBarCode extends StatelessWidget {
   String content;
@@ -57,12 +58,14 @@ class HoorayBarCode extends StatelessWidget {
                   Container(
                       width: MediaQuery.of(context).size.width * 0.8 * 0.9,
                       height: MediaQuery.of(context).size.height * 0.18 * 0.98,
-                      decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.all(Radius.circular(12))),
+                      decoration:
+                          BoxDecoration(color: Colors.black, borderRadius: BorderRadius.all(Radius.circular(12))),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.25 * 0.25,
                         alignment: AlignmentDirectional.center,
                         margin: EdgeInsets.all(4.0),
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
+                        decoration:
+                            BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: new BarCodeImage(
                           barHeight: 80,
                           lineWidth: 1.2,

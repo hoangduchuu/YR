@@ -6,8 +6,7 @@ class RestaurantInfo extends StatelessWidget {
   String name;
   String address;
 
-  RestaurantInfo(
-      {@required this.logoLink, @required this.name, @required this.address})
+  RestaurantInfo({@required this.logoLink, @required this.name, @required this.address})
       : assert(logoLink != null),
         assert(name != null),
         assert(address != null);
@@ -27,10 +26,7 @@ class RestaurantInfo extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                    width: 64,
-                    height: 64,
-                    child: Image.asset('assets/images/logo.png')),
+                Container(width: 64, height: 64, child: Image.asset('assets/images/logo.png')),
                 SizedBox(
                   height: spacing_6,
                 ),

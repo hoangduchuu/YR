@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'core/injector.dart';
+
 import 'app.dart';
+import 'core/injector.dart';
 
 void main() {
   setupInjector();

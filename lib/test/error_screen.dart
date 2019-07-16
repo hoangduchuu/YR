@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/widget/common_button.dart';
 
 class ErrorScreen extends StatefulWidget {
   _ErrorScreenState createState() => _ErrorScreenState();
@@ -34,14 +32,12 @@ class _ErrorScreenState extends State<ErrorScreen> {
               height: MediaQuery.of(context).size.height * 0.01,
             ),
             ButtonTheme(
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(border: Border.all(color: HColors.ColorSecondPrimary),borderRadius: BorderRadius.circular(10)),
-                child: FlatButton(onPressed: (){
-
-                }, child: Text('Thử lại')),
-              )
-            ),
+                child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                  border: Border.all(color: HColors.ColorSecondPrimary), borderRadius: BorderRadius.circular(10)),
+              child: FlatButton(onPressed: () {}, child: Text('Thử lại')),
+            )),
           ],
         ),
       ),

@@ -21,6 +21,5 @@ void setupInjector() {
   injector.registerLazySingleton<AuthProvider>(() => AuthProvider());
   injector.registerLazySingleton<CouponProvider>(() => CouponProvider());
   injector.registerLazySingleton<StoreProvider>(() => StoreProvider());
-  injector
-      .registerLazySingleton<TransactionProvider>(() => TransactionProvider());
+  injector.registerLazySingleton<TransactionProvider>(() => TransactionProvider());
 }

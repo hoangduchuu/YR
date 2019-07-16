@@ -18,12 +18,12 @@ class ForgotEntity {
   String toJson() => json.encode(toMap());
 
   factory ForgotEntity.fromMap(Map<String, dynamic> json) => new ForgotEntity(
-    status: json["status"] == null ? null : json["status"],
-    forgotCode: json["forgotCode"] == null ? null : json["forgotCode"],
-  );
+        status: json["status"] == null ? null : json["status"],
+        forgotCode: json["forgotCode"] == null ? null : json["forgotCode"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "status": status == null ? null : status,
-    "forgotCode": forgotCode == null ? null : forgotCode,
-  };
+        "status": status == null ? null : status,
+        "forgotCode": forgotCode == null ? null : forgotCode,
+      };
 }

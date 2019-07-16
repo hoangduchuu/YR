@@ -1,3 +1,3 @@
-class IsToJSON{
-  String toJSON(){}
+class IsToJSON {
+  String toJSON() {}
 }

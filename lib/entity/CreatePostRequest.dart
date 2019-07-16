@@ -26,20 +26,20 @@ class CreatePostRequest {
   String toRawJson() => json.encode(toJson());
 
   factory CreatePostRequest.fromJson(Map<String, dynamic> json) => new CreatePostRequest(
-    objectType: json["objectType"],
-    status: json["status"],
-    title: json["title"],
-    code: json["code"],
-    description: json["description"],
-    thumbnail: json["thumbnail"],
-  );
+        objectType: json["objectType"],
+        status: json["status"],
+        title: json["title"],
+        code: json["code"],
+        description: json["description"],
+        thumbnail: json["thumbnail"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "objectType": objectType,
-    "status": status,
-    "title": title,
-    "code": code,
-    "description": description,
-    "thumbnail": thumbnail,
-  };
+        "objectType": objectType,
+        "status": status,
+        "title": title,
+        "code": code,
+        "description": description,
+        "thumbnail": thumbnail,
+      };
 }

@@ -51,8 +51,7 @@ class OwnerEntity {
     this.clientEmail,
   });
 
-  factory OwnerEntity.fromRawJson(String str) =>
-      OwnerEntity.fromJson(json.decode(str));
+  factory OwnerEntity.fromRawJson(String str) => OwnerEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -77,8 +76,7 @@ class OwnerEntity {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-        ownerBackground:
-            json["ownerBackground"] == null ? null : json["ownerBackground"],
+        ownerBackground: json["ownerBackground"] == null ? null : json["ownerBackground"],
         ownerLogo: json["ownerLogo"] == null ? null : json["ownerLogo"],
         clientEmail: json["clientEmail"] == null ? null : json["clientEmail"],
       );

@@ -1,8 +1,9 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
@@ -12,16 +13,13 @@ import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
-import 'package:your_reward_user/screen/splash/SplashScreen.dart';
+import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
 import 'package:your_reward_user/widget/NetWorkImage.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
-import 'dart:ui' as ui;
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'profile_event.dart';
 

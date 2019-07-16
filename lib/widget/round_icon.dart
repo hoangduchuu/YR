@@ -6,7 +6,8 @@ class RoundIcon extends StatelessWidget {
   VoidCallback callback;
 
   RoundIcon({@required this.image, @required this.callback})
-  : assert(image != null), assert(callback != null);
+      : assert(image != null),
+        assert(callback != null);
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,18 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
+import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
-import 'dart:ui' as ui;
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'bloc/request_pass_bloc.dart';
 import 'bloc/request_pass_event.dart';
 import 'bloc/request_pass_state.dart';
@@ -24,8 +26,7 @@ class ChangePassScreen extends BasePage {
   ChangePassScreen(this.email);
 }
 
-class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessageHandler,
-    ScaffoldPage{
+class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessageHandler, ScaffoldPage {
   RequestChangePassBloc _bloc;
   String _code, _newPassword, _reNewpassword;
   bool _backToLogin = false;
@@ -52,8 +53,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
       elevation: 0.0,
       title: Text(
         'Quên mật khẩu?',
-        style: TextStyle(
-            color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
+        style: TextStyle(color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
       ),
     );
   }
@@ -63,19 +63,17 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
     return _buildBody();
   }
 
-
   Widget _buildBody() {
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
         handleUIControlState(state);
-        if (state is ChangePassSuccessState){
+        if (state is ChangePassSuccessState) {
           setState(() {
             _backToLogin = true;
             _submitButtonValue = "Quay lại trang đăng nhập";
           });
-          super.showSuccessMessage(
-              "Thành công, Bạn có thể đăng nhập với mật khẩu mới", context);
+          super.showSuccessMessage("Thành công, Bạn có thể đăng nhập với mật khẩu mới", context);
           super.hideLoadingWithContext(context);
         }
       },
@@ -85,8 +83,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
           decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
               image: AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.cover,
             ),
@@ -95,8 +92,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
             filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
             child: new Container(
               //you can change opacity with color here(I used black) for background.
-              decoration:
-                  new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+              decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
             ),
           ),
         ),
@@ -165,8 +161,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
                   textColor: HColors.white,
                   text: Text(
                     _submitButtonValue,
-                    style: TextStyle(
-                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                    style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
                   radiusValue: 10,
                   width: MediaQuery.of(context).size.width * 0.72,
@@ -180,11 +175,9 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
 
   void _handleCLick(BuildContext context) {
     if (_backToLogin) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
     }
-    _bloc.dispatch(
-        ChangePassEvent(widget.email, _newPassword, _reNewpassword, _code));
+    _bloc.dispatch(ChangePassEvent(widget.email, _newPassword, _reNewpassword, _code));
   }
 
   @override

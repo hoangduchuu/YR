@@ -1,14 +1,10 @@
 import 'dart:io';
-import 'dart:io';
-import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
-import 'package:http/http.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
-import 'dart:typed_data';
 
 class MyHttpClient {
   MyHttpClient._privateConstructor();
@@ -18,8 +14,7 @@ class MyHttpClient {
   static MyHttpClient get instance => _instance;
 
   //get unauthorized
-  Future<String> get(String url, Map<String, String> header,
-      Map<String, String> params) async {
+  Future<String> get(String url, Map<String, String> header, Map<String, String> params) async {
     Uri uri = Uri.parse(url);
     final newUri = uri.replace(queryParameters: params);
     var response = await http.get(newUri, headers: header);
@@ -27,15 +22,13 @@ class MyHttpClient {
   }
 
   //post unauthorized with json data
-  Future<String> post(
-      String url, Map<String, String> header, String jsonBody) async {
+  Future<String> post(String url, Map<String, String> header, String jsonBody) async {
     var response = await http.post(url, headers: header, body: jsonBody);
     return response.body;
   }
 
-  Future<String> patch(
-      String url, Map<String, String> header, String jsonBody) async {
-    var response = await http.patch(url, headers: header, body:jsonBody);
+  Future<String> patch(String url, Map<String, String> header, String jsonBody) async {
+    var response = await http.patch(url, headers: header, body: jsonBody);
     return response.body;
   }
 
@@ -47,27 +40,18 @@ class MyHttpClient {
     try {
       ByteData byteData = await rootBundle.load(file.path);
       List<int> imageData = byteData.buffer.asUint8List();
-      UploadFileInfo fileInfo = UploadFileInfo.fromBytes(
-          imageData, "${DateTime.now().millisecond}.jpg");
+      UploadFileInfo fileInfo = UploadFileInfo.fromBytes(imageData, "${DateTime.now().millisecond}.jpg");
       try {
         FormData formData = new FormData.from({"image": fileInfo});
         var response = await dio.post(url, data: formData);
         return response.toString();
       } catch (e) {
         return uploadEntityToJson(ErrorEntity(
-            name: e.toString(),
-            message: e.toString(),
-            className: e.toString(),
-            errors: e.toString(),
-            code: 400));
+            name: e.toString(), message: e.toString(), className: e.toString(), errors: e.toString(), code: 400));
       }
     } catch (e) {
       return uploadEntityToJson(ErrorEntity(
-          name: e.toString(),
-          message: e.toString(),
-          className: e.toString(),
-          errors: e.toString(),
-          code: 400));
+          name: e.toString(), message: e.toString(), className: e.toString(), errors: e.toString(), code: 400));
     }
   }
 }

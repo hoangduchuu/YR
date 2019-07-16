@@ -1,10 +1,8 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
-import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
@@ -23,6 +21,7 @@ import 'package:your_reward_user/provider/SharedPrefRepo.dart';
 import 'package:your_reward_user/screen/sign_up/SignupBloc.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
+
 import 'DataProvider.dart';
 
 class AuthRepo {
@@ -95,7 +94,8 @@ class AuthRepo {
             return Pair(STATE.SUCCESS, DataProvider.user);
           }
         } else {
-          return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${(result is ErrorEntity) ? result.message : 'Vui lòng thử lại'}');
+          return Pair(STATE.ERROR, null,
+              erroMsg: 'Lỗi: ${(result is ErrorEntity) ? result.message : 'Vui lòng thử lại'}');
         }
       }
     } catch (e) {
@@ -171,8 +171,8 @@ class AuthRepo {
     try {
       UploadEntity uploadTask = await _authProvider.upload(file);
 
-      var updateResult = await _authProvider.updateAvatar(userId, '${YRService.END_POINT}/load/file/${uploadTask.image
-          .filename}');
+      var updateResult =
+          await _authProvider.updateAvatar(userId, '${YRService.END_POINT}/load/file/${uploadTask.image.filename}');
       if (updateResult is ErrorEntity) {
         return Pair(false, null, erroMsg: updateResult.message);
       }
@@ -223,8 +223,9 @@ class AuthRepo {
     }
   }
 
-  Future<Pair<FACEBOOK_STATE, dynamic>> registerFacebook(String email, String facebookId, String fullName, String deviceId,String phone) async {
-    var result = await _authProvider.registerWithFacebook(email, facebookId, fullName,phone);
+  Future<Pair<FACEBOOK_STATE, dynamic>> registerFacebook(
+      String email, String facebookId, String fullName, String deviceId, String phone) async {
+    var result = await _authProvider.registerWithFacebook(email, facebookId, fullName, phone);
     if (result is NewFacebookRegisterEntity) {
       // return the new facebook register entity
       return Pair(FACEBOOK_STATE.NEW_USER, null);
@@ -240,7 +241,8 @@ class AuthRepo {
         var updateResult = await _authProvider.updateDeviceId(result.user.id, deviceId);
         if (updateResult is ErrorEntity) {
           await clearLoginResult();
-          return Pair(FACEBOOK_STATE.COMMON_ERROR, null, erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
+          return Pair(FACEBOOK_STATE.COMMON_ERROR, null,
+              erroMsg: "Có lỗi khi update DeviceId ${updateResult.toString()}");
         }
         if (updateResult is UpdateProfileEntity) {
           DataProvider.provideData(UserMapper().mapFrom(result.user), result.accessToken.accessToken);
@@ -249,9 +251,8 @@ class AuthRepo {
       }
     }
     if (result is FaceBookRequestErrorEntity) {
-      return Pair(FACEBOOK_STATE.COMMON_ERROR, result.message,erroMsg: result.message);
+      return Pair(FACEBOOK_STATE.COMMON_ERROR, result.message, erroMsg: result.message);
     }
-
   }
 
   saveLoginFacebookResult(LoginFacebookEntity result) async {

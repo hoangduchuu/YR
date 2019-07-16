@@ -14,22 +14,18 @@ class StoreProvider {
   Future<dynamic> getStores({int limit = 200, int skip = 0}) async {
     String url =
         '${YRService.END_POINT}${YRService.PATH_STORES}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
-    String raw =
-        await client.get(url, YRService.generateHeadersWithToken(), Map());
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
     var result = GetStoresParser().parse(raw);
     return result;
   }
 
-  Future<dynamic> getStoresByOwnerId(String ownerId,
-      {int limit = 200, int skip = 0}) async {
-
-    Map<String,String> params = Map<String,String>();
+  Future<dynamic> getStoresByOwnerId(String ownerId, {int limit = 200, int skip = 0}) async {
+    Map<String, String> params = Map<String, String>();
     params['ownerId'] = ownerId;
 
     String url =
         '${YRService.END_POINT}${YRService.PATH_STORES}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
-    String raw =
-    await client.get(url, YRService.generateHeadersWithToken(), params);
+    String raw = await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = GetStoresParser().parse(raw);
     return result;
   }

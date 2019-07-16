@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:your_reward_user/entity/userEntity.dart';
 
 import 'LevelEntity.dart';
@@ -41,13 +40,11 @@ class MembershipEntity {
       this.iconName,
       this.levelDescription});
 
-  factory MembershipEntity.fromRawJson(String str) =>
-      MembershipEntity.fromJson(json.decode(str));
+  factory MembershipEntity.fromRawJson(String str) => MembershipEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory MembershipEntity.fromJson(Map<String, dynamic> json) =>
-      new MembershipEntity(
+  factory MembershipEntity.fromJson(Map<String, dynamic> json) => new MembershipEntity(
         id: json["_id"],
         points: json["points"],
         accumulationPoints: json["accumulationPoints"],
@@ -60,14 +57,9 @@ class MembershipEntity {
         user: UserEntity.fromJson(json["user"]),
         owner: OwnerEntity.fromJson(json["owner"]),
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
-        levelName:
-            json["level"] == null ? null : Level.fromJson(json["level"]).title,
-        iconName: json["level"] == null
-            ? null
-            : Level.fromJson(json["level"]).iconName,
-        levelDescription: json["level"] == null
-            ? null
-            : Level.fromJson(json["level"]).description,
+        levelName: json["level"] == null ? null : Level.fromJson(json["level"]).title,
+        iconName: json["level"] == null ? null : Level.fromJson(json["level"]).iconName,
+        levelDescription: json["level"] == null ? null : Level.fromJson(json["level"]).description,
       );
 
   Map<String, dynamic> toJson() => {

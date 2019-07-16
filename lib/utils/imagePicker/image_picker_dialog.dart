@@ -6,7 +6,6 @@ import 'image_picker_handler.dart';
 
 // ignore: must_be_immutable
 class ImagePickerDialog extends StatelessWidget {
-
   ImagePickerHandler _listener;
   AnimationController _controller;
   BuildContext context;
@@ -31,9 +30,7 @@ class ImagePickerDialog extends StatelessWidget {
   }
 
   getImage(BuildContext context) {
-    if (_controller == null ||
-        _drawerDetailsPosition == null ||
-        _drawerContentsOpacity == null) {
+    if (_controller == null || _drawerDetailsPosition == null || _drawerContentsOpacity == null) {
       return;
     }
     _controller.forward();
@@ -83,18 +80,12 @@ class ImagePickerDialog extends StatelessWidget {
                 new GestureDetector(
                   onTap: () => _listener.openCamera(),
                   child: roundedButton(
-                      "Chụp hình",
-                      EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      Colors.blue,
-                      const Color(0xFFFFFFFF)),
+                      "Chụp hình", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0), Colors.blue, const Color(0xFFFFFFFF)),
                 ),
                 new GestureDetector(
                   onTap: () => _listener.openGallery(),
                   child: roundedButton(
-                      "Thư viện ảnh",
-                      EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      Colors.blue,
-                      const Color(0xFFFFFFFF)),
+                      "Thư viện ảnh", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0), Colors.blue, const Color(0xFFFFFFFF)),
                 ),
                 const SizedBox(height: 16.0),
                 new GestureDetector(
@@ -102,10 +93,7 @@ class ImagePickerDialog extends StatelessWidget {
                   child: new Padding(
                     padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
                     child: roundedButton(
-                        "Thoát",
-                        EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                        Colors.blue,
-                        const Color(0xFFFFFFFF)),
+                        "Thoát", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0), Colors.blue, const Color(0xFFFFFFFF)),
                   ),
                 ),
               ],
@@ -114,8 +102,7 @@ class ImagePickerDialog extends StatelessWidget {
         ));
   }
 
-  Widget roundedButton(
-      String buttonLabel, EdgeInsets margin, Color bgColor, Color textColor) {
+  Widget roundedButton(String buttonLabel, EdgeInsets margin, Color bgColor, Color textColor) {
     var loginBtn = new Container(
       margin: margin,
       padding: EdgeInsets.all(15.0),
@@ -133,11 +120,9 @@ class ImagePickerDialog extends StatelessWidget {
       ),
       child: Text(
         buttonLabel,
-        style: new TextStyle(
-            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
+        style: new TextStyle(color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
       ),
     );
     return loginBtn;
   }
-
 }

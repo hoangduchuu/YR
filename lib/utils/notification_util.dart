@@ -54,10 +54,8 @@ class NotificationManager {
   }
 
   void iOS_Permission() {
-    _firebaseMessaging.requestNotificationPermissions(
-        IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
+    _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
       print("2 register **********  Settings registered: $settings");
     });
   }
@@ -67,8 +65,7 @@ class NotificationManager {
       context: context,
       builder: (BuildContext context) => CustomDialog(
         title: title,
-        description:
-            body,
+        description: body,
         buttonText: " Xác nhận",
       ),
     );
