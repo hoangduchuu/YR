@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
@@ -31,7 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, BaseBlocState> {
     }
   }
 
-  Stream<BaseBlocState> _handleLoginState(String input, String password,String deviceId) async* {
+  Stream<BaseBlocState> _handleLoginState(String input, String password, String deviceId) async* {
     // login with email
     if (AuthUtils.mayEmail(input)) {
       yield* _handleLoginWithEmail(input, password, deviceId);
@@ -41,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, BaseBlocState> {
     }
   }
 
-  Stream<BaseBlocState> _handleLoginWithEmail(String input, String password,String deviceId) async*{
+  Stream<BaseBlocState> _handleLoginWithEmail(String input, String password, String deviceId) async* {
     if (!AuthUtils.validateEmailValid(input)) {
       yield UIControlState.showError('Vui lòng nhập đúng định dạng Email hoặc Số điện thoại');
     } else if (!AuthUtils.validatePasswordValid(password)) {
@@ -81,7 +82,8 @@ class LoginBloc extends Bloc<LoginEvent, BaseBlocState> {
     }
   }
 
-  Stream<BaseBlocState> _handleFacebookLoginRequest(String email, String facebookId, String fullName, String deviceId, String phone) async* {
+  Stream<BaseBlocState> _handleFacebookLoginRequest(
+      String email, String facebookId, String fullName, String deviceId, String phone) async* {
     var result = await authRepo.registerFacebook(email, facebookId, fullName, deviceId, phone);
     if (result.right is User) {
       yield UIControlState.showLoading();

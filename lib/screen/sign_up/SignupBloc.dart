@@ -83,15 +83,7 @@ class InitialState extends SignUpState {
 
 //region Params request
 class SignupModel {
-  String email,
-      role,
-      fullName,
-      password,
-      confirmPasswrod,
-      thumbnail,
-      phone,
-      gender,
-      status;
+  String email, role, fullName, password, confirmPasswrod, thumbnail, phone, gender, status;
 
   SignupModel(
       {this.email,

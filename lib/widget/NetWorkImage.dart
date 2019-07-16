@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:your_reward_user/utils/const.dart';
 
 // Use ImageLoad to load any image to show no-image
 class ImageLoader extends StatelessWidget {

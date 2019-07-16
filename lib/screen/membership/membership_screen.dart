@@ -10,8 +10,7 @@ import 'detail/card_store_detail_screen.dart';
 class MemberShipScreen extends StatefulWidget {
   final MembershipCard memberCard;
 
-  const MemberShipScreen({Key key, @required this.memberCard})
-      : super(key: key);
+  const MemberShipScreen({Key key, @required this.memberCard}) : super(key: key);
 
   _MemberShipScreenState createState() => _MemberShipScreenState();
 }
@@ -43,19 +42,14 @@ class _MemberShipScreenState extends State<MemberShipScreen> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(FontAwesomeIcons.home,
-                    color: _currentIndex == 0
-                        ? HColors.ColorSecondPrimary
-                        : HColors.inactiveTabColor),
+                    color: _currentIndex == 0 ? HColors.ColorSecondPrimary : HColors.inactiveTabColor),
                 title: SizedBox.shrink()),
             BottomNavigationBarItem(
                 icon: Icon(
                   FontAwesomeIcons.solidBell,
-                  color: _currentIndex == 1
-                      ? HColors.ColorSecondPrimary
-                      : HColors.inactiveTabColor,
+                  color: _currentIndex == 1 ? HColors.ColorSecondPrimary : HColors.inactiveTabColor,
                 ),
-                title: SizedBox
-                    .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
+                title: SizedBox.shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
                 ),
           ],
           onTap: onTabTapped,

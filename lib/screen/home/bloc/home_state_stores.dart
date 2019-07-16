@@ -1,5 +1,4 @@
 import 'package:your_reward_user/model/MembershipCard.dart';
-import 'package:your_reward_user/model/Store.dart';
 
 import 'home_state.dart';
 
@@ -14,11 +13,9 @@ class GetMembershipCardSuccessState extends HomeState {
   }
 }
 
-class GetMemberShipCardsEmptyState extends HomeState{
-
+class GetMemberShipCardsEmptyState extends HomeState {
   @override
   String toString() {
     return 'GetMemberShipCardsEmptyState{}';
   }
 }
-

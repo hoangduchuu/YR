@@ -1,22 +1,14 @@
 enum Gender { MALE }
 
-final genderValues = new EnumValues({
-  "male": Gender.MALE
-});
+final genderValues = new EnumValues({"male": Gender.MALE});
 
 enum Role { OWNER, ADMIN }
 
-final roleValues = new EnumValues({
-  "admin": Role.ADMIN,
-  "owner": Role.OWNER
-});
+final roleValues = new EnumValues({"admin": Role.ADMIN, "owner": Role.OWNER});
 
 enum CouponStatus { ACTIVE }
 
-final statusValues = new EnumValues({
-  "active": CouponStatus.ACTIVE
-});
-
+final statusValues = new EnumValues({"active": CouponStatus.ACTIVE});
 
 class EnumValues<T> {
   Map<String, T> map;

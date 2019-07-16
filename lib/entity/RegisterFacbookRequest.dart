@@ -23,8 +23,7 @@ class RegisterFacebookRequest implements IsToJSON {
     this.strategy,
   });
 
-  factory RegisterFacebookRequest.fromJson(Map<String, dynamic> json) =>
-      new RegisterFacebookRequest(
+  factory RegisterFacebookRequest.fromJson(Map<String, dynamic> json) => new RegisterFacebookRequest(
         facebookId: json["facebookId"],
         email: json["email"],
         fullname: json["fullname"],

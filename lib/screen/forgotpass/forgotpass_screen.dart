@@ -1,4 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
@@ -8,8 +11,7 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
-import 'dart:ui' as ui;
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'bloc/request_pass_bloc.dart';
 import 'bloc/request_pass_event.dart';
 import 'bloc/request_pass_state.dart';
@@ -17,12 +19,10 @@ import 'change_passs_screen.dart';
 
 class ForgotPassRequestScreen extends BasePage {
   @override
-  _ForgotPassRequestScreenState createState() =>
-      _ForgotPassRequestScreenState();
+  _ForgotPassRequestScreenState createState() => _ForgotPassRequestScreenState();
 }
 
-class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> with
-  ErrorMessageHandler, ScaffoldPage{
+class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> with ErrorMessageHandler, ScaffoldPage {
   RequestChangePassBloc _bloc;
   String _email;
 
@@ -31,7 +31,6 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
     super.initState();
     _bloc = RequestChangePassBloc();
   }
-
 
   @override
   Widget appBar() {
@@ -48,8 +47,7 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
       elevation: 0.0,
       title: Text(
         'Quên mật khẩu?',
-        style: TextStyle(
-            color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
+        style: TextStyle(color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
       ),
     );
   }
@@ -64,12 +62,9 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
       bloc: _bloc,
       listener: (context, state) {
         handleUIControlState(state);
-        if (state is RequestPassSuccessState){
+        if (state is RequestPassSuccessState) {
           super.hideLoadingWithContext(context);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChangePassScreen(_email)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePassScreen(_email)));
         }
       },
       child: Stack(children: <Widget>[
@@ -78,8 +73,7 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
           decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
               image: AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.cover,
             ),
@@ -88,8 +82,7 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
             filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
             child: new Container(
               //you can change opacity with color here(I used black) for background.
-              decoration:
-                  new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+              decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
             ),
           ),
         ),
@@ -144,8 +137,7 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
                   textColor: HColors.white,
                   text: Text(
                     'Gữi yêu câu',
-                    style: TextStyle(
-                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                    style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
                   radiusValue: 10,
                   width: MediaQuery.of(context).size.width * 0.72,
@@ -165,5 +157,4 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
   Color getBgColor() {
     return null;
   }
-
 }

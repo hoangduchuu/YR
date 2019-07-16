@@ -19,18 +19,15 @@ class GetTransactionEntity {
     this.data,
   });
 
-  factory GetTransactionEntity.fromRawJson(String str) =>
-      GetTransactionEntity.fromJson(json.decode(str));
+  factory GetTransactionEntity.fromRawJson(String str) => GetTransactionEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory GetTransactionEntity.fromJson(Map<String, dynamic> json) =>
-      new GetTransactionEntity(
+  factory GetTransactionEntity.fromJson(Map<String, dynamic> json) => new GetTransactionEntity(
         total: json["total"],
         limit: json["limit"],
         skip: json["skip"],
-        data: new List<TransactionEntity>.from(
-            json["data"].map((x) => TransactionEntity.fromJson(x))),
+        data: new List<TransactionEntity>.from(json["data"].map((x) => TransactionEntity.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +41,4 @@ class GetTransactionEntity {
   String toString() {
     return 'GetTransactionEntity{total: $total, limit: $limit, skip: $skip, data: $data}';
   }
-
-
 }

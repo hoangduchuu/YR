@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:your_reward_user/core/injector.dart';
@@ -12,7 +13,6 @@ import 'package:your_reward_user/screen/home/home_screen.dart';
 import 'package:your_reward_user/screen/login/login_screen.dart';
 
 import 'bloc/SplashBloc.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 //region scree
 /// Reponsitbility to check the user info was saved in local storage and navigate to login or home screen.
@@ -23,7 +23,7 @@ class SplashScreen extends BasePage {
 //endregion
 
 //region state
-class _SplashScreenState extends BaseState<SplashScreen>{
+class _SplashScreenState extends BaseState<SplashScreen> {
   SplashBloc _splashBloc;
   bool isValid;
   Timer _timer;
@@ -64,7 +64,8 @@ class _SplashScreenState extends BaseState<SplashScreen>{
             gotoLoginScreen();
           }
         },
-        child: Container(color: Colors.white, child: Image.asset('assets/images/ic_launcher.png', width: 64.0, height: 64.0)));
+        child: Container(
+            color: Colors.white, child: Image.asset('assets/images/ic_launcher.png', width: 64.0, height: 64.0)));
   }
 
   Future _checkUserToken([SplashBloc splashBloc]) async {

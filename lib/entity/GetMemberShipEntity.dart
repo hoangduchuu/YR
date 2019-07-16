@@ -24,25 +24,21 @@ class GetMemberShipEntity {
   String toRawJson() => json.encode(toJson());
 
   factory GetMemberShipEntity.fromJson(Map<String, dynamic> json) => new GetMemberShipEntity(
-    total: json["total"],
-    limit: json["limit"],
-    skip: json["skip"],
-    data: new List<MembershipEntity>.from(json["data"].map((x) => MembershipEntity.fromJson(x))),
-  );
+        total: json["total"],
+        limit: json["limit"],
+        skip: json["skip"],
+        data: new List<MembershipEntity>.from(json["data"].map((x) => MembershipEntity.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "total": total,
-    "limit": limit,
-    "skip": skip,
-    "data": new List<dynamic>.from(data.map((x) => x.toJson())),
-  };
+        "total": total,
+        "limit": limit,
+        "skip": skip,
+        "data": new List<dynamic>.from(data.map((x) => x.toJson())),
+      };
 
   @override
   String toString() {
     return 'GetMemberShipEntity{total: $total, limit: $limit, skip: $skip, data: $data}';
   }
-
 }
-
-
-

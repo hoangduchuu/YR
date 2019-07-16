@@ -6,7 +6,6 @@ import 'package:your_reward_user/widget/tranfer_history_row.dart';
 class TransactionWidget extends StatefulWidget {
   List<Transaction> _transactions;
 
-
   TransactionWidget(this._transactions);
 
   @override
@@ -14,13 +13,15 @@ class TransactionWidget extends StatefulWidget {
 }
 
 class _TransactionWidgetState extends State<TransactionWidget> {
-@override
+  @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return _buildTransactionList(widget._transactions);}
+    return _buildTransactionList(widget._transactions);
+  }
 
   Widget _buildTransactionList(List<Transaction> mTransactions) {
     if (mTransactions == null || mTransactions.isEmpty) {

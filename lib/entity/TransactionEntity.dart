@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 
 import 'package:your_reward_user/entity/userEntity.dart';
 
@@ -58,13 +56,11 @@ class TransactionEntity {
     this.store,
   });
 
-  factory TransactionEntity.fromRawJson(String str) =>
-      TransactionEntity.fromJson(json.decode(str));
+  factory TransactionEntity.fromRawJson(String str) => TransactionEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory TransactionEntity.fromJson(Map<String, dynamic> json) =>
-      new TransactionEntity(
+  factory TransactionEntity.fromJson(Map<String, dynamic> json) => new TransactionEntity(
         id: json["_id"],
         objectType: json["objectType"],
         amt: json["amt"],
@@ -120,8 +116,4 @@ class TransactionEntity {
   String toString() {
     return 'TransactionEntity{id: $id, objectType: $objectType, amt: $amt, payAmt: $payAmt, points: $points, address: $address, status: $status, myCouponIds: $myCouponIds, title: $title, description: $description, storeId: $storeId, userId: $userId, phone: $phone, objectId: $objectId, ownerId: $ownerId, code: $code, authorId: $authorId, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, author: $author, user: $user, store: $store}';
   }
-
-
 }
-
-

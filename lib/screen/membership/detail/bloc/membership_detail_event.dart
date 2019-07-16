@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -11,12 +10,11 @@ class GetMemberShipDetailEvent extends MemberShipDetailEvent {
   String ownerId;
 
   GetMemberShipDetailEvent(this.ownerId);
-
 }
 
-class GetVoucherEvent extends MemberShipDetailEvent{
+class GetVoucherEvent extends MemberShipDetailEvent {
   String ownerId;
   String userId;
 
-  GetVoucherEvent(this.userId,this.ownerId);
+  GetVoucherEvent(this.userId, this.ownerId);
 }

@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/model/Coupon.dart';
@@ -12,7 +11,6 @@ abstract class MemberShipDetailBaseState extends BaseBlocState {
   String toString() {
     return 'MemberShipDetailBaseState{}';
   }
-
 }
 
 class InitialState extends MemberShipDetailBaseState {
@@ -31,10 +29,9 @@ class OnGetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
   String toString() {
     return 'OngetMemberShipDetailSuccessState{stores: $stores}';
   }
-
 }
 
-class GetMemberShipDetailSuccessState extends MemberShipDetailBaseState{
+class GetMemberShipDetailSuccessState extends MemberShipDetailBaseState {
   final List<Store> stores;
 
   GetMemberShipDetailSuccessState(this.stores) : super([stores]);
@@ -52,9 +49,10 @@ class OnGetCouponSuccessState extends MemberShipDetailBaseState {
   OnGetCouponSuccessState(this.coupons) : super([coupons]);
 }
 
-class GetCouponSuccessState extends MemberShipDetailBaseState{
+class GetCouponSuccessState extends MemberShipDetailBaseState {
   final List<Store> stores;
 
   GetCouponSuccessState(this.stores) : super([stores]);
 }
+
 /// END GET COUPON

@@ -16,7 +16,7 @@ class InitState extends ProfileState {}
 
 class ResetState extends ProfileState {}
 
-class UploadSuccessState extends ProfileState{
+class UploadSuccessState extends ProfileState {
   final String uploadedUrl;
 
   UploadSuccessState(this.uploadedUrl) : super([uploadedUrl]);
@@ -27,7 +27,7 @@ class UploadSuccessState extends ProfileState{
   }
 }
 
-class UpdateStateSuccess extends ProfileState{
+class UpdateStateSuccess extends ProfileState {
   final User user;
 
   UpdateStateSuccess(this.user) : super([user]);
@@ -38,7 +38,7 @@ class UpdateStateSuccess extends ProfileState{
   }
 }
 
-class SignOutSuccess extends ProfileState{
+class SignOutSuccess extends ProfileState {
   @override
   String toString() {
     return 'SignOutSuccess{}';

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/entity/LoginEntity.dart';
+import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/provider/AuthProvider.dart';
 import 'package:your_reward_user/provider/CouponProvider.dart';
 import 'package:your_reward_user/provider/PostProvider.dart';
-import 'package:your_reward_user/entity/LoginEntity.dart';
-import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
-import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/provider/TransactionProvider.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
@@ -68,10 +67,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
                 child: SizedBox(
                     child: Text(
               _userProfile,
-              style: TextStyle(
-                  backgroundColor: Colors.blue,
-                  color: Colors.white,
-                  fontSize: 18),
+              style: TextStyle(backgroundColor: Colors.blue, color: Colors.white, fontSize: 18),
             ))),
             RaisedButton(
               onPressed: _onAuthenticationLogin,
@@ -148,8 +144,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
       UserProvider.userEntity = entity.user;
       print(LogPrefix.okResponse(entity.accessToken));
       setState(() {
-        _userProfile =
-            'Welcome: ${UserProvider.userEntity.email} - ${UserProvider.userEntity.fullname}';
+        _userProfile = 'Welcome: ${UserProvider.userEntity.email} - ${UserProvider.userEntity.fullname}';
       });
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -200,7 +195,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetPosts() {
     print(LogPrefix.methodName("_onGetPosts"));
-    postRepo.getPosts("Chung","page").then((onValue) {
+    postRepo.getPosts("Chung", "page").then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -236,7 +231,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetGeneralCoupons() {
     print(LogPrefix.methodName("_onGetGeneralCoupons"));
-    couponRepo.getCoupons("5d19a9477a44a4595488df20","5ce3704714fcb561a3d7a277").then((onValue) {
+    couponRepo.getCoupons("5d19a9477a44a4595488df20", "5ce3704714fcb561a3d7a277").then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -254,9 +249,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetMemberShips() {
     print(LogPrefix.methodName("_onGetMemberShips"));
-    couponRepo
-        .getMemberShipCards("5ce0061bc151ae4a211e7508", limit: 2, skip: 0)
-        .then((onValue) {
+    couponRepo.getMemberShipCards("5ce0061bc151ae4a211e7508", limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -265,9 +258,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetStores() {
     print(LogPrefix.methodName("_onGetStores"));
-    couponRepo
-        .getStores("5ce3704714fcb561a3d7a277", limit: 2, skip: 0)
-        .then((onValue) {
+    couponRepo.getStores("5ce3704714fcb561a3d7a277", limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -276,9 +267,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetTransactionByStoreId() {
     print(LogPrefix.methodName("_onGetTransactionByStoreId"));
-    couponRepo
-        .getTransactionByStoreId("5cdfeb2b04456d438bb0ae4b", limit: 2, skip: 0)
-        .then((onValue) {
+    couponRepo.getTransactionByStoreId("5cdfeb2b04456d438bb0ae4b", limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
@@ -287,7 +276,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetTransactionOverTheWorld() {
     print(LogPrefix.methodName("_onGetTransactionOverTheWorld"));
-    _transactionRepo.getAllTransactions("5d1995787a44a4595488de9a",limit: 2, skip: 0).then((onValue) {
+    _transactionRepo.getAllTransactions("5d1995787a44a4595488de9a", limit: 2, skip: 0).then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));

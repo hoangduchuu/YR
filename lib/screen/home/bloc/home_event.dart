@@ -10,9 +10,10 @@ class GetMemberShipCardsRequest extends HomeEvent {
   String userId;
 
   GetMemberShipCardsRequest(this.userId);
-
 }
+
 class GetTransactionRequest extends HomeEvent {
   String userId;
+
   GetTransactionRequest(this.userId);
 }

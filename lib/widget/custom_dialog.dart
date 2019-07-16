@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:your_reward_user/data/YRService.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;

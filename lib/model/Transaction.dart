@@ -8,7 +8,7 @@ class Transaction {
   int price;
   String logo;
 
-  //TODO huu: re-map data format
+//TODO huu: re-map data format
 }
 
 class TransactionMapper extends BaseMapper<Transaction, TransactionEntity> {

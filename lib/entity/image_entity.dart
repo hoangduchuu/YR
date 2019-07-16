@@ -21,15 +21,13 @@ class ImageEntity {
     this.size,
   });
 
-  factory ImageEntity.fromJson(String str) =>
-      ImageEntity.fromMap(json.decode(str));
+  factory ImageEntity.fromJson(String str) => ImageEntity.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory ImageEntity.fromMap(Map<String, dynamic> json) => new ImageEntity(
         fieldname: json["fieldname"] == null ? null : json["fieldname"],
-        originalname:
-            json["originalname"] == null ? null : json["originalname"],
+        originalname: json["originalname"] == null ? null : json["originalname"],
         encoding: json["encoding"] == null ? null : json["encoding"],
         mimetype: json["mimetype"] == null ? null : json["mimetype"],
         destination: json["destination"] == null ? null : json["destination"],

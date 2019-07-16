@@ -1,5 +1,3 @@
-import 'package:your_reward_user/data/YRService.dart';
-import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
@@ -15,7 +13,6 @@ class User {
   String _avatar;
   String deviceId;
 
-
   String get avatar => this._avatar;
 
   set avatar(String value) {
@@ -26,8 +23,6 @@ class User {
   String toString() {
     return 'User{fullName: $fullName, id: $id, phone: $phone, adress: $adress, email: $email, createAt: $createAt, _avatar: $_avatar, deviceId: $deviceId}';
   }
-
-
 }
 
 class UserMapper extends BaseMapper<User, UserEntity> {

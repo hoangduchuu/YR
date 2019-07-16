@@ -8,12 +8,11 @@ import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
+import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
-import 'package:your_reward_user/widget/bar_code.dart';
 import 'package:your_reward_user/widget/hooray_barcode.dart';
 import 'package:your_reward_user/widget/member_card.dart';
 import 'package:your_reward_user/widget/restaurant_item.dart';
@@ -62,7 +61,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
     return Color(0xFFF5F5F5);
   }
 
-  Widget _body(){
+  Widget _body() {
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
@@ -104,7 +103,11 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 ),
                 child: Text(
                   'Cửa hàng',
-                  style: TextStyle(color: HColors.ColorSecondPrimary, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: Hfonts.PrimaryFontBold),
+                  style: TextStyle(
+                      color: HColors.ColorSecondPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
           Container(height: 250, child: _buildListStore(_stores)),
@@ -118,7 +121,11 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 ),
                 child: Text(
                   'Voucher',
-                  style: TextStyle(color: HColors.ColorSecondPrimary, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: Hfonts.PrimaryFontBold),
+                  style: TextStyle(
+                      color: HColors.ColorSecondPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: Hfonts.PrimaryFontBold),
                 ),
               )),
           Container(height: 250, child: _buildListVouchers(_coupons)),
@@ -144,7 +151,8 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
                 },
               ),
             ],

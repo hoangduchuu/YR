@@ -2,15 +2,12 @@ import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/entity/GetStoreEntity.dart';
 import 'package:your_reward_user/entity/RespErrorEntity.dart';
 import 'package:your_reward_user/model/Store.dart';
-import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/provider/StoreProvider.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
-import 'DataProvider.dart';
-
 class StoreRepo {
-  StoreProvider _provider =injector<StoreProvider>();
+  StoreProvider _provider = injector<StoreProvider>();
   StoreMapper _mapper;
 
   StoreRepo() {
@@ -35,7 +32,6 @@ class StoreRepo {
       return Pair(STATE.ERROR, null, erroMsg: e.toString());
     }
   }
-
 
   // request and mapping from entity to model
   Future<Pair<STATE, List<Store>>> getStoresByStoreId(String ownerId) async {

@@ -18,6 +18,7 @@ class AuthUtils {
   static bool mayEmail(String value) {
     return value.contains("@");
   }
+
   //check password!! password length must be 8 digit
   static bool validatePasswordValid(String password) {
     if (password == null || password.isEmpty) {
@@ -45,7 +46,6 @@ class AuthUtils {
     RegExp regex = new RegExp(pattern);
     return regex.hasMatch(value);
   }
-
 
   static User buildUser(User user) {
     var inputUser = new User();

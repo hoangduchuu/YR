@@ -1,4 +1,3 @@
-import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/model/User.dart';
 
 /// use for cache the User and Token to memory

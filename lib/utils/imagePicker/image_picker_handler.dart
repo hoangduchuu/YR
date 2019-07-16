@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'image_picker_dialog.dart';
-class ImagePickerHandler extends StatefulWidget{
+
+class ImagePickerHandler extends StatefulWidget {
   ImagePickerDialog imagePicker;
   AnimationController _controller;
   ImagePickerListener _listener;
   String downloadUrl;
+
   ImagePickerHandler(this._listener, this._controller);
 
   Future openCamera() async {
@@ -63,5 +63,6 @@ class ImagePickerHandler extends StatefulWidget{
 
 abstract class ImagePickerListener {
   onImageCropped(File _image);
-  onUploaded(File _image,String imgUrl);
+
+  onUploaded(File _image, String imgUrl);
 }

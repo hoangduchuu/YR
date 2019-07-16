@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
-import 'package:your_reward_user/model/Store.dart';
-import 'package:your_reward_user/repository/DataProvider.dart';
 
 import 'NetWorkImage.dart';
 import 'no_membership_cart.dart';
@@ -68,7 +65,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
         fit: StackFit.expand,
         alignment: const Alignment(0, 0),
         children: [
-         ImageLoader(url:item.img, boxFit: BoxFit.fill),
+          ImageLoader(url: item.img, boxFit: BoxFit.fill),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

@@ -1,13 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/test/map_screen.dart';
 import 'package:your_reward_user/widget/NetWorkImage.dart';
+
 class RestaurantDetailScreen extends StatefulWidget {
   Store _store;
 
@@ -18,8 +17,7 @@ class RestaurantDetailScreen extends StatefulWidget {
   _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
 }
 
-class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
-    with SingleTickerProviderStateMixin {
+class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with SingleTickerProviderStateMixin {
   TabController tabController;
   ScrollController scrollController;
   String url;
@@ -83,8 +81,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
           height: 60,
           decoration: BoxDecoration(
             color: HColors.white,
-            border:
-                Border(bottom: BorderSide(color: HColors.paleGrey, width: 2)),
+            border: Border(bottom: BorderSide(color: HColors.paleGrey, width: 2)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,11 +90,10 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                 width: MediaQuery.of(context).size.width * 0.2,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  border: Border(
-                      right: BorderSide(color: HColors.paleGrey, width: 2)),
+                  border: Border(right: BorderSide(color: HColors.paleGrey, width: 2)),
                 ),
                 child: InkWell(
-                  onTap: ()=>_onContactClick(widget._store.phone),
+                  onTap: () => _onContactClick(widget._store.phone),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -107,9 +103,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                       ),
                       Text(
                         'Liên hệ',
-                        style: TextStyle(
-                            color: HColors.ColorSecondPrimary,
-                            fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(color: HColors.ColorSecondPrimary, fontFamily: Hfonts.PrimaryFontBold),
                       ),
                     ],
                   ),
@@ -119,11 +113,10 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                 width: MediaQuery.of(context).size.width * 0.2,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  border: Border(
-                      left: BorderSide(color: HColors.paleGrey, width: 2)),
+                  border: Border(left: BorderSide(color: HColors.paleGrey, width: 2)),
                 ),
                 child: InkWell(
-                  onTap: ()=> _onLocationClick(),
+                  onTap: () => _onLocationClick(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -133,9 +126,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                       ),
                       Text(
                         'Địa điểm',
-                        style: TextStyle(
-                            color: HColors.ColorSecondPrimary,
-                            fontFamily: Hfonts.PrimaryFontBold),
+                        style: TextStyle(color: HColors.ColorSecondPrimary, fontFamily: Hfonts.PrimaryFontBold),
                       ),
                     ],
                   ),
@@ -186,10 +177,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
           padding: EdgeInsets.only(left: 18, bottom: 5),
           child: Text(
             'Miêu tả',
-            style: TextStyle(
-                fontSize: 20,
-                color: HColors.white,
-                fontFamily: Hfonts.PrimaryFontBold),
+            style: TextStyle(fontSize: 20, color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
           ),
         ),
         Container(
@@ -199,10 +187,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
               width: MediaQuery.of(context).size.width * 0.9,
               child: Text(
                 widget._store.description,
-                style: TextStyle(
-                    fontFamily: Hfonts.PrimaryFontRegular,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: Hfonts.PrimaryFontRegular, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             )),
       ],
@@ -215,7 +200,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
       return Container(
         color: Colors.lightBlueAccent,
         height: 200,
-        child: Center(child: Text("No image avalable", style: TextStyle(fontSize: 20,color: Colors.white),)),
+        child: Center(
+            child: Text(
+          "No image avalable",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        )),
       );
     }
     return Swiper(
@@ -233,9 +222,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
     print("call to $phone");
     UrlLauncher.launch("tel://$phone");
   }
+
   _onLocationClick() {
     print('${widget._store.addressLng} -- ${widget._store.addressLat}');
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>GoogleMapScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapScreen()));
   }
-
 }

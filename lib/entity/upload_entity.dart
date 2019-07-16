@@ -18,18 +18,15 @@ class UploadEntity {
   String toJson() => json.encode(toMap());
 
   factory UploadEntity.fromMap(Map<String, dynamic> json) => new UploadEntity(
-    image: json["image"] == null ? null : ImageEntity.fromMap(json["image"]),
-  );
+        image: json["image"] == null ? null : ImageEntity.fromMap(json["image"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "image": image == null ? null : image.toMap(),
-  };
+        "image": image == null ? null : image.toMap(),
+      };
 
   @override
   String toString() {
     return 'UploadEntity{image: $image}';
   }
-
-
 }
-

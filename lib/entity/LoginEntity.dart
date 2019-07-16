@@ -6,8 +6,7 @@ import 'dart:convert';
 
 import 'package:your_reward_user/entity/userEntity.dart';
 
-LoginEntity loginEntityFromJson(String str) =>
-    LoginEntity.fromJson(json.decode(str));
+LoginEntity loginEntityFromJson(String str) => LoginEntity.fromJson(json.decode(str));
 
 String loginEntityToJson(LoginEntity data) => json.encode(data.toJson());
 

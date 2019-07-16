@@ -6,7 +6,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 class GoogleMapScreen extends StatefulWidget {
   LatLng _location;
-  GoogleMapScreen({LatLng location}){
+
+  GoogleMapScreen({LatLng location}) {
     this._location = location;
   }
 
@@ -24,13 +25,11 @@ class _MyAppState extends State<GoogleMapScreen> {
   Future _onMapCreated(GoogleMapController controller) async {
     _controller.complete(controller);
 
-    PermissionStatus permissionStatus =
-    await PermissionHandler().checkPermissionStatus(PermissionGroup.location);
-    if (permissionStatus != PermissionStatus.granted){
-      Map<PermissionGroup, PermissionStatus> permissions = await
-      PermissionHandler().requestPermissions([PermissionGroup.location]);
+    PermissionStatus permissionStatus = await PermissionHandler().checkPermissionStatus(PermissionGroup.location);
+    if (permissionStatus != PermissionStatus.granted) {
+      Map<PermissionGroup, PermissionStatus> permissions =
+          await PermissionHandler().requestPermissions([PermissionGroup.location]);
     }
-
   }
 
   @override

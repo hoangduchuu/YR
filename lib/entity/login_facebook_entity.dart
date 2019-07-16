@@ -20,14 +20,14 @@ class LoginFacebookEntity {
   String toJson() => json.encode(toMap());
 
   factory LoginFacebookEntity.fromMap(Map<String, dynamic> json) => new LoginFacebookEntity(
-    accessToken: json["accessToken"] == null ? null : AccessTokenEntity.fromMap(json["accessToken"]),
-    user: json["user"] == null ? null : UserEntity.fromJson(json["user"]),
-  );
+        accessToken: json["accessToken"] == null ? null : AccessTokenEntity.fromMap(json["accessToken"]),
+        user: json["user"] == null ? null : UserEntity.fromJson(json["user"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "accessToken": accessToken == null ? null : accessToken.toMap(),
-    "user": user == null ? null : user.toJson(),
-  };
+        "accessToken": accessToken == null ? null : accessToken.toMap(),
+        "user": user == null ? null : user.toJson(),
+      };
 }
 
 class AccessTokenEntity {
@@ -44,14 +44,12 @@ class AccessTokenEntity {
   String toJson() => json.encode(toMap());
 
   factory AccessTokenEntity.fromMap(Map<String, dynamic> json) => new AccessTokenEntity(
-    accessToken: json["accessToken"] == null ? null : json["accessToken"],
-    user: json["user"] == null ? null : UserEntity.fromJson(json["user"]),
-  );
+        accessToken: json["accessToken"] == null ? null : json["accessToken"],
+        user: json["user"] == null ? null : UserEntity.fromJson(json["user"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "accessToken": accessToken == null ? null : accessToken,
-    "user": user == null ? null : user.toJson(),
-  };
+        "accessToken": accessToken == null ? null : accessToken,
+        "user": user == null ? null : user.toJson(),
+      };
 }
-
-

@@ -6,15 +6,7 @@ import 'package:your_reward_user/data/base/IsToJSON.dart';
  * model for request body when register user
  */
 class RegisterRequest implements IsToJSON {
-  String email,
-      role,
-      fullName,
-      password,
-      confirmPasswrod,
-      thumbnail,
-      phone,
-      gender,
-      status;
+  String email, role, fullName, password, confirmPasswrod, thumbnail, phone, gender, status;
 
   RegisterRequest(
       {this.email,

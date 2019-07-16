@@ -5,8 +5,6 @@ import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/data/base/BaseParser.dart';
 import 'package:your_reward_user/data/base/MyHttpClient.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
-import 'package:your_reward_user/entity/RegisterEntity.dart';
-import 'package:your_reward_user/entity/RegisterFacbookRequest.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/change_pass_entity.dart';
@@ -38,7 +36,13 @@ class AuthProvider {
 
   //register Facebook
   Future<dynamic> registerWithFacebook(String email, facebookId, String fullName, String phone) async {
-    var body = {"facebookId": facebookId, "email": email, "fullname": fullName, "avatar": "http://example.com/img.png", "strategy": "facebook"};
+    var body = {
+      "facebookId": facebookId,
+      "email": email,
+      "fullname": fullName,
+      "avatar": "http://example.com/img.png",
+      "strategy": "facebook"
+    };
     if (phone != null) {
       body = {
         "facebookId": facebookId,

@@ -20,14 +20,14 @@ class BaseEntity {
   String toRawJson() => json.encode(toJson());
 
   factory BaseEntity.fromJson(Map<String, dynamic> json) => new BaseEntity(
-    total: json["total"],
-    limit: json["limit"],
-    skip: json["skip"],
-  );
+        total: json["total"],
+        limit: json["limit"],
+        skip: json["skip"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "total": total,
-    "limit": limit,
-    "skip": skip,
-  };
+        "total": total,
+        "limit": limit,
+        "skip": skip,
+      };
 }

@@ -135,14 +135,10 @@ class TestScreen extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-                icon:
-                    Icon(FontAwesomeIcons.home, color: HColors.saveButtonColor),
-                title: SizedBox.shrink()),
+                icon: Icon(FontAwesomeIcons.home, color: HColors.saveButtonColor), title: SizedBox.shrink()),
             BottomNavigationBarItem(
-                icon:
-                    Icon(FontAwesomeIcons.bell, color: HColors.saveButtonColor),
-                title: SizedBox
-                    .shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
+                icon: Icon(FontAwesomeIcons.bell, color: HColors.saveButtonColor),
+                title: SizedBox.shrink() //new Text('Thông báo',style: TextStyle(color: saveButtonColor,fontSize: 10))
                 ),
           ],
           onTap: (index) {},

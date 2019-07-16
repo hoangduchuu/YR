@@ -2,8 +2,6 @@
 //
 //     final registerEntity = registerEntityFromJson(jsonString);
 
-import 'dart:convert';
-
 class RegisterEntity {
   String gender;
   String status;
@@ -45,8 +43,7 @@ class RegisterEntity {
     this.v,
   });
 
-  factory RegisterEntity.fromJson(Map<String, dynamic> json) =>
-      new RegisterEntity(
+  factory RegisterEntity.fromJson(Map<String, dynamic> json) => new RegisterEntity(
         gender: json["gender"],
         status: json["status"],
         role: json["role"],

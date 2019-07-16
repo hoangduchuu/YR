@@ -8,7 +8,8 @@ class MemberShipSlider extends StatelessWidget {
     Key key,
     @required this.context,
     @required List<MembershipCard> memberships,
-  }) : _memberships = memberships, super(key: key);
+  })  : _memberships = memberships,
+        super(key: key);
 
   final BuildContext context;
   final List<MembershipCard> _memberships;
@@ -21,8 +22,8 @@ class MemberShipSlider extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => MemberShipScreen(
-                  memberCard: _memberships[index],
-                )));
+                      memberCard: _memberships[index],
+                    )));
       },
       memberships: _memberships,
     );

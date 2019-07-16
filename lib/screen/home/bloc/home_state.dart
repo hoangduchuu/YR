@@ -6,12 +6,9 @@ abstract class HomeState extends BaseBlocState {
   HomeState([List props = const []]) : super(props);
 }
 
-class InitialState extends HomeState{
-
+class InitialState extends HomeState {
   @override
   String toString() {
     return 'InitialState{}';
   }
 }
-
-

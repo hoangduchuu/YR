@@ -7,6 +7,7 @@ import 'package:your_reward_user/repository/CouponRepo.dart';
 import 'package:your_reward_user/repository/StoreRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
+
 import 'membership_detail_event.dart';
 import 'membership_detail_state.dart';
 
@@ -14,15 +15,13 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, BaseBlocState> {
   StoreRepo _storeRepo = injector<StoreRepo>();
   CouponRepo _couponRepo = injector<CouponRepo>();
 
-
   @override
-  Stream<BaseBlocState> mapEventToState(
-      MemberShipDetailEvent event) async* {
+  Stream<BaseBlocState> mapEventToState(MemberShipDetailEvent event) async* {
     if (event is GetMemberShipDetailEvent) {
       yield* _handleGetStoreRequest(event.ownerId);
     }
-    if (event is GetVoucherEvent){
-      yield* _handleGetCouponRequest(event.userId,event.ownerId);
+    if (event is GetVoucherEvent) {
+      yield* _handleGetCouponRequest(event.userId, event.ownerId);
     }
   }
 
@@ -46,10 +45,10 @@ class MemberShipDetailBloc extends Bloc<MemberShipDetailEvent, BaseBlocState> {
     }
   }
 
-  Stream<BaseBlocState> _handleGetCouponRequest(String userId,String ownerId) async* {
+  Stream<BaseBlocState> _handleGetCouponRequest(String userId, String ownerId) async* {
     yield UIControlState.showLoading();
     try {
-      Pair<STATE, List<Coupon>> result = await _couponRepo.getCoupons(userId,ownerId);
+      Pair<STATE, List<Coupon>> result = await _couponRepo.getCoupons(userId, ownerId);
       if (result.left == STATE.ERROR) {
         yield UIControlState.showError(result.erroMsg);
       } else if (result.right.isEmpty) {

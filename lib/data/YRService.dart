@@ -1,32 +1,23 @@
 import 'dart:io';
 
 import 'package:your_reward_user/repository/DataProvider.dart';
-import 'package:your_reward_user/utils/UserProvider.dart';
 
 class YRService {
-  static const DEFAULT_HEADER = {
-    HttpHeaders.contentTypeHeader: 'application/json'
-  };
+  static const DEFAULT_HEADER = {HttpHeaders.contentTypeHeader: 'application/json'};
   static String myToken = DataProvider.userToken;
+
   static Map<String, String> generateHeadersWithToken() {
-    return {
-      HttpHeaders.authorizationHeader: 'Bearer $myToken',
-      HttpHeaders.contentTypeHeader: 'application/json'
-    };
+    return {HttpHeaders.authorizationHeader: 'Bearer $myToken', HttpHeaders.contentTypeHeader: 'application/json'};
   }
 
   static Map<String, String> inputToken(String token) {
-    return {
-      HttpHeaders.authorizationHeader: 'Bearer $token',
-      HttpHeaders.contentTypeHeader: 'application/json'
-    };
+    return {HttpHeaders.authorizationHeader: 'Bearer $token', HttpHeaders.contentTypeHeader: 'application/json'};
   }
 
-  static const DEFAULT_FILE_HEADER = {
-    HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded'
-  };
+  static const DEFAULT_FILE_HEADER = {HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded'};
 
   static String END_POINT = 'http://206.189.149.115:3030';
+
   //authentication
   static String PATH_USERS = '/users';
   static String PATH_LOGIN = '/authentication';
