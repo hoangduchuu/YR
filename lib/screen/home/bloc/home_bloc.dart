@@ -43,12 +43,15 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
           await _couponRepo.getMembership(userID);
       if (result.left == STATE.ERROR) {
         yield UIControlState.showError(result.erroMsg);
-      } else if (result.right.isEmpty) {
+      }
+      if (result.right.isEmpty) {
         yield GetMemberShipCardsEmptyState();
+      }else{
+        if (result.left == STATE.SUCCESS) {
+          yield GetMembershipCardSuccessState(memberships: result.right);
+        }
       }
-      if (result.left == STATE.SUCCESS) {
-        yield GetMembershipCardSuccessState(memberships: result.right);
-      }
+
     } catch (e) {
       yield UIControlState.showError( e.toString());
     }
