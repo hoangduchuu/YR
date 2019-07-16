@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
+import 'NetWorkImage.dart';
+
 class TranferHistoryRow extends StatefulWidget {
   final String tranferName;
   final String time;
@@ -46,7 +48,7 @@ class _TranferHistoryRowState extends State<TranferHistoryRow> {
             decoration: new BoxDecoration(
               shape: BoxShape.circle,
             ),
-            child: Image.network(widget.storeType,fit: BoxFit.cover,width: 20,),
+            child: ImageLoader(url:widget.storeType,boxFit: BoxFit.cover,radius: 25,),
           ),
           SizedBox(
             width:  MediaQuery.of(context).size.width*0.02,

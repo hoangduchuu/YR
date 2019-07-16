@@ -17,6 +17,7 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
+import 'package:your_reward_user/widget/NetWorkImage.dart';
 import 'package:your_reward_user/widget/common_button.dart';
 import 'package:your_reward_user/widget/textfield.dart';
 import 'dart:ui' as ui;
@@ -26,8 +27,7 @@ import 'profile_event.dart';
 
 class AccountInformationScreen extends BasePage {
   @override
-  _AccountInformationScreenState createState() =>
-      _AccountInformationScreenState();
+  _AccountInformationScreenState createState() => _AccountInformationScreenState();
 }
 
 class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
@@ -37,9 +37,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   ProfileBloc _profileBloc;
   String _name, _email, _phone;
   String _avatarUrl = DataProvider.user.avatar;
-  TextEditingController _userTextController,
-      _emailTextController,
-      _phoneTextController;
+  TextEditingController _userTextController, _emailTextController, _phoneTextController;
 
   @override
   void initState() {
@@ -78,7 +76,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     return _buildBloc(context);
   }
 
-
   @override
   onImageCropped(File _image) {
     _profileBloc.dispatch(UploadEvent(DataProvider.user.id, _image));
@@ -95,20 +92,20 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
         bloc: _profileBloc,
         listener: (context, state) async {
           handleUIControlState(state);
-          if (state is UploadSuccessState){
+          if (state is UploadSuccessState) {
             print("Upload success ${state.uploadedUrl}");
             setState(() {
               DataProvider.user.avatar = state.uploadedUrl;
             });
             super.hideLoadingWithContext(context);
-          } else if (state is UpdateStateSuccess){
+          } else if (state is UpdateStateSuccess) {
             super.hideLoadingWithContext(context);
             showSuccessMessage("Thay đổi thông tin thành công", context);
             updateChangedData(state.user);
-          } else if (state is SignOutSuccess){
+          } else if (state is SignOutSuccess) {
             await SharedPrefRepo.clearAll();
-            Navigator.pushAndRemoveUntil(
-                context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (Route<dynamic> route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+                (Route<dynamic> route) => false);
           }
         },
         child: Stack(
@@ -119,8 +116,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               decoration: BoxDecoration(
                 color: Colors.white,
                 image: DecorationImage(
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                  colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
                   image: AssetImage('assets/images/bg1.jpg'),
                   fit: BoxFit.cover,
                 ),
@@ -129,8 +125,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                 filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                 child: new Container(
                   //you can change opacity with color here(I used black) for background.
-                  decoration:
-                      new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+                  decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
                 ),
               ),
             ),
@@ -175,14 +170,19 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          alignment: Alignment.center,
-                          height: 100,
                           width: 100,
-                          decoration: BoxDecoration(
-                              borderRadius: new BorderRadius.circular(50),
-                              image: DecorationImage(
-                                  image: NetworkImage(DataProvider.user.avatar),
-                                  fit: BoxFit.cover)),
+                          height: 100,
+                          margin: EdgeInsets.only(top: 20, left: 10),
+                          decoration: new BoxDecoration(
+                            color: Colors.white30,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: ImageLoader(
+                              url: DataProvider.user.avatar,
+                              radius: 50,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -240,8 +240,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       textColor: HColors.white,
                       text: Text(
                         'Lưu lại thông tin',
-                        style: TextStyle(
-                            fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                       ),
                       width: MediaQuery.of(parentContext).size.width * 0.72,
                       buttonPadding: 10,
@@ -258,8 +257,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       textColor: HColors.white,
                       text: Text(
                         'Đăng xuất',
-                        style: TextStyle(
-                            fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                       ),
                       width: MediaQuery.of(parentContext).size.width * 0.72,
                       buttonPadding: 10,
@@ -303,8 +301,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Xác nhận"),
-      content: Text(
-          "Bạn có muốn đăng xuất?"),
+      content: Text("Bạn có muốn đăng xuất?"),
       actions: [
         cancelButton,
         continueButton,
@@ -322,7 +319,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
 
   updateChangedData(User user) {
     setState(() {
-
       User mUser = DataProvider.user;
       mUser.email = user.email;
       mUser.phone = user.phone;
@@ -338,6 +334,4 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   Color getBgColor() {
     return null;
   }
-
-
 }

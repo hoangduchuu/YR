@@ -7,6 +7,7 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/test/map_screen.dart';
+import 'package:your_reward_user/widget/NetWorkImage.dart';
 class RestaurantDetailScreen extends StatefulWidget {
   Store _store;
 
@@ -220,9 +221,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
     return Swiper(
         autoplay: true,
         itemBuilder: (BuildContext context, int index) {
-          return new Image.network(
-            imgList[index],
-            fit: BoxFit.fill,
+          return new ImageLoader(
+            url: imgList[index],
           );
         },
         itemCount: imgList.length,

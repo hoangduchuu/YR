@@ -4,6 +4,8 @@ import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
+import 'NetWorkImage.dart';
+
 class MemberCard extends StatefulWidget {
   final String memberName;
   final int memberPoint;
@@ -60,15 +62,8 @@ class _MemberCardState extends State<MemberCard> {
                         color: Colors.white30,
                         shape: BoxShape.circle,
                       ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            borderRadius: new BorderRadius.circular(50),
-                            image: DecorationImage(
-                                image: NetworkImage(DataProvider.user.avatar),
-                                fit: BoxFit.cover)),
+                      child: Center(
+                        child: ImageLoader(url: DataProvider.user.avatar,radius: 30,),
                       ),
                     ),
                     Container(

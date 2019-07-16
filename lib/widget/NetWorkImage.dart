@@ -1,15 +1,36 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:your_reward_user/utils/const.dart';
 
+// Use ImageLoad to load any image to show no-image
 class ImageLoader extends StatelessWidget {
-  final String url;
+  String url;
+  bool circleImage = false;
+  double radius;
+  BoxFit boxFit;
 
-  ImageLoader(this.url);
+  ImageLoader({@required this.url, this.circleImage, this.radius, this.boxFit});
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage(
-      placeholder: AssetImage("assets/images/coupons.png"),
-      image: NetworkImage(url),
+    return CachedNetworkImage(
+      imageUrl: url,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadiusDirectional.circular(radius == null ? 0 : radius),
+          image: DecorationImage(
+            image: imageProvider,
+            fit: boxFit == null ? BoxFit.cover : boxFit,
+          ),
+        ),
+      ),
+      placeholder: (context, url) => Center(
+        child: CircularProgressIndicator(),
+      ),
+      errorWidget: (context, url, error) => Image.asset("assets/images/no_image.png"),
+      fadeOutDuration: new Duration(seconds: 1),
+      fadeInDuration: new Duration(seconds: 3),
     );
+    ;
   }
 }

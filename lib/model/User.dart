@@ -3,6 +3,7 @@ import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/SignupEntity.dart';
 import 'package:your_reward_user/entity/userEntity.dart';
 import 'package:your_reward_user/utils/BaseMapper.dart';
+import 'package:your_reward_user/utils/const.dart';
 
 class User {
   String fullName;
@@ -39,7 +40,7 @@ class UserMapper extends BaseMapper<User, UserEntity> {
     model.email = entity.email;
     model.fullName = entity.fullname;
     model.createAt = entity.createdAt.toString();
-    model.avatar = entity.thumbnail;
+    model.avatar = entity.thumbnail == null ? NO_IMAGE : entity.thumbnail;
     model.deviceId = entity.deviceId;
     return model;
   }

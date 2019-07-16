@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/widget/NetWorkImage.dart';
 
 class RestaurantItem extends StatefulWidget {
   final String storeName;
   final String storeImage;
   final VoidCallback onClick;
 
-  RestaurantItem(
-      {Key key,
-      @required this.storeName,
-      @required this.storeImage,
-      @required this.onClick})
+  RestaurantItem({Key key, @required this.storeName, @required this.storeImage, @required this.onClick})
       : super(key: key);
 
   @override
@@ -38,13 +35,12 @@ class _RestaurantItemState extends State<RestaurantItem> {
             child: Stack(
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      image: DecorationImage(
-                          image: NetworkImage(widget.storeImage),
-                          fit: BoxFit.cover)),
                   height: 250,
                   width: 190,
+                  child: ImageLoader(
+                    url: widget.storeImage,
+                    radius: 5,
+                  ),
                 ),
                 Container(
                   height: 150,
@@ -60,9 +56,8 @@ class _RestaurantItemState extends State<RestaurantItem> {
                       alignment: Alignment.centerLeft,
                       width: MediaQuery.of(context).size.width / 2,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(7),
-                              bottomRight: Radius.circular(7)),
+                          borderRadius:
+                              BorderRadius.only(bottomLeft: Radius.circular(7), bottomRight: Radius.circular(7)),
                           color: Colors.black54),
                       child: Column(
                         children: <Widget>[

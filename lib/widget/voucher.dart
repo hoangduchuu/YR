@@ -48,7 +48,7 @@ class Voucher extends StatelessWidget {
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                    child: ImageLoader(imageUrl),
+                    child: ImageLoader(url: imageUrl, radius: 5,),
                   ),
                   height: 160,
                   width:160,
