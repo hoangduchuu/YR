@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:your_reward_user/core/injector.dart';
+import 'package:your_reward_user/data/YRService.dart';
 import 'package:your_reward_user/entity/LoginEntity.dart';
 import 'package:your_reward_user/entity/RegisterEntity.dart';
 import 'package:your_reward_user/entity/RegisterRequest.dart';
@@ -169,13 +170,15 @@ class AuthRepo {
   Future<Pair<bool, String>> upload(String userId, File file) async {
     try {
       UploadEntity uploadTask = await _authProvider.upload(file);
-      var updateResult = await _authProvider.updateAvatar(userId, 'load/file/${uploadTask.image.filename}');
+
+      var updateResult = await _authProvider.updateAvatar(userId, '${YRService.END_POINT}/load/file/${uploadTask.image
+          .filename}');
       if (updateResult is ErrorEntity) {
         return Pair(false, null, erroMsg: updateResult.message);
       }
 
       if (updateResult != null && updateResult is UpdateProfileEntity) {
-        return Pair(true, 'load/file/${uploadTask.image.filename}', erroMsg: null);
+        return Pair(true, '${YRService.END_POINT}/load/file/${uploadTask.image.filename}', erroMsg: null);
       }
     } catch (error) {
       return Pair(false, null, erroMsg: error.toString());

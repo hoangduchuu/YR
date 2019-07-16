@@ -18,7 +18,7 @@ class User {
   String get avatar => this._avatar;
 
   set avatar(String value) {
-    this._avatar = '${YRService.END_POINT}/$value';
+    this._avatar = '$value';
   }
 
   @override
