@@ -75,13 +75,15 @@ abstract class BaseState<page extends BasePage> extends State<page> {
 
 
   void showSuccessToast(BuildContext context, String msg, {int duration, int gravity,double backgroundRadius}) {
-    Toast.show(msg, context, duration: duration, gravity: gravity, backgroundColor:  Color(0xFF81C784) ,textColor: Colors.white);
+    Toast.show(msg, scaffoldKey.currentContext, duration: duration, gravity: gravity, backgroundColor:  Color(0xFF81C784) ,textColor: Colors.white);
   }
 
   void showErrorToast(BuildContext context, String msg, {int duration, int gravity,double backgroundRadius}) {
-    Toast.show(msg, context, duration: duration, gravity: gravity, backgroundColor:  Colors.red ,textColor: Colors.white);
+    Toast.show(msg, scaffoldKey.currentContext, duration: duration, gravity: gravity, backgroundColor:  Colors.red ,
+        textColor:
+    Colors.white);
   }
   void showSimpleToast(BuildContext context, String msg, {int duration, int gravity,double backgroundRadius}) {
-    Toast.show(msg, context, duration: duration, gravity: gravity);
+    Toast.show(msg, scaffoldKey.currentContext, duration: duration, gravity: gravity);
   }
 }
