@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>835840466406-36larl3qq8kpb22hupag1mielji7egac.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.835840466406-36larl3qq8kpb22hupag1mielji7egac</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>835840466406-lkamlpup6jjvsp4ho6i54q2sr79q230s.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZiUPqM0HIXGhkqgjSKdRYSZQc4P7ap0A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>835840466406</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hooray.yourRewardUser</string>
+	<key>PROJECT_ID</key>
+	<string>yourreward</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yourreward.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:835840466406:ios:1938a9b541bebff5</string>
+	<key>DATABASE_URL</key>
+	<string>https://yourreward.firebaseio.com</string>
+</dict>
+</plist>
