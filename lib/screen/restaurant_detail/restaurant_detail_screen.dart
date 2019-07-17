@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
@@ -224,7 +225,13 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with Si
   }
 
   _onLocationClick() {
-    print('${widget._store.addressLng} -- ${widget._store.addressLat}');
-    Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapScreen()));
+    LatLng location = LatLng(double.parse(widget._store.addressLat), double.tryParse(widget._store.addressLng));
+    Store store = widget._store;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => GoogleMapScreen(
+                  store: store,
+                )));
   }
 }
