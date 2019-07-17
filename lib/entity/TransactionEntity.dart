@@ -83,7 +83,7 @@ class TransactionEntity {
         v: json["__v"],
         author: AuthorEntity.fromJson(json["author"]),
         user: UserEntity.fromJson(json["user"]),
-        store: StoreEntity.fromJson(json["store"]),
+        store: json["store"] != null ? StoreEntity.fromJson(json["store"]) : null,
       );
 
   Map<String, dynamic> toJson() => {

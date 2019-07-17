@@ -17,9 +17,9 @@ class TransactionMapper extends BaseMapper<Transaction, TransactionEntity> {
     Transaction model = Transaction();
     model.price = entity.amt;
     model.point = entity.points;
-    model.storeLocation = entity.store.address;
+    model.storeLocation = entity.store != null ? entity.store.address : "unknown";
+    model.logo = entity.store != null ? entity.store.thumbnail : '';
     model.time = entity.createdAt.toString();
-    model.logo = entity.store.thumbnail;
     return model;
   }
 
