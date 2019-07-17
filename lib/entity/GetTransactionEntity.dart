@@ -27,7 +27,9 @@ class GetTransactionEntity {
         total: json["total"],
         limit: json["limit"],
         skip: json["skip"],
-        data: new List<TransactionEntity>.from(json["data"].map((x) => TransactionEntity.fromJson(x))),
+        data: new List<TransactionEntity>.from(json["data"].map((x){
+          return TransactionEntity.fromJson(x);
+        })),
       );
 
   Map<String, dynamic> toJson() => {

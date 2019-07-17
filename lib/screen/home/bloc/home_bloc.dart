@@ -39,6 +39,7 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
     try {
       Pair<STATE, List<MembershipCard>> result = await _couponRepo.getMembership(userID);
       if (result.left == STATE.ERROR) {
+        print('_handleHomeRequest: ===========');
         yield UIControlState.showError(result.erroMsg);
       }
       if (result.right.isEmpty) {
@@ -49,6 +50,7 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
         }
       }
     } catch (e) {
+      print('_handleHomeRequest: ${e.toString()}');
       yield UIControlState.showError(e.toString());
     }
   }
@@ -58,6 +60,7 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
     try {
       Pair<STATE, List<Transaction>> result = await _transactionRepo.getTransactions(userId);
       if (result.left == STATE.ERROR) {
+        print('_handleGetTransactionRequest: ============');
         yield UIControlState.showError(result.erroMsg);
       } else if (result.right.isEmpty) {
         yield GetTransactionEmptyState();
@@ -66,6 +69,7 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
         yield OnGetTransactionSuccess(transactions: result.right);
       }
     } catch (e) {
+      print('_handleGetTransactionRequest: ${e.toString()}');
       yield UIControlState.showError(e.toString());
     }
   }

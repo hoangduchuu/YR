@@ -18,6 +18,7 @@ class TransactionProvider {
     params['userId'] = userId;
     String raw = await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = GetTransactionParser().parse(raw);
+    print('$result');
     return result;
   }
 
@@ -25,7 +26,6 @@ class TransactionProvider {
     String url =
         '${YRService.END_POINT}${YRService.PATH_TRANSACTIONS}?${CommonUtils.getFilterParam(limit: limit, skip: skip)}';
 
-    // FIXME : UGENT : hỏi lại api này
     Map<String, String> params = Map();
     params['ownerId'] = ownerId;
     params['userId'] = userId;
