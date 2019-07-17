@@ -10,6 +10,7 @@ class YRTextField extends StatefulWidget {
   final IconData icon;
   TextEditingController textController;
   TextInputType type = TextInputType.text;
+  String defaultText = "";
 
   YRTextField(
       {Key key,
@@ -17,6 +18,7 @@ class YRTextField extends StatefulWidget {
       @required this.icon,
       @required this.onTextChanged,
       @required this.isPassword,
+      this.defaultText,
       this.type,
       this.textController})
       : super(key: key);
@@ -34,6 +36,7 @@ class _SBTextFieldState extends State<YRTextField> {
   void initState() {
     super.initState();
     widget.textController = TextEditingController();
+    widget.textController.text = this.widget.defaultText;
   }
 
   @override
