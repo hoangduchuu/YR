@@ -236,7 +236,6 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler,
       final graphResponse = await http
           .get('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${"$token"}');
       final profile = json.decode(graphResponse.body);
-      super.showSuccessToast(_context, "${profile.toString()}");
       _fullname = profile['name'];
       _facebookEmail = profile['email'];
       _facebookId = profile['id'];

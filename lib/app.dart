@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       '/facebooklogin': (BuildContext context) => FacebookLoginPage(),
       '/hoorayapi': (BuildContext context) => ApiScreenTest(),
     },
+    debugShowCheckedModeBanner: false,
     //unknown route
   );
 
