@@ -53,9 +53,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     _userTextController = TextEditingController();
     _emailTextController = TextEditingController();
     _phoneTextController = TextEditingController();
-    _userTextController.text = DataProvider.user.fullName;
-    _emailTextController.text = DataProvider.user.email;
-    _phoneTextController.text = DataProvider.user.phone;
   }
 
   @override
@@ -203,6 +200,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       ),
                     ),
                     YRTextField(
+                      defaultText: DataProvider.user.fullName,
                       textController: _userTextController,
                       hintText: 'Nhập họ và tên của bạn',
                       onTextChanged: (value) {
@@ -212,6 +210,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                       icon: FontAwesomeIcons.userCog,
                     ),
                     YRTextField(
+                        defaultText: DataProvider.user.email,
                         textController: _emailTextController,
                         hintText: 'Nhập email',
                         icon: FontAwesomeIcons.envelopeOpen,
@@ -220,6 +219,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                         },
                         isPassword: false),
                     YRTextField(
+                      defaultText: DataProvider.user.phone,
                       textController: _phoneTextController,
                       hintText: 'Nhập vào số điện thoại liên lạc',
                       icon: FontAwesomeIcons.phoneSquare,
