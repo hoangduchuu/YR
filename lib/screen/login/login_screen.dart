@@ -27,7 +27,7 @@ class LoginScreen extends BasePage {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler, ScaffoldPage {
+class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler {
   LoginBloc _loginBloc;
   String _email = "huu@example.com";
   String _password = "john.doe";
@@ -47,13 +47,22 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler,
   }
 
   @override
-  Widget appBar() {
-    return null;
-  }
-
-  @override
-  Widget body() {
-    return _buildBody();
+  Widget build(BuildContext context) {
+    return Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              image: DecorationImage(
+                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
+                image: AssetImage('assets/images/bg1.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child:  Scaffold(
+              backgroundColor: Colors.transparent,
+              body: _buildBody(),
+            ),
+          );
   }
 
   @override
@@ -73,27 +82,7 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler,
           _showPhoneInputDialog(super.scaffoldKey.currentContext);
         }
       },
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              image: DecorationImage(
-                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
-                image: AssetImage('assets/images/bg1.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: new BackdropFilter(
-              filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-              child: new Container(
-                //you can change opacity with color here(I used black) for background.
-                decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
-              ),
-            ),
-          ),
+      child:
           Container(
             height: MediaQuery.of(context).size.height,
             child: ListView(
@@ -218,8 +207,6 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler,
               ],
             ),
           ),
-        ],
-      ),
     );
   }
 

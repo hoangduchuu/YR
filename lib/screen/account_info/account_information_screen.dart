@@ -25,17 +25,20 @@ import 'profile_event.dart';
 
 class AccountInformationScreen extends BasePage {
   @override
-  _AccountInformationScreenState createState() => _AccountInformationScreenState();
+  _AccountInformationScreenState createState() =>
+      _AccountInformationScreenState();
 }
 
 class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
-    with ImagePickerListener, TickerProviderStateMixin, ErrorMessageHandler, ScaffoldPage {
+    with ImagePickerListener, TickerProviderStateMixin, ErrorMessageHandler {
   AnimationController _controller;
   ImagePickerHandler imagePicker;
   ProfileBloc _profileBloc;
   String _name, _email, _phone;
   String _avatarUrl = DataProvider.user.avatar;
-  TextEditingController _userTextController, _emailTextController, _phoneTextController;
+  TextEditingController _userTextController,
+      _emailTextController,
+      _phoneTextController;
 
   @override
   void initState() {
@@ -51,8 +54,11 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     _profileBloc = ProfileBloc();
 
     _userTextController = TextEditingController();
+    _userTextController.text = DataProvider.user.fullName;
     _emailTextController = TextEditingController();
+    _emailTextController.text = DataProvider.user.email;
     _phoneTextController = TextEditingController();
+    _phoneTextController.text = DataProvider.user.phone;
   }
 
   @override
@@ -62,13 +68,45 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   }
 
   @override
-  Widget appBar() {
-    return null;
-  }
-
-  @override
-  Widget body() {
-    return _buildBloc(context);
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
+              image: AssetImage('assets/images/bg1.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: _buildBloc(context),
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: HColors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+          
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -84,189 +122,141 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
 
   _buildBloc(BuildContext parentContext) {
     return BlocListener(
-        bloc: _profileBloc,
-        listener: (context, state) async {
-          handleUIControlState(state);
-          if (state is UploadSuccessState) {
-            print("Upload success ${state.uploadedUrl}");
-            setState(() {
-              DataProvider.user.avatar = state.uploadedUrl;
-            });
-            super.hideLoadingWithContext(context);
-          } else if (state is UpdateStateSuccess) {
-            super.hideLoadingWithContext(context);
-            showSuccessMessage("Thay đổi thông tin thành công", context);
-            updateChangedData(state.user);
-          } else if (state is SignOutSuccess) {
-            await SharedPrefRepo.clearAll();
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-                (Route<dynamic> route) => false);
-          }
-        },
-        child: Stack(
-          fit: StackFit.expand,
+      bloc: _profileBloc,
+      listener: (context, state) async {
+        handleUIControlState(state);
+        if (state is UploadSuccessState) {
+          print("Upload success ${state.uploadedUrl}");
+          setState(() {
+            DataProvider.user.avatar = state.uploadedUrl;
+          });
+          super.hideLoadingWithContext(context);
+        } else if (state is UpdateStateSuccess) {
+          super.hideLoadingWithContext(context);
+          showSuccessMessage("Thay đổi thông tin thành công", context);
+          updateChangedData(state.user);
+        } else if (state is SignOutSuccess) {
+          await SharedPrefRepo.clearAll();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => LoginScreen()),
+              (Route<dynamic> route) => false);
+        }
+      },
+      child: Container(
+        height: double.maxFinite,
+        child: ListView(
+          //shrinkWrap: true,
           children: <Widget>[
-            Container(
-              height: MediaQuery.of(parentContext).size.height,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
-                  image: AssetImage('assets/images/bg1.jpg'),
-                  fit: BoxFit.cover,
+            SizedBox(
+              height: MediaQuery.of(parentContext).size.height*0.05,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 100,
+                  height: 100,
+                  margin: EdgeInsets.only(top: 20, left: 10),
+                  decoration: new BoxDecoration(
+                    color: Colors.white30,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: ImageLoader(
+                      url: DataProvider.user.avatar,
+                      radius: 50,
+                    ),
+                  ),
                 ),
+              ],
+            ),
+            CommonButton(
+              onPressed: () {
+                imagePicker.showDialog(parentContext);
+              },
+              backgroundColor: Colors.transparent,
+              textColor: HColors.white,
+              buttonPadding: 10,
+              text: Text(
+                'Tải ảnh lên',
+                style: TextStyle(color: HColors.white),
               ),
-              child: new BackdropFilter(
-                filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                child: new Container(
-                  //you can change opacity with color here(I used black) for background.
-                  decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
-                ),
+              width: MediaQuery.of(parentContext).size.width * 0.4,
+              icon: Icon(
+                FontAwesomeIcons.cameraRetro,
+                color: HColors.white,
               ),
             ),
-            Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-                leading: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: HColors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(parentContext);
-                    }),
-                title: Text(
-                  'Thông tin',
-                  style: TextStyle(color: HColors.white),
-                ),
+            YRTextField(
+              defaultText: DataProvider.user.fullName,
+              textController: _userTextController,
+              hintText: 'Nhập họ và tên của bạn',
+              onTextChanged: (value) {
+                _name = value;
+              },
+              isPassword: false,
+              icon: FontAwesomeIcons.userCog,
+            ),
+            YRTextField(
+                defaultText: DataProvider.user.email,
+                textController: _emailTextController,
+                hintText: 'Nhập email',
+                icon: FontAwesomeIcons.envelopeOpen,
+                onTextChanged: (value) {
+                  _email = value;
+                },
+                isPassword: false),
+            YRTextField(
+              defaultText: DataProvider.user.phone,
+              textController: _phoneTextController,
+              hintText: 'Nhập vào số điện thoại liên lạc',
+              icon: FontAwesomeIcons.phoneSquare,
+              type: TextInputType.number,
+              onTextChanged: (value) {
+                _phone = value;
+              },
+              isPassword: false,
+            ),
+            SizedBox(
+              height: MediaQuery.of(parentContext).size.height * 0.03,
+            ),
+            CommonButton(
+              onPressed: () => _handleSubmit(),
+              backgroundColor: HColors.ColorSecondPrimary,
+              textColor: HColors.white,
+              text: Text(
+                'Lưu lại thông tin',
+                style:
+                    TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
               ),
-              body: Container(
-                height: double.maxFinite,
-                child: ListView(
-                  //shrinkWrap: true,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-//            Container(
-//              width: 80.0,
-//              height: 80.0,
-//              decoration: BoxDecoration(
-//                shape: BoxShape.circle,
-//                image: DecorationImage(
-//                  image: NetworkImage(
-//                      'https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg'),
-//                ),
-//              ),
-//            ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          width: 100,
-                          height: 100,
-                          margin: EdgeInsets.only(top: 20, left: 10),
-                          decoration: new BoxDecoration(
-                            color: Colors.white30,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: ImageLoader(
-                              url: DataProvider.user.avatar,
-                              radius: 50,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    CommonButton(
-                      onPressed: () {
-                        imagePicker.showDialog(parentContext);
-                      },
-                      backgroundColor: Colors.transparent,
-                      textColor: HColors.white,
-                      buttonPadding: 10,
-                      text: Text(
-                        'Tải ảnh lên',
-                        style: TextStyle(color: HColors.white),
-                      ),
-                      width: MediaQuery.of(parentContext).size.width * 0.4,
-                      icon: Icon(
-                        FontAwesomeIcons.cameraRetro,
-                        color: HColors.white,
-                      ),
-                    ),
-                    YRTextField(
-                      defaultText: DataProvider.user.fullName,
-                      textController: _userTextController,
-                      hintText: 'Nhập họ và tên của bạn',
-                      onTextChanged: (value) {
-                        _name = value;
-                      },
-                      isPassword: false,
-                      icon: FontAwesomeIcons.userCog,
-                    ),
-                    YRTextField(
-                        defaultText: DataProvider.user.email,
-                        textController: _emailTextController,
-                        hintText: 'Nhập email',
-                        icon: FontAwesomeIcons.envelopeOpen,
-                        onTextChanged: (value) {
-                          _email = value;
-                        },
-                        isPassword: false),
-                    YRTextField(
-                      defaultText: DataProvider.user.phone,
-                      textController: _phoneTextController,
-                      hintText: 'Nhập vào số điện thoại liên lạc',
-                      icon: FontAwesomeIcons.phoneSquare,
-                      type: TextInputType.number,
-                      onTextChanged: (value) {
-                        _phone = value;
-                      },
-                      isPassword: false,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(parentContext).size.height * 0.03,
-                    ),
-                    CommonButton(
-                      onPressed: () => _handleSubmit(),
-                      backgroundColor: HColors.ColorSecondPrimary,
-                      textColor: HColors.white,
-                      text: Text(
-                        'Lưu lại thông tin',
-                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-                      ),
-                      width: MediaQuery.of(parentContext).size.width * 0.72,
-                      buttonPadding: 10,
-                      radiusValue: 10,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(parentContext).size.height * 0.03,
-                    ),
-                    CommonButton(
-                      onPressed: () {
-                        showAlertDialog(context);
-                      },
-                      backgroundColor: HColors.red,
-                      textColor: HColors.white,
-                      text: Text(
-                        'Đăng xuất',
-                        style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-                      ),
-                      width: MediaQuery.of(parentContext).size.width * 0.72,
-                      buttonPadding: 10,
-                      radiusValue: 10,
-                    )
-                  ],
-                ),
+              width: MediaQuery.of(parentContext).size.width * 0.72,
+              buttonPadding: 10,
+              radiusValue: 10,
+            ),
+            SizedBox(
+              height: MediaQuery.of(parentContext).size.height * 0.03,
+            ),
+            CommonButton(
+              onPressed: () {
+                showAlertDialog(context);
+              },
+              backgroundColor: HColors.red,
+              textColor: HColors.white,
+              text: Text(
+                'Đăng xuất',
+                style:
+                    TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
               ),
+              width: MediaQuery.of(parentContext).size.width * 0.72,
+              buttonPadding: 10,
+              radiusValue: 10,
             )
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   _handleSubmit() {
