@@ -19,10 +19,12 @@ import 'change_passs_screen.dart';
 
 class ForgotPassRequestScreen extends BasePage {
   @override
-  _ForgotPassRequestScreenState createState() => _ForgotPassRequestScreenState();
+  _ForgotPassRequestScreenState createState() =>
+      _ForgotPassRequestScreenState();
 }
 
-class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> with ErrorMessageHandler, ScaffoldPage {
+class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen>
+    with ErrorMessageHandler {
   RequestChangePassBloc _bloc;
   String _email;
 
@@ -33,47 +35,18 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
   }
 
   @override
-  Widget appBar() {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: HColors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          }),
-      elevation: 0.0,
-      title: Text(
-        'Quên mật khẩu?',
-        style: TextStyle(color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
-      ),
-    );
-  }
-
-  @override
-  Widget body() {
-    return _buildBody();
-  }
-
-  Widget _buildBody() {
-    return BlocListener(
-      bloc: _bloc,
-      listener: (context, state) {
-        handleUIControlState(state);
-        if (state is RequestPassSuccessState) {
-          super.hideLoadingWithContext(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePassScreen(_email)));
-        }
-      },
-      child: Stack(children: <Widget>[
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Stack(
+      children: <Widget>[
+        
         Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
               image: AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.cover,
             ),
@@ -82,20 +55,59 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
             filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
             child: new Container(
               //you can change opacity with color here(I used black) for background.
-              decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+              decoration:
+                  new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: _buildBody(),
+              ),
             ),
           ),
         ),
-        Container(
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: HColors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            elevation: 0.0,
+          
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBody() {
+    return BlocListener(
+        bloc: _bloc,
+        listener: (context, state) {
+          handleUIControlState(state);
+          if (state is RequestPassSuccessState) {
+            super.hideLoadingWithContext(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChangePassScreen(_email)));
+          }
+        },
+        child: Container(
           height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
           child: ListView(
             children: <Widget>[
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
+                height: MediaQuery.of(context).size.height * 0.2,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
+            
               Center(
                 child: Image.asset(
                   'assets/images/password.png',
@@ -137,16 +149,15 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
                   textColor: HColors.white,
                   text: Text(
                     'Gữi yêu câu',
-                    style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
+                    style: TextStyle(
+                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
                   ),
                   radiusValue: 10,
                   width: MediaQuery.of(context).size.width * 0.72,
                   buttonPadding: 10),
             ],
           ),
-        )
-      ]),
-    );
+        ));
   }
 
   void _handleCLick() {
