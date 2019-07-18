@@ -54,8 +54,11 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     _profileBloc = ProfileBloc();
 
     _userTextController = TextEditingController();
+    _userTextController.text = DataProvider.user.fullName;
     _emailTextController = TextEditingController();
+    _emailTextController.text = DataProvider.user.email;
     _phoneTextController = TextEditingController();
+    _phoneTextController.text = DataProvider.user.phone;
   }
 
   @override
@@ -77,14 +80,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                   Colors.black.withOpacity(0.9), BlendMode.dstATop),
               image: AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.cover,
-            ),
-          ),
-          child: new BackdropFilter(
-            filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-            child: new Container(
-              //you can change opacity with color here(I used black) for background.
-              decoration:
-                  new BoxDecoration(color: Colors.black.withOpacity(0.2)),
             ),
           ),
         ),

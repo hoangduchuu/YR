@@ -51,17 +51,9 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen>
               fit: BoxFit.cover,
             ),
           ),
-          child: new BackdropFilter(
-            filter: new ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-            child: new Container(
-              //you can change opacity with color here(I used black) for background.
-              decoration:
-                  new BoxDecoration(color: Colors.black.withOpacity(0.2)),
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: _buildBody(),
-              ),
-            ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: _buildBody(),
           ),
         ),
         Positioned(
