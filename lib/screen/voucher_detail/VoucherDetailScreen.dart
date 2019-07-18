@@ -13,6 +13,7 @@ class VoucherDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: HColors.white,
+        brightness: Brightness.light,
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,

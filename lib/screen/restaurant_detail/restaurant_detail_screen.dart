@@ -55,6 +55,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with Si
           right: 0.0,
           child: AppBar(
             backgroundColor: Colors.transparent,
+            brightness: Brightness.light,
             elevation: 0.0,
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),

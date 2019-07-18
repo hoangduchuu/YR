@@ -50,6 +50,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
   Widget appBar() {
     return AppBar(
       backgroundColor: HColors.white,
+      brightness: Brightness.light,
       elevation: 0.0,
       actions: <Widget>[
         IconButton(

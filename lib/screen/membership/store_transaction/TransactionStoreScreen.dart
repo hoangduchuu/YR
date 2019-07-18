@@ -35,6 +35,7 @@ class _TransactionStoreScreenState extends BaseState<TransactionStoreScreen> wit
   Widget appBar() {
     return AppBar(
       backgroundColor: HColors.white,
+      brightness: Brightness.light,
       title: Text(
         "Lịch sử giao dịch",
         style: TextStyle(color: Colors.red),
