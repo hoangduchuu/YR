@@ -18,19 +18,13 @@ class NotificationManager {
   }
 
   void register() {
-    if (Platform.isIOS)
-      iOS_Permission() {
-        print("PLATFORM ------ >IOS ");
-      }
-    if (Platform.isAndroid) {
+    if (Platform.isIOS){
+      iOS_Permission();
+    } if (Platform.isAndroid) {
       print("PLATFORM ------ >I IS ANDROID");
     }
 
-//    _firebaseMessaging.getToken().then((value) {
-//      print("------- GET TOKEN SUCCESS->: $value");
-//    }).catchError((err) {
-//      print("------- GET TOKEN err $err");
-//    });
+
     print("REGISTER ");
 
     _firebaseMessaging.configure(
@@ -53,9 +47,7 @@ class NotificationManager {
     );
   }
 
-  void unRegister() {
-    print("UN-REGISTER THI LAM GI?");
-  }
+
 
   void iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
