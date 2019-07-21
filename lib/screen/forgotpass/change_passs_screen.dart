@@ -159,10 +159,7 @@ class _ChangePassScreenState extends BaseState<ChangePassScreen> with ErrorMessa
                   },
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
-                  text: Text(
-                    _submitButtonValue,
-                    style: TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-                  ),
+                  text: _submitButtonValue,
                   radiusValue: 10,
                   width: MediaQuery.of(context).size.width * 0.72,
                   buttonPadding: 10),

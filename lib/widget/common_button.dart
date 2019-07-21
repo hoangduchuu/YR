@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:your_reward_user/styles/h_fonts.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 
 class CommonButton extends StatefulWidget {
   final VoidCallback onPressed;
@@ -8,20 +8,24 @@ class CommonButton extends StatefulWidget {
   final double radiusValue;
   final double width;
   final Icon icon;
-  final Text text;
+  final String text;
   final double buttonPadding;
+  final String font;
+  final double textSize;
 
-  CommonButton(
-      {Key key,
-      @required this.onPressed,
-      @required this.backgroundColor,
-      @required this.textColor,
-      @required this.buttonPadding,
-      this.radiusValue,
-      this.width,
-      this.icon,
-      this.text})
-      : super(key: key);
+  CommonButton({
+    Key key,
+    @required this.text,
+    @required this.onPressed,
+    @required this.backgroundColor,
+    @required this.textColor,
+    @required this.buttonPadding,
+    this.radiusValue,
+    this.width,
+    this.font,
+    this.icon,
+    this.textSize,
+  }) : super(key: key);
 
   @override
   _CommonButtonState createState() => _CommonButtonState();
@@ -52,12 +56,12 @@ class _CommonButtonState extends State<CommonButton> {
                             width: 15,
                           )
                         : SizedBox.shrink(),
-                    widget.text == null
-                        ? Text(
-                            'Đăng nhập với facebook',
-                            style: TextStyle(fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
-                          )
-                        : widget.text,
+                    Text(
+                      widget.text == null ? 'Hey dev, please insert text value. Thanks' : widget.text,
+                      style: TextStyle(
+                          fontSize: widget.textSize == null ? 16 : widget.textSize,
+                          fontFamily: CommonUtils.getFontName(widget.font)),
+                    )
                   ],
                 ),
               ),

@@ -25,10 +25,7 @@ class TestScreen extends StatelessWidget {
               buttonPadding: 11,
               backgroundColor: HColors.ColorBgFacebook,
               textColor: HColors.textOnButtonColor,
-              text: Text(
-                'Đăng nhập với facebook',
-                style: TextStyle(fontSize: 15),
-              ),
+              text: "Đăng nhập với facebook",
               icon: Icon(
                 FontAwesomeIcons.facebookSquare,
                 size: 20,
@@ -43,10 +40,7 @@ class TestScreen extends StatelessWidget {
               buttonPadding: 11,
               backgroundColor: HColors.ColorBgGoogle,
               textColor: HColors.textOnButtonColor,
-              text: Text(
-                'Đăng nhập với google',
-                style: TextStyle(fontSize: 15),
-              ),
+              text: "Đăng nhập với google",
               icon: Icon(
                 FontAwesomeIcons.google,
                 size: 20,
@@ -61,10 +55,7 @@ class TestScreen extends StatelessWidget {
               buttonPadding: 15,
               backgroundColor: HColors.ColorPrimary,
               textColor: HColors.textOnButtonColor,
-              text: Text(
-                'Đăng nhập',
-                style: TextStyle(fontSize: 15),
-              ),
+              text: "Đăng nhập",
               //icon: Icon(FontAwesomeIcons.facebookSquare,size: 20,),
               radiusValue: 30,
               //width: 300,
@@ -76,10 +67,7 @@ class TestScreen extends StatelessWidget {
               buttonPadding: 13,
               backgroundColor: HColors.saveButtonColor,
               textColor: HColors.textOnButtonColor,
-              text: Text(
-                'Lưu lại',
-                style: TextStyle(fontSize: 15),
-              ),
+              text: "'Lưu lại'",
               //icon: Icon(FontAwesomeIcons.facebookSquare,size: 20,),
               radiusValue: 7,
               //width: 300,

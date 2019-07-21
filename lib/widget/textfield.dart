@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 
 class YRTextField extends StatefulWidget {
   final Function(String textValue) onTextChanged;
@@ -11,6 +12,7 @@ class YRTextField extends StatefulWidget {
   TextEditingController textController;
   TextInputType type = TextInputType.text;
   String defaultText = "";
+  String font = "";
 
   YRTextField(
       {Key key,
@@ -20,6 +22,7 @@ class YRTextField extends StatefulWidget {
       @required this.isPassword,
       this.defaultText,
       this.type,
+      this.font,
       this.textController})
       : super(key: key);
 
@@ -37,6 +40,7 @@ class _SBTextFieldState extends State<YRTextField> {
     super.initState();
     widget.textController = TextEditingController();
     widget.textController.text = this.widget.defaultText;
+    widget.font = Hfonts.PrimaryFontRegular;
   }
 
   @override
@@ -49,12 +53,13 @@ class _SBTextFieldState extends State<YRTextField> {
               keyboardType: this.widget.type,
               controller: widget.textController,
               obscureText: widget.isPassword == true ? _obscureText : false,
-              style: TextStyle(fontSize: 17.0, fontFamily: Hfonts.PrimaryFontBold),
+              style: TextStyle(fontSize: 17.0, fontFamily: CommonUtils.getFontName(widget.font)),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, bottom: 15, top: 15, right: 14),
                 fillColor: HColors.textFBGColor,
                 hintText: widget.hintText,
-                hintStyle: TextStyle(fontSize: 17.0, color: HColors.brighterBlack, fontFamily: Hfonts.PrimaryFontBold),
+                hintStyle: TextStyle(
+                    fontSize: 17.0, color: HColors.brighterBlack, fontFamily: CommonUtils.getFontName(widget.font)),
                 border: InputBorder.none,
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: HColors.ColorSecondPrimary, style: BorderStyle.solid, width: 2),

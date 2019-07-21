@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:intl/intl.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 class CommonUtils {
@@ -38,5 +39,12 @@ class CommonUtils {
     String deviceId = token.substring(0, colonPosition);
     String registrationToken = token.substring(colonPosition + 1, token.length);
     return Pair(deviceId, registrationToken);
+  }
+
+  static getFontName(String fontName) {
+    if (fontName == null) {
+      return Hfonts.DefaultFont;
+    }
+    return fontName;
   }
 }

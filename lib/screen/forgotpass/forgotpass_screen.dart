@@ -140,11 +140,7 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen>
                   },
                   backgroundColor: HColors.ColorSecondPrimary,
                   textColor: HColors.white,
-                  text: Text(
-                    'Gữi yêu câu',
-                    style: TextStyle(
-                        fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-                  ),
+                  text: "Gữi yêu câu",
                   radiusValue: 10,
                   width: MediaQuery.of(context).size.width * 0.72,
                   buttonPadding: 10),

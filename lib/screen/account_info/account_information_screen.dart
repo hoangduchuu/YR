@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,9 +11,7 @@ import 'package:your_reward_user/screen/account_info/profile_state.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
-import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/login/login_screen.dart';
-import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
 import 'package:your_reward_user/widget/NetWorkImage.dart';
@@ -25,8 +22,7 @@ import 'profile_event.dart';
 
 class AccountInformationScreen extends BasePage {
   @override
-  _AccountInformationScreenState createState() =>
-      _AccountInformationScreenState();
+  _AccountInformationScreenState createState() => _AccountInformationScreenState();
 }
 
 class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
@@ -36,9 +32,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
   ProfileBloc _profileBloc;
   String _name, _email, _phone;
   String _avatarUrl = DataProvider.user.avatar;
-  TextEditingController _userTextController,
-      _emailTextController,
-      _phoneTextController;
+  TextEditingController _userTextController, _emailTextController, _phoneTextController;
 
   @override
   void initState() {
@@ -76,8 +70,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
           decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.9), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.9), BlendMode.dstATop),
               image: AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.cover,
             ),
@@ -103,7 +96,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                 onPressed: () {
                   Navigator.pop(context);
                 }),
-          
           ),
         ),
       ],
@@ -138,10 +130,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
           updateChangedData(state.user);
         } else if (state is SignOutSuccess) {
           await SharedPrefRepo.clearAll();
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => LoginScreen()),
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
               (Route<dynamic> route) => false);
         }
       },
@@ -151,7 +140,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
           //shrinkWrap: true,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(parentContext).size.height*0.05,
+              height: MediaQuery.of(parentContext).size.height * 0.05,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -180,10 +169,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               backgroundColor: Colors.transparent,
               textColor: HColors.white,
               buttonPadding: 10,
-              text: Text(
-                'Tải ảnh lên',
-                style: TextStyle(color: HColors.white),
-              ),
+              text: 'Tải ảnh lên',
               width: MediaQuery.of(parentContext).size.width * 0.4,
               icon: Icon(
                 FontAwesomeIcons.cameraRetro,
@@ -227,11 +213,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               onPressed: () => _handleSubmit(),
               backgroundColor: HColors.ColorSecondPrimary,
               textColor: HColors.white,
-              text: Text(
-                'Lưu lại thông tin',
-                style:
-                    TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-              ),
+              text: 'Lưu lại thông tin',
               width: MediaQuery.of(parentContext).size.width * 0.72,
               buttonPadding: 10,
               radiusValue: 10,
@@ -245,11 +227,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               },
               backgroundColor: HColors.red,
               textColor: HColors.white,
-              text: Text(
-                'Đăng xuất',
-                style:
-                    TextStyle(fontFamily: Hfonts.PrimaryFontBold, fontSize: 16),
-              ),
+              text: 'Đăng xuất',
               width: MediaQuery.of(parentContext).size.width * 0.72,
               buttonPadding: 10,
               radiusValue: 10,
@@ -312,8 +290,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
       mUser.email = user.email;
       mUser.phone = user.phone;
       mUser.fullName = user.fullName;
-
-      print("OBJECT USER ${user.toString()}");
 
       DataProvider.provideData(mUser, DataProvider.userToken);
     });
