@@ -10,11 +10,10 @@ class RequestChangePassBloc extends Bloc<RequestPassBaseEvent, BaseBlocState> {
   AuthRepo _authRepo = injector<AuthRepo>();
 
   @override
-  Stream<RequestPassBaseState> mapEventToState(RequestPassBaseEvent event) async* {
+  Stream<BaseBlocState> mapEventToState(RequestPassBaseEvent event) async* {
     if (event is RequestPassEvent) {
       yield* _handleRequestEmail(event.email);
-    }
-    if (event is ChangePassEvent) {
+    } else if (event is ChangePassEvent) {
       yield* _handleChangePassword(event.code, event.email, event.password, event.rePassword);
     }
   }

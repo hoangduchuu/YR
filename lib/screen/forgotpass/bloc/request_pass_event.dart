@@ -9,9 +9,9 @@ abstract class RequestPassBaseEvent extends Equatable {
 class InitEvent extends RequestPassBaseEvent {}
 
 class RequestPassEvent extends RequestPassBaseEvent {
-  String email;
+  final String email;
 
-  RequestPassEvent(this.email);
+  RequestPassEvent(this.email) : super([email]);
 }
 
 class ChangePassEvent extends RequestPassBaseEvent {
