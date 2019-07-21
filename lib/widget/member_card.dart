@@ -142,29 +142,6 @@ class _MemberCardState extends State<MemberCard> {
                       SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        //margin: EdgeInsets.only(right: 40),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Lần tích điểm',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.white, fontFamily: Hfonts.PrimaryFontRegular),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              '${widget.times}',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: Hfonts.PrimaryFontBold),
-                            ),
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 )
