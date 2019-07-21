@@ -84,6 +84,7 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
           ),
         ),
         Scaffold(
+          key: scaffoldKey,
           backgroundColor: Colors.transparent,
           body: _buildBloc(context),
         ),

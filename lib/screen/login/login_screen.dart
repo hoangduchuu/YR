@@ -59,6 +59,7 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler 
               ),
             ),
             child:  Scaffold(
+              key: scaffoldKey,
               backgroundColor: Colors.transparent,
               body: _buildBody(),
             ),

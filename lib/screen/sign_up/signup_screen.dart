@@ -45,6 +45,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen>
           ),
         ),
         child: Scaffold(
+          key: scaffoldKey,
           backgroundColor: Colors.transparent,
           body: _buildBody(),
         ),
