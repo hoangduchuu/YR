@@ -18,25 +18,15 @@ class NotificationManager {
   }
 
   void register() {
-    if (Platform.isIOS){
+    if (Platform.isIOS) {
       iOS_Permission();
-    } if (Platform.isAndroid) {
-      print("PLATFORM ------ >I IS ANDROID");
     }
-
-
-    print("REGISTER ");
-
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('*("2 register ********* on message $message');
-//        var title = message['notification']['title'];
-//        var body = message['notification']['body'];
-
-        var title = "Title";
-        var body = message.toString();
+        var title = message['notification']['title'];
+        var body = message['notification']['body'];
         _showDialog(_context, title, body);
-
       },
       onResume: (Map<String, dynamic> message) async {
         print(' 2register ********** on resume $message');
@@ -47,13 +37,9 @@ class NotificationManager {
     );
   }
 
-
-
   void iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
-      print("2 register **********  Settings registered: $settings");
-    });
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {});
   }
 
   void _showDialog(BuildContext context, String title, String body) {
