@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:your_reward_user/entity/enums.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
@@ -12,6 +13,7 @@ import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/widget/YRText.dart';
 import 'package:your_reward_user/widget/empty_membership_widget.dart';
 import 'package:your_reward_user/widget/restaurant_card.dart';
 import 'package:your_reward_user/widget/tranfer_history_row.dart';
@@ -120,13 +122,11 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
-                child: Text(
-                  'Lịch sử giao dịch',
-                  style: TextStyle(
-                      color: HColors.ColorSecondPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
+                child: YRText(
+                  "Lịch sử giao dịch",
+                  textFontStyle: TextFontStyle.BOLD,
+                  color: HColors.ColorSecondPrimary,
+                  fontSize: 20,
                 ),
               ),
             ),

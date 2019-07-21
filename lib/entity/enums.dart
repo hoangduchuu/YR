@@ -23,3 +23,5 @@ class EnumValues<T> {
     return reverseMap;
   }
 }
+
+enum TextFontStyle{BOLD,REGULAR}
