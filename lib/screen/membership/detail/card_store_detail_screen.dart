@@ -83,6 +83,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
         controller: _scrollController,
         children: <Widget>[
           MemberCard(
+              title: widget.memberCard.levelName,
               memberName: DataProvider.user.fullName,
               memberPoint: widget.memberCard.points,
               startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
@@ -97,7 +98,10 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
                 padding: EdgeInsets.only(bottom: 6),
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),
@@ -115,7 +119,10 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
                 padding: EdgeInsets.only(bottom: 6),
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
                 ),

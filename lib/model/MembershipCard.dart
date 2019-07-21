@@ -44,10 +44,8 @@ class MembershipCardMapper extends BaseMapper<MembershipCard, MembershipEntity> 
     model.iconName = entity.iconName;
     model.logo = entity.owner.ownerLogo;
     model.ownerName = entity.owner.fullname;
-//    model.levelName = entity.level.title;
-    model.levelName = "Bạc"; // FIXME UGENT: bị mất field Level
+    model.levelName = (entity.level == null || entity.level.title == null) ? "Mới đăng ký" : entity.level.title;
     model.img = entity.owner.ownerBackground;
-    // FIXME: lấy đúng field hoặc API trả về kết quả không đúng
     return model;
   }
 

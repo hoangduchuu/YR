@@ -12,6 +12,7 @@ class MemberCard extends StatefulWidget {
   final String startDate;
   final int times;
   final bool isVIP;
+  final String title;
 
   MemberCard(
       {Key key,
@@ -19,6 +20,7 @@ class MemberCard extends StatefulWidget {
       @required this.memberPoint,
       @required this.startDate,
       @required this.times,
+      this.title,
       this.isVIP})
       : super(key: key);
 
@@ -195,7 +197,7 @@ class _MemberCardState extends State<MemberCard> {
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                       )
                     : Text(
-                        'Member',
+                        '${widget.title}',
                         style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: Hfonts.PrimaryFontBold),
                       ),
               ],
