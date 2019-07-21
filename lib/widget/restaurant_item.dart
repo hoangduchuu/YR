@@ -53,9 +53,11 @@ class _RestaurantItemState extends State<RestaurantItem> {
                     left: 0,
                     child: Container(
                       alignment: Alignment.centerLeft,
-                      width: MediaQuery.of(context).size.width / 2,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(7)), color: Colors.black54),
+                      width: MediaQuery.of(context).size.width / 2.18,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.only(bottomLeft: Radius.circular(7.0), bottomRight: Radius.circular(7.0)),
+                          color: Colors.black54),
                       child: Column(
                         children: <Widget>[
                           Container(
