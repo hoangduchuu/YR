@@ -71,10 +71,15 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
               ),
             ),
           ),
-          Center(
-            child: Text(
-              DataProvider.user.fullName,
-              style: TextStyle(color: Colors.red),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Center(
+              child: YRText(
+                DataProvider.user.fullName,
+                color: Colors.black,
+                fontSize: 22,
+//                style: TextStyle(color: Colors.red),
+              ),
             ),
           ),
         ],
