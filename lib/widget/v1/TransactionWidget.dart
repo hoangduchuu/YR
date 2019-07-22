@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
-import 'package:your_reward_user/widget/tranfer_history_row.dart';
+import 'package:your_reward_user/widget/v1/tranfer_history_row.dart';
 
 class TransactionWidget extends StatefulWidget {
   List<Transaction> _transactions;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/widget/common_button.dart';
-import 'package:your_reward_user/widget/member_card.dart';
-import 'package:your_reward_user/widget/restaurant_card.dart';
-import 'package:your_reward_user/widget/textfield.dart';
-import 'package:your_reward_user/widget/tranfer_history_row.dart';
+import 'package:your_reward_user/widget/v1/common_button.dart';
+import 'package:your_reward_user/widget/v1/member_card.dart';
+import 'package:your_reward_user/widget/v1/restaurant_card.dart';
+import 'package:your_reward_user/widget/v1/textfield.dart';
+import 'package:your_reward_user/widget/v1/tranfer_history_row.dart';
 
 class TestScreen extends StatelessWidget {
   @override

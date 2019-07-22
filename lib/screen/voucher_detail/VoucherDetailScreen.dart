@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
-import 'package:your_reward_user/widget/hooray_barcode.dart';
+import 'package:your_reward_user/widget/v1/hooray_barcode.dart';
 
 class VoucherDetailScreen extends StatelessWidget {
   Coupon coupon;

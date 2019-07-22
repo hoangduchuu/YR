@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/widget/NetWorkImage.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 
 class RestaurantItem extends StatefulWidget {
   final String storeName;

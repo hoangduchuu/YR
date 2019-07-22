@@ -9,7 +9,7 @@ import 'package:your_reward_user/screen/membership/store_transaction/store_trans
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_event.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_state.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
-import 'package:your_reward_user/widget/TransactionWidget.dart';
+import 'package:your_reward_user/widget/v1/TransactionWidget.dart';
 
 class TransactionStoreScreen extends BasePage {
   final String ownerId;

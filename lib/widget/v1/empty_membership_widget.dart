@@ -4,8 +4,8 @@ import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 
-import 'hooray_barcode.dart';
-import 'member_card.dart';
+import 'package:your_reward_user/widget/v1/hooray_barcode.dart';
+import 'package:your_reward_user/widget/v1/member_card.dart';
 
 class EmptyCardScreen extends StatelessWidget {
   User user;

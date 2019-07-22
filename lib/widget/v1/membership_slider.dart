@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
-import 'package:your_reward_user/widget/restaurant_card.dart';
+import 'package:your_reward_user/widget/v1/restaurant_card.dart';
 
 class MemberShipSlider extends StatelessWidget {
   const MemberShipSlider({

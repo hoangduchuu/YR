@@ -4,7 +4,7 @@ import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
-import 'NetWorkImage.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 
 class MemberCard extends StatefulWidget {
   final String memberName;
