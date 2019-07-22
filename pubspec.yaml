@@ -47,6 +47,7 @@ dependencies:
   toast: ^0.1.4
   cached_network_image: ^1.1.0
   flutter_html: ^0.10.4
+  flutter_widget_from_html_core: ^0.2.2+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
