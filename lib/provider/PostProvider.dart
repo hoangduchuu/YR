@@ -4,20 +4,19 @@ import 'package:your_reward_user/data/base/MyHttpClient.dart';
 import 'package:your_reward_user/entity/CreatePostRequest.dart';
 import 'package:your_reward_user/entity/GetPostEntity.dart';
 import 'package:your_reward_user/entity/PostEntity.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
 
-class PostRepo {
+class PostProvider {
   MyHttpClient client;
 
-  PostRepo() {
+  PostProvider() {
     client = MyHttpClient.instance;
   }
 
   //register
-  Future<dynamic> getPosts(String searchContent, String objectType, {int limit = 200, int skip = 0}) async {
-    String url =
-        '${YRService.END_POINT}${YRService.PATH_POSTS}?${CommonUtils.getFilterParam()}&\$search=$searchContent &objectType=$objectType';
+  Future<dynamic> getPosts({int limit = 200, int skip = 0}) async {
+    String url = '${YRService.END_POINT}${YRService.PATH_POSTS}';
     String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
+    print("RAW ${raw}");
     var result = new GetPostParser().parse(raw);
     return result;
   }

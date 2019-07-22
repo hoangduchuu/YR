@@ -2,20 +2,24 @@ import 'package:bloc/bloc.dart';
 import 'package:your_reward_user/bloc/base/base_bloc_state.dart';
 import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
+import 'package:your_reward_user/model/Post.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/CouponRepo.dart';
 import 'package:your_reward_user/repository/TransactionRepo.dart';
+import 'package:your_reward_user/repository/post_repo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 import 'home_event.dart';
 import 'home_state.dart';
+import 'home_state_news.dart';
 import 'home_state_stores.dart';
 import 'home_state_transactions.dart';
 
 class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
   TransactionRepo _transactionRepo;
   CouponRepo _couponRepo = injector<CouponRepo>();
+  PostRepo _postRepo = injector<PostRepo>();
 
   HomeBLoc() {
     this._transactionRepo = new TransactionRepo();
@@ -28,6 +32,9 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
     }
     if (event is GetTransactionRequest) {
       yield* _handleGetTransactionRequest(event.userId);
+    }
+    if (event is GetPostsRequest) {
+      yield* _handleGetPostRequest();
     }
   }
 
@@ -71,6 +78,24 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
     } catch (e) {
       print('_handleGetTransactionRequest: ${e.toString()}');
       yield UIControlState.showError(e.toString());
+    }
+  }
+
+  Stream<BaseBlocState> _handleGetPostRequest() async* {
+    yield UIControlState.showLoading();
+    try {
+      Pair<STATE, List<Post>> result = await _postRepo.getPosts();
+      if (result.left == STATE.ERROR) {
+        yield UIControlState.showError(result.erroMsg);
+      }
+      if (result.right.isEmpty) {
+        yield GetPostEmptyState();
+      }
+      if (result.left == STATE.SUCCESS) {
+        yield GetPostSuccessState(posts: result.right);
+      }
+    } catch (e) {
+      yield UIControlState.showError("$e");
     }
   }
 }

@@ -17,3 +17,12 @@ class GetTransactionRequest extends HomeEvent {
 
   GetTransactionRequest(this.userId);
 }
+
+class GetPostsRequest extends HomeEvent {
+  GetPostsRequest();
+
+  @override
+  String toString() {
+    return 'GetPostsRequest{}';
+  }
+}

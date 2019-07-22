@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:your_reward_user/entity/enums.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
+import 'package:your_reward_user/model/Post.dart';
 import 'package:your_reward_user/model/Transaction.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
@@ -11,15 +11,15 @@ import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/home/bloc/home_bloc.dart';
 import 'package:your_reward_user/screen/home/bloc/home_event.dart';
+import 'package:your_reward_user/screen/home/bloc/home_state_news.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_stores.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v1/empty_membership_widget.dart';
-import 'package:your_reward_user/widget/v1/tranfer_history_row.dart';
+import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
 
@@ -33,6 +33,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
   HomeBLoc _homeBloc;
   List<MembershipCard> _memberships;
   List<Transaction> _transactions;
+  List<Post> _posts;
   bool isSliderLoaded = false;
 
   @override
@@ -41,6 +42,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     _homeBloc = HomeBLoc();
     _homeBloc.dispatch(GetMemberShipCardsRequest(DataProvider.user.id));
     _homeBloc.dispatch(GetTransactionRequest(DataProvider.user.id));
+    _homeBloc.dispatch(GetPostsRequest());
   }
 
   @override
@@ -117,6 +119,13 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
             _transactions = state.transactions;
           });
         }
+        if (state is GetPostSuccessState) {
+          super.hideLoading();
+          print("SCreen ${state.posts.toString()}");
+          setState(() {
+            _posts = state.posts;
+          });
+        }
       },
       child: ListView(
         controller: _scrollController,
@@ -126,16 +135,19 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
           ),
           Visibility(
             visible: isSliderLoaded,
-            child: RestaurantCard(
-              cb: (int index) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MemberShipScreen(
-                              memberCard: _memberships[index],
-                            )));
-              },
-              memberships: _memberships,
+            child: Hero(
+              tag: "HUUHOANG",
+              child: RestaurantCard(
+                cb: (int index) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MemberShipScreen(
+                                memberCard: _memberships[index],
+                              )));
+                },
+                memberships: _memberships,
+              ),
             ),
           ),
           Visibility(
@@ -151,36 +163,33 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
                 border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
               ),
               child: YRText(
-                "Lịch sử giao dịch",
-                textFontStyle: TextFontStyle.BOLD,
+                "Tin Tức",
                 color: HColors.ColorSecondPrimary,
-                fontSize: 20,
+                fontSize: 30,
               ),
             ),
           ),
-          _buildTransactionList(_transactions)
+          _buildNewsUI(_posts)
         ],
       ),
     );
   }
 
-  Widget _buildTransactionList(List<Transaction> mTransactions) {
+  Widget _buildNewsUI(List<Post> mTransactions) {
     if (mTransactions == null || mTransactions.isEmpty) {
       return Container();
     } // Prevent while waiting data error
+    print("DÂT ${mTransactions.toString()}");
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: _transactions.length,
+        itemCount: _posts.length,
         itemBuilder: (context, index) {
-          return TranferHistoryRow(
-              tranferName: 'Giao dịch số ${index + 1}',
-              time: CommonUtils.getTimeFormated(_transactions[index].time),
-              date: CommonUtils.getDateFormat(_transactions[index].time),
-              place: _transactions[index].storeLocation,
-              price: _transactions[index].price.toString(),
-              storeType: _transactions[index].logo,
-              point: _transactions[index].point);
+          return NewsRow(Post(
+            title: _posts[index].title,
+            content: _posts[index].content,
+            image: _posts[index].image,
+          ));
         });
   }
 }

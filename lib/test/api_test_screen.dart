@@ -18,7 +18,7 @@ class ApiScreenTest extends StatefulWidget {
 
 class _ApiScreenTestState extends State<ApiScreenTest> {
   AuthProvider repo;
-  PostRepo postRepo;
+  PostProvider postRepo;
   CouponProvider couponRepo;
   TransactionProvider _transactionRepo;
   var _loginStatus = "Login";
@@ -27,7 +27,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
   @override
   void initState() {
     repo = AuthProvider();
-    postRepo = PostRepo();
+    postRepo = PostProvider();
     couponRepo = CouponProvider();
     _transactionRepo = TransactionProvider();
     _onAuthenticationLogin();
@@ -195,7 +195,7 @@ class _ApiScreenTestState extends State<ApiScreenTest> {
 
   void _onGetPosts() {
     print(LogPrefix.methodName("_onGetPosts"));
-    postRepo.getPosts("Chung", "page").then((onValue) {
+    postRepo.getPosts().then((onValue) {
       print(LogPrefix.okResponse(onValue));
     }).catchError((e) {
       print(LogPrefix.errorResponse(e));
