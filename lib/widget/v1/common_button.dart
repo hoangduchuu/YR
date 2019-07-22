@@ -45,7 +45,7 @@ class _CommonButtonState extends State<CommonButton> {
                 textColor: widget.textColor == null ? Colors.white : widget.textColor,
                 color: widget.backgroundColor == null ? Color(0xFF3b5998) : widget.backgroundColor,
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(widget.radiusValue == null ? 20 : widget.radiusValue)),
+                    borderRadius: new BorderRadius.circular(widget.radiusValue == null ? 300 : widget.radiusValue)),
                 onPressed: widget.onPressed,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
