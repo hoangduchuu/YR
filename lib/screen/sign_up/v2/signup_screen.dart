@@ -7,7 +7,7 @@ import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/v1/YRText.dart';
-import 'package:your_reward_user/widget/v1/common_button.dart';
+import 'package:your_reward_user/widget/v2/common_button.dart';
 import 'package:your_reward_user/widget/v2/textfield.dart';
 
 import '../SignupBloc.dart';
