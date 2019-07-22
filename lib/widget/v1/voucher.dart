@@ -3,7 +3,7 @@ import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/screen/voucher_detail/VoucherDetailScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 
-import 'NetWorkImage.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 
 class Voucher extends StatelessWidget {
   final String name;

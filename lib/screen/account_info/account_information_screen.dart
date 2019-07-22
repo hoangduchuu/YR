@@ -14,9 +14,9 @@ import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/login/login_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
-import 'package:your_reward_user/widget/NetWorkImage.dart';
-import 'package:your_reward_user/widget/common_button.dart';
-import 'package:your_reward_user/widget/textfield.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
+import 'package:your_reward_user/widget/v1/common_button.dart';
+import 'package:your_reward_user/widget/v1/textfield.dart';
 
 import 'profile_event.dart';
 

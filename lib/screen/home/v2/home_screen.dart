@@ -9,18 +9,19 @@ import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
+import 'package:your_reward_user/screen/home/bloc/home_bloc.dart';
+import 'package:your_reward_user/screen/home/bloc/home_event.dart';
+import 'package:your_reward_user/screen/home/bloc/home_state_stores.dart';
+import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v1/empty_membership_widget.dart';
-import 'package:your_reward_user/widget/v1/restaurant_card.dart';
 import 'package:your_reward_user/widget/v1/tranfer_history_row.dart';
-
-import 'bloc/home_bloc.dart';
-import 'bloc/home_event.dart';
-import 'bloc/home_state_stores.dart';
-import 'bloc/home_state_transactions.dart';
+import 'package:your_reward_user/widget/v2/restaurant_card.dart';
+import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
 
 class HomeScreen extends BasePage {
   @override
@@ -50,9 +51,35 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
   @override
   Widget appBar() {
     return AppBar(
+      title: Row(
+        children: <Widget>[
+          Center(
+            child: Container(
+              width: 35,
+              height: 35,
+              decoration: new BoxDecoration(
+                color: Colors.white30,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: ImageLoader(
+                  url: DataProvider.user.avatar,
+                  radius: 25,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Text(
+              DataProvider.user.fullName,
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: HColors.white,
       brightness: Brightness.light,
-      elevation: 0.0,
+      elevation: 2.0,
       actions: <Widget>[
         IconButton(
           icon: Icon(FontAwesomeIcons.userCircle),
@@ -91,50 +118,48 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
           });
         }
       },
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Visibility(
-              visible: isSliderLoaded,
-              child: RestaurantCard(
-                cb: (int index) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MemberShipScreen(
-                                memberCard: _memberships[index],
-                              )));
-                },
-                memberships: _memberships,
+      child: ListView(
+        controller: _scrollController,
+        children: <Widget>[
+          YellowBarcode(
+            DataProvider.user.phone,
+          ),
+          Visibility(
+            visible: isSliderLoaded,
+            child: RestaurantCard(
+              cb: (int index) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MemberShipScreen(
+                              memberCard: _memberships[index],
+                            )));
+              },
+              memberships: _memberships,
+            ),
+          ),
+          Visibility(
+            visible: !isSliderLoaded,
+            child: Center(child: Text("Đang tải....")),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20, top: 30, right: 20),
+            child: Container(
+              padding: EdgeInsets.only(bottom: 6),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
+              ),
+              child: YRText(
+                "Lịch sử giao dịch",
+                textFontStyle: TextFontStyle.BOLD,
+                color: HColors.ColorSecondPrimary,
+                fontSize: 20,
               ),
             ),
-            Visibility(
-              visible: !isSliderLoaded,
-              child: Center(child: Text("Đang tải....")),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20, top: 30, right: 20),
-              child: Container(
-                padding: EdgeInsets.only(bottom: 6),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
-                ),
-                child: YRText(
-                  "Lịch sử giao dịch",
-                  textFontStyle: TextFontStyle.BOLD,
-                  color: HColors.ColorSecondPrimary,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: _buildTransactionList(_transactions),
-            ),
-          ],
-        ),
+          ),
+          _buildTransactionList(_transactions)
+        ],
       ),
     );
   }
@@ -144,6 +169,8 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
       return Container();
     } // Prevent while waiting data error
     return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: _transactions.length,
         itemBuilder: (context, index) {
           return TranferHistoryRow(

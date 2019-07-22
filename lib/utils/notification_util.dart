@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/utils/progress_dialog.dart';
-import 'package:your_reward_user/widget/custom_dialog.dart';
+import 'package:your_reward_user/widget/v1/custom_dialog.dart';
 
 class NotificationManager {
   FirebaseMessaging _firebaseMessaging;

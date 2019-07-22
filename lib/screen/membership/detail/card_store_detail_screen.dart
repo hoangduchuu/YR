@@ -13,10 +13,10 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
-import 'package:your_reward_user/widget/hooray_barcode.dart';
-import 'package:your_reward_user/widget/member_card.dart';
-import 'package:your_reward_user/widget/restaurant_item.dart';
-import 'package:your_reward_user/widget/voucher.dart';
+import 'package:your_reward_user/widget/v1/hooray_barcode.dart';
+import 'package:your_reward_user/widget/v1/member_card.dart';
+import 'package:your_reward_user/widget/v1/restaurant_item.dart';
+import 'package:your_reward_user/widget/v1/voucher.dart';
 
 import 'bloc/membership_detail_bloc.dart';
 import 'bloc/membership_detail_event.dart';
