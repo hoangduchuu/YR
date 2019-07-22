@@ -5,15 +5,16 @@ import 'package:your_reward_user/widget/v1/YRText.dart';
 
 class YellowBarcode extends StatelessWidget {
   String content;
+  double elevation = 12;
 
-  YellowBarcode(this.content);
+  YellowBarcode(this.content, {this.elevation});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Card(
-        elevation: 12,
+        elevation: this.elevation,
         child: Column(
           children: <Widget>[
             Container(

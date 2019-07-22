@@ -7,6 +7,7 @@ import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/test/map_screen.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
+import 'package:your_reward_user/widget/v1/common_button.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
   Store _store;
@@ -44,155 +45,124 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with Si
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        _buildBody(),
-        new Positioned(
-          //Place it at the top, and not use the entire screen
-          top: 0.0,
-          left: 0.0,
-          right: 0.0,
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            brightness: Brightness.light,
-            elevation: 0.0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              color: HColors.white,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        brightness: Brightness.light,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),
+          onPressed: () {
+            Navigator.pop(context);
+          }, color: Colors.black,),
+        title: Text(
+          'CỬA HÀNG',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
         ),
-      ],
-    ));
+      ),
+      body: _buildBody()
+    );
   }
 
   _buildBody() {
-    return ListView(
-      children: <Widget>[
-        Container(
-          //padding: EdgeInsets.symmetric(horizontal: 10),
-          height: 200,
-          child: _buildSlider(),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 60,
-          decoration: BoxDecoration(
-            color: HColors.white,
-            border: Border(bottom: BorderSide(color: HColors.paleGrey, width: 2)),
+    return Container(
+      color: HColors.bgColor,
+      child: ListView(
+        children: <Widget>[
+          Container(
+            //padding: EdgeInsets.symmetric(horizontal: 10),
+            height: 200,
+            child: Stack(
+              children: <Widget>[
+                _buildSlider(),
+                Positioned(
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      color: HColors.blackAlpha,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            widget._store.name,
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 6,),
+                          Text(
+                            widget._store.description.isEmpty ? 'Chưa xác định' : widget._store.description,
+                            style: TextStyle(color: Colors.white,fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          SizedBox(height: 16,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.2,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border(right: BorderSide(color: HColors.paleGrey, width: 2)),
-                ),
-                child: InkWell(
-                  onTap: () => _onContactClick(widget._store.phone),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.phone,
-                        color: HColors.ColorSecondPrimary,
-                      ),
-                      Text(
-                        'Liên hệ',
-                        style: TextStyle(color: HColors.ColorSecondPrimary, fontFamily: Hfonts.PrimaryFontBold),
-                      ),
-                    ],
-                  ),
+              SizedBox(width: 20,),
+              Expanded(
+                flex: 1,
+                child: CommonButton(
+                  backgroundColor: HColors.ColorPrimary,
+                  text: 'ĐỊA ĐIỂM',
+                  textColor: HColors.black,
+                  buttonPadding: 14,
+                  icon: ImageIcon(AssetImage('assets/images/ic_location.png')),
+                  radiusValue: 4,
+                  onPressed: (){
+                    _onLocationClick();
+                  },
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.2,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border(left: BorderSide(color: HColors.paleGrey, width: 2)),
-                ),
-                child: InkWell(
-                  onTap: () => _onLocationClick(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                        color: HColors.ColorSecondPrimary,
-                      ),
-                      Text(
-                        'Địa điểm',
-                        style: TextStyle(color: HColors.ColorSecondPrimary, fontFamily: Hfonts.PrimaryFontBold),
-                      ),
-                    ],
-                  ),
+              SizedBox(width: 12,),
+              Expanded(
+                flex: 1,
+                child: CommonButton(
+                  backgroundColor: HColors.red,
+                  text: 'LIÊN HỆ',
+                  textColor: HColors.white,
+                  buttonPadding: 14,
+                  icon: ImageIcon(AssetImage('assets/images/ic_phone.png')),
+                  radiusValue: 4,
+                  onPressed: (){
+                    _onContactClick(widget._store.phone);
+                  },
                 ),
               ),
+              SizedBox(width: 20,),
             ],
           ),
-        ),
-        Container(
-          height: 100,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-          decoration: BoxDecoration(color: HColors.white),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Text(
-                  widget._store.name,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: HColors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Text(
-                  widget._store.address,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                      color: HColors.black,
-                      fontSize: 13,
-                      fontFamily: Hfonts.PrimaryFontRegular,
-                      fontWeight: FontWeight.bold),
-                ),
-              )
-            ],
+          SizedBox(height: 16,),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
+            child: Text(
+              'MÔ TẢ',
+              style: TextStyle(fontSize: 18, fontFamily: 'Lato',
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black),
+            ),
           ),
-        ),
-        Container(
-          height: 30,
-          decoration: BoxDecoration(color: HColors.ColorSecondPrimary),
-          padding: EdgeInsets.only(left: 18, bottom: 5),
-          child: Text(
-            'Miêu tả',
-            style: TextStyle(fontSize: 20, color: HColors.white, fontFamily: Hfonts.PrimaryFontBold),
-          ),
-        ),
-        Container(
-            height: 300,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
-            child: Container(
+          Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Text(
-                widget._store.description,
-                style: TextStyle(fontFamily: Hfonts.PrimaryFontRegular, fontSize: 15, fontWeight: FontWeight.bold),
+              margin: EdgeInsets.symmetric(vertical: 4, horizontal: 18),
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(8))
               ),
-            )),
-      ],
+              child: Text(
+                widget._store.description.isEmpty ? 'Chưa có nội dung' : 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                style: TextStyle(fontFamily: 'Lato'),
+              )),
+        ],
+      ),
     );
   }
 
