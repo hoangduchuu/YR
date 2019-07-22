@@ -24,8 +24,7 @@ class VoucherDetailScreen extends StatelessWidget {
             }),
         elevation: 0.0,
       ),
-
-      // FIXME : makeup lại
+      backgroundColor: HColors.bgColor,
       body: ListView(
         children: <Widget>[
           HoorayBarCode(content: coupon.code),
@@ -34,7 +33,7 @@ class VoucherDetailScreen extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
             child: Text(
               coupon.title,
-              style: TextStyle(fontSize: 20, color: Colors.red),
+              style: TextStyle(fontSize: 20, color: Colors.red, fontFamily: 'Aptima', fontStyle:  FontStyle.normal),
             ),
           ),
           Container(
@@ -42,7 +41,7 @@ class VoucherDetailScreen extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
             child: Text(
               'Ngày hết hạn:  ${coupon.endDate}',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: TextStyle(fontSize: 14, color: Colors.black54, fontFamily: 'Aptima', fontStyle: FontStyle.normal),
             ),
           ),
           Container(
@@ -50,7 +49,7 @@ class VoucherDetailScreen extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Text(
               'Nội dung:  ${coupon.getDescription()}',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: TextStyle(fontSize: 14, color: Colors.black54, fontFamily: 'Aptima', fontStyle: FontStyle.italic),
             ),
           )
         ],

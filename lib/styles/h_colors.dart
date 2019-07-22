@@ -20,8 +20,8 @@ class HColors {
   static const salmon = const Color(0xffee8777);
   static const dark = const Color(0xff22242a);
   static const Color ColorSecondPrimary = const Color(0xFF644650);
-  static const Color ColorPrimary = const Color(0xff89c541);
-  static const Color ColorPrimaryLight = const Color(0xff9CCC65);
+  static const Color ColorPrimary = const Color(0xfffab335);
+  static const Color ColorPrimaryLight = const Color(0xfffab335);
   static const Color ColorBg = const Color(0xffBDBDBD);
   static const Color textColor = const Color(0xff212121);
   static const Color hintTextColor = const Color(0xff9E9E9E);
@@ -56,6 +56,6 @@ class HColors {
   static const Color brightestBlue = const Color(0xFF4DD0E1);
   static const Color lightPink = const Color(0xFFD81B60);
   static const Color ladyPink = const Color(0xFFD500F9);
-  static const Color bgColor = const Color(0xFFF8F8F8);
+  static const Color bgColor = const Color(0xFFeff1f1); //0xFFeff1f1 && 0xFFF8F8F8
   static const Color textFBGColor = const Color(0xFFEEEEEE);
 }

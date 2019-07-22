@@ -19,6 +19,7 @@ import 'test/widget_screen.dart';
 //class này sẽ cấu hình route tới các screen của màn hình
 class MyApp extends StatelessWidget {
   final app = new MaterialApp(
+    theme: ThemeData(fontFamily: 'Lato'),
     routes: <String, WidgetBuilder>{
       '/': (BuildContext context) => SplashScreen(),
       '/bottombar': (BuildContext context) => MemberShipScreen(),
