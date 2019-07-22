@@ -36,7 +36,7 @@ class HColors {
   static const Color shobNowColor = const Color(0xFF607d8b);
   static const Color inactiveTabColor = const Color(0xFFBDBDBD);
   static const Color shynnyRed = const Color(0xFFef9a9a);
-  static const Color red = const Color(0xFFd32f2f);
+  static const Color red = const Color(0xFFFA441A);
   static const Color shynnyPurple = const Color(0xFFCE93D8);
   static const Color purple = const Color(0xFF7B1FA2);
   static const Color deepPurple = const Color(0xFF4A148C);
@@ -58,4 +58,6 @@ class HColors {
   static const Color ladyPink = const Color(0xFFD500F9);
   static const Color bgColor = const Color(0xFFeff1f1); //0xFFeff1f1 && 0xFFF8F8F8
   static const Color textFBGColor = const Color(0xFFEEEEEE);
+  static const Color blackAlpha = const Color(0x88000000);
+
 }
