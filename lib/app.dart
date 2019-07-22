@@ -7,7 +7,7 @@ import 'package:your_reward_user/screen/login/v2/login_screen.dart';
 import 'package:your_reward_user/screen/membership/detail/card_store_detail_screen.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
-import 'package:your_reward_user/screen/sign_up/signup_screen.dart';
+import 'package:your_reward_user/screen/sign_up/v2/signup_screen.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
 import 'package:your_reward_user/test/api_test_screen.dart';
 import 'package:your_reward_user/test/error_screen.dart';
