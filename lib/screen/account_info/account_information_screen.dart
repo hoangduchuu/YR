@@ -11,7 +11,7 @@ import 'package:your_reward_user/screen/account_info/profile_state.dart';
 import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
-import 'package:your_reward_user/screen/login/login_screen.dart';
+import 'package:your_reward_user/screen/login/v2/login_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/imagePicker/image_picker_handler.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
