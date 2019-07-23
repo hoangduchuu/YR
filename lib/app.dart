@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:your_reward_user/screen/account_info/account_information_screen.dart';
-import 'package:your_reward_user/screen/forgotpass/forgotpass_screen.dart';
+import 'package:your_reward_user/screen/forgotpass/v2/forgotpass_screen.dart';
 import 'package:your_reward_user/screen/home/home_screen.dart';
 import 'package:your_reward_user/screen/login/v2/login_screen.dart';
 import 'package:your_reward_user/screen/membership/detail/card_store_detail_screen.dart';
