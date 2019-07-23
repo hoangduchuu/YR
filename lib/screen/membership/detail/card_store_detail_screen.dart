@@ -11,6 +11,8 @@ import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/screen/notification/notification_screen.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
+import 'package:your_reward_user/screen/transaction/transactions_screen.dart';
+import 'package:your_reward_user/screen/transaction_detail/transaction_detail_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';

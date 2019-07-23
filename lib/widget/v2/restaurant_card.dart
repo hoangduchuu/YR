@@ -50,7 +50,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(top: 10, left: 2, right: 2, bottom: 10),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
                     child: GestureDetector(
                         child: _buildStack(item),
                         onTap: () {
@@ -87,13 +87,15 @@ class _RestaurantCardState extends State<RestaurantCard> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 5),
+            margin: EdgeInsets.fromLTRB(0, 0, 12, 6),
             alignment: Alignment.bottomRight,
-            child: YRText(
+            child: Text(
               "${item.levelName}",
-              color: Colors.white70,
-              fontSize: 30,
-              textFontStyle: TextFontStyle.REGULAR,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
             ),
           )
         ],
