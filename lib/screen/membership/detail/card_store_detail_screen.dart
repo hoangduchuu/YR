@@ -11,6 +11,7 @@ import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/screen/notification/notification_screen.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
+import 'package:your_reward_user/screen/transaction_detail/transaction_detail.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
@@ -163,7 +164,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
 //                  Navigator.push(
 //                      context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => NewsScreen()));
+                      context, MaterialPageRoute(builder: (context) => TransactionDetail()));
                 },
               ),
             ],

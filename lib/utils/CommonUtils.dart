@@ -47,4 +47,8 @@ class CommonUtils {
     }
     return fontName;
   }
+  static getMoneyFormat(int money, {String suffix = ''}){
+    final f = new NumberFormat("#,###");
+    return '${f.format(money)} $suffix';
+  }
 }
