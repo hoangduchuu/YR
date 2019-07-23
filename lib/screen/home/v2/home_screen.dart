@@ -15,6 +15,7 @@ import 'package:your_reward_user/screen/home/bloc/home_state_news.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_stores.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
+import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/YRText.dart';
@@ -184,17 +185,21 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     if (mTransactions == null || mTransactions.isEmpty) {
       return Container();
     } // Prevent while waiting data error
-    print("DÂT ${mTransactions.toString()}");
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: _posts.length,
         itemBuilder: (context, index) {
-          return NewsRow(Post(
-            title: _posts[index].title,
-            content: _posts[index].content,
-            image: _posts[index].image,
-          ));
+          return NewsRow(
+            Post(
+              title: _posts[index].title,
+              content: _posts[index].content,
+              image: _posts[index].image,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
+            },
+          );
         });
   }
 }

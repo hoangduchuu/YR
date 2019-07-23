@@ -160,10 +160,8 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
-//                  Navigator.push(
-//                      context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => NewsScreen()));
+                      context, MaterialPageRoute(builder: (context) => RestaurantDetailScreen(store: stores[index])));
                 },
               ),
             ],
