@@ -1,7 +1,5 @@
 import 'package:barcode_flutter/barcode_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:your_reward_user/entity/enums.dart';
-import 'package:your_reward_user/widget/v1/YRText.dart';
 
 class YellowBarcode extends StatelessWidget {
   String content;
