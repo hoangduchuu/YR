@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Post.dart';
 import 'package:your_reward_user/model/Transaction.dart';
@@ -16,12 +15,15 @@ import 'package:your_reward_user/screen/home/bloc/home_state_stores.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
-import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v1/empty_membership_widget.dart';
 import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
+
+
+
 
 class HomeScreen extends BasePage {
   @override
@@ -74,11 +76,10 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
           Container(
             margin: EdgeInsets.only(left: 20),
             child: Center(
-              child: YRText(
+              child: Text(
                 DataProvider.user.fullName,
-                color: Colors.black,
-                fontSize: 22,
-//                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.black,
+                  fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -88,12 +89,15 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
       brightness: Brightness.light,
       elevation: 2.0,
       actions: <Widget>[
-        IconButton(
-          icon: Icon(FontAwesomeIcons.userCircle),
-          color: HColors.ColorSecondPrimary,
-          onPressed: () {
-            Navigator.pushNamed(context, '/accountinfo');
-          },
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          child: IconButton(
+            icon:  Image.asset('assets/images/ic_notifi.png'),
+            color: HColors.ColorSecondPrimary,
+            onPressed: () {
+              Navigator.pushNamed(context, '/accountinfo');
+            },
+          ),
         ),
       ],
     );
@@ -101,7 +105,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
 
   @override
   Color getBgColor() {
-    return HColors.white;
+    return HColors.bgColor;
   }
 
   Widget _buildBody() {
@@ -160,18 +164,10 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
             child: Center(child: Text("Đang tải....")),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20, top: 30, right: 20),
-            child: Container(
-              padding: EdgeInsets.only(bottom: 6),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
-              ),
-              child: YRText(
-                "Tin Tức",
-                color: HColors.ColorSecondPrimary,
-                fontSize: 30,
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            child: Text(
+              "Tin Tức",
+              style: TextStyle(color: HColors.black, fontSize: 22, fontWeight: FontWeight.w600),
             ),
           ),
           _buildNewsUI(_posts)
@@ -182,9 +178,10 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
 
   Widget _buildNewsUI(List<Post> mTransactions) {
     if (mTransactions == null || mTransactions.isEmpty) {
+      // Prevent while waiting data error
       return Container();
-    } // Prevent while waiting data error
-    print("DÂT ${mTransactions.toString()}");
+    }
+
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
@@ -192,9 +189,11 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
         itemBuilder: (context, index) {
           return NewsRow(Post(
             title: _posts[index].title,
-            content: _posts[index].content,
+            content: CommonUtils.getNewsDescription(_posts[index].content),
             image: _posts[index].image,
           ));
         });
   }
+  
+
 }

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/utils/pair.dart';
-
+import 'package:html/parser.dart' show parse;
 class CommonUtils {
   static int getRandomInt() {
     var random = new Random();
@@ -50,5 +50,11 @@ class CommonUtils {
   static getMoneyFormat(int money, {String suffix = ''}){
     final f = new NumberFormat("#,###");
     return '${f.format(money)} $suffix';
+  }
+
+  static String getNewsDescription(String html){
+    var document = parse(html);
+    String result = document.getElementsByClassName('description')[0].text;
+    return result;
   }
 }

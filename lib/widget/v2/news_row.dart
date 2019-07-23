@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:your_reward_user/model/Post.dart';
+import 'package:your_reward_user/styles/h_colors.dart';
 
 // TODO FIX THIS UI
 class NewsRow extends StatelessWidget {
@@ -10,41 +11,54 @@ class NewsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        margin: const EdgeInsets.all(5),
-        elevation: 1.0,
-        borderOnForeground: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            Container(
-              height: 150,
-              width: 120,
-              child: Image.network(
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16))),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              bottomLeft: Radius.circular(16.0),
+            ),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: new Image.network(
                 _post.image,
                 fit: BoxFit.fill,
+                width: 120,
+                height: 120,
               ),
             ),
-            Column(
+          ),
+          SizedBox(width: 8,),
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 6,),
+                Text(_post.title, style: TextStyle(color: HColors.black, fontSize: 16,
+                    fontWeight: FontWeight.w700,),maxLines: 2, overflow: TextOverflow.ellipsis,),
+                SizedBox(height: 6,),
+                Container(
+                  width: 24,
+                  height: 3,
+                  color: HColors.ColorPrimary,
+                ),
+                SizedBox(height: 6,),
                 Container(
                   alignment: Alignment.topLeft,
-                  height: 150,
-                  child: Html(
-                    data: _post.content,
-                  ),
+                  child: Text(_post.content,
+                  maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 14,),)
                 ),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          SizedBox(width: 8,),
+        ],
       ),
     );
   }
