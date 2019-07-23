@@ -197,7 +197,12 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
               image: _posts[index].image,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsScreen(
+                            post: _posts[index],
+                          )));
             },
           );
         });
