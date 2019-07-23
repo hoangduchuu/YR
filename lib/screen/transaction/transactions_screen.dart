@@ -6,10 +6,13 @@ import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
-import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_bloc.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_event.dart';
+import 'package:your_reward_user/screen/membership/store_transaction/store_transaction_state.dart';
 import 'package:your_reward_user/screen/transaction/transaction_row.dart';
+import 'package:your_reward_user/screen/transaction_detail/transaction_detail_screen.dart';
+import 'package:your_reward_user/styles/h_colors.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/v2/YRAppBar.dart';
 
 class TransactionScreen extends BasePage {
@@ -33,12 +36,24 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
   _buildUI() {
     return ListView.builder(
       itemBuilder: _transactionCard,
-      itemCount: 10,
+      itemCount: _transactionCount(),
     );
   }
 
   Widget _transactionCard(BuildContext context, int index) {
-    return TransactionRow(title: 'Giao dịch số 0001', description: 'adfasdfasdfsadfsadfafds');
+    if (_transactions == null || _transactions.isEmpty) {
+      return Container();
+    }
+    return TransactionRow(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => TransactionDetail(transaction: _transactions[index])));
+      },
+      title: "Giao dịch số ${index + 1}",
+      description:
+          "Vào lúc ${CommonUtils.getDateFormat(_transactions[index].time)}. Tại ${_transactions[index].storeLocation}",
+      points: _transactions[index].point,
+    );
   }
 
   @override
@@ -53,9 +68,7 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
     return BlocListener(
         bloc: _bloc,
         listener: (context, state) {
-          print("co state ${state.toString()}");
-
-//          handleUIControlState(state);
+          handleUIControlState(state);
           if (state is OnGetTransactionSuccess) {
             super.hideLoadingWithContext(context);
             setState(() {
@@ -69,7 +82,13 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
 
   @override
   Color getBgColor() {
-    // TODO: implement getBgColor
-    return null;
+    return HColors.bgColor;
+  }
+
+  int _transactionCount() {
+    if (_transactions == null || _transactions.isEmpty) {
+      return 0;
+    }
+    return _transactions.length;
   }
 }

@@ -7,6 +7,8 @@ class Transaction {
   int point;
   int price;
   String logo;
+  String storeName;
+  String disCountPrice;
 
 //TODO huu: re-map data format
 }
@@ -20,6 +22,8 @@ class TransactionMapper extends BaseMapper<Transaction, TransactionEntity> {
     model.storeLocation = entity.store != null ? entity.store.address : "unknown";
     model.logo = entity.store != null ? entity.store.thumbnail : '';
     model.time = entity.createdAt.toString();
+    model.storeName = entity.store.owner.fullname;
+    model.disCountPrice = 0.toString();
     return model;
   }
 

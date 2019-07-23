@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/model/Store.dart';
@@ -12,11 +13,12 @@ import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail
 import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_event.dart';
 import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_state.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
+import 'package:your_reward_user/screen/transaction/transactions_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
-import 'package:your_reward_user/widget/v2/YRAppBar.dart';
+import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v2/card_membership.dart';
 import 'package:your_reward_user/widget/v2/image_left_content_right_widget.dart';
 import 'package:your_reward_user/widget/v2/restaurant_item.dart';
@@ -47,9 +49,34 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
 
   @override
   Widget appBar() {
-    return YRAppBar(
-      title: widget.memberCard.ownerName,
-    );
+    return AppBar(
+        title: YRText(
+          widget.memberCard.ownerName,
+          color: Colors.black,
+          font: "Lato",
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: IconButton(
+            icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(FontAwesomeIcons.history),
+            color: HColors.ColorSecondPrimary,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TransactionScreen(
+                            ownerId: widget.memberCard.ownerId,
+                          )));
+            },
+          ),
+        ]);
   }
 
   @override

@@ -13,12 +13,11 @@ import 'package:your_reward_user/screen/home/bloc/home_event.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_news.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_stores.dart';
 import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
-import 'package:your_reward_user/screen/membership/membership_screen.dart';
+import 'package:your_reward_user/screen/membership/detail/v2/card_store_detail_screen.dart';
 import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/empty_membership_widget.dart';
-import 'package:your_reward_user/widget/v2/card_membership.dart';
 import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
@@ -148,7 +147,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MemberShipScreen(
+                          builder: (context) => MemberShipStoreDetailScreen(
                                 memberCard: _memberships[index],
                               )));
                 },
