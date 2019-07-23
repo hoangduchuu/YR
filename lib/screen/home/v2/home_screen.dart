@@ -190,7 +190,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
         itemBuilder: (context, index) {
           return NewsRow(Post(
             title: _posts[index].title,
-            content: CommonUtils.getNewsDescription(_posts[index].content),
+            content: _posts[index].title,
             image: _posts[index].image,
           ));
         });
