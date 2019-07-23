@@ -16,7 +16,7 @@ class SignUpScreen extends BasePage {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
-
+const PADDING_BUTTON = EdgeInsets.symmetric(horizontal: 16);
 class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandler {
   SignUpBloc _signUpBloc;
   String _email, _password, _repassword, _name, _phone;
@@ -70,7 +70,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
             SizedBox(
               child: Center(
                 child: YRText(
-                  "Đ Ă N G   K Ý",
+                  "ĐĂNG KÝ",
                   fontSize: 40,
                   textFontStyle: TextFontStyle.BOLD,
                   color: HColors.ColorSecondPrimary,
@@ -81,38 +81,54 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
             SizedBox(
               height: 15,
             ),
-            YRTextField(
-              hintText: 'Nhập vào tên tài khoản',
-              onTextChanged: (value) {
-                _name = value;
-              },
-              isPassword: false,
+            Padding(
+              padding: PADDING_BUTTON,
+              child: YRTextField(
+                hintText: 'Nhập vào tên tài khoản',
+                onTextChanged: (value) {
+                  _name = value;
+                },
+                isPassword: false,
+              ),
             ),
-            YRTextField(
-                hintText: 'Nhập email',
-                onTextChanged: (value) {
-                  _email = value;
-                },
-                isPassword: false),
-            YRTextField(
-                hintText: 'Nhập mật khẩu',
-                onTextChanged: (value) {
-                  _password = value;
-                },
-                isPassword: true),
-            YRTextField(
-                hintText: 'Xác nhận lại mật khẩu',
-                onTextChanged: (value) {
-                  _repassword = value;
-                },
-                isPassword: true),
-            YRTextField(
-                type: TextInputType.phone,
-                hintText: 'Số điện thoại',
-                onTextChanged: (value) {
-                  _phone = value;
-                },
-                isPassword: false),
+            Padding(
+              padding: PADDING_BUTTON,
+              child: YRTextField(
+                  hintText: 'Nhập email',
+                  onTextChanged: (value) {
+                    _email = value;
+                  },
+                  isPassword: false),
+            ),
+            Padding(
+              padding: PADDING_BUTTON,
+              child: YRTextField(
+                  hintText: 'Nhập mật khẩu',
+                  onTextChanged: (value) {
+                    _password = value;
+                  },
+                  isPassword: true),
+            ),
+            Padding(
+              padding: PADDING_BUTTON,
+              child: YRTextField(
+                  hintText: 'Xác nhận lại mật khẩu',
+                  onTextChanged: (value) {
+                    _repassword = value;
+                  },
+                  isPassword: true),
+            ),
+            Padding(
+              padding: PADDING_BUTTON,
+              child: YRTextField(
+                  type: TextInputType.phone,
+                  hintText: 'Số điện thoại',
+                  onTextChanged: (value) {
+                    _phone = value;
+                  },
+                  isPassword: false),
+            ),
+            SizedBox(height: 12,),
             CommonButton(
               onPressed: () {
                 SignupModel model = SignupModel();
@@ -127,7 +143,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> with ErrorMessageHandle
                 print("DISPATH SIGN UP");
                 _signUpBloc.dispatch(SignUpEvent(model));
               },
-              backgroundColor: Colors.amberAccent,
+              backgroundColor: HColors.ColorPrimary,
               textColor: HColors.black,
               font: Hfonts.LatoSemiBold,
               text: "Đăng ký",

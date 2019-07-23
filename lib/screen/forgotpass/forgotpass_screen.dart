@@ -36,10 +36,8 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Stack(
       children: <Widget>[
-        
         Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(

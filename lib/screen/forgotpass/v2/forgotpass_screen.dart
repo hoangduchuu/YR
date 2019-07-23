@@ -31,25 +31,24 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: YRText(
-          "ĐỔI MẬT KHẨU",
-          color: HColors.black,
-          font: Hfonts.LatoSemiBold,
-        ),
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: HColors.black,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
         elevation: 0.0,
+        leading: IconButton(
+          icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
+        ),
+        title: Text(
+          'QUÊN MẬT KHẨU',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
       ),
+      backgroundColor: HColors.bgColor,
       body: _buildBody(),
     );
   }
@@ -65,37 +64,40 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
           }
         },
         child: Container(
-          margin: EdgeInsets.only(top: 30),
-          alignment: Alignment.topCenter,
+          margin: EdgeInsets.only(top: 30, left: 16, right: 16),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.9,
             height: 200,
-            child: Card(
-              elevation: 1,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Column(
-                  children: <Widget>[
-                    YRTextField(
-                        font: Hfonts.LatoLight,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(16))
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: YRTextField(
+                        font: Hfonts.LatoRegular,
                         hintText: 'Nhập vào email',
                         onTextChanged: (value) {
                           _email = value;
                         },
                         isPassword: false),
-                    CommonButton(
-                        onPressed: () {
-                          _handleCLick();
-                        },
-                        backgroundColor: Colors.amberAccent,
-                        textColor: HColors.black,
-                        font: Hfonts.LatoSemiBold,
-                        text: "Gữi yêu cầu",
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        radiusValue: 2,
-                        buttonPadding: 2),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 16,),
+                  CommonButton(
+                      onPressed: () {
+                        _handleCLick();
+                      },
+                      backgroundColor: HColors.ColorPrimary,
+                      textColor: HColors.black,
+                      font: Hfonts.LatoBold,
+                      text: "Gửi Yêu Cầu",
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      radiusValue: 4,
+                      buttonPadding: 2),
+                ],
               ),
             ),
           ),
