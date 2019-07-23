@@ -47,7 +47,7 @@ class ImageLoader extends StatelessWidget {
     if (overlay == null) {
       return ColorFilter.mode(null, null);
     } else if (overlay) {
-      return ColorFilter.mode(Colors.black54, BlendMode.overlay);
+      return ColorFilter.mode(Colors.black54, BlendMode.darken);
     }
     return null;
   }

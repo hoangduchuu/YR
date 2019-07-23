@@ -23,9 +23,6 @@ import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
 
-
-
-
 class HomeScreen extends BasePage {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -79,8 +76,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
             child: Center(
               child: Text(
                 DataProvider.user.fullName,
-                style: TextStyle(color: Colors.black,
-                  fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -93,7 +89,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
         Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
           child: IconButton(
-            icon:  Image.asset('assets/images/ic_notifi.png'),
+            icon: Image.asset('assets/images/ic_notifi.png'),
             color: HColors.ColorSecondPrimary,
             onPressed: () {
               Navigator.pushNamed(context, '/accountinfo');
@@ -188,13 +184,21 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
         physics: NeverScrollableScrollPhysics(),
         itemCount: _posts.length,
         itemBuilder: (context, index) {
-          return NewsRow(Post(
-            title: _posts[index].title,
-            content: _posts[index].title,
-            image: _posts[index].image,
-          ));
+          return NewsRow(
+            Post(
+              title: _posts[index].title,
+              content: _posts[index].title,
+              image: _posts[index].image,
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsScreen(
+                            post: _posts[index],
+                          )));
+            },
+          );
         });
   }
-  
-
 }

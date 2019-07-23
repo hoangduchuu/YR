@@ -35,20 +35,24 @@ class NewsScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16))),
-      child: HtmlWidget(
-        post.content,
-        onTapUrl: (url) => showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: Text('onTapUrl'),
-            content: Text(url),
+    return ListView(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.all(16),
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16))),
+          child: HtmlWidget(
+            post.content,
+            onTapUrl: (url) => showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text('onTapUrl'),
+                content: Text(url),
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
