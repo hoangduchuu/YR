@@ -1,52 +1,63 @@
 import 'package:barcode_flutter/barcode_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:your_reward_user/styles/h_colors.dart';
+import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 
-class YellowBarcode extends StatelessWidget {
-  String content;
-  double elevation = 12;
+class CardMemberShip extends StatelessWidget {
+  String logo;
+  String level;
+  String joinDate;
+  String point;
 
-  YellowBarcode(this.content, {this.elevation});
+  CardMemberShip({this.logo, this.level, this.joinDate, this.point});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(16),
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/images/bg_barcode.png"), fit: BoxFit.fill),
+          image: DecorationImage(image: AssetImage("assets/images/bg_member_card.png"), fit: BoxFit.fill),
           borderRadius: BorderRadius.all(Radius.circular(12))
       ),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 16,),
-          Text(
-            "Your Reward",
-            style: TextStyle(fontSize: 40,
-              fontWeight: FontWeight.w600,
-              color: Colors.white70),
-          ),
           SizedBox(height: 8,),
-          Container(
-            padding: EdgeInsets.all(12),
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white,
-            child: Center(
-              child: BarCodeImage(
-                barHeight: 80,
-                lineWidth: 1.2,
-                data: this.content,
-                // Code string. (required) //1562165461408
-                codeType: BarCodeType.Code128,
-                // Code type (required)
-                hasText: true,
-                // Render with text label or not (default: false)
-                onError: (error) {
-                  // Error handler
-                  print('error = $error');
-                },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: ImageLoader(
+                  circleImage: true,
+                  radius: 50,
+                  url: this.logo,
+                ),
               ),
-            ),
-          ),
-          SizedBox(height: 30,)
+            Text(this.level, style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white),),
+          ],),
+          SizedBox(height: 56,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(this.point, style: TextStyle(fontSize: 16,color: HColors.white, fontWeight: FontWeight.bold),),
+                  Text('Lần tích điểm', style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),),
+                ],
+              ),
+              SizedBox(width: 16,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(this.joinDate, style: TextStyle(fontSize: 16,color: HColors.white ,fontWeight: FontWeight.bold),),
+                  Text('Ngày Tham Gia', style: TextStyle(fontWeight: FontWeight.w100,color: HColors.white),),
+                ],
+              ),
+            ],
+          )
         ],
       ),
     );
