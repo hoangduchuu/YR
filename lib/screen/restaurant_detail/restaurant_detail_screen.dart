@@ -3,7 +3,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/model/Store.dart';
-import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/test/map_screen.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
@@ -46,7 +45,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with Si
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         brightness: Brightness.light,
         elevation: 0.0,
         leading: IconButton(

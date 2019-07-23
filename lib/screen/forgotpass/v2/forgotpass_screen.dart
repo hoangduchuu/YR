@@ -8,6 +8,7 @@ import 'package:your_reward_user/screen/forgotpass/bloc/request_pass_event.dart'
 import 'package:your_reward_user/screen/forgotpass/bloc/request_pass_state.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v2/common_button.dart';
 import 'package:your_reward_user/widget/v2/textfield.dart';
 
@@ -33,11 +34,16 @@ class _ForgotPassRequestScreenState extends BaseState<ForgotPassRequestScreen> w
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        title: YRText(
+          "ĐỔI MẬT KHẨU",
+          color: HColors.black,
+          font: Hfonts.LatoSemiBold,
+        ),
         backgroundColor: Colors.transparent,
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              color: HColors.red,
+              color: HColors.black,
             ),
             onPressed: () {
               Navigator.pop(context);
