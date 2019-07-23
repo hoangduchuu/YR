@@ -14,10 +14,11 @@ import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
 import 'package:your_reward_user/widget/v2/YRAppBar.dart';
+import 'package:your_reward_user/widget/v2/card_membership.dart';
 import 'package:your_reward_user/widget/v2/image_left_content_right_widget.dart';
-import 'package:your_reward_user/widget/v2/member_card.dart';
 import 'package:your_reward_user/widget/v2/restaurant_item.dart';
 
 class MemberShipStoreDetailScreen extends BasePage {
@@ -82,7 +83,12 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
       child: ListView(
         controller: _scrollController,
         children: <Widget>[
-          MemberCard(),
+          CardMemberShip(
+            logo: widget.memberCard.logo,
+            level: widget.memberCard.levelName,
+            joinDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
+            point: widget.memberCard.points.toString(),
+          ),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
