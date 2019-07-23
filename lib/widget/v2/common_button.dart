@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 
 class CommonButton extends StatefulWidget {
@@ -10,7 +11,7 @@ class CommonButton extends StatefulWidget {
   final Icon icon;
   final String text;
   final double buttonPadding;
-  final String font;
+  String font;
   final double textSize;
   bool isRoundedButon;
   final Color roundedColor;
@@ -25,7 +26,7 @@ class CommonButton extends StatefulWidget {
       @required this.buttonPadding,
       this.radiusValue,
       this.width,
-      this.font,
+      this.font = Hfonts.LatoSemiBold,
       this.isRoundedButon = false,
       this.icon,
       this.paddingBottom = 0,
