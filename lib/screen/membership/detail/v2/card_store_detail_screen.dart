@@ -8,19 +8,17 @@ import 'package:your_reward_user/screen/base/BasePage.dart';
 import 'package:your_reward_user/screen/base/BaseState.dart';
 import 'package:your_reward_user/screen/base/ErrorMessageHandler.dart';
 import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
+import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_bloc.dart';
+import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_event.dart';
+import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_state.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
-import 'package:your_reward_user/widget/v1/hooray_barcode.dart';
-import 'package:your_reward_user/widget/v1/member_card.dart';
-import 'package:your_reward_user/widget/v1/restaurant_item.dart';
-import 'package:your_reward_user/widget/v1/voucher.dart';
-
-import 'bloc/membership_detail_bloc.dart';
-import 'bloc/membership_detail_event.dart';
-import 'bloc/membership_detail_state.dart';
+import 'package:your_reward_user/widget/v2/YRAppBar.dart';
+import 'package:your_reward_user/widget/v2/image_left_content_right_widget.dart';
+import 'package:your_reward_user/widget/v2/member_card.dart';
+import 'package:your_reward_user/widget/v2/restaurant_item.dart';
 
 class MemberShipStoreDetailScreen extends BasePage {
   final MembershipCard memberCard;
@@ -48,7 +46,9 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
 
   @override
   Widget appBar() {
-    return null;
+    return YRAppBar(
+      title: widget.memberCard.ownerName,
+    );
   }
 
   @override
@@ -82,18 +82,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
       child: ListView(
         controller: _scrollController,
         children: <Widget>[
-          MemberCard(
-              title: widget.memberCard.levelName,
-              memberName: DataProvider.user.fullName,
-              memberPoint: widget.memberCard.points,
-              startDate: CommonUtils.getDateFormat(widget.memberCard.createdAt.toString()),
-              times: widget.memberCard.accumulationPoints),
-          SizedBox(
-            height: 10,
-          ),
-          HoorayBarCode(
-            content: DataProvider.user.phone.toString(),
-          ),
+          MemberCard(),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
@@ -105,13 +94,13 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 child: Text(
                   'Cửa hàng',
                   style: TextStyle(
-                      color: HColors.ColorSecondPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
+                    color: HColors.ColorSecondPrimary,
+                    fontSize: 30,
+                    fontFamily: Hfonts.PrimaryFontRegular,
+                  ),
                 ),
               )),
-          Container(height: 250, child: _buildListStore(_stores)),
+          Container(height: 150, child: _buildListStore(_stores)),
           Padding(
               padding: EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Container(
@@ -123,13 +112,13 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 child: Text(
                   'Voucher',
                   style: TextStyle(
-                      color: HColors.ColorSecondPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: Hfonts.PrimaryFontBold),
+                    color: HColors.ColorSecondPrimary,
+                    fontSize: 30,
+                    fontFamily: Hfonts.PrimaryFontRegular,
+                  ),
                 ),
               )),
-          Container(height: 250, child: _buildListVouchers(_coupons)),
+          _buildListVouchers(_coupons),
         ],
       ),
     );
@@ -140,6 +129,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
       return Container();
     }
     return ListView.builder(
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: stores.length,
         itemBuilder: (context, index) {
@@ -149,6 +139,8 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                 width: 10,
               ),
               RestaurantItem(
+                height: 150,
+                width: 250,
                 storeName: stores[index].name,
                 storeImage: stores[index].storeLogo,
                 onClick: () {
@@ -166,24 +158,17 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
       return Container();
     }
     return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: coupons.length,
         physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: coupons.length,
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: Row(
-              children: <Widget>[
-                Voucher(
-                  coupon: coupons[index],
-                  name: coupons[index].title,
-                  imageUrl: _getVoucherThumb(coupons[index].image),
-                  date: coupons[index].endDate,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
+            child: ImageLeftContentRightRow(
+              imageUrl: _getVoucherThumb(coupons[index].image),
+              title: coupons[index].title,
+              content: coupons[index].getDescription(),
             ),
           );
         });

@@ -5,7 +5,7 @@ import 'package:your_reward_user/model/MembershipCard.dart';
 import 'package:your_reward_user/screen/membership/store_transaction/TransactionStoreScreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
-import 'detail/card_store_detail_screen.dart';
+import 'detail/v2/card_store_detail_screen.dart';
 
 class MemberShipScreen extends StatefulWidget {
   final MembershipCard memberCard;
