@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
-import 'package:your_reward_user/screen/membership/store_transaction/TransactionStoreScreen.dart';
+import 'package:your_reward_user/screen/transaction/transactions_screen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 
 import 'detail/v2/card_store_detail_screen.dart';
@@ -25,7 +25,7 @@ class _MemberShipScreenState extends State<MemberShipScreen> {
     super.initState();
     _children = [
       MemberShipStoreDetailScreen(memberCard: widget.memberCard),
-      TransactionStoreScreen(
+      TransactionScreen(
         ownerId: widget.memberCard.ownerId,
       )
     ];
