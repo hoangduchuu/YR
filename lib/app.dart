@@ -6,6 +6,7 @@ import 'package:your_reward_user/screen/home/home_screen.dart';
 import 'package:your_reward_user/screen/login/v2/login_screen.dart';
 import 'package:your_reward_user/screen/membership/detail/v2/card_store_detail_screen.dart';
 import 'package:your_reward_user/screen/membership/membership_screen.dart';
+import 'package:your_reward_user/screen/notification/notification_screen.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/screen/sign_up/v2/signup_screen.dart';
 import 'package:your_reward_user/screen/splash/SplashScreen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       '/map': (BuildContext context) => GoogleMapScreen(),
       '/facebooklogin': (BuildContext context) => FacebookLoginPage(),
       '/hoorayapi': (BuildContext context) => ApiScreenTest(),
+      '/notification': (BuildContext context) => NotificationScreen(),
     },
     debugShowCheckedModeBanner: false,
     //unknown route

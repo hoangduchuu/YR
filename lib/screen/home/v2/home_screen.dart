@@ -91,7 +91,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
             icon: Image.asset('assets/images/ic_notifi.png'),
             color: HColors.ColorSecondPrimary,
             onPressed: () {
-              Navigator.pushNamed(context, '/accountinfo');
+              Navigator.pushNamed(context, '/notification');
             },
           ),
         ),
