@@ -100,31 +100,43 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler 
             SizedBox(
               height: 15,
             ),
-            YRTextField(
-                hintText: 'Nhập email',
-                onTextChanged: (value) {
-                  _email = value;
-                },
-                isPassword: false),
-            YRTextField(
-                hintText: 'Nhập mật khẩu',
-                onTextChanged: (value) {
-                  _password = value;
-                },
-                isPassword: true),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: YRTextField(
+                  hintText: 'Nhập email',
+                  onTextChanged: (value) {
+                    _email = value;
+                  },
+                  isPassword: false),
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: YRTextField(
+                  hintText: 'Nhập mật khẩu',
+                  onTextChanged: (value) {
+                    _password = value;
+                  },
+                  isPassword: true),
+            ),
+            SizedBox(
+              height: 12,
+            ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(right: 30),
                   child: FlatButton(
-                    child: new YRText(
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    child: Text(
                       "Quên mật khẩu?",
                       style: TextStyle(
-                          fontFamily: Hfonts.PrimaryFontRegular,
                           color: HColors.hintTextColor,
                           fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w600),
                     ),
                     onPressed: () => {Navigator.pushNamed(context, "/forgotpass")},
                   ),
@@ -139,13 +151,13 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler 
                   alignment: Alignment.center,
                   child: CommonButton(
                     onPressed: () => {_onSubmitLogin(context)},
-                    backgroundColor: Colors.amberAccent,
+                    backgroundColor: HColors.ColorPrimary,
                     textColor: HColors.black,
                     font: Hfonts.LatoSemiBold,
                     text: "Đăng nhập",
                     width: MediaQuery.of(context).size.width * 0.4,
                     buttonPadding: 10,
-                    radiusValue: 3,
+                    radiusValue: 4,
                   ),
                 ),
               ],

@@ -99,8 +99,7 @@ class _CommonButtonState extends State<CommonButton> {
           Text(
             widget.text == null ? 'Hey dev, please insert text value. Thanks' : widget.text,
             style: TextStyle(
-                fontSize: widget.textSize == null ? 16 : widget.textSize,
-                fontFamily: CommonUtils.getFontName(widget.font)),
+                fontSize: widget.textSize == null ? 16 : widget.textSize,),
           )
         ],
       ),

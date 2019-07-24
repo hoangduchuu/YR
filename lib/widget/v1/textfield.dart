@@ -53,7 +53,7 @@ class _SBTextFieldState extends State<YRTextField> {
               keyboardType: this.widget.type,
               controller: widget.textController,
               obscureText: widget.isPassword == true ? _obscureText : false,
-              style: TextStyle(fontSize: 17.0, fontFamily: CommonUtils.getFontName(widget.font)),
+              style: TextStyle(fontSize: 16.0, fontFamily: 'Lato'),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, bottom: 15, top: 15, right: 14),
                 fillColor: HColors.textFBGColor,

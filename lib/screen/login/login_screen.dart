@@ -120,7 +120,6 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler 
                   child: new Text(
                     "Quên mật khẩu?",
                     style: TextStyle(
-                        fontFamily: Hfonts.PrimaryFontRegular,
                         color: HColors.ColorSecondPrimary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
