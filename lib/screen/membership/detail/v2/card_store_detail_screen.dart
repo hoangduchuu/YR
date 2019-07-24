@@ -55,7 +55,8 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
           color: Colors.black,
           font: "Lato",
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
         elevation: 0.0,
         leading: IconButton(
             icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),
@@ -86,7 +87,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
 
   @override
   Color getBgColor() {
-    return Color(0xFFF5F5F5);
+    return HColors.bgColor;
   }
 
   Widget _body() {
@@ -117,38 +118,23 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
             point: widget.memberCard.points.toString(),
           ),
           Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Container(
-                padding: EdgeInsets.only(bottom: 6),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
-                ),
-                child: Text(
-                  'Cửa hàng',
-                  style: TextStyle(
-                    color: HColors.ColorSecondPrimary,
-                    fontSize: 30,
-                    fontFamily: Hfonts.PrimaryFontRegular,
-                  ),
+              padding: EdgeInsets.only(left: 16, top: 10, right: 16),
+              child: Text(
+                'Cửa hàng',
+                style: TextStyle(
+                  color: HColors.ColorSecondPrimary,
+                  fontSize: 22,
                 ),
               )),
+          SizedBox(height: 12,),
           Container(height: 150, child: _buildListStore(_stores)),
           Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Container(
-                padding: EdgeInsets.only(bottom: 6),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black12, width: 1)),
-                ),
-                child: Text(
-                  'Voucher',
-                  style: TextStyle(
-                    color: HColors.ColorSecondPrimary,
-                    fontSize: 30,
-                    fontFamily: Hfonts.PrimaryFontRegular,
-                  ),
+              padding: EdgeInsets.only(left: 16, top: 12, right: 16),
+              child: Text(
+                'Voucher',
+                style: TextStyle(
+                  color: HColors.ColorSecondPrimary,
+                  fontSize: 22,
                 ),
               )),
           _buildListVouchers(_coupons),
@@ -169,7 +155,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
           return Row(
             children: <Widget>[
               SizedBox(
-                width: 10,
+                width: 22,
               ),
               RestaurantItem(
                 height: 150,

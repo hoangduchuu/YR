@@ -21,7 +21,8 @@ class YRAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: titileColor,
         font: titleFont,
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
+      brightness: Brightness.light,
       elevation: 0.0,
       leading: IconButton(
           icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),

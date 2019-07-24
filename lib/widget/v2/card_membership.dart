@@ -35,7 +35,7 @@ class CardMemberShip extends StatelessWidget {
                   url: this.logo,
                 ),
               ),
-            Text(this.level, style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white),),
+            Text(this.level.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white, fontSize: 22),),
           ],),
           SizedBox(height: 56,),
           Row(
