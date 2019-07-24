@@ -18,26 +18,20 @@ class NotificationRow extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
+              SizedBox(height: 32, width: 32, child: Image.asset('assets/images/ic_notifi_2.png')),
               SizedBox(
-                height: 32,
-                  width: 32,
-                  child: Image.asset('assets/images/ic_notifi_2.png')),
-              SizedBox(width: 8,),
-              Text(
-                this.title,
-                style: TextStyle(fontWeight: FontWeight.bold),
-                maxLines: 2, overflow: TextOverflow.ellipsis
+                width: 8,
+              ),
+              Expanded(
+                child: Text(this.title,
+                    style: TextStyle(fontWeight: FontWeight.bold), maxLines: 2, overflow: TextOverflow.ellipsis),
               )
             ],
           ),
           SizedBox(
             height: 12,
           ),
-          Text(
-            this.description,
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis
-          )
+          Text(this.description, maxLines: 4, overflow: TextOverflow.ellipsis)
         ],
       ),
     );

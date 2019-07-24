@@ -16,7 +16,6 @@ class PostProvider {
   Future<dynamic> getPosts({int limit = 200, int skip = 0}) async {
     String url = '${YRService.END_POINT}${YRService.PATH_POSTS}';
     String raw = await client.get(url, YRService.generateHeadersWithToken(), Map());
-    print("RAW ${raw}");
     var result = new GetPostParser().parse(raw);
     return result;
   }

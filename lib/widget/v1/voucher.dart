@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:your_reward_user/model/Coupon.dart';
 import 'package:your_reward_user/screen/voucher_detail/VoucherDetailScreen.dart';
 import 'package:your_reward_user/styles/h_fonts.dart';
-
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 
 class Voucher extends StatelessWidget {
@@ -35,7 +34,12 @@ class Voucher extends StatelessWidget {
   _buildItemCard(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VoucherDetailScreen(coupon)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => VoucherDetailScreen(
+                      coupon: null,
+                    )));
       },
       child: Container(
         height: 200,

@@ -1,14 +1,24 @@
-enum Gender { MALE }
-
-final genderValues = new EnumValues({"male": Gender.MALE});
-
+enum Gender { MALE, FEMALE }
+enum Status { ACTIVE }
+enum NotificationReadSTATUS { ACTIVE, READ }
 enum Role { OWNER, ADMIN }
+enum CouponStatus { ACTIVE, DRAFT, JEJECTED }
 
+// enumpaping
+final genderValues = new EnumValues({"male": Gender.MALE, "female": Gender.FEMALE});
 final roleValues = new EnumValues({"admin": Role.ADMIN, "owner": Role.OWNER});
-
-enum CouponStatus { ACTIVE }
-
 final statusValues = new EnumValues({"active": CouponStatus.ACTIVE});
+final notificationReadStatusValue = new EnumValues(
+  {
+    "active": NotificationReadSTATUS.ACTIVE,
+    "read": NotificationReadSTATUS.READ,
+  },
+);
+final couponStatus = new EnumValues({
+  "rejected": CouponStatus.ACTIVE,
+  "draft": CouponStatus.DRAFT,
+  "active": CouponStatus.ACTIVE,
+});
 
 class EnumValues<T> {
   Map<String, T> map;
@@ -24,4 +34,4 @@ class EnumValues<T> {
   }
 }
 
-enum TextFontStyle{BOLD,REGULAR}
+enum TextFontStyle { BOLD, REGULAR }
