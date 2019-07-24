@@ -33,7 +33,7 @@ class CouponMapper extends BaseMapper<Coupon, CouponEntity> {
     model.image = getThumbnail(entity.thumbnail);
     model.status = entity.status.toString();
     model._description = entity.description;
-    model.endDate = entity.endDate != null ? CommonUtils.getDateFormat(entity.endDate) : "";
+    model.endDate = entity.endDate != null ? CommonUtils.getDateFormat(entity.endDate) : "Chưa có";
     return model;
   }
 

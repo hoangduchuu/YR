@@ -14,7 +14,7 @@ import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail
 import 'package:your_reward_user/screen/membership/detail/bloc/membership_detail_state.dart';
 import 'package:your_reward_user/screen/restaurant_detail/restaurant_detail_screen.dart';
 import 'package:your_reward_user/screen/transaction/transactions_screen.dart';
-import 'package:your_reward_user/styles/h_fonts.dart';
+import 'package:your_reward_user/screen/voucher_detail/VoucherDetailScreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/utils/const.dart';
@@ -126,7 +126,9 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
                   fontSize: 22,
                 ),
               )),
-          SizedBox(height: 12,),
+          SizedBox(
+            height: 12,
+          ),
           Container(height: 150, child: _buildListStore(_stores)),
           Padding(
               padding: EdgeInsets.only(left: 16, top: 12, right: 16),
@@ -188,6 +190,10 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
               imageUrl: _getVoucherThumb(coupons[index].image),
               title: coupons[index].title,
               content: coupons[index].getDescription(),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => VoucherDetailScreen(coupon: coupons[index])));
+              },
             ),
           );
         });
