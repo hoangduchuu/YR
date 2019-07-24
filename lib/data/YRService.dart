@@ -40,4 +40,8 @@ class YRService {
   static String PATH_STORES = "/stores";
 
   static String PATH_TRANSACTIONS = "/transactions";
+
+  // notification
+
+  static String PATH_NOTIFICATION = "/notifications";
 }

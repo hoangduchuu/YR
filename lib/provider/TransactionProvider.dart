@@ -18,7 +18,6 @@ class TransactionProvider {
     params['userId'] = userId;
     String raw = await client.get(url, YRService.generateHeadersWithToken(), params);
     var result = GetTransactionParser().parse(raw);
-    print('$result');
     return result;
   }
 

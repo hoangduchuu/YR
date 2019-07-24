@@ -226,7 +226,6 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
     newUserInfo.phone = _phoneTextController.text;
     newUserInfo.fullName = _userTextController.text;
 
-    print("SCREEN  $newUserInfo");
     _profileBloc.dispatch(UpdateUserInfo(newUserInfo));
   }
 

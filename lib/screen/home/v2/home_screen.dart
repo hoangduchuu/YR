@@ -131,7 +131,6 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
         }
         if (state is GetPostSuccessState) {
           super.hideLoading();
-          print("SCreen ${state.posts.toString()}");
           setState(() {
             _posts = state.posts;
           });

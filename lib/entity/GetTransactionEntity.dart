@@ -27,7 +27,7 @@ class GetTransactionEntity {
         total: json["total"],
         limit: json["limit"],
         skip: json["skip"],
-        data: new List<TransactionEntity>.from(json["data"].map((x){
+        data: new List<TransactionEntity>.from(json["data"].map((x) {
           return TransactionEntity.fromJson(x);
         })),
       );
@@ -41,6 +41,6 @@ class GetTransactionEntity {
 
   @override
   String toString() {
-    return 'GetTransactionEntity{total: $total, limit: $limit, skip: $skip, data: $data}';
+    return 'GetTransactionEntity{}';
   }
 }
