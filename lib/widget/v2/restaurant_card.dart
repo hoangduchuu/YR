@@ -90,7 +90,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
             margin: EdgeInsets.fromLTRB(0, 0, 12, 6),
             alignment: Alignment.bottomRight,
             child: Text(
-              "${item.levelName}",
+              "${item.levelName}".toUpperCase(),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,

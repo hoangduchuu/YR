@@ -92,6 +92,7 @@ class TransactionDetail extends StatelessWidget {
             height: 12,
           ),
           Container(
+              width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(8))),

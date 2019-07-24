@@ -51,7 +51,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
   Widget appBar() {
     return AppBar(
         title: YRText(
-          widget.memberCard.ownerName,
+          widget.memberCard.ownerName.toUpperCase(),
           color: Colors.black,
           font: "Lato",
         ),

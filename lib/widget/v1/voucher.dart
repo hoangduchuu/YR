@@ -35,7 +35,7 @@ class Voucher extends StatelessWidget {
   _buildItemCard(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VoucherDetailScreen(coupon)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => VoucherDetailScreen(coupon: coupon)));
       },
       child: Container(
         height: 200,

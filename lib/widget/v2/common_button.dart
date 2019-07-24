@@ -23,7 +23,7 @@ class CommonButton extends StatefulWidget {
       @required this.onPressed,
       @required this.backgroundColor,
       @required this.textColor,
-      @required this.buttonPadding,
+      this.buttonPadding,
       this.radiusValue,
       this.width,
       this.font = Hfonts.LatoSemiBold,
@@ -47,7 +47,6 @@ class _CommonButtonState extends State<CommonButton> {
     return Center(
       child: Container(
           width: widget.width != null ? widget.width : 270,
-          height: 75,
           child: Column(
             children: <Widget>[
               switchButton(),

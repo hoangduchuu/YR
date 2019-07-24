@@ -135,9 +135,8 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
         }
       },
       child: Container(
-        height: double.maxFinite,
-        child: ListView(
-          //shrinkWrap: true,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(parentContext).size.height * 0.05,
@@ -162,6 +161,9 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                 ),
               ],
             ),
+            SizedBox(
+              height: 6,
+            ),
             CommonButton(
               onPressed: () {
                 imagePicker.showDialog(parentContext);
@@ -176,6 +178,9 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                 color: HColors.white,
               ),
             ),
+            SizedBox(
+              height: 6,
+            ),
             YRTextField(
               defaultText: DataProvider.user.fullName,
               textController: _userTextController,
@@ -186,6 +191,9 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
               isPassword: false,
               icon: FontAwesomeIcons.userCog,
             ),
+            SizedBox(
+              height: 6,
+            ),
             YRTextField(
                 defaultText: DataProvider.user.email,
                 textController: _emailTextController,
@@ -195,6 +203,9 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
                   _email = value;
                 },
                 isPassword: false),
+            SizedBox(
+              height: 6,
+            ),
             YRTextField(
               defaultText: DataProvider.user.phone,
               textController: _phoneTextController,
@@ -211,16 +222,14 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
             ),
             CommonButton(
               onPressed: () => _handleSubmit(),
-              backgroundColor: HColors.ColorSecondPrimary,
+              backgroundColor: HColors.ColorPrimary,
               textColor: HColors.white,
               text: 'Lưu lại thông tin',
               width: MediaQuery.of(parentContext).size.width * 0.72,
               buttonPadding: 10,
               radiusValue: 10,
             ),
-            SizedBox(
-              height: MediaQuery.of(parentContext).size.height * 0.03,
-            ),
+            SizedBox(height: 12,),
             CommonButton(
               onPressed: () {
                 showAlertDialog(context);
