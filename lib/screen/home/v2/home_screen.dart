@@ -63,9 +63,14 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: ImageLoader(
-                  url: DataProvider.user.avatar,
-                  radius: 25,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/accountinfo');
+                  },
+                  child: ImageLoader(
+                    url: DataProvider.user.avatar,
+                    radius: 25,
+                  ),
                 ),
               ),
             ),
