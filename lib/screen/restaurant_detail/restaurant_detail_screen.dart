@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:your_reward_user/model/Store.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/test/map_screen.dart';
+import 'package:your_reward_user/utils/logger.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/common_button.dart';
 
@@ -196,6 +197,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> with Si
 
   _onLocationClick() {
     LatLng location = LatLng(double.parse(widget._store.addressLat), double.tryParse(widget._store.addressLng));
+    log('${widget._store.addressLat} - ${widget._store.addressLng}');
     Store store = widget._store;
     Navigator.push(
         context,

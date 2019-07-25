@@ -46,55 +46,57 @@ class _MyAppState extends State<GoogleMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("${widget._store.name}"),
-          backgroundColor: HColors.lightBlueGrey,
-          elevation: 0.0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            color: Colors.black12,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+    return Scaffold(
+      appBar:  AppBar(
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: ImageIcon(AssetImage('assets/images/ic_arrow.png')),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
         ),
-        body: Stack(
-          children: <Widget>[
-            GoogleMap(
-              onMapCreated: _onMapCreated,
-              myLocationButtonEnabled: true,
-              myLocationEnabled: true,
-              initialCameraPosition: CameraPosition(
-                target: LatLng(double.tryParse(widget._store.addressLat), double.tryParse(widget._store.addressLng)),
-                zoom: 11.0,
-              ),
-              markers: Set<Marker>.of(markers.values),
+        title: Text(
+          '${widget._store.name}',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
+      ),
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(double.tryParse(widget._store.addressLat), double.tryParse(widget._store.addressLng)),
+              zoom: 17.0,
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 50, 10, 0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  iconSize: 30,
-                  icon: Icon(Icons.home),
-                  color: Colors.red,
-                  onPressed: () {
-                    mapController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        CameraPosition(
-                            zoom: 11.0,
-                            target: LatLng(
-                                double.tryParse(widget._store.addressLat), double.tryParse(widget._store.addressLng))),
-                      ),
-                    );
-                  },
-                ),
+            markers: Set<Marker>.of(markers.values),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 50, 10, 0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                iconSize: 30,
+                icon: Icon(Icons.home),
+                color: Colors.red,
+                onPressed: () {
+                  mapController.animateCamera(
+                    CameraUpdate.newCameraPosition(
+                      CameraPosition(
+                          zoom: 17.0,
+                          target: LatLng(
+                              double.tryParse(widget._store.addressLat), double.tryParse(widget._store.addressLng))),
+                    ),
+                  );
+                },
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -125,8 +127,8 @@ class _MyAppState extends State<GoogleMapScreen> {
     final Marker marker = Marker(
       markerId: markerId,
       position: LatLng(
-        double.tryParse(widget._store.addressLat) + sin(_markerIdCounter * pi / 6.0) / 20.0,
-        double.tryParse(widget._store.addressLng) + cos(_markerIdCounter * pi / 6.0) / 20.0,
+        double.tryParse(widget._store.addressLat),
+        double.tryParse(widget._store.addressLng),
       ),
       infoWindow: InfoWindow(title: widget._store.name, snippet: widget._store.address),
       onTap: () {

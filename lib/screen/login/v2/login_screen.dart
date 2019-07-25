@@ -89,7 +89,7 @@ class _LoginScreenState extends BaseState<LoginScreen> with ErrorMessageHandler 
             SizedBox(
               child: Center(
                 child: YRText(
-                  "Y O U R  R E W A R D",
+                  "YOUR REWARDS",
                   fontSize: 40,
                   textFontStyle: TextFontStyle.BOLD,
                   color: HColors.ColorSecondPrimary,

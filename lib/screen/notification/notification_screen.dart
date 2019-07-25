@@ -4,18 +4,21 @@ import 'package:your_reward_user/core/base_provider/base_view.dart';
 import 'package:your_reward_user/core/base_provider/view_states.dart';
 import 'package:your_reward_user/model/notification.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
+import 'package:your_reward_user/screen/base/BasePage.dart';
+import 'package:your_reward_user/screen/base/BaseState.dart';
+import 'package:your_reward_user/screen/base/ScaffoldPage.dart';
 import 'package:your_reward_user/screen/notification/notification_viewmodel.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/utils/logger.dart';
 
 import 'notification_row.dart';
 
-class NotificationScreen extends StatefulWidget {
+class NotificationScreen extends BasePage {
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationScreenState extends BaseState<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseView<NotificationViewModel>(
@@ -48,11 +51,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget buildListNotification(NotificationViewModel model) {
     List<NotificationModel> notifications = model.notifications;
     if (model.state == ViewState.Busy) {
-      Logger.log("SHOW LOADING ");
+      super.onWidgetDidBuild((){
+        Logger.log("SHOW LOADING ");
+        super.showLoading();
+      });
+    } else if (model.state == ViewState.Idle) {
+      super.onWidgetDidBuild((){
+        Logger.log("HIDE LOADING ");
+        super.hideLoading();
+      });
     }
-    if (model.state == ViewState.Idle) {
-      Logger.log("HIDE LOADING ");
-    }
+
     if (notifications == null || notifications.isEmpty) {
       return Container();
     }
@@ -67,7 +76,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 
+
+
+
   _handleModelReady(NotificationViewModel model) {
     model.getNotification(DataProvider.user.id);
   }
+
+
 }
