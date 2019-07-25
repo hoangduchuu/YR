@@ -114,6 +114,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
+        handleUIControlState(state, hasShimmer: true);
         if (state is GetMemberShipCardsEmptyState) {
           super.hideLoading();
         } else if (state is GetMembershipCardSuccessState) {

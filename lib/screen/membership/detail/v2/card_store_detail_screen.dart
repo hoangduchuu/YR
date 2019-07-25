@@ -22,6 +22,8 @@ import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v2/card_membership.dart';
 import 'package:your_reward_user/widget/v2/image_left_content_right_widget.dart';
 import 'package:your_reward_user/widget/v2/restaurant_item.dart';
+import 'package:your_reward_user/widget/v2/shimmer/shimmer_list.dart';
+import 'package:your_reward_user/widget/v2/shimmer/shimmer_list_horizontal.dart';
 
 class MemberShipStoreDetailScreen extends BasePage {
   final MembershipCard memberCard;
@@ -94,7 +96,7 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
     return BlocListener(
       bloc: _bloc,
       listener: (context, state) {
-        handleUIControlState(state);
+        handleUIControlState(state, hasShimmer: true);
         if (state is OnGetMemberShipDetailSuccessState) {
           super.hideLoadingWithContext(context);
           setState(() {
@@ -146,13 +148,16 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
   }
 
   Widget _buildListStore(List<Store> stores) {
-    if (stores == null || stores.isEmpty) {
+    if (_stores == null) {
+      return ListShimmerHori();
+    }
+    if (_stores.isEmpty) {
       return Container();
     }
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: stores.length,
+        itemCount: _stores.length,
         itemBuilder: (context, index) {
           return Row(
             children: <Widget>[
@@ -175,8 +180,16 @@ class _MemberShipStoreDetailScreenState extends BaseState<MemberShipStoreDetailS
   }
 
   Widget _buildListVouchers(List<Coupon> coupons) {
-    if (coupons == null || coupons.isEmpty) {
-      return Container();
+    if (coupons == null) {
+      return ListShimmer();
+    }
+    if (coupons.isEmpty) {
+      return Center(
+        child: Container(
+          margin: EdgeInsets.only(top: 20),
+          child: Text("chua co voucher"),
+        ),
+      );
     }
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
