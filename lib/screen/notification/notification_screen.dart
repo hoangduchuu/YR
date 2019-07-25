@@ -6,7 +6,7 @@ import 'package:your_reward_user/model/notification.dart';
 import 'package:your_reward_user/repository/DataProvider.dart';
 import 'package:your_reward_user/screen/notification/notification_viewmodel.dart';
 import 'package:your_reward_user/styles/styles.dart';
-import 'package:your_reward_user/utils/logger.dart';
+import 'package:your_reward_user/widget/v2/shimmer/shimmer_list.dart';
 
 import 'notification_row.dart';
 
@@ -48,10 +48,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget buildListNotification(NotificationViewModel model) {
     List<NotificationModel> notifications = model.notifications;
     if (model.state == ViewState.Busy) {
-      Logger.log("SHOW LOADING ");
-    }
-    if (model.state == ViewState.Idle) {
-      Logger.log("HIDE LOADING ");
+      return ShimmerList();
     }
     if (notifications == null || notifications.isEmpty) {
       return Container();
