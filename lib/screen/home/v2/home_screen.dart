@@ -17,7 +17,6 @@ import 'package:your_reward_user/screen/membership/detail/v2/card_store_detail_s
 import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
-import 'package:your_reward_user/widget/v1/empty_membership_widget.dart';
 import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
@@ -115,8 +114,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
       listener: (context, state) {
         handleUIControlState(state);
         if (state is GetMemberShipCardsEmptyState) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => EmptyCardScreen.user(DataProvider.user)));
+          super.hideLoading();
         } else if (state is GetMembershipCardSuccessState) {
           super.hideLoading();
           setState(() {
@@ -161,7 +159,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
           ),
           Visibility(
             visible: !isSliderLoaded,
-            child: Center(child: Text("Đang tải....")),
+            child: Center(),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
