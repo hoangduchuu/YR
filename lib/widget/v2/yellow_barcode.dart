@@ -19,7 +19,7 @@ class YellowBarcode extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 16,),
           Text(
-            "Your Reward",
+            "Your Rewards",
             style: TextStyle(fontSize: 40,
               fontWeight: FontWeight.w600,
               color: Colors.white70),

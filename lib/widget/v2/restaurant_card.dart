@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:your_reward_user/entity/enums.dart';
 import 'package:your_reward_user/model/MembershipCard.dart';
+import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v1/YRText.dart';
 import 'package:your_reward_user/widget/v1/no_membership_cart.dart';
@@ -72,32 +74,100 @@ class _RestaurantCardState extends State<RestaurantCard> {
             overlay: true,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                width: 100,
-                height: 100,
-                child: ImageLoader(
-                  circleImage: true,
-                  radius: 50,
-                  url: item.logo,
-                ),
-              ),
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: ImageLoader(
+                        circleImage: true,
+                        radius: 50,
+                        url: item.logo,
+                      ),
+                    ),
+                    Text(item.levelName.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white, fontSize: 22),),
+                  ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('${item.points}', style: TextStyle(fontSize: 16,color: HColors.white, fontWeight: FontWeight.bold),),
+                        Text('Lần tích điểm', style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),),
+                      ],
+                    ),
+                    SizedBox(width: 16,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(CommonUtils.getDateFormat(item.createdAt.toString()), style: TextStyle(fontSize: 16,color: HColors.white ,fontWeight: FontWeight.bold),),
+                        Text('Ngày Tham Gia', style: TextStyle(fontWeight: FontWeight.w100,color: HColors.white),),
+                      ],
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 12, 6),
-            alignment: Alignment.bottomRight,
-            child: Text(
-              "${item.levelName}".toUpperCase(),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              ),
-            ),
-          )
         ],
-      );
+  );
+
+//  Widget _buildCard(){
+//    return Container(
+//      margin: EdgeInsets.all(16),
+//      padding: EdgeInsets.all(12),
+//      decoration: BoxDecoration(
+//          image: DecorationImage(image: AssetImage("assets/images/bg_member_card.png"), fit: BoxFit.fill),
+//          borderRadius: BorderRadius.all(Radius.circular(12))
+//      ),
+//      child: Column(
+//        children: <Widget>[
+//          SizedBox(height: 8,),
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//            children: <Widget>[
+//              SizedBox(
+//                width: 100,
+//                height: 100,
+//                child: ImageLoader(
+//                  circleImage: true,
+//                  radius: 50,
+//                  url: this.logo,
+//                ),
+//              ),
+//              Text(this.level.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white, fontSize: 22),),
+//            ],),
+//          SizedBox(height: 56,),
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.end,
+//            children: <Widget>[
+//              Column(
+//                mainAxisAlignment: MainAxisAlignment.center,
+//                children: <Widget>[
+//                  Text(this.point, style: TextStyle(fontSize: 16,color: HColors.white, fontWeight: FontWeight.bold),),
+//                  Text('Lần tích điểm', style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),),
+//                ],
+//              ),
+//              SizedBox(width: 16,),
+//              Column(
+//                mainAxisAlignment: MainAxisAlignment.center,
+//                children: <Widget>[
+//                  Text(this.joinDate, style: TextStyle(fontSize: 16,color: HColors.white ,fontWeight: FontWeight.bold),),
+//                  Text('Ngày Tham Gia', style: TextStyle(fontWeight: FontWeight.w100,color: HColors.white),),
+//                ],
+//              ),
+//            ],
+//          )
+//        ],
+//      ),
+//    );
+//  }
+
 }

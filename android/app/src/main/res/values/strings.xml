@@ -2,5 +2,5 @@
 <resources>
     <string name="facebook_app_id">2530514613627948</string>
     <string name="fb_login_protocol_scheme">fb2530514613627948</string>
-    <string name="app_name">YourReward</string>
+    <string name="app_name">Your Rewards</string>
 </resources>

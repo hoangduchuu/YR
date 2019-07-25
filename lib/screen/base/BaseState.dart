@@ -82,7 +82,7 @@ abstract class BaseState<page extends BasePage> extends State<page> {
     Toast.show(msg, scaffoldKey.currentContext, duration: duration, gravity: gravity);
   }
 
-  onWidgetDidBuild(Function callback) {
+  void onWidgetDidBuild(Function callback) {
     //wait and call this function after view is rendered
     WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
