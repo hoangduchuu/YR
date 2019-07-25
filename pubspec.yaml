@@ -50,6 +50,7 @@ dependencies:
   html: ^0.14.0+2
   flutter_widget_from_html_core: ^0.2.2+1
   provider: ^3.0.0+1
+  shimmer: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
