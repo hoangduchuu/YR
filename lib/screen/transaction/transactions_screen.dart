@@ -30,6 +30,7 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
 
   @override
   void initState() {
+    super.initState();
     _bloc = TransactionStoreBloc();
     _bloc.dispatch(GetTransactionRequest(widget.ownerId));
   }
