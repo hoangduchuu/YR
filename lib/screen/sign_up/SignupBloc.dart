@@ -7,6 +7,7 @@ import 'package:your_reward_user/core/injector.dart';
 import 'package:your_reward_user/model/User.dart';
 import 'package:your_reward_user/repository/AuthRepo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
+import 'package:your_reward_user/utils/auth_utils.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 //region bloc
@@ -24,6 +25,27 @@ class SignUpBloc extends Bloc<BaseSignUpEvent, BaseBlocState> {
   }
 
   Stream<BaseBlocState> _handleLoginState(SignupModel model) async* {
+    if (model.fullName == null || model.fullName.isEmpty) {
+      yield UIControlState.showError("Vui lòng nhập đúng định dạng email");
+      yield ResetState();
+      return;
+    }
+    if (model.email == null || model.email.isEmpty || !AuthUtils.validateEmailValid(model.email)) {
+      yield UIControlState.showError("Vui lòng nhập đúng định dạng email");
+      yield ResetState();
+      return;
+    }
+    if (!AuthUtils.validatePassAndConfirmPassValid(model.password, model.confirmPasswrod)) {
+      yield UIControlState.showError("Mật khẩu và xác nhận mật khảu không giống nhau");
+      yield ResetState();
+      return;
+    }
+    if (!AuthUtils.validateMobile(model.phone)) {
+      yield UIControlState.showError("Số điện thoại nhập vào không hợp lệ");
+      yield ResetState();
+      return;
+    }
+    yield UIControlState.showLoading();
     try {
       Pair<STATE, User> result = await authRepo.register(model);
       if (result.left == STATE.SUCCESS) {
