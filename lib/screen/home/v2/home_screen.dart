@@ -19,6 +19,8 @@ import 'package:your_reward_user/styles/styles.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
+import 'package:your_reward_user/widget/v2/shimmer/atm_shimmer.dart';
+import 'package:your_reward_user/widget/v2/shimmer/shimmer_list.dart';
 import 'package:your_reward_user/widget/v2/yellow_barcode.dart';
 
 class HomeScreen extends BasePage {
@@ -112,7 +114,7 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     return BlocListener(
       bloc: _homeBloc,
       listener: (context, state) {
-        handleUIControlState(state);
+        handleUIControlState(state, hasShimmer: true);
         if (state is GetMemberShipCardsEmptyState) {
           super.hideLoading();
         } else if (state is GetMembershipCardSuccessState) {
@@ -140,33 +142,10 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
           YellowBarcode(
             DataProvider.user.phone,
           ),
-          Visibility(
-            visible: isSliderLoaded,
-            child: Hero(
-              tag: "HUUHOANG",
-              child: RestaurantCard(
-                cb: (int index) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MemberShipStoreDetailScreen(
-                                memberCard: _memberships[index],
-                              )));
-                },
-                memberships: _memberships,
-              ),
-            ),
-          ),
+          buildSlider(),
           Visibility(
             visible: !isSliderLoaded,
             child: Center(),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            child: Text(
-              "Tin Tức",
-              style: TextStyle(color: HColors.black, fontSize: 22, fontWeight: FontWeight.w600),
-            ),
           ),
           _buildNewsUI(_posts)
         ],
@@ -174,32 +153,67 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
     );
   }
 
+  Widget buildSlider() {
+    if (_memberships == null) {
+      return ATMShimmer();
+    }
+    return Visibility(
+      visible: isSliderLoaded,
+      child: Hero(
+        tag: "HUUHOANG",
+        child: RestaurantCard(
+          cb: (int index) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MemberShipStoreDetailScreen(
+                          memberCard: _memberships[index],
+                        )));
+          },
+          memberships: _memberships,
+        ),
+      ),
+    );
+  }
+
   Widget _buildNewsUI(List<Post> mTransactions) {
     if (mTransactions == null || mTransactions.isEmpty) {
       // Prevent while waiting data error
-      return Container();
+      return ListShimmer();
     }
 
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: _posts.length,
-        itemBuilder: (context, index) {
-          return NewsRow(
-            Post(
-              title: _posts[index].title,
-              content: _posts[index].title,
-              image: _posts[index].image,
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => NewsScreen(
-                            post: _posts[index],
-                          )));
-            },
-          );
-        });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          child: Text(
+            "Tin Tức",
+            style: TextStyle(color: HColors.black, fontSize: 22, fontWeight: FontWeight.w600),
+          ),
+        ),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _posts.length,
+            itemBuilder: (context, index) {
+              return NewsRow(
+                Post(
+                  title: _posts[index].title,
+                  content: _posts[index].title,
+                  image: _posts[index].image,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NewsScreen(
+                                post: _posts[index],
+                              )));
+                },
+              );
+            })
+      ],
+    );
   }
 }

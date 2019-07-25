@@ -4,10 +4,12 @@ import 'BasePage.dart';
 import 'BaseState.dart';
 
 mixin ErrorMessageHandler<page extends BasePage> on BaseState<page> {
-  void handleUIControlState(BaseBlocState state) {
+  void handleUIControlState(BaseBlocState state, {bool hasShimmer = false}) {
     if (state is UIControlState) {
       if (state.isLoading) {
-        showLoading();
+        if (!hasShimmer) {
+          showLoading();
+        }
       } else if (state.isSuccess) {
         hideLoading();
       } else if (state.isError) {

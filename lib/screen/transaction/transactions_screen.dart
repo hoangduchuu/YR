@@ -14,6 +14,7 @@ import 'package:your_reward_user/screen/transaction_detail/transaction_detail_sc
 import 'package:your_reward_user/styles/h_colors.dart';
 import 'package:your_reward_user/utils/CommonUtils.dart';
 import 'package:your_reward_user/widget/v2/YRAppBar.dart';
+import 'package:your_reward_user/widget/v2/shimmer/shimmer_list.dart';
 
 class TransactionScreen extends BasePage {
   final String ownerId;
@@ -34,6 +35,14 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
   }
 
   _buildUI() {
+    if (_transactions == null) {
+      return ListShimmer();
+    }
+    if (_transactions.isEmpty) {
+      return Container(
+        child: Center(child: Text("Chưa có giao dịch nào")),
+      );
+    }
     return ListView.builder(
       itemBuilder: _transactionCard,
       itemCount: _transactionCount(),
@@ -68,7 +77,7 @@ class _TransactionScreenState extends BaseState<TransactionScreen> with Scaffold
     return BlocListener(
         bloc: _bloc,
         listener: (context, state) {
-          handleUIControlState(state);
+          handleUIControlState(state, hasShimmer: true);
           if (state is OnGetTransactionSuccess) {
             super.hideLoadingWithContext(context);
             setState(() {
