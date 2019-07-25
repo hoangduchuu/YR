@@ -41,8 +41,8 @@ class AuthUtils {
 
   //validate mobile
   static bool validateMobile(String value) {
-// Indian Mobile number are of 10 digit only
-    Pattern pattern = r'^(?:[+0]9)?[0-9]{10}$';
+// Vietnam Mobile number are of 10 digit only    see https://www.regextester.com/98578
+    Pattern pattern = r'(09|01[2|6|8|9])+([0-9]{8})\b';
     RegExp regex = new RegExp(pattern);
     return regex.hasMatch(value);
   }
