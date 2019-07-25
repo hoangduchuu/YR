@@ -14,7 +14,7 @@ abstract class BaseState<page extends BasePage> extends State<page> {
   void initState() {
     super.initState();
     notificationManager = NotificationManager(context);
-    notificationManager.register();
+
   }
 
   void showError(String msg) {

@@ -6,6 +6,7 @@ import 'BaseState.dart';
 mixin ScaffoldPage<page extends BasePage> on BaseState<page> {
   @override
   Widget build(BuildContext context) {
+    notificationManager.register(context);
     return Scaffold(
       key: scaffoldKey,
       body: body(),

@@ -8,19 +8,19 @@ import 'package:your_reward_user/widget/v1/custom_dialog.dart';
 
 class NotificationManager {
   FirebaseMessaging _firebaseMessaging;
-  ProgressDialog progressDialog;
   BuildContext _context;
 
   NotificationManager(BuildContext context) {
     this._firebaseMessaging = FirebaseMessaging();
-    progressDialog = new ProgressDialog(context, ProgressDialogType.Normal);
-    this._context = context;
   }
 
-  void register() {
+  Set<BuildContext> contexts = Set();
+
+  void register(BuildContext context) {
     if (Platform.isIOS) {
       iOS_Permission();
     }
+    _context = context;
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('*("2 register ********* on message $message');
@@ -36,6 +36,8 @@ class NotificationManager {
       },
     );
   }
+
+
 
   void iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
