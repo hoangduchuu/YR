@@ -48,7 +48,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget buildListNotification(NotificationViewModel model) {
     List<NotificationModel> notifications = model.notifications;
     if (model.state == ViewState.Busy) {
-      return ShimmerList();
+      return ListShimmer();
     }
     if (notifications == null || notifications.isEmpty) {
       return Container();

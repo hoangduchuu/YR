@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerList extends StatelessWidget {
+class ListShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -10,7 +10,7 @@ class ShimmerList extends StatelessWidget {
       child: Column(
         children: [0, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1]
             .map((_) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 8.0, left: 10),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
