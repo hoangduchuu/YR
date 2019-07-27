@@ -40,15 +40,21 @@ class CouponRepo {
   // request and mapping from entity to model
   Future<Pair<STATE, List<MembershipCard>>> getMembership(String userId) async {
     try {
+      print('error entity 1');
       var result = await _provider.getMemberShipCards(userId);
+
       if (result is ErrorEntity && result.code != null) {
         return Pair(STATE.ERROR, null, erroMsg: 'Lỗi: ${result.message}');
       }
+      print('error entity 3');
       if (result is GetMemberShipEntity) {
         List<MembershipCard> stores = List<MembershipCard>();
+
         result.data.forEach((it) {
-          MembershipCard item = _membershipCardMapper.mapFrom(it);
-          stores.add(item);
+          if (it.owner != null){
+            MembershipCard item = _membershipCardMapper.mapFrom(it);
+            stores.add(item);
+          }
         });
         return Pair(STATE.SUCCESS, stores);
       }

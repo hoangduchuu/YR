@@ -40,6 +40,8 @@ class CouponProvider {
     param['userId'] = userId;
 
     String raw = await client.get(url, YRService.generateHeadersWithToken(), param);
+    print('error entity 2');
+    print('$raw');
     var result = GetMemberShipCardParser().parse(raw);
     return result;
   }

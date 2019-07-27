@@ -27,7 +27,7 @@ class GetMemberShipEntity {
         total: json["total"],
         limit: json["limit"],
         skip: json["skip"],
-        data: new List<MembershipEntity>.from(json["data"].map((x) => MembershipEntity.fromJson(x))),
+        data: new List<MembershipEntity>.from(json["data"].map((x) => MembershipEntity.fromJson(x))).toList(),
       );
 
   Map<String, dynamic> toJson() => {

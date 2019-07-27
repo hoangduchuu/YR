@@ -40,26 +40,28 @@ class UserEntity {
       this.v,
       this.deviceId});
 
-  factory UserEntity.fromJson(Map<String, dynamic> json) => new UserEntity(
-      id: json["_id"],
-      gender: json["gender"],
-      status: json["status"],
-      role: json["role"],
-      points: json["points"],
-      isNotificationEmail: json["isNotificationEmail"],
-      isNotificationApplication: json["isNotificationApplication"],
-      isNotificationPromotion: json["isNotificationPromotion"],
-      isNotificationEvent: json["isNotificationEvent"],
-      isProfile: json["isProfile"],
-      email: json["email"],
-      fullname: json["fullname"],
-      thumbnail: json["thumbnail"],
-      phone: json["phone"],
-      address: json["address"],
-      createdAt: DateTime.parse(json["createdAt"]),
-      updatedAt: DateTime.parse(json["updatedAt"]),
-      v: json["__v"],
-      deviceId: json["deviceId"]);
+  factory UserEntity.fromJson(Map<String, dynamic> json){
+    return new UserEntity(
+        id: json["_id"],
+        gender: json["gender"],
+        status: json["status"],
+        role: json["role"],
+        points: json["points"],
+        isNotificationEmail: json["isNotificationEmail"],
+        isNotificationApplication: json["isNotificationApplication"],
+        isNotificationPromotion: json["isNotificationPromotion"],
+        isNotificationEvent: json["isNotificationEvent"],
+        isProfile: json["isProfile"],
+        email: json["email"],
+        fullname: json["fullname"],
+        thumbnail: json["thumbnail"],
+        phone: json["phone"],
+        address: json["address"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+        deviceId: json["deviceId"]);
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,

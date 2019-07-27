@@ -44,23 +44,26 @@ class MembershipEntity {
 
   String toRawJson() => json.encode(toJson());
 
-  factory MembershipEntity.fromJson(Map<String, dynamic> json) => new MembershipEntity(
-        id: json["_id"],
-        points: json["points"],
-        accumulationPoints: json["accumulationPoints"],
-        userId: json["userId"],
-        ownerId: json["ownerId"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-        levelId: json["levelId"] == null ? null : json["levelId"],
-        user: UserEntity.fromJson(json["user"]),
-        owner: OwnerEntity.fromJson(json["owner"]),
-        level: json["level"] == null ? null : Level.fromJson(json["level"]),
-        levelName: json["level"] == null ? null : Level.fromJson(json["level"]).title,
-        iconName: json["level"] == null ? null : Level.fromJson(json["level"]).iconName,
-        levelDescription: json["level"] == null ? null : Level.fromJson(json["level"]).description,
-      );
+  factory MembershipEntity.fromJson(Map<String, dynamic> json) {
+    print('MembershipEntity fromJson');
+    return new MembershipEntity(
+      id: json["_id"],
+      points: json["points"],
+      accumulationPoints: json["accumulationPoints"],
+      userId: json["userId"],
+      ownerId: json["ownerId"],
+      createdAt: DateTime.parse(json["createdAt"]),
+      updatedAt: DateTime.parse(json["updatedAt"]),
+      v: json["__v"],
+      levelId: json["levelId"] == null ? null : json["levelId"],
+      user: UserEntity.fromJson(json["user"]),
+      owner: json["owner"]["_id"] == null ? null : OwnerEntity.fromJson(json["owner"]),
+      level: json["level"] == null ? null : Level.fromJson(json["level"]),
+      levelName: json["level"] == null ? null : Level.fromJson(json["level"]).title,
+      iconName: json["level"] == null ? null : Level.fromJson(json["level"]).iconName,
+      levelDescription: json["level"] == null ? null : Level.fromJson(json["level"]).description,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,
