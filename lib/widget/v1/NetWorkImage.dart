@@ -34,7 +34,9 @@ class ImageLoader extends StatelessWidget {
         ),
       ),
       placeholder: (context, url) => Center(
-        child: CircularProgressIndicator(),
+        child: Image.asset(
+          "assets/images/no_image.png",
+        ),
       ),
       errorWidget: (context, url, error) => Image.asset("assets/images/no_image.png"),
       fadeOutDuration: new Duration(seconds: 1),
