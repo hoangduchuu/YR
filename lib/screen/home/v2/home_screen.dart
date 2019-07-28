@@ -16,6 +16,7 @@ import 'package:your_reward_user/screen/home/bloc/home_state_transactions.dart';
 import 'package:your_reward_user/screen/membership/detail/v2/card_store_detail_screen.dart';
 import 'package:your_reward_user/screen/news/news_sreen.dart';
 import 'package:your_reward_user/styles/styles.dart';
+import 'package:your_reward_user/utils/logger.dart';
 import 'package:your_reward_user/widget/v1/NetWorkImage.dart';
 import 'package:your_reward_user/widget/v2/news_row.dart';
 import 'package:your_reward_user/widget/v2/restaurant_card.dart';
@@ -116,6 +117,10 @@ class _HomeScreenState extends BaseState<HomeScreen> with ErrorMessageHandler, S
       listener: (context, state) {
         handleUIControlState(state, hasShimmer: true);
         if (state is GetMemberShipCardsEmptyState) {
+          setState(() {
+            isSliderLoaded = false;
+            _memberships = state.memberships;
+          });
           super.hideLoading();
         } else if (state is GetMembershipCardSuccessState) {
           super.hideLoading();

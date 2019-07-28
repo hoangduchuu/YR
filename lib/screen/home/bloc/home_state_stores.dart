@@ -14,6 +14,9 @@ class GetMembershipCardSuccessState extends HomeState {
 }
 
 class GetMemberShipCardsEmptyState extends HomeState {
+  List<MembershipCard> memberships;
+  GetMemberShipCardsEmptyState(this.memberships);
+
   @override
   String toString() {
     return 'GetMemberShipCardsEmptyState{}';

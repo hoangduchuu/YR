@@ -8,6 +8,7 @@ import 'package:your_reward_user/repository/CouponRepo.dart';
 import 'package:your_reward_user/repository/TransactionRepo.dart';
 import 'package:your_reward_user/repository/post_repo.dart';
 import 'package:your_reward_user/utils/app_state.dart';
+import 'package:your_reward_user/utils/logger.dart';
 import 'package:your_reward_user/utils/pair.dart';
 
 import 'home_event.dart';
@@ -50,7 +51,7 @@ class HomeBLoc extends Bloc<HomeEvent, BaseBlocState> {
         yield UIControlState.showError(result.erroMsg);
       }
       if (result.right.isEmpty) {
-        yield GetMemberShipCardsEmptyState();
+        yield GetMemberShipCardsEmptyState(result.right);
       } else {
         if (result.left == STATE.SUCCESS) {
           yield GetMembershipCardSuccessState(memberships: result.right);

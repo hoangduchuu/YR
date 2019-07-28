@@ -24,7 +24,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
   @override
   Widget build(BuildContext context) {
     if (super.widget.memberships == null || super.widget.memberships.isEmpty) {
-      return new NoMemberShipCard("Chưa có hình ảnh");
+      return new Container();
     }
     return CarouselSlider(
       enableInfiniteScroll: false,
@@ -91,24 +91,42 @@ class _RestaurantCardState extends State<RestaurantCard> {
                         url: item.logo,
                       ),
                     ),
-                    Text(item.levelName.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold,color: HColors.white, fontSize: 22),),
-                  ],),
+                    Text(
+                      item.levelName.toUpperCase(),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: HColors.white, fontSize: 22),
+                    ),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('${item.points}', style: TextStyle(fontSize: 16,color: HColors.white, fontWeight: FontWeight.bold),),
-                        Text('Lần tích điểm', style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),),
+                        Text(
+                          '${item.points}',
+                          style: TextStyle(fontSize: 16, color: HColors.white, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Lần tích điểm',
+                          style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),
+                        ),
                       ],
                     ),
-                    SizedBox(width: 16,),
+                    SizedBox(
+                      width: 16,
+                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(CommonUtils.getDateFormat(item.createdAt.toString()), style: TextStyle(fontSize: 16,color: HColors.white ,fontWeight: FontWeight.bold),),
-                        Text('Ngày Tham Gia', style: TextStyle(fontWeight: FontWeight.w100,color: HColors.white),),
+                        Text(
+                          CommonUtils.getDateFormat(item.createdAt.toString()),
+                          style: TextStyle(fontSize: 16, color: HColors.white, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Ngày Tham Gia',
+                          style: TextStyle(fontWeight: FontWeight.w100, color: HColors.white),
+                        ),
                       ],
                     ),
                   ],
@@ -117,7 +135,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
             ),
           ),
         ],
-  );
+      );
 
 //  Widget _buildCard(){
 //    return Container(
