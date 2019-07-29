@@ -115,104 +115,106 @@ class _AccountInformationScreenState extends BaseState<AccountInformationScreen>
             color: HColors.white,
             borderRadius: BorderRadius.all(Radius.circular(12))
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                width: 140,
-                height: 140,
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      height: 120,
-                      margin: EdgeInsets.only(top: 20, left: 10),
-                      decoration: new BoxDecoration(
-                        color: Colors.white30,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: ImageLoader(
-                          url: DataProvider.user.avatar,
-                          radius: 50,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  width: 140,
+                  height: 140,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        height: 120,
+                        margin: EdgeInsets.only(top: 20, left: 10),
+                        decoration: new BoxDecoration(
+                          color: Colors.white30,
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.bottomRight,
-                      child: InkWell(
-                        onTap: () {
-                          imagePicker.showDialog(parentContext);
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: Colors.amberAccent,
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.black,
+                        child: Center(
+                          child: ImageLoader(
+                            url: DataProvider.user.avatar,
+                            radius: 50,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        alignment: Alignment.bottomRight,
+                        child: InkWell(
+                          onTap: () {
+                            imagePicker.showDialog(parentContext);
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Colors.amberAccent,
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(parentContext).size.height * 0.03,
-              ),
-              YRTextField(
-                defaultText: DataProvider.user.fullName,
-                textController: _userTextController,
-                hintText: 'Nhập họ và tên của bạn',
-                onTextChanged: (value) {
-                  _name = value;
-                },
-                isPassword: false,
-              ),
-              YRTextField(
-                  defaultText: DataProvider.user.email,
-                  textController: _emailTextController,
-                  hintText: 'Nhập email',
+                SizedBox(
+                  height: MediaQuery.of(parentContext).size.height * 0.03,
+                ),
+                YRTextField(
+                  defaultText: DataProvider.user.fullName,
+                  textController: _userTextController,
+                  hintText: 'Nhập họ và tên của bạn',
                   onTextChanged: (value) {
-                    _email = value;
+                    _name = value;
                   },
-                  isPassword: false),
-              YRTextField(
-                defaultText: DataProvider.user.phone,
-                textController: _phoneTextController,
-                hintText: 'Nhập vào số điện thoại liên lạc',
-                type: TextInputType.number,
-                onTextChanged: (value) {
-                  _phone = value;
-                },
-                isPassword: false,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              CommonButton(
-                onPressed: () => _handleSubmit(),
-                backgroundColor: Colors.amberAccent,
-                textColor: HColors.black,
-                text: 'Lưu Lại Thông Tin',
-                width: MediaQuery.of(parentContext).size.width * 0.50,
-                radiusValue: 4,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              CommonButton(
-                onPressed: () {
-                  showAlertDialog(context);
-                },
-                backgroundColor: HColors.red,
-                textColor: HColors.white,
-                text: 'Đăng Xuất',
-                width: MediaQuery.of(parentContext).size.width * 0.50,
-                radiusValue: 4,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-            ],
+                  isPassword: false,
+                ),
+                YRTextField(
+                    defaultText: DataProvider.user.email,
+                    textController: _emailTextController,
+                    hintText: 'Nhập email',
+                    onTextChanged: (value) {
+                      _email = value;
+                    },
+                    isPassword: false),
+                YRTextField(
+                  defaultText: DataProvider.user.phone,
+                  textController: _phoneTextController,
+                  hintText: 'Nhập vào số điện thoại liên lạc',
+                  type: TextInputType.number,
+                  onTextChanged: (value) {
+                    _phone = value;
+                  },
+                  isPassword: false,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                CommonButton(
+                  onPressed: () => _handleSubmit(),
+                  backgroundColor: Colors.amberAccent,
+                  textColor: HColors.black,
+                  text: 'Lưu Lại Thông Tin',
+                  width: MediaQuery.of(parentContext).size.width * 0.50,
+                  radiusValue: 4,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                CommonButton(
+                  onPressed: () {
+                    showAlertDialog(context);
+                  },
+                  backgroundColor: HColors.red,
+                  textColor: HColors.white,
+                  text: 'Đăng Xuất',
+                  width: MediaQuery.of(parentContext).size.width * 0.50,
+                  radiusValue: 4,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           ),
         ),
       ),
